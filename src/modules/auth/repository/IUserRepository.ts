@@ -1,4 +1,4 @@
-import { UserRole } from '../../../common/enums/UserRole.enum';
+import { UserRole } from '../../../common/enums/userRole.enum';
 import { UserEntity } from '../../../types/UserEntity';
 
 export interface CreateUserInput {

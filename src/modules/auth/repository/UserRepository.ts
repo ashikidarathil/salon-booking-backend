@@ -1,6 +1,6 @@
 import { injectable } from 'tsyringe';
-import { BaseRepository } from '../../../common/repository/BaseRepository';
 import { UserModel, UserDocument } from '../../../models/User.model';
+import { BaseRepository } from '../../../common/repository/BaseRepository';
 import { UserEntity } from '../../../types/UserEntity';
 import { IUserRepository, CreateUserInput } from './IUserRepository';
 

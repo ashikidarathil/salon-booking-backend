@@ -1,5 +1,5 @@
 import { UserEntity } from '../../../../types/UserEntity';
-import { UserRole } from '../../../../common/enums/UserRole.enum';
+import { UserRole } from '../../../../common/enums/userRole.enum';
 
 export class AuthMapper {
   static toLoginResponse(user: UserEntity, token: string) {

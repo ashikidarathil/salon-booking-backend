@@ -5,8 +5,8 @@ import jwt from 'jsonwebtoken';
 import { env } from '../../../config/env';
 import { MESSAGES } from '../../../common/constants/messages';
 import { AppError } from '../../../common/errors/AppError';
-import { HttpStatus } from '../../../common/enums/HttpStatus.enum';
-import { UserRole } from '../../../common/enums/UserRole.enum';
+import { HttpStatus } from '../../../common/enums/httpStatus.enum';
+import { UserRole } from '../../../common/enums/userRole.enum';
 
 import type { IAuthService } from './IAuthService';
 import type { SignupDto } from '../dto/Signup.dto';

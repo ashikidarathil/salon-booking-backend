@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { ApiResponse } from '../../../common/response/ApiResponse';
-import { HttpStatus } from '../../../common/enums/HttpStatus.enum';
+import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 
 import type { IAuthController } from './IAuthController';
 import type { IAuthService } from '../service/IAuthService';
