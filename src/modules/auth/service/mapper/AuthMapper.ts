@@ -1,4 +1,4 @@
-import { UserEntity } from '../../../../types/UserEntity';
+import { UserEntity } from '../../../../types/userEntity';
 import { UserRole } from '../../../../common/enums/userRole.enum';
 
 export class AuthMapper {

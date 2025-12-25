@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from './AppError';
+import { AppError } from './appError';
 import { HttpStatus } from '../enums/httpStatus.enum';
 
 export function globalErrorHandler(

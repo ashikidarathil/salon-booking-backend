@@ -1,12 +1,21 @@
 import dotenv from 'dotenv';
-dotenv.config();
+
+const envFile = process.env.NODE_ENV === 'docker' ? '.env.docker' : '.env.local';
+
+dotenv.config({ path: envFile });
+
+function requireEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Environment variable ${name} is missing`);
+  }
+  return value;
+}
 
 export const env = {
+  NODE_ENV: process.env.NODE_ENV || 'local',
   PORT: process.env.PORT || '5001',
-  MONGODB_URI: process.env.MONGODB_URI as string,
+  MONGODB_URI: requireEnv('MONGODB_URI'),
   REDIS_URL: process.env.REDIS_URL || 'redis://localhost:6379',
-  JWT_SECRET: process.env.JWT_SECRET as string,
+  JWT_SECRET: requireEnv('JWT_SECRET'),
 };
-
-if (!env.MONGODB_URI) throw new Error('MONGODB_URI missing in .env');
-if (!env.JWT_SECRET) throw new Error('JWT_SECRET missing in .env');

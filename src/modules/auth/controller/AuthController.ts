@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { ApiResponse } from '../../../common/response/ApiResponse';
+import { ApiResponse } from '../../../common/response/apiResponse';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 
 import type { IAuthController } from './IAuthController';

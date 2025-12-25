@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { env } from '../../../config/env';
 import { MESSAGES } from '../../../common/constants/messages';
-import { AppError } from '../../../common/errors/AppError';
+import { AppError } from '../../../common/errors/appError';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { UserRole } from '../../../common/enums/userRole.enum';
 
@@ -16,7 +16,7 @@ import type { ResetPasswordDto } from '../dto/ResetPassword.dto';
 import type { ForgotPasswordDto } from '../dto/ForgotPassword.dto';
 
 import type { IUserRepository } from '../repository/IUserRepository';
-import { AuthMapper } from './mapper/AuthMapper';
+import { AuthMapper } from './mapper/authMapper';
 import { IOtpService } from './IOtpService';
 
 @injectable()
