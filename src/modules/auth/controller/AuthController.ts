@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
-import { ApiResponse } from '../../../common/response/ApiResponse';
-import { HttpStatus } from '../../../common/enums/HttpStatus.enum';
+import { ApiResponse } from '../../../common/response/apiResponse';
+import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 
 import type { IAuthController } from './IAuthController';
 import type { IAuthService } from '../service/IAuthService';
@@ -15,7 +15,7 @@ import { TOKENS } from '../../../common/di/tokens';
 
 @injectable()
 export class AuthController implements IAuthController {
-  constructor(@inject(TOKENS.AuthService) private readonly authService: IAuthService) {}
+  constructor(@inject(TOKENS.AuthService) private readonly _authService: IAuthService) {}
 
   async signup(req: Request, res: Response) {
     const dto: SignupDto = {
@@ -25,7 +25,7 @@ export class AuthController implements IAuthController {
       password: req.body.password,
     };
 
-    const data = await this.authService.signup(dto);
+    const data = await this._authService.signup(dto);
 
     res.status(HttpStatus.CREATED).json(new ApiResponse(true, 'Signup successful', data));
   }
@@ -36,7 +36,7 @@ export class AuthController implements IAuthController {
       otp: req.body.otp,
     };
 
-    const data = await this.authService.verifyOtp(dto);
+    const data = await this._authService.verifyOtp(dto);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, 'OTP verified', data));
   }
@@ -47,7 +47,7 @@ export class AuthController implements IAuthController {
       password: req.body.password,
     };
 
-    const data = await this.authService.login(dto);
+    const data = await this._authService.login(dto);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, 'Login successful', data));
   }
@@ -57,7 +57,7 @@ export class AuthController implements IAuthController {
       email: req.body.email,
     };
 
-    const data = await this.authService.forgotPassword(dto);
+    const data = await this._authService.forgotPassword(dto);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, 'Reset OTP sent', data));
   }
@@ -69,7 +69,7 @@ export class AuthController implements IAuthController {
       newPassword: req.body.newPassword,
     };
 
-    const data = await this.authService.resetPassword(dto);
+    const data = await this._authService.resetPassword(dto);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, 'Password reset successful', data));
   }

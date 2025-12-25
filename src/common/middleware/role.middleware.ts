@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
-import { UserRole } from '../../common/enums/UserRole.enum';
-import { HttpStatus } from '../../common/enums/HttpStatus.enum';
+import { UserRole } from '../enums/userRole.enum';
+import { HttpStatus } from '../enums/httpStatus.enum';
 import { MESSAGES } from '../../common/constants/messages';
 import type { AuthPayload } from './auth.middleware';
 

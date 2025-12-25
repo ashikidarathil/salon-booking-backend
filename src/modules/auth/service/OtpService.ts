@@ -1,6 +1,6 @@
 import redisClient from '../../../config/redis';
-import { AppError } from '../../../common/errors/AppError';
-import { HttpStatus } from '../../../common/enums/HttpStatus.enum';
+import { AppError } from '../../../common/errors/appError';
+import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { MESSAGES } from '../../../common/constants/messages';
 import { IOtpService } from './IOtpService';
 import { injectable } from 'tsyringe';

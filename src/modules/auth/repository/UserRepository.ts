@@ -1,7 +1,7 @@
 import { injectable } from 'tsyringe';
-import { BaseRepository } from '../../../common/repository/BaseRepository';
-import { UserModel, UserDocument } from '../../../models/User.model';
-import { UserEntity } from '../../../types/UserEntity';
+import { UserModel, UserDocument } from '../../../models/user.model';
+import { BaseRepository } from '../../../common/repository/baseRepository';
+import { UserEntity } from '../../../types/userEntity';
 import { IUserRepository, CreateUserInput } from './IUserRepository';
 
 @injectable()

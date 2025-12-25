@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from './AppError';
-import { HttpStatus } from '../enums/HttpStatus.enum';
+import { AppError } from './appError';
+import { HttpStatus } from '../enums/httpStatus.enum';
 
 export function globalErrorHandler(
   err: unknown,
