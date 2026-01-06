@@ -1,8 +1,16 @@
 export const MESSAGES = {
   AUTH: {
     EMAIL_EXISTS: 'Email already registered',
+    PHONE_EXISTS: 'Phone already exists',
     INVALID_CREDENTIALS: 'Invalid email or password',
+    EMAIL_OR_PHONE_REQUIRED: 'Email or phone required',
     USER_NOT_FOUND: 'User not found',
+    USER_BLOCKED: 'User is blocked',
+    UNAUTHORIZERD_ROLE_ACCESS: 'Unauthorized role access',
+    USE_GOOGLE_LOGIN: 'Use Google login for this account',
+    GOOGE_LOGIN_ONLY_FOR_USERS: 'Google login only allowed for users',
+    INVALID_GOOGLE_TOKEN: 'Invalid Google token',
+    VERIFY_EMAIL_OR_PHONE: 'Please verify email/phone before login',
     SIGNUP_OK_VERIFY_OTP: 'Signup successful. Please verify OTP.',
     OTP_OK: 'Account verified successfully',
     OTP_INVALID: 'Invalid or expired OTP',

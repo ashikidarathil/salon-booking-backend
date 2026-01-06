@@ -3,6 +3,9 @@ import { UserModel, UserDocument } from '../../../models/user.model';
 import { BaseRepository } from '../../../common/repository/baseRepository';
 import { UserEntity } from '../../../types/userEntity';
 import { IUserRepository, CreateUserInput } from './IUserRepository';
+import { UserStatus } from '../../../models/user.model';
+import { HttpStatus } from '../../../common/enums/httpStatus.enum';
+import { AppError } from '../../../common/errors/appError';
 
 @injectable()
 export class UserRepository
@@ -18,14 +21,87 @@ export class UserRepository
     return user ? this.toEntity(user) : null;
   }
 
+  async findByPhone(phone: string): Promise<UserEntity | null> {
+    const user = await this._model.findOne({ phone }).select('+password');
+    return user ? this.toEntity(user) : null;
+  }
+
+  async findByEmailOrPhone(identifier: string): Promise<UserEntity | null> {
+    const user = await this._model
+      .findOne({
+        $or: [{ email: identifier.toLowerCase().trim() }, { phone: identifier.trim() }],
+      })
+      .select('+password');
+
+    return user ? this.toEntity(user) : null;
+  }
+
   async createUser(data: CreateUserInput): Promise<UserEntity> {
-    const user = new this._model(data);
+    const user = new this._model({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+      role: data.role || 'USER',
+      emailVerified: data.emailVerified ?? false,
+      phoneVerified: data.phoneVerified ?? false,
+      isActive: data.isActive ?? false,
+      isBlocked: false,
+      status: data.status ?? (data.role === 'STYLIST' ? 'APPLIED' : 'ACTIVE'),
+      authProvider: 'LOCAL',
+    });
+
     await user.save();
     return this.toEntity(user);
   }
 
+  async markEmailVerified(email: string): Promise<UserEntity | null> {
+    const user = await this._model.findOneAndUpdate(
+      { email: email.toLowerCase().trim() },
+      { emailVerified: true, isActive: true, status: 'ACTIVE' },
+      { new: true },
+    );
+    return user ? this.toEntity(user) : null;
+  }
+
+  async markPhoneVerifiedByPhone(phone: string): Promise<UserEntity | null> {
+    const user = await this._model.findOneAndUpdate(
+      { phone },
+      { phoneVerified: true, isActive: true, status: 'ACTIVE' },
+      { new: true },
+    );
+    return user ? this.toEntity(user) : null;
+  }
+
+  // async markPhoneVerified(userId: string, phone: string) {
+  //   const exists = await this._model.findOne({
+  //     phone,
+  //     _id: { $ne: userId },
+  //   });
+
+  //   if (exists) {
+  //     throw new AppError('Phone number already in use', HttpStatus.BAD_REQUEST);
+  //   }
+
+  //   const user = await this._model.findByIdAndUpdate(
+  //     userId,
+  //     {
+  //       phone,
+  //       phoneVerified: true,
+  //       isActive: true,
+  //     },
+  //     { new: true },
+  //   );
+
+  //   return user ? this.toEntity(user) : null;
+  // }
+
   async activateUser(email: string): Promise<UserEntity | null> {
-    const user = await this._model.findOneAndUpdate({ email }, { isActive: true }, { new: true });
+    const user = await this._model.findOneAndUpdate(
+      { email },
+      { isActive: true, status: 'ACTIVE' },
+      { new: true },
+    );
     return user ? this.toEntity(user) : null;
   }
 
@@ -37,17 +113,97 @@ export class UserRepository
     );
     return user ? this.toEntity(user) : null;
   }
+  async createGoogleUser(data: {
+    name: string;
+    email: string;
+    googleId: string;
+  }): Promise<UserEntity> {
+    const user = new this._model({
+      name: data.name,
+      email: data.email,
+      googleId: data.googleId,
+      authProvider: 'GOOGLE',
+      role: 'USER',
+      emailVerified: true,
+      phoneVerified: false,
+      status: 'ACTIVE',
+      isActive: true,
+      isBlocked: false,
+    });
+
+    await user.save();
+    return this.toEntity(user);
+  }
+
+  async updateInvitedStylist(
+    userId: string,
+    data: { name: string; phone?: string; password: string; isActive: boolean },
+  ): Promise<boolean> {
+    const updated = await this._model
+      .findByIdAndUpdate(
+        userId,
+        {
+          name: data.name,
+          phone: data.phone,
+          password: data.password,
+          isActive: data.isActive,
+          phoneVerified: data.phone ? true : false,
+          status: 'ACCEPTED',
+        },
+        { new: true },
+      )
+      .lean();
+    return !!updated;
+  }
+
+  async setActiveById(userId: string, isActive: boolean): Promise<void> {
+    await this._model.findByIdAndUpdate(userId, { isActive });
+  }
+
+  async setBlockedById(userId: string, isBlocked: boolean): Promise<void> {
+    await this._model.findByIdAndUpdate(userId, { isBlocked });
+  }
+
+  async setStatusById(userId: string, status: UserStatus): Promise<void> {
+    await this._model.findByIdAndUpdate(userId, { status });
+  }
+
+  async updateProfilePicture(userId: string, pictureUrl: string): Promise<UserEntity> {
+    const user = await this._model.findByIdAndUpdate(
+      userId,
+      { profilePicture: pictureUrl },
+      { new: true },
+    );
+
+    if (!user) {
+      throw new AppError('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.toEntity(user);
+  }
+
+  async findAllByRole(role: string): Promise<UserEntity[]> {
+    const users = await this._model.find({ role }).sort({ createdAt: -1 }).select('-password -__v');
+
+    return users.map((u) => this.toEntity(u));
+  }
 
   protected toEntity(user: UserDocument): UserEntity {
     return {
       id: user._id.toString(),
       name: user.name,
       email: user.email,
+      emailVerified: user.emailVerified,
       phone: user.phone,
+      phoneVerified: user.phoneVerified,
       password: user.password,
+      googleId: user.googleId,
+      authProvider: user.authProvider,
       role: user.role,
       isActive: user.isActive,
       isBlocked: user.isBlocked,
+      status: user.status,
+      profilePicture: user.profilePicture ?? null,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     };

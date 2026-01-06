@@ -1,7 +1,8 @@
-import { UserRole } from '../../../common/enums/userRole.enum';
+import { UserRole } from '../../../../common/enums/userRole.enum';
 
 export interface LoginResponseDto {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   user: {
     id: string;
     name: string;

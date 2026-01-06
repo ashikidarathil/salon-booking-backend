@@ -1,6 +1,6 @@
-export interface SignupDto {
+export type AcceptInviteDto = {
+  token: string;
   name: string;
-  email: string;
   phone?: string;
   password: string;
-}
+};

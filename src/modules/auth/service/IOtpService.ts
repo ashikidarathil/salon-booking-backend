@@ -4,4 +4,6 @@ export interface IOtpService {
 
   generateResetOtp(email: string): Promise<string>;
   verifyResetOtp(email: string, otp: string): Promise<boolean>;
+  generateSmsOtp(phone: string): Promise<string>;
+  verifySmsOtp(phone: string, otp: string): Promise<boolean>;
 }
