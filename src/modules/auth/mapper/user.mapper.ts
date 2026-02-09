@@ -12,6 +12,7 @@ export class UserMapper {
       profilePicture: user.profilePicture ?? null,
       isActive: user.isActive,
       isBlocked: user.isBlocked,
+      authProvider: user.authProvider,
     };
   }
 }

@@ -9,4 +9,5 @@ export interface SafeUser {
   profilePicture?: string | null;
   isActive: boolean;
   isBlocked: boolean;
+  authProvider?: 'LOCAL' | 'GOOGLE';
 }

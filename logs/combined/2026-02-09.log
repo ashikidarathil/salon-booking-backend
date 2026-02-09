@@ -43,3 +43,114 @@
 {"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 12:32:20"}
 {"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 13:23:25","url":"/api/auth/login","userId":"anonymous"}
 {"level":"warn","message":"Handled AppError Unauthorized role access","method":"POST","statusCode":403,"timestamp":"2026-02-09 13:55:06","url":"/api/auth/login","userId":"anonymous"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 15:51:27"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 15:51:27"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 15:51:27"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 16:14:34"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 16:14:34"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 16:14:34"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 16:15:46"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 16:15:46"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 16:15:46"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 16:17:48"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 16:17:48"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 16:17:48"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 16:18:12"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 16:18:12"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 16:18:12"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 16:19:06"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 16:19:06"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 16:19:06"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 16:33:34"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 16:33:34"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 16:33:34"}
+{"level":"warn","message":"Handled AppError Your account has been blocked","method":"POST","statusCode":403,"timestamp":"2026-02-09 16:42:08","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Your account has been blocked","method":"POST","statusCode":403,"timestamp":"2026-02-09 16:42:33","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Your account has been blocked","method":"POST","statusCode":403,"timestamp":"2026-02-09 16:42:33","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError New password and confirm password do not match","method":"POST","statusCode":400,"timestamp":"2026-02-09 16:49:10","url":"/api/auth/profile/change-password","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 16:50:52","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 16:53:06"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 16:53:06"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 16:53:06"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 16:55:40","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:04:26"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:04:26"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:04:26"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:04:26"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:04:26"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:04:26"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:04:32"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:04:32"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:04:32"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:04:32"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:04:32"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:04:32"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:04:46"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:04:46"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:04:46"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:04:46"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:04:46"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:04:46"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 17:09:03","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 17:09:09","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 17:09:10","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 17:09:32","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 17:14:01","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 17:14:34","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError New password cannot be the same as current password","method":"POST","statusCode":400,"timestamp":"2026-02-09 17:14:41","url":"/api/auth/profile/change-password","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:16:55"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:16:55"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:16:55"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:16:55"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:16:55"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:16:55"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 17:18:04","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 17:18:22","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError This phone number is already registered with another account","method":"PUT","statusCode":409,"timestamp":"2026-02-09 17:18:41","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:21:15"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:21:15"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:21:15"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:21:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:21:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:21:15"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:21:45"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:21:45"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:21:45"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:21:45"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:21:45"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 17:21:45"}
+{"level":"warn","message":"Handled AppError Phone number must contain exactly 10 digits","method":"PUT","statusCode":400,"timestamp":"2026-02-09 17:22:09","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError Phone number must contain exactly 10 digits","method":"PUT","statusCode":400,"timestamp":"2026-02-09 17:22:17","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError Phone number must contain exactly 10 digits","method":"PUT","statusCode":400,"timestamp":"2026-02-09 17:24:22","url":"/api/auth/profile/update","userId":"6964d0b34e4f1c1c47e3df2b"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 17:25:09","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 17:25:15","url":"/api/auth/login","userId":"anonymous"}
+{"level":"error","message":"Unhandled Error Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: salon_booking.users index: phone_1 dup key: { phone: \"\" }","method":"PUT","stack":"MongoServerError: Plan executor error during findAndModify :: caused by :: E11000 duplicate key error collection: salon_booking.users index: phone_1 dup key: { phone: \"\" }\n    at Connection.sendCommand (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/cmap/connection.ts:557:17)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Connection.command (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/cmap/connection.ts:627:22)\n    at async Server.command (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/sdam/server.ts:350:21)\n    at async tryOperation (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/operations/execute_operation.ts:293:24)\n    at async executeOperation (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/operations/execute_operation.ts:123:12)\n    at async Collection.findOneAndUpdate (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/collection.ts:1041:12)\n    at async model.Query._findOneAndUpdate (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:3543:13)\n    at async model.Query.exec (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:4627:63)\n    at async UserRepository.updateProfile (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/auth/repository/UserRepository.ts:225:18)","timestamp":"2026-02-09 17:54:42","url":"/api/auth/profile/update","userId":"6952c5e37717bc70a397d947"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:59:59"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 17:59:59"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 17:59:59"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 18:00:00"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 18:00:00"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 18:00:00"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 18:06:46"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 18:06:46"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 18:06:46"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 18:06:46"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 18:06:46"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 18:06:46"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:13:08","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:13:14","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:13:15","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:13:33","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:13:41","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:13:45","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:13:45","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:13:46","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:14:10","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:14:10","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:14:22","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:14:22","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:14:43","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:14:58","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:14:58","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Your account has been blocked","method":"POST","statusCode":403,"timestamp":"2026-02-09 18:16:53","url":"/api/auth/login","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:18:52","url":"/api/auth/login","userId":"anonymous"}

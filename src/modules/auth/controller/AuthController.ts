@@ -234,4 +234,38 @@ export class AuthController implements IAuthController {
       .status(HttpStatus.OK)
       .json(new ApiResponse(true, 'Profile picture updated successfully', data));
   }
+
+  async changePassword(req: Request & { auth?: { userId: string } }, res: Response) {
+    const userId = req.auth?.userId;
+    if (!userId) {
+      throw new AppError(MESSAGES.AUTH.AUTH_REQUIRED, HttpStatus.UNAUTHORIZED);
+    }
+
+    const dto = {
+      currentPassword: req.body.currentPassword,
+      newPassword: req.body.newPassword,
+      confirmPassword: req.body.confirmPassword,
+    };
+
+    const data = await this._profileService.changePassword(userId, dto);
+
+    res.status(HttpStatus.OK).json(new ApiResponse(true, data.message, data));
+  }
+
+  async updateProfile(req: Request & { auth?: { userId: string } }, res: Response) {
+    const userId = req.auth?.userId;
+    if (!userId) {
+      throw new AppError(MESSAGES.AUTH.AUTH_REQUIRED, HttpStatus.UNAUTHORIZED);
+    }
+
+    const dto = {
+      name: req.body.name,
+      email: req.body.email,
+      phone: req.body.phone,
+    };
+
+    const data = await this._profileService.updateProfile(userId, dto);
+
+    res.status(HttpStatus.OK).json(new ApiResponse(true, data.message, data));
+  }
 }

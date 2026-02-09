@@ -197,6 +197,39 @@ export class UserRepository
     return users.map((u) => this.toEntity(u));
   }
 
+  // New methods for profile management
+  async findByIdWithPassword(userId: string): Promise<UserEntity | null> {
+    const user = await this._model.findById(userId).select('+password');
+    return user ? this.toEntity(user) : null;
+  }
+
+  async updatePasswordById(userId: string, hashedPassword: string): Promise<UserEntity | null> {
+    const user = await this._model.findByIdAndUpdate(
+      userId,
+      { password: hashedPassword },
+      { new: true },
+    );
+    return user ? this.toEntity(user) : null;
+  }
+
+  async updateProfile(
+    userId: string,
+    data: { name?: string; email?: string; phone?: string },
+  ): Promise<UserEntity | null> {
+    const updateData: Record<string, string> = {};
+
+    if (data.name !== undefined) updateData.name = data.name;
+    if (data.email !== undefined) updateData.email = data.email;
+    if (data.phone !== undefined) updateData.phone = data.phone.trim();
+
+    const user = await this._model.findByIdAndUpdate(userId, updateData, {
+      new: true,
+      runValidators: true,
+    });
+
+    return user ? this.toEntity(user) : null;
+  }
+
   protected toEntity(user: UserDocument): UserEntity {
     return {
       id: user._id.toString(),

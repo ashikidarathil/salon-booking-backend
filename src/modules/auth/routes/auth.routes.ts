@@ -39,4 +39,12 @@ router.put(
   controller.updateProfilePicture.bind(controller),
 );
 
+router.post(
+  AUTH_ROUTES.CHANGE_PASSWORD,
+  authMiddleware,
+  controller.changePassword.bind(controller),
+);
+
+router.put(AUTH_ROUTES.UPDATE_PROFILE, authMiddleware, controller.updateProfile.bind(controller));
+
 export default router;

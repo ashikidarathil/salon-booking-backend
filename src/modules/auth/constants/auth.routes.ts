@@ -25,6 +25,8 @@ export const AUTH_ROUTES = {
   VERIFY_SMS_OTP: '/sms/verify-otp',
   UPLOAD_PROFILE_PICTURE: '/profile/upload-picture',
   UPDATE_PROFILE_PICTURE: '/profile/update-picture',
+  CHANGE_PASSWORD: '/profile/change-password',
+  UPDATE_PROFILE: '/profile/update',
 } as const;
 
 /**

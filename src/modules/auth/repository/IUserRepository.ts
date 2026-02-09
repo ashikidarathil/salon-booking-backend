@@ -30,10 +30,8 @@ export interface IUserRepository {
   findByPhone(phone: string): Promise<UserEntity | null>;
   findByEmailOrPhone(identifier: string): Promise<UserEntity | null>;
   update(filter: Record<string, unknown>, data: Partial<UserDocument>): Promise<UserEntity | null>;
-  findByEmail(email: string): Promise<UserEntity | null>;
   createUser(data: CreateUserInput): Promise<UserEntity>;
   markEmailVerified(email: string): Promise<UserEntity | null>;
-  // markPhoneVerified(userId: string, phone: string): Promise<UserEntity | null>;
   updatePassword(email: string, hashedPassword: string): Promise<UserEntity | null>;
   createGoogleUser(data: { name: string; email: string; googleId: string }): Promise<UserEntity>;
   markPhoneVerifiedByPhone(phone: string): Promise<UserEntity | null>;
@@ -47,4 +45,12 @@ export interface IUserRepository {
   updateProfilePicture(userId: string, pictureUrl: string): Promise<UserEntity>;
   findAllByRole(role: string): Promise<UserEntity[]>;
   getPaginated(query: PaginationQueryDto): Promise<PaginatedResponse<UserEntity>>;
+
+  // New methods for profile management
+  findByIdWithPassword(userId: string): Promise<UserEntity | null>;
+  updatePasswordById(userId: string, hashedPassword: string): Promise<UserEntity | null>;
+  updateProfile(
+    userId: string,
+    data: { name?: string; email?: string; phone?: string },
+  ): Promise<UserEntity | null>;
 }
