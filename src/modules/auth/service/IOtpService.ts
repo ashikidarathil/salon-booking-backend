@@ -1,9 +1,5 @@
 export interface IOtpService {
-  generateSignupOtp(email: string): Promise<string>;
-  verifySignupOtp(email: string, otp: string): Promise<boolean>;
-
-  generateResetOtp(email: string): Promise<string>;
-  verifyResetOtp(email: string, otp: string): Promise<boolean>;
-  generateSmsOtp(phone: string): Promise<string>;
-  verifySmsOtp(phone: string, otp: string): Promise<boolean>;
+  generate(key: string, ttlSeconds: number): Promise<string>;
+  resend(key: string, ttlSeconds: number): Promise<string>;
+  verify(key: string, otp: string): Promise<void>;
 }

@@ -1,19 +1,26 @@
-import { injectable } from 'tsyringe';
+import { injectable, inject } from 'tsyringe';
 import { UserModel, UserDocument } from '../../../models/user.model';
 import { BaseRepository } from '../../../common/repository/baseRepository';
-import { UserEntity } from '../../../types/userEntity';
+import { UserEntity } from '../../../common/types/userEntity';
 import { IUserRepository, CreateUserInput } from './IUserRepository';
 import { UserStatus } from '../../../models/user.model';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { AppError } from '../../../common/errors/appError';
+import { PaginatedBaseRepository } from '../../../common/repository/paginatedBaseRepository';
+import { TOKENS } from '../../../common/di/tokens';
+import { QueryBuilderService } from '../../../common/service/queryBuilder/queryBuilder.service';
 
 @injectable()
 export class UserRepository
-  extends BaseRepository<UserDocument, UserEntity>
+  extends PaginatedBaseRepository<UserDocument, UserEntity>
   implements IUserRepository
 {
-  constructor() {
-    super(UserModel);
+  constructor(@inject(TOKENS.QueryBuilder) queryBuilder: QueryBuilderService) {
+    super(UserModel, queryBuilder);
+  }
+
+  protected getSearchableFields(): readonly (keyof UserDocument & string)[] {
+    return ['name', 'email', 'phone'];
   }
 
   async findByEmail(email: string): Promise<UserEntity | null> {
@@ -161,7 +168,9 @@ export class UserRepository
   }
 
   async setBlockedById(userId: string, isBlocked: boolean): Promise<void> {
-    await this._model.findByIdAndUpdate(userId, { isBlocked });
+    console.log(`🔄 Updating user ${userId}: isBlocked = ${isBlocked}`);
+    const updated = await this._model.findByIdAndUpdate(userId, { isBlocked });
+    console.log(`✅ Updated result:`, updated);
   }
 
   async setStatusById(userId: string, status: UserStatus): Promise<void> {

@@ -8,7 +8,6 @@ export type StylistInviteEntity = {
   expiresAt: Date;
   status: 'PENDING' | 'ACCEPTED' | 'EXPIRED' | 'CANCELLED';
   usedAt?: Date;
-  branchId?: string;
   specialization: string;
   experience: number;
   createdBy: string;

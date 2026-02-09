@@ -1,3 +1,4 @@
+/*
 import type { Response } from 'express';
 import { env } from '../../config/env';
 import { UserRole } from '../enums/userRole.enum';
@@ -43,5 +44,33 @@ export const setAuthCookies = (
 
 export const clearAuthCookies = (res: Response) => {
   res.clearCookie('access_token', { path: '/' });
+  res.clearCookie('refresh_token', { path: '/' });
+};
+*/
+
+import type { Response } from 'express';
+import { env } from '../../config/env';
+import { UserRole } from '../enums/userRole.enum';
+import jwt from 'jsonwebtoken';
+
+export function createSessionToken(userId: string, role: UserRole, tabId?: string) {
+  return jwt.sign({ userId, role, tabId }, env.REFRESH_TOKEN_SECRET, {
+    expiresIn: env.REFRESH_TOKEN_EXPIRES,
+  });
+}
+
+const isProd = env.NODE_ENV === 'production';
+
+export const setAuthCookie = (res: Response, token: string) => {
+  res.cookie('refresh_token', token, {
+    httpOnly: true,
+    secure: isProd,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+};
+
+export const clearAuthCookies = (res: Response) => {
   res.clearCookie('refresh_token', { path: '/' });
 };

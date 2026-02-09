@@ -2,7 +2,6 @@ import nodemailer from 'nodemailer';
 import { injectable } from 'tsyringe';
 import { env } from '../../../config/env';
 import { IEmailService } from './IEmailService';
-import { otpEmailTemplate } from './emailTemplates';
 
 @injectable()
 export class EmailService implements IEmailService {
@@ -16,23 +15,12 @@ export class EmailService implements IEmailService {
     },
   });
 
-  async sendOtpEmail(to: string, otp: string): Promise<void> {
-    const template = otpEmailTemplate(otp);
-
+  async sendEmail(params: { to: string; subject: string; html: string }): Promise<void> {
     await this.transporter.sendMail({
       from: env.SMTP_FROM,
-      to,
-      subject: template.subject,
-      html: template.html,
-    });
-  }
-
-  async send(to: string, subject: string, html: string): Promise<void> {
-    await this.transporter.sendMail({
-      from: env.SMTP_FROM,
-      to,
-      subject,
-      html,
+      to: params.to,
+      subject: params.subject,
+      html: params.html,
     });
   }
 }

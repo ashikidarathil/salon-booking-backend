@@ -7,17 +7,26 @@ import { AppError } from '../../../common/errors/appError';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { UserRole } from '../../../common/enums/userRole.enum';
 import { env } from '../../../config/env';
+import type { IEmailService } from '../../../common/service/email/IEmailService';
+import { stylistInviteEmailTemplate } from '../../../common/service/email/stylistInvite.template';
 
 import type { IStylistInviteService } from './IStylistInviteService';
-import type { CreateStylistInviteDto } from '../dto/CreateStylistInvite.dto';
-import type { ValidateInviteDto } from '../dto/ValidateInvite.dto';
-import type { AcceptInviteDto } from '../dto/AcceptInvite.dto';
+import type { CreateStylistInviteRequest } from '../dto/request/CreateStylistInvite.request';
+import type { ValidateInviteRequest } from '../dto/request/ValidateInvite.request';
+import type { AcceptInviteRequest } from '../dto/request/AcceptInvite.request';
+import type { CreateInviteResponse } from '../dto/response/CreateInvite.response';
+import type { ValidateInviteResponse } from '../dto/response/ValidateInvite.response';
+import type { SendInviteResponse } from '../dto/response/CreateInvite.response';
 
 import type { IStylistInviteRepository } from '../repository/IStylistInviteRepository';
 import type { IStylistRepository } from '../repository/IStylistRepository';
 import type { IUserRepository } from '../../auth/repository/IUserRepository';
-import type { IEmailService } from '../../../common/service/email/IEmailService';
 
+import { STYLIST_INVITE_MESSAGES } from '../constants/stylistInvite.messages';
+
+/**
+ * Utility function to generate SHA256 hash of input string
+ */
 function sha256(input: string): string {
   return crypto.createHash('sha256').update(input).digest('hex');
 }
@@ -31,14 +40,20 @@ export class StylistInviteService implements IStylistInviteService {
     @inject(TOKENS.EmailService) private readonly _email: IEmailService,
   ) {}
 
+  /**
+   * Creates a new stylist invitation with email
+   * Validates email, creates user draft, sends invitation email
+   */
   async createInvite(
     adminId: string,
-    dto: CreateStylistInviteDto,
-  ): Promise<{ inviteLink: string; userId: string }> {
+    dto: CreateStylistInviteRequest,
+  ): Promise<CreateInviteResponse> {
     const email = dto.email.toLowerCase().trim();
 
     const existing = await this._userRepo.findByEmail(email);
-    if (existing) throw new AppError('Email already registered', HttpStatus.BAD_REQUEST);
+    if (existing) {
+      throw new AppError(STYLIST_INVITE_MESSAGES.EMAIL_ALREADY_REGISTERED, HttpStatus.BAD_REQUEST);
+    }
 
     const tempPasswordHash = await bcrypt.hash(crypto.randomBytes(16).toString('hex'), 10);
 
@@ -56,7 +71,6 @@ export class StylistInviteService implements IStylistInviteService {
 
     await this._stylistRepo.createStylistDraft({
       userId: user.id,
-      branchId: dto.branchId,
       specialization: dto.specialization.trim(),
       experience: dto.experience,
     });
@@ -73,53 +87,47 @@ export class StylistInviteService implements IStylistInviteService {
       rawToken,
       inviteLink,
       expiresAt,
-      branchId: dto.branchId,
       specialization: dto.specialization.trim(),
       experience: dto.experience,
       createdBy: adminId,
     });
 
-    await this._email.send(
-      email,
-      'Stylist Invitation - Complete Your Registration',
-      `
-      <div style="font-family: Arial, sans-serif;">
-        <h2>You are invited as a Stylist</h2>
-        <p>Complete registration using:</p>
-        <p><a href="${inviteLink}">${inviteLink}</a></p>
-        <p>This link expires in 24 hours.</p>
-      </div>
-      `,
-    );
+    const template = stylistInviteEmailTemplate(inviteLink);
+
+    await this._email.sendEmail({
+      to: email,
+      subject: template.subject,
+      html: template.html,
+    });
 
     return { inviteLink, userId: user.id };
   }
 
-  async sendInviteToAppliedStylist(
-    adminId: string,
-    userId: string,
-  ): Promise<{ inviteLink: string }> {
+  /**
+   * Sends invitation to an already applied stylist
+   * Validates user status and sends new invitation email
+   */
+
+  async sendInviteToAppliedStylist(adminId: string, userId: string): Promise<SendInviteResponse> {
     const user = await this._userRepo.findById(userId);
 
-    if (!user) throw new AppError('User not found', HttpStatus.NOT_FOUND);
+    if (!user) {
+      throw new AppError(STYLIST_INVITE_MESSAGES.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
 
     if (user.role !== UserRole.STYLIST) {
-      throw new AppError('User is not a stylist applicant', HttpStatus.BAD_REQUEST);
+      throw new AppError(STYLIST_INVITE_MESSAGES.NOT_STYLIST_APPLICANT, HttpStatus.BAD_REQUEST);
     }
 
     if (user.status !== 'APPLIED') {
-      throw new AppError('Stylist already invited / accepted / active', HttpStatus.BAD_REQUEST);
+      throw new AppError(STYLIST_INVITE_MESSAGES.STYLIST_ALREADY_INVITED, HttpStatus.BAD_REQUEST);
     }
 
     if (!user.email) {
-      throw new AppError(
-        'Applied stylist must have an email to send invite',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new AppError(STYLIST_INVITE_MESSAGES.MISSING_EMAIL, HttpStatus.BAD_REQUEST);
     }
 
     await this._userRepo.setStatusById(userId, 'PENDING');
-
     await this._inviteRepo.cancelByUserId(userId);
 
     const rawToken = crypto.randomBytes(32).toString('hex');
@@ -134,69 +142,66 @@ export class StylistInviteService implements IStylistInviteService {
       rawToken,
       inviteLink,
       expiresAt,
-      branchId: undefined,
       specialization: 'Applied Stylist',
       experience: 0,
       createdBy: adminId,
     });
 
-    await this._email.send(
-      user.email,
-      'Stylist Invitation - Complete Your Registration',
-      `
-      <div style="font-family: Arial, sans-serif;">
-        <h2>Your stylist application is approved for registration</h2>
-        <p>Complete registration using:</p>
-        <p><a href="${inviteLink}">${inviteLink}</a></p>
-        <p>This link expires in 24 hours.</p>
-      </div>
-      `,
-    );
+    const template = stylistInviteEmailTemplate(inviteLink);
+
+    await this._email.sendEmail({
+      to: user.email,
+      subject: template.subject,
+      html: template.html,
+    });
 
     return { inviteLink };
   }
 
-  async validateInvite(dto: ValidateInviteDto): Promise<{
-    email: string;
-    branchId?: string;
-    specialization: string;
-    experience: number;
-    expiresAt: Date;
-  }> {
+  /**
+   * Validates an invitation token
+   * Checks token validity and expiration
+   */
+  async validateInvite(dto: ValidateInviteRequest): Promise<ValidateInviteResponse> {
     const tokenHash = sha256(dto.token);
 
     const invite = await this._inviteRepo.findPendingByTokenHash(tokenHash);
-    if (!invite) throw new AppError('Invalid or used invite', HttpStatus.BAD_REQUEST);
+    if (!invite) {
+      throw new AppError(STYLIST_INVITE_MESSAGES.INVALID_INVITE, HttpStatus.BAD_REQUEST);
+    }
 
     if (invite.expiresAt.getTime() < Date.now()) {
       await this._inviteRepo.markExpired(invite.id);
-      throw new AppError('Invite expired', HttpStatus.BAD_REQUEST);
+      throw new AppError(STYLIST_INVITE_MESSAGES.INVITE_EXPIRED, HttpStatus.BAD_REQUEST);
     }
 
     return {
       email: invite.email,
-      branchId: invite.branchId,
       specialization: invite.specialization,
       experience: invite.experience,
       expiresAt: invite.expiresAt,
     };
   }
 
-  async acceptInvite(dto: AcceptInviteDto, tabId?: string): Promise<{ success: true }> {
+  /**
+   * Accepts an invitation and completes stylist registration
+   * Validates password, updates user details, marks invite as accepted
+   */
+  async acceptInvite(dto: AcceptInviteRequest, tabId?: string): Promise<{ success: true }> {
     const tokenHash = sha256(dto.token);
 
     const invite = await this._inviteRepo.findPendingByTokenHash(tokenHash);
     if (!invite) {
-      throw new AppError('Invalid or used invite link', HttpStatus.BAD_REQUEST);
+      throw new AppError(STYLIST_INVITE_MESSAGES.INVALID_INVITE, HttpStatus.BAD_REQUEST);
     }
 
     if (invite.expiresAt.getTime() < Date.now()) {
       await this._inviteRepo.markExpired(invite.id);
-      throw new AppError('Invite link has expired', HttpStatus.BAD_REQUEST);
+      throw new AppError(STYLIST_INVITE_MESSAGES.INVITE_EXPIRED, HttpStatus.BAD_REQUEST);
     }
 
     if (dto.password.length < 6) {
-      throw new AppError('Password must be at least 6 characters', HttpStatus.BAD_REQUEST);
+      throw new AppError(STYLIST_INVITE_MESSAGES.PASSWORD_TOO_SHORT, HttpStatus.BAD_REQUEST);
     }
 
     const hashed = await bcrypt.hash(dto.password, 10);
@@ -209,10 +214,7 @@ export class StylistInviteService implements IStylistInviteService {
     });
 
     if (!ok) {
-      throw new AppError(
-        'Failed to update stylist account. User not found.',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new AppError(STYLIST_INVITE_MESSAGES.UPDATE_FAILED, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     await this._inviteRepo.markAccepted(invite.id);
@@ -220,6 +222,10 @@ export class StylistInviteService implements IStylistInviteService {
     return { success: true };
   }
 
+  /**
+   * Approves a stylist applicant
+   * Activates user account and stylist profile
+   */
   async approveStylist(adminId: string, userId: string): Promise<{ success: true }> {
     await this._userRepo.setActiveById(userId, true);
     await this._userRepo.setStatusById(userId, 'ACTIVE');
@@ -227,6 +233,10 @@ export class StylistInviteService implements IStylistInviteService {
     return { success: true };
   }
 
+  /**
+   * Rejects a stylist applicant
+   * Cancels invites, deactivates account, and blocks user
+   */
   async rejectStylist(adminId: string, userId: string): Promise<{ success: true }> {
     await this._inviteRepo.cancelByUserId(userId);
     await this._userRepo.setActiveById(userId, false);
@@ -235,6 +245,9 @@ export class StylistInviteService implements IStylistInviteService {
     return { success: true };
   }
 
+  /**
+   * Toggles block status for a stylist user
+   */
   async toggleBlock(adminId: string, userId: string, block: boolean): Promise<{ success: true }> {
     await this._userRepo.setBlockedById(userId, block);
     return { success: true };

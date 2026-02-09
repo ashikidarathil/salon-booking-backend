@@ -1,3 +1,6 @@
+import type { UploadProfilePictureDto } from '../dto/profile/UploadProfilePicture.dto';
+import type { UploadProfilePictureResponseDto } from '../dto/profile/UploadProfilePictureResponse.dto';
+
 export interface IProfileService {
-  uploadPicture(userId: string, file: Express.Multer.File): Promise<{ profilePicture: string }>;
+  uploadProfilePicture(dto: UploadProfilePictureDto): Promise<UploadProfilePictureResponseDto>;
 }

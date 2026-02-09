@@ -1,0 +1,112 @@
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 01:00:27"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 01:00:27"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 01:00:27"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 12:22:48"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 12:22:48"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 12:22:48"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 12:39:16"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 12:39:16"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 12:39:16"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 12:44:02"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 12:44:02"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 12:44:02"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 12:44:22"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 12:44:22"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 12:44:22"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 12:55:29"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 12:55:29"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 12:55:29"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 12:55:51"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 12:55:51"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 12:55:51"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:29:15"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:29:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:29:15"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:29:23"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:29:23"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:29:23"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:29:38"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:29:38"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:29:38"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:29:55"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:29:55"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:29:55"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:30:09"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:30:09"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:30:09"}
+{"level":"error","message":"Unhandled Error Cannot read properties of null (reading '_id')","method":"GET","stack":"TypeError: Cannot read properties of null (reading '_id')\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/repository/branchCategory.repository.ts:50:34\n    at Array.map (<anonymous>)\n    at BranchCategoryRepository.getPaginatedByBranch (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/repository/branchCategory.repository.ts:48:23)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BranchCategoryController.listPaginated (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/controller/branchCategory.controller.ts:48:18)","timestamp":"2026-02-05 13:33:01","url":"/api/admin/branches/6969fc199765ee9238e0cec6/categories/paginated?page=1&limit=5","userId":"693d1d1c955b52394a731682"}
+{"level":"error","message":"Unhandled Error Cannot read properties of null (reading '_id')","method":"GET","stack":"TypeError: Cannot read properties of null (reading '_id')\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/repository/branchCategory.repository.ts:50:34\n    at Array.map (<anonymous>)\n    at BranchCategoryRepository.getPaginatedByBranch (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/repository/branchCategory.repository.ts:48:23)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BranchCategoryController.listPaginated (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/controller/branchCategory.controller.ts:48:18)","timestamp":"2026-02-05 13:33:01","url":"/api/admin/branches/6969fc199765ee9238e0cec6/categories/paginated?page=1&limit=5","userId":"693d1d1c955b52394a731682"}
+{"level":"error","message":"Unhandled Error Cannot read properties of null (reading '_id')","method":"GET","stack":"TypeError: Cannot read properties of null (reading '_id')\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/repository/branchCategory.repository.ts:50:34\n    at Array.map (<anonymous>)\n    at BranchCategoryRepository.getPaginatedByBranch (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/repository/branchCategory.repository.ts:48:23)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BranchCategoryController.listPaginated (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/controller/branchCategory.controller.ts:48:18)","timestamp":"2026-02-05 13:33:10","url":"/api/admin/branches/696752301a5b3233b277a47c/categories/paginated?page=1&limit=5","userId":"693d1d1c955b52394a731682"}
+{"level":"error","message":"Unhandled Error Cannot read properties of null (reading '_id')","method":"GET","stack":"TypeError: Cannot read properties of null (reading '_id')\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/repository/branchCategory.repository.ts:50:34\n    at Array.map (<anonymous>)\n    at BranchCategoryRepository.getPaginatedByBranch (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/repository/branchCategory.repository.ts:48:23)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BranchCategoryController.listPaginated (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/branchCategory/controller/branchCategory.controller.ts:48:18)","timestamp":"2026-02-05 13:33:10","url":"/api/admin/branches/696752301a5b3233b277a47c/categories/paginated?page=1&limit=5","userId":"693d1d1c955b52394a731682"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:34:15"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:34:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:34:15"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:43:14"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:43:14"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:43:14"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:53:48"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:53:48"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:53:48"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:54:13"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:54:13"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:54:13"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:56:28"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:56:28"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:56:29"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:57:05"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:57:05"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:57:05"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 13:59:02"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 13:59:02"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 13:59:02"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:00:41"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:00:41"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:00:41"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:02:20"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:02:20"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:02:20"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:02:36"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:02:36"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:02:36"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:04:15"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:04:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:04:15"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:06:16"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:06:16"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:06:16"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:13:27"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:13:27"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:13:27"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:15:09"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:15:09"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:15:09"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:16:07"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:16:07"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:16:07"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:16:37"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:16:37"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:16:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:18:08"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:18:08"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:18:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:22:27"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:22:27"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:22:27"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 14:23:25"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 14:23:25"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 14:23:25"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 16:24:16"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 16:24:16"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 16:24:16"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 16:25:46"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 16:25:46"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 16:25:46"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 16:26:20"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 16:26:20"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 16:26:20"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 16:26:37"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 16:26:37"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 16:26:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-05 20:01:59"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-05 20:01:59"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-05 20:01:59"}

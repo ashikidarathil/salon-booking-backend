@@ -5,8 +5,7 @@ import { MESSAGES } from '../../../common/constants/messages';
 import { AppError } from '../../../common/errors/appError';
 import type { IAuthController } from './IAuthController';
 import type { IAuthService } from '../service/IAuthService';
-import { setAuthCookies, clearAuthCookies } from '../../../common/utils/cookie.util';
-
+import { setAuthCookie, clearAuthCookies } from '../../../common/utils/cookie.util';
 import type { SignupDto } from '../dto/auth/Signup.dto';
 import type { LoginDto } from '../dto/auth/Login.dto';
 import type { VerifyOtpDto } from '../dto/auth/VerifyOtp.dto';
@@ -18,6 +17,8 @@ import { injectable, inject } from 'tsyringe';
 import { TOKENS } from '../../../common/di/tokens';
 import { ApplyAsStylistDto } from '../dto/stylist/ApplyAsStylist.dto';
 import { IProfileService } from '../service/IProfileService';
+import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+
 @injectable()
 export class AuthController implements IAuthController {
   constructor(
@@ -27,6 +28,19 @@ export class AuthController implements IAuthController {
 
   private getTabId(req: Request): string {
     return (req.headers['x-tab-id'] as string) || '';
+  }
+
+  private async handleProfileUpload(req: Request & { auth?: { userId: string } }) {
+    const userId = req.auth?.userId;
+
+    if (!userId) {
+      throw new AppError(MESSAGES.AUTH.AUTH_REQUIRED, HttpStatus.UNAUTHORIZED);
+    }
+
+    return this._profileService.uploadProfilePicture({
+      userId,
+      file: req.file as Express.Multer.File,
+    });
   }
 
   async signup(req: Request, res: Response) {
@@ -82,16 +96,18 @@ export class AuthController implements IAuthController {
     res.json(new ApiResponse(true, 'New OTP sent to phone'));
   }
 
-  // async verifySmsOtp(req: Request & { auth?: { userId: string } }, res: Response) {
-  //   const dto: VerifySmsOtpDto = {
-  //     phone: req.body.phone,
-  //     otp: req.body.otp,
-  //   };
+  /*
+  async verifySmsOtp(req: Request & { auth?: { userId: string } }, res: Response) {
+    const dto: VerifySmsOtpDto = {
+      phone: req.body.phone,
+      otp: req.body.otp,
+    };
 
-  //   const userId = req.auth!.userId;
-  //   await this._authService.verifySmsOtp(userId, dto);
-  //   res.json(new ApiResponse(true, 'Mobile verified'));
-  // }
+    const userId = req.auth!.userId;
+    await this._authService.verifySmsOtp(userId, dto);
+    res.json(new ApiResponse(true, 'Mobile verified'));
+  }
+  */
 
   async login(req: Request, res: Response) {
     const dto: LoginDto = {
@@ -101,7 +117,7 @@ export class AuthController implements IAuthController {
     };
     const tabId = this.getTabId(req);
     const data = await this._authService.login(dto, tabId);
-    setAuthCookies(res, data.tokens);
+    setAuthCookie(res, data.token);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, 'Login successful', { user: data.user }));
   }
@@ -111,7 +127,7 @@ export class AuthController implements IAuthController {
     const tabId = this.getTabId(req);
 
     const data = await this._authService.googleLogin(dto, tabId);
-    setAuthCookies(res, data.tokens);
+    setAuthCookie(res, data.token);
     res
       .status(HttpStatus.OK)
       .json(new ApiResponse(true, 'Google login successful', { user: data.user }));
@@ -130,7 +146,7 @@ export class AuthController implements IAuthController {
 
     if (!email) {
       res.status(HttpStatus.BAD_REQUEST).json({
-        message: 'Email is required',
+        message: MESSAGES.AUTH.EMAIL_REQUIRED,
       });
       return;
     }
@@ -145,7 +161,7 @@ export class AuthController implements IAuthController {
 
     if (!email || !otp) {
       res.status(HttpStatus.BAD_REQUEST).json({
-        message: 'Email and OTP required',
+        message: MESSAGES.AUTH.EMAIL_AND_OTP_REQUIRED,
       });
       return;
     }
@@ -169,35 +185,17 @@ export class AuthController implements IAuthController {
     const token = req.cookies?.refresh_token;
     const tabId = this.getTabId(req);
     const data = await this._authService.refresh(token, tabId);
-    setAuthCookies(res, data.tokens);
+    setAuthCookie(res, data.token);
     res.status(HttpStatus.OK).json(new ApiResponse(true, 'Token refreshed', { user: data.user }));
   }
 
   async me(req: Request & { auth?: { userId: string } }, res: Response) {
     if (!req.auth?.userId) {
-      res.status(HttpStatus.UNAUTHORIZED).json({
-        message: 'Authentication required',
-      });
-      return;
+      throw new AppError(MESSAGES.AUTH.AUTH_REQUIRED, HttpStatus.UNAUTHORIZED);
     }
+    const data = await this._authService.me(req.auth.userId);
 
-    const user = await this._authService.me(req.auth.userId);
-
-    if (user.isBlocked) {
-      res.status(HttpStatus.FORBIDDEN).json({
-        message: MESSAGES.AUTH.USER_BLOCKED,
-      });
-      return;
-    }
-
-    if (!user.isActive) {
-      res.status(HttpStatus.FORBIDDEN).json({
-        message: MESSAGES.AUTH.VERIFY_EMAIL_OR_PHONE,
-      });
-      return;
-    }
-
-    res.json(new ApiResponse(true, 'Me', { user }));
+    res.status(HttpStatus.OK).json(new ApiResponse(true, 'Me', data));
   }
 
   async logout(req: Request, res: Response) {
@@ -222,15 +220,7 @@ export class AuthController implements IAuthController {
   }
 
   async uploadProfilePicture(req: Request & { auth?: { userId: string } }, res: Response) {
-    if (!req.auth?.userId) {
-      throw new AppError('Authentication required', HttpStatus.UNAUTHORIZED);
-    }
-
-    if (!req.file) {
-      throw new AppError('No file uploaded', HttpStatus.BAD_REQUEST);
-    }
-
-    const data = await this._profileService.uploadPicture(req.auth.userId, req.file);
+    const data = await this.handleProfileUpload(req);
 
     res
       .status(HttpStatus.OK)
@@ -238,15 +228,7 @@ export class AuthController implements IAuthController {
   }
 
   async updateProfilePicture(req: Request & { auth?: { userId: string } }, res: Response) {
-    if (!req.auth?.userId) {
-      throw new AppError('Authentication required', HttpStatus.UNAUTHORIZED);
-    }
-
-    if (!req.file) {
-      throw new AppError('No file uploaded', HttpStatus.BAD_REQUEST);
-    }
-
-    const data = await this._profileService.uploadPicture(req.auth.userId, req.file);
+    const data = await this.handleProfileUpload(req);
 
     res
       .status(HttpStatus.OK)

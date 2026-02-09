@@ -1,0 +1,258 @@
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:44:37"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:44:37"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:44:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:45:01"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:45:01"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:45:01"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:45:15"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:45:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:45:15"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:45:24"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:45:24"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:45:24"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:45:32"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:45:32"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:45:32"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:47:11"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:47:11"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:47:11"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:48:57"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:48:57"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:48:57"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:49:03"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:49:03"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:49:03"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:49:10"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:49:10"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:49:10"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:49:43"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:49:43"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:49:43"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:50:28"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:50:28"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:50:28"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:50:57"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:50:57"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:50:57"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:52:05"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:52:05"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:52:05"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:53:42"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:53:42"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:53:42"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:55:23"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:55:23"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:55:23"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:56:58"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:56:58"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:56:58"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:57:14"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:57:14"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:57:14"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:57:23"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:57:23"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:57:23"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:57:33"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:57:33"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:57:33"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:57:59"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:57:59"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:57:59"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 14:58:30"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 14:58:30"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 14:58:30"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:01:48"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:01:48"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:01:48"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:25:10"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:25:10"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:25:10"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:26:56"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:26:56"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:26:56"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:27:19"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:27:19"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:27:19"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:27:23"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:27:23"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:27:23"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:27:38"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:27:38"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:27:38"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:27:50"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:27:50"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:27:50"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:27:59"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:27:59"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:27:59"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:28:08"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:28:08"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:28:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:28:21"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:28:21"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:28:21"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:35:53"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:35:53"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:35:53"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:37:19"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:37:19"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:37:19"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:37:37"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:37:37"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:37:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:38:06"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:38:06"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:38:06"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:38:30"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:38:30"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:38:30"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:38:57"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:38:57"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:38:57"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:39:13"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:39:13"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:39:13"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:39:18"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:39:19"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:39:19"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:39:24"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:39:24"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:39:24"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:40:01"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:40:01"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:40:01"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:43:51"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:43:51"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:43:51"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:44:16"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:44:16"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:44:16"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 15:44:45"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 15:44:45"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 15:44:45"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:51:35"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:51:35"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:51:35"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:53:06"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:53:06"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:53:06"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:53:19"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:53:19"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:53:19"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:53:44"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:53:44"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:53:44"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:53:49"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:53:49"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:53:49"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:54:30"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:54:31"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:54:31"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:54:56"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:54:56"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:54:56"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:55:05"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:55:05"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:55:05"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:55:41"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:55:41"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:55:41"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:56:34"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:56:34"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:56:34"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:56:47"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:56:47"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:56:47"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:57:03"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:57:03"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:57:03"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:57:12"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:57:12"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:57:12"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:57:29"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:57:29"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:57:29"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 16:57:42"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 16:57:42"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 16:57:42"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:00:30"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:00:30"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:00:30"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:03:07"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:03:07"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:03:07"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:04:08"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:04:08"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:04:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:13:14"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:13:14"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:13:14"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:35:14"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:35:14"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:35:14"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:35:21"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:35:21"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:35:21"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:35:31"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:35:31"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:35:31"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:35:39"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:35:39"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:35:39"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:35:45"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:35:46"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:35:46"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:35:51"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:35:51"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:35:51"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:36:02"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:36:02"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:36:02"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:36:14"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:36:14"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:36:14"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:36:20"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:36:20"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:36:20"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:36:47"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:36:47"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:36:47"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:41:57"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:41:57"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:41:57"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:44:11"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:44:11"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:44:11"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:45:18"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:45:18"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:45:18"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:48:43"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:48:43"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:48:43"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:49:19"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:49:19"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:49:19"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 17:53:27"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 17:53:27"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 17:53:27"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 18:05:09"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 18:05:09"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 18:05:09"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 18:06:54"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 18:06:54"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 18:06:54"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 18:41:15"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 18:41:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 18:41:15"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 18:41:40"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 18:41:40"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 18:41:40"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 18:41:45"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 18:41:45"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 18:41:45"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 18:41:52"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 18:41:52"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 18:41:52"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-01-29 18:50:36"}
+{"level":"info","message":"Redis connected","timestamp":"2026-01-29 18:50:36"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-01-29 18:50:36"}

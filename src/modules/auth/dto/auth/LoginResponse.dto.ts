@@ -1,12 +1,6 @@
-import { UserRole } from '../../../../common/enums/userRole.enum';
+import type { SafeUser } from '../../types/SafeUser.type';
 
 export interface LoginResponseDto {
-  accessToken: string;
-  refreshToken: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    role: UserRole;
-  };
+  user: SafeUser;
+  token: string;
 }

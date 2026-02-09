@@ -1,7 +1,9 @@
 import { UserRole } from '../../../common/enums/userRole.enum';
-import { UserEntity } from '../../../types/userEntity';
+import { UserEntity } from '../../../common/types/userEntity';
 import { UserDocument } from '../../../models/user.model';
 import type { UserStatus } from '../../../models/user.model';
+import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 
 export interface CreateUserInput {
   name: string;
@@ -44,4 +46,5 @@ export interface IUserRepository {
   setStatusById(userId: string, status: UserStatus): Promise<void>;
   updateProfilePicture(userId: string, pictureUrl: string): Promise<UserEntity>;
   findAllByRole(role: string): Promise<UserEntity[]>;
+  getPaginated(query: PaginationQueryDto): Promise<PaginatedResponse<UserEntity>>;
 }

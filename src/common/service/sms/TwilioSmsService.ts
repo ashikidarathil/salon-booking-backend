@@ -7,11 +7,11 @@ import { ISmsService } from './ISmsService';
 export class TwilioSmsService implements ISmsService {
   private client = twilio(env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN);
 
-  async sendOtp(phone: string, otp: string): Promise<void> {
+  async sendSms(params: { to: string; message: string }): Promise<void> {
     await this.client.messages.create({
-      body: `Your OTP is ${otp}. Valid for 5 minutes.`,
+      body: params.message,
       from: env.TWILIO_PHONE_NUMBER,
-      to: phone,
+      to: params.to,
     });
   }
 }

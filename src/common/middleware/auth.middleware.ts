@@ -16,31 +16,27 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  const cookieToken = req.cookies?.access_token;
-  const headerToken = req.headers.authorization?.split(' ')[1];
+  const token = req.cookies?.refresh_token;
   const currentTabId = req.headers['x-tab-id'] as string;
-
-  const token = headerToken || cookieToken;
 
   if (!token) {
     return res.status(HttpStatus.UNAUTHORIZED).json({ message: MESSAGES.AUTH.NO_TOKEN });
   }
 
   try {
-    const decoded = jwt.verify(token, env.ACCESS_TOKEN_SECRET) as AuthPayload;
+    const decoded = jwt.verify(token, env.REFRESH_TOKEN_SECRET) as AuthPayload;
 
-    if (decoded.tabId && decoded.tabId !== currentTabId && currentTabId) {
-      res.clearCookie('access_token', { path: '/' });
-      res.clearCookie('refresh_token', { path: '/' });
-
+    if (decoded.tabId && currentTabId && decoded.tabId !== currentTabId) {
+      res.clearCookie('refresh_token');
       return res.status(HttpStatus.UNAUTHORIZED).json({
-        message: 'Token is for a different tab. Please log in again.',
+        message: 'Session expired. Please login again.',
       });
     }
 
     req.auth = decoded;
     next();
   } catch {
+    res.clearCookie('refresh_token');
     return res.status(HttpStatus.UNAUTHORIZED).json({ message: MESSAGES.AUTH.INVALID_TOKEN });
   }
 };

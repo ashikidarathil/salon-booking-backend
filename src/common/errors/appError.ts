@@ -7,7 +7,6 @@ export class AppError extends Error {
   constructor(message: string, statusCode: HttpStatus) {
     super(message);
     this.statusCode = statusCode;
-
     Object.setPrototypeOf(this, new.target.prototype);
     Error.captureStackTrace(this);
   }

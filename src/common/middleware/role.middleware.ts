@@ -8,8 +8,8 @@ export const roleMiddleware =
   (roles: UserRole[]) =>
   (req: Request & { auth?: AuthPayload }, res: Response, next: NextFunction) => {
     if (!req.auth)
-      return res.status(HttpStatus.UNAUTHORIZED).json({ message: MESSAGES.AUTH.UNAUTHORIZED });
+      return res.status(HttpStatus.UNAUTHORIZED).json({ message: MESSAGES.COMMON.UNAUTHORIZED });
     if (!roles.includes(req.auth.role))
-      return res.status(HttpStatus.FORBIDDEN).json({ message: MESSAGES.AUTH.FORBIDDEN });
+      return res.status(HttpStatus.FORBIDDEN).json({ message: MESSAGES.COMMON.FORBIDDEN });
     next();
   };

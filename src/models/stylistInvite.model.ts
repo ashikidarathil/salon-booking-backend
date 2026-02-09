@@ -11,7 +11,6 @@ export interface StylistInviteDocument extends Document {
   expiresAt: Date;
   status: InviteStatus;
   usedAt?: Date;
-  branchId?: mongoose.Types.ObjectId;
   specialization: string;
   experience: number;
   createdBy: mongoose.Types.ObjectId;
@@ -39,7 +38,6 @@ const StylistInviteSchema = new Schema<StylistInviteDocument>(
       default: 'PENDING',
     },
     usedAt: { type: Date },
-    branchId: { type: Schema.Types.ObjectId, ref: 'Branch', required: false },
     specialization: { type: String, required: true, trim: true },
     experience: { type: Number, required: true, min: 0 },
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },

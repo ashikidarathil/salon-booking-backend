@@ -1,0 +1,126 @@
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:31:08"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:31:08"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:31:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:44:15"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:44:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:44:15"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:44:22"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:44:22"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:44:22"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:46:09"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:46:09"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:46:09"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:46:17"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:46:17"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:46:17"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:46:26"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:46:26"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:46:26"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:46:37"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:46:37"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:46:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:47:31"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:47:31"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:47:31"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:47:44"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:47:44"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:47:44"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:48:01"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:48:01"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:48:01"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:48:18"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:48:18"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:48:18"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 13:49:06"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 13:49:06"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 13:49:06"}
+{"level":"warn","message":"Handled AppError Category name already exists","method":"POST","statusCode":400,"timestamp":"2026-02-03 14:03:07","url":"/api/admin/categories","userId":"693d1d1c955b52394a731682"}
+{"level":"warn","message":"Handled AppError Category name already exists","method":"POST","statusCode":400,"timestamp":"2026-02-03 14:13:41","url":"/api/admin/categories","userId":"693d1d1c955b52394a731682"}
+{"level":"warn","message":"Handled AppError Category name already exists","method":"POST","statusCode":400,"timestamp":"2026-02-03 14:15:43","url":"/api/admin/categories","userId":"693d1d1c955b52394a731682"}
+{"level":"warn","message":"Handled AppError Category name already exists","method":"POST","statusCode":400,"timestamp":"2026-02-03 14:29:04","url":"/api/admin/categories","userId":"693d1d1c955b52394a731682"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 15:06:07"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 15:06:07"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 15:06:07"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 16:21:57"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 16:21:57"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 16:21:57"}
+{"level":"error","message":"Unhandled Error E11000 duplicate key error collection: salon_booking.services index: name_1 dup key: { name: \"HAIR SPA\" }","method":"POST","stack":"MongoServerError: E11000 duplicate key error collection: salon_booking.services index: name_1 dup key: { name: \"HAIR SPA\" }\n    at InsertOneOperation.handleOk (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/operations/insert.ts:79:13)\n    at tryOperation (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/operations/execute_operation.ts:294:26)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/operations/execute_operation.ts:123:12)\n    at async Collection.insertOne (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/collection.ts:294:12)\n    at async model.$__save (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/model.js:398:16)\n    at async model.save (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/model.js:609:5)\n    at async ServiceRepository.create (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/service/repository/service.repository.ts:21:5)\n    at async ServiceService.create (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/service/service/service.service.ts:43:17)\n    at async ServiceController.create (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/service/controller/service.controller.ts:14:18)","timestamp":"2026-02-03 16:22:58","url":"/api/admin/services","userId":"693d1d1c955b52394a731682"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 16:30:00"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 16:30:00"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 16:30:00"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 16:30:33"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 16:30:33"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 16:30:33"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 16:31:11"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 16:31:11"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 16:31:11"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 16:31:23"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 16:31:23"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 16:31:23"}
+{"level":"error","message":"Unhandled Error E11000 duplicate key error collection: salon_booking.services index: name_1_categoryId_1 dup key: { name: \"Pedicure\", categoryId: ObjectId('6968d3e8b0a91d7513463dee') }","method":"POST","stack":"MongoServerError: E11000 duplicate key error collection: salon_booking.services index: name_1_categoryId_1 dup key: { name: \"Pedicure\", categoryId: ObjectId('6968d3e8b0a91d7513463dee') }\n    at InsertOneOperation.handleOk (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/operations/insert.ts:79:13)\n    at tryOperation (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/operations/execute_operation.ts:294:26)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async executeOperation (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/operations/execute_operation.ts:123:12)\n    at async Collection.insertOne (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongodb/src/collection.ts:294:12)\n    at async model.$__save (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/model.js:398:16)\n    at async model.save (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/model.js:609:5)\n    at async ServiceRepository.create (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/service/repository/service.repository.ts:21:5)\n    at async ServiceService.create (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/service/service/service.service.ts:43:17)\n    at async ServiceController.create (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/service/controller/service.controller.ts:14:18)","timestamp":"2026-02-03 16:42:55","url":"/api/admin/services","userId":"693d1d1c955b52394a731682"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 16:59:20"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 16:59:20"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 16:59:20"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 16:59:41"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 16:59:41"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 16:59:41"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:00:04"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:00:04"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:00:04"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:00:53"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:00:53"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:00:53"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:01:04"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:01:04"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:01:04"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:01:22"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:01:22"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:01:22"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:01:32"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:01:32"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:01:32"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:02:42"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:02:42"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:02:42"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:02:50"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:02:50"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:02:50"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:03:06"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:03:06"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:03:06"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:05:01"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:05:01"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:05:01"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:05:17"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:05:17"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:05:17"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:05:55"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:05:55"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:05:55"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:06:20"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:06:20"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:06:20"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:06:33"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:06:33"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:06:33"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:07:39"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:07:39"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:07:39"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:07:53"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:07:53"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:07:53"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:14:54"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:14:54"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:14:54"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:17:00"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:17:00"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:17:00"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:17:34"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:17:34"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:17:34"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 17:36:53"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 17:36:53"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 17:36:53"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-03 19:25:18"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-03 19:25:18"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-03 19:25:18"}

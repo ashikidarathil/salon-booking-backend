@@ -2,7 +2,6 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface StylistDocument extends Document {
   userId: mongoose.Types.ObjectId;
-  branchId?: mongoose.Types.ObjectId;
   specialization: string;
   experience: number;
   rating: number;
@@ -18,7 +17,6 @@ export interface StylistDocument extends Document {
 const StylistSchema = new Schema<StylistDocument>(
   {
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, unique: true },
-    branchId: { type: Schema.Types.ObjectId, ref: 'Branch', required: false },
     specialization: { type: String, required: true, trim: true },
     experience: { type: Number, required: true, min: 0 },
     rating: { type: Number, default: 0 },

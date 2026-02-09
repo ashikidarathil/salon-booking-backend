@@ -5,7 +5,6 @@ export type CreateInviteInput = {
   rawToken: string;
   inviteLink: string;
   expiresAt: Date;
-  branchId?: string;
   specialization: string;
   experience: number;
   createdBy: string;

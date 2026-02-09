@@ -1,0 +1,7 @@
+{"level":"error","message":"Redis error {\"errno\":-61,\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":6379}","timestamp":"2026-02-08 00:21:44"}
+{"level":"error","message":"Redis error {\"errno\":-61,\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":6379}","timestamp":"2026-02-08 00:21:44"}
+{"level":"error","message":"Redis error {\"errno\":-61,\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":6379}","timestamp":"2026-02-08 00:21:44"}
+{"level":"error","message":"Redis error {\"errno\":-61,\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":6379}","timestamp":"2026-02-08 00:21:44"}
+{"level":"error","message":"Redis error {\"errno\":-61,\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":6379}","timestamp":"2026-02-08 00:21:45"}
+{"level":"error","message":"Redis error {\"errno\":-61,\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":6379}","timestamp":"2026-02-08 00:21:46"}
+{"level":"error","message":"Redis error {\"errno\":-61,\"code\":\"ECONNREFUSED\",\"syscall\":\"connect\",\"address\":\"127.0.0.1\",\"port\":6379}","timestamp":"2026-02-08 00:21:47"}

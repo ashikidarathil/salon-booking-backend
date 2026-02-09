@@ -1,4 +1,4 @@
-import { Model, Document } from 'mongoose';
+import { Model, Document, UpdateQuery } from 'mongoose';
 
 export abstract class BaseRepository<TDocument extends Document, TEntity> {
   protected readonly _model: Model<TDocument>;
@@ -19,8 +19,13 @@ export abstract class BaseRepository<TDocument extends Document, TEntity> {
     return doc ? this.toEntity(doc) : null;
   }
 
-  async update(filter: Record<string, unknown>, data: Partial<TDocument>): Promise<TEntity | null> {
-    const doc = await this._model.findOneAndUpdate(filter, data, { new: true });
+  async update(
+    filter: Record<string, unknown>,
+    data: UpdateQuery<TDocument>,
+  ): Promise<TEntity | null> {
+    const doc = await this._model.findOneAndUpdate(filter, data, {
+      new: true,
+    });
     return doc ? this.toEntity(doc) : null;
   }
 }

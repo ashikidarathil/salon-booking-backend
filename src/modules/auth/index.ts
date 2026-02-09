@@ -20,12 +20,12 @@ import type { ISmsService } from '../../common/service/sms/ISmsService';
 import { StylistRepository } from '../stylistInvite/repository/StylistRepository';
 import type { IStylistRepository } from '../stylistInvite/repository/IStylistRepository';
 
-import { S3Service } from '../../common/service/s3/S3Service';
+import type { IImageService } from '../../common/service/image/IImageService';
+import { S3Service } from '../../common/service/image/S3Service';
 
 import { ProfileService } from './service/ProfileService';
 import { IProfileService } from './service/IProfileService';
 
-// Register bindings (interface -> class)
 container.register<IUserRepository>(TOKENS.UserRepository, { useClass: UserRepository });
 container.register<IOtpService>(TOKENS.OtpService, { useClass: RedisOtpService });
 container.register<IAuthService>(TOKENS.AuthService, { useClass: AuthService });
@@ -41,9 +41,9 @@ container.register<IStylistRepository>(TOKENS.StylistRepository, {
 
 container.registerSingleton<IProfileService>(TOKENS.ProfileService, ProfileService);
 
-container.register(S3Service, { useClass: S3Service });
-
-// Controller as itself
+container.register<IImageService>(TOKENS.ImageService, {
+  useClass: S3Service,
+});
 container.register(AuthController, { useClass: AuthController });
 
 export const resolveAuthController = () => container.resolve(AuthController);
