@@ -35,7 +35,6 @@ export class StylistBranchService implements IStylistBranchService {
   ) {}
 
   async listBranchStylists(branchId: string) {
-    // 1️⃣ Get active mappings
     const mappings = await StylistBranchModel.find({
       branchId,
       isActive: true,
@@ -45,7 +44,6 @@ export class StylistBranchService implements IStylistBranchService {
 
     if (mappings.length === 0) return [];
 
-    // 2️⃣ Fetch stylists
     const stylistIds = mappings.map((m) => m.stylistId);
 
     const stylists = await StylistModel.find({
@@ -57,7 +55,6 @@ export class StylistBranchService implements IStylistBranchService {
     const stylistMap = new Map<string, (typeof stylists)[0]>();
     stylists.forEach((s) => stylistMap.set(s._id.toString(), s));
 
-    // 3️⃣ Fetch users
     const userIds = stylists.map((s) => s.userId);
 
     const users = await UserModel.find({
@@ -99,11 +96,9 @@ export class StylistBranchService implements IStylistBranchService {
   ): Promise<PaginatedResponse<UnassignedStylistOptionDto>> {
     const { params, search } = PaginationQueryParser.parse(query);
 
-    // Get all assigned stylists
     const active = await StylistBranchModel.find({ isActive: true }).select('stylistId').lean();
     const assignedStylistIds = active.map((x) => x.stylistId);
 
-    // Fetch stylists NOT assigned
     const stylists = await StylistModel.find({
       _id: { $nin: assignedStylistIds },
     })
@@ -115,7 +110,6 @@ export class StylistBranchService implements IStylistBranchService {
       return PaginationResponseBuilder.build([], 0, params.page, params.limit);
     }
 
-    // Fetch users
     const userIds = stylists.map((s) => s.userId);
 
     const users = await UserModel.find({ _id: { $in: userIds } })
@@ -125,7 +119,6 @@ export class StylistBranchService implements IStylistBranchService {
     const userMap = new Map<string, (typeof users)[0]>();
     users.forEach((u) => userMap.set(u._id.toString(), u));
 
-    // Map to response format
     let items: UnassignedStylistOptionDto[] = stylists.map((s) => {
       const user = userMap.get(s.userId.toString());
       return StylistBranchMapper.toUnassignedOption({
@@ -140,7 +133,6 @@ export class StylistBranchService implements IStylistBranchService {
       });
     });
 
-    // ✅ Apply search filter (by name, email, or specialization)
     if (search) {
       const regex = new RegExp(search, 'i');
       items = items.filter(
@@ -149,10 +141,8 @@ export class StylistBranchService implements IStylistBranchService {
       );
     }
 
-    // Get total count before pagination
     const totalItems = items.length;
 
-    // ✅ Apply pagination
     const paginatedItems = items.slice(params.skip, params.skip + params.limit);
 
     return PaginationResponseBuilder.build(paginatedItems, totalItems, params.page, params.limit);
@@ -162,7 +152,6 @@ export class StylistBranchService implements IStylistBranchService {
     const active = await StylistBranchModel.find({ isActive: true }).select('stylistId').lean();
     const assignedStylistIds = active.map((x) => x.stylistId);
 
-    // fetch stylists NOT assigned
     const stylists = await StylistModel.find({
       _id: { $nin: assignedStylistIds },
     })
@@ -233,11 +222,6 @@ export class StylistBranchService implements IStylistBranchService {
     return { success: true as const };
   }
 
-  /**
-   * Internally:
-   * 1) deactivate old active mapping (if exists)
-   * 2) create new mapping for target branch
-   */
   async changeBranch(branchId: string, dto: ChangeStylistBranchRequestDto, adminId: string) {
     const stylist = await StylistModel.findById(dto.stylistId)
       .select('_id userId specialization experience status')
@@ -272,7 +256,6 @@ export class StylistBranchService implements IStylistBranchService {
   ): Promise<PaginatedResponse<BranchStylistItemDto>> {
     const { params, search } = PaginationQueryParser.parse(query);
 
-    // 1️⃣ Get active mappings for this branch
     const mappings = await StylistBranchModel.find({
       branchId,
       isActive: true,
@@ -284,7 +267,6 @@ export class StylistBranchService implements IStylistBranchService {
       return PaginationResponseBuilder.build([], 0, params.page, params.limit);
     }
 
-    // 2️⃣ Fetch stylists
     const stylistIds = mappings.map((m) => m.stylistId);
 
     const stylists = await StylistModel.find({
@@ -296,7 +278,6 @@ export class StylistBranchService implements IStylistBranchService {
     const stylistMap = new Map<string, (typeof stylists)[0]>();
     stylists.forEach((s) => stylistMap.set(s._id.toString(), s));
 
-    // 3️⃣ Fetch users
     const userIds = stylists.map((s) => s.userId);
 
     const users = await UserModel.find({
@@ -308,7 +289,6 @@ export class StylistBranchService implements IStylistBranchService {
     const userMap = new Map<string, (typeof users)[0]>();
     users.forEach((u) => userMap.set(u._id.toString(), u));
 
-    // 4️⃣ Map to response format
     let items: BranchStylistItemDto[] = mappings.map((m) => {
       const stylist = stylistMap.get(m.stylistId.toString());
       if (!stylist) {
@@ -332,7 +312,6 @@ export class StylistBranchService implements IStylistBranchService {
       });
     });
 
-    // ✅ Apply search filter (by name, email, or specialization)
     if (search) {
       const regex = new RegExp(search, 'i');
       items = items.filter(
@@ -341,10 +320,8 @@ export class StylistBranchService implements IStylistBranchService {
       );
     }
 
-    // Get total count before pagination
     const totalItems = items.length;
 
-    // ✅ Apply pagination
     const paginatedItems = items.slice(params.skip, params.skip + params.limit);
 
     return PaginationResponseBuilder.build(paginatedItems, totalItems, params.page, params.limit);

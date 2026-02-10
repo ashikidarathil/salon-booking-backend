@@ -154,3 +154,6 @@
 {"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:14:58","url":"/api/auth/login","userId":"anonymous"}
 {"level":"warn","message":"Handled AppError Your account has been blocked","method":"POST","statusCode":403,"timestamp":"2026-02-09 18:16:53","url":"/api/auth/login","userId":"anonymous"}
 {"level":"warn","message":"Handled AppError Invalid email/phone or password","method":"POST","statusCode":401,"timestamp":"2026-02-09 18:18:52","url":"/api/auth/login","userId":"anonymous"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 19:18:06"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 19:18:06"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 19:18:06"}

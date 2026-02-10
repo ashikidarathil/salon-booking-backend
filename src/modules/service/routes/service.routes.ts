@@ -11,6 +11,8 @@ const controller = resolveServiceController();
 
 // PUBLIC
 router.get(API_ROUTES.PUBLIC.SERVICE.LIST, controller.listPublic.bind(controller));
+router.get(API_ROUTES.PUBLIC.SERVICE.BY_ID(':id'), controller.getPublic.bind(controller));
+router.get(API_ROUTES.PUBLIC.SERVICE.PAGINATED, controller.listPublicPaginated.bind(controller));
 
 // ADMIN
 
@@ -22,7 +24,7 @@ router.get(
 );
 
 router.get(
-  '/admin/services/paginated',
+  API_ROUTES.ADMIN.SERVICE.PAGINATED,
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.getPaginatedServices.bind(controller),
@@ -57,14 +59,6 @@ router.patch(
 );
 
 router.post(
-  API_ROUTES.ADMIN.SERVICE.UPLOAD_IMAGE(':id'),
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
-  uploadMiddleware.single('image'),
-  controller.uploadImage.bind(controller),
-);
-
-router.patch(
   API_ROUTES.ADMIN.SERVICE.UPLOAD_IMAGE(':id'),
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),

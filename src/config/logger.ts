@@ -40,12 +40,10 @@ const fileFormat = winston.format.combine(
 /* ===================== TRANSPORTS ===================== */
 
 const transports: winston.transport[] = [
-  // ✅ CONSOLE (pretty)
   new winston.transports.Console({
     format: consoleFormat,
   }),
 
-  // ✅ FILE: combined logs (JSON)
   new DailyRotateFile({
     filename: path.join('logs', 'combined', '%DATE%.log'),
     datePattern: 'YYYY-MM-DD',
@@ -54,7 +52,6 @@ const transports: winston.transport[] = [
     format: fileFormat,
   }),
 
-  // ✅ FILE: error logs only
   new DailyRotateFile({
     level: 'error',
     filename: path.join('logs', 'errors', '%DATE%.log'),
@@ -64,7 +61,6 @@ const transports: winston.transport[] = [
     format: fileFormat,
   }),
 
-  // ✅ FILE: http logs
   new DailyRotateFile({
     level: 'http',
     filename: path.join('logs', 'http', '%DATE%.log'),

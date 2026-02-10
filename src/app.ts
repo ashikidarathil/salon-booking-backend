@@ -63,10 +63,10 @@ app.use('/api/admin', adminRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', serviceRoutes);
 app.use('/api', branchRoutes);
-app.use('/api', branchServiceRoutes); 
-app.use('/api', authMiddleware, blockMiddleware);
+app.use('/api', branchServiceRoutes);
 app.use('/api', stylistBranchRoutes);
 app.use('/api', branchCategoryRoutes);
+app.use('/api', authMiddleware, blockMiddleware);
 
 app.use(globalErrorHandler);
 

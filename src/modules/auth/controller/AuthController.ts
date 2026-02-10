@@ -17,7 +17,6 @@ import { injectable, inject } from 'tsyringe';
 import { TOKENS } from '../../../common/di/tokens';
 import { ApplyAsStylistDto } from '../dto/stylist/ApplyAsStylist.dto';
 import { IProfileService } from '../service/IProfileService';
-import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 
 @injectable()
 export class AuthController implements IAuthController {

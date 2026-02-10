@@ -54,8 +54,23 @@ export class BranchService implements IBranchService {
   async getNearestBranches(
     latitude: number,
     longitude: number,
-    maxDistance = 50000,
+    maxDistance = 5000000,
   ): Promise<BranchWithDistanceDto[]> {
+    if (latitude === undefined || longitude === undefined) {
+      throw new AppError(BRANCH_MESSAGES.LATITUDE_LONGITUDE_REQUIRED, HttpStatus.BAD_REQUEST);
+    }
+
+    if (typeof latitude !== 'number' || typeof longitude !== 'number') {
+      throw new AppError(
+        BRANCH_MESSAGES.LATITUDE_LONGITUDE_MUST_BE_NUMBERS,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
+      throw new AppError(BRANCH_MESSAGES.INVALID_COORDINATES, HttpStatus.BAD_REQUEST);
+    }
+
     return this.repo.findNearestBranches(latitude, longitude, maxDistance);
   }
 

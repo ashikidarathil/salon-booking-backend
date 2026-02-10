@@ -1,10 +1,10 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface StylistBranchDocument extends Document {
-  stylistId: mongoose.Types.ObjectId; // ref Stylist (_id)
-  branchId: mongoose.Types.ObjectId; // ref Branch (_id)
+  stylistId: mongoose.Types.ObjectId;
+  branchId: mongoose.Types.ObjectId;
   isActive: boolean;
-  assignedBy: mongoose.Types.ObjectId; // admin userId
+  assignedBy: mongoose.Types.ObjectId;
   assignedAt: Date;
   unassignedAt?: Date | null;
   createdAt: Date;

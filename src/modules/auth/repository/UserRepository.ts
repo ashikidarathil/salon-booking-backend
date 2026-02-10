@@ -1,6 +1,5 @@
 import { injectable, inject } from 'tsyringe';
 import { UserModel, UserDocument } from '../../../models/user.model';
-import { BaseRepository } from '../../../common/repository/baseRepository';
 import { UserEntity } from '../../../common/types/userEntity';
 import { IUserRepository, CreateUserInput } from './IUserRepository';
 import { UserStatus } from '../../../models/user.model';
@@ -80,28 +79,30 @@ export class UserRepository
     return user ? this.toEntity(user) : null;
   }
 
-  // async markPhoneVerified(userId: string, phone: string) {
-  //   const exists = await this._model.findOne({
-  //     phone,
-  //     _id: { $ne: userId },
-  //   });
+  /*
+  async markPhoneVerified(userId: string, phone: string) {
+    const exists = await this._model.findOne({
+      phone,
+      _id: { $ne: userId },
+    });
 
-  //   if (exists) {
-  //     throw new AppError('Phone number already in use', HttpStatus.BAD_REQUEST);
-  //   }
+    if (exists) {
+      throw new AppError('Phone number already in use', HttpStatus.BAD_REQUEST);
+    }
 
-  //   const user = await this._model.findByIdAndUpdate(
-  //     userId,
-  //     {
-  //       phone,
-  //       phoneVerified: true,
-  //       isActive: true,
-  //     },
-  //     { new: true },
-  //   );
+    const user = await this._model.findByIdAndUpdate(
+      userId,
+      {
+        phone,
+        phoneVerified: true,
+        isActive: true,
+      },
+      { new: true },
+    );
 
-  //   return user ? this.toEntity(user) : null;
-  // }
+    return user ? this.toEntity(user) : null;
+  }
+  */
 
   async activateUser(email: string): Promise<UserEntity | null> {
     const user = await this._model.findOneAndUpdate(
@@ -197,7 +198,6 @@ export class UserRepository
     return users.map((u) => this.toEntity(u));
   }
 
-  // New methods for profile management
   async findByIdWithPassword(userId: string): Promise<UserEntity | null> {
     const user = await this._model.findById(userId).select('+password');
     return user ? this.toEntity(user) : null;

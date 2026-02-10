@@ -2,6 +2,7 @@ export const API_ROUTES = {
   ADMIN: {
     SERVICE: {
       BASE: '/admin/services',
+      PAGINATED: '/admin/services/paginated',
       BY_ID: (id: string) => `/admin/services/${id}`,
       SOFT_DELETE: (id: string) => `/admin/services/${id}/delete`,
       RESTORE: (id: string) => `/admin/services/${id}/restore`,
@@ -13,6 +14,8 @@ export const API_ROUTES = {
   PUBLIC: {
     SERVICE: {
       LIST: '/services',
+      BY_ID: (id: string) => `/services/${id}`,
+      PAGINATED: '/services/paginated',
     },
   },
 } as const;

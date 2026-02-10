@@ -1545,3 +1545,6 @@
 {"durationMs":2,"ip":"::1","level":"http","message":"HTTP Request","method":"GET","status":200,"timestamp":"2026-02-09 19:10:55","url":"/api/branches","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36","userId":"anonymous"}
 {"durationMs":2,"ip":"::1","level":"http","message":"HTTP Request","method":"GET","status":200,"timestamp":"2026-02-09 19:10:55","url":"/api/branches/69845194d64e8db7c76d6a65/services/69837bcb3fdb771109ada2ce","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36","userId":"anonymous"}
 {"durationMs":3,"ip":"::1","level":"http","message":"HTTP Request","method":"GET","status":200,"timestamp":"2026-02-09 19:10:55","url":"/api/branches/69845194d64e8db7c76d6a65/services/paginated?limit=6&categoryId=698375063fdb771109ada201","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36","userId":"anonymous"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-09 19:18:06"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-09 19:18:06"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-09 19:18:06"}

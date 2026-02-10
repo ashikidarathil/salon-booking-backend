@@ -12,9 +12,9 @@ import type {
   ToggleBranchServiceStatusRequestDto,
 } from '../dto/branchService.request.dto';
 import { BranchServiceMapper } from '../mapper/branchService.mapper';
+import { IBranchCategoryRepository } from '../../branchCategory/repository/IBranchCategoryRepository';
 
-import { ServiceModel } from '../../../models/service.model';
-import { ServiceLean } from '../types/serviceLean.types';
+import { ServiceModel, ServiceLean } from '../../../models/service.model';
 import type { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 import { PaginationQueryParser } from '../../../common/dto/pagination.query.dto';
 import type { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
@@ -26,6 +26,8 @@ export class BranchServiceService implements IBranchServiceService {
   constructor(
     @inject(TOKENS.BranchServiceRepository)
     private readonly _repo: IBranchServiceRepository,
+    @inject(TOKENS.BranchCategoryRepository)
+    private readonly _branchCategoryRepo: IBranchCategoryRepository,
   ) {}
 
   async list(branchId: string) {
@@ -133,7 +135,6 @@ export class BranchServiceService implements IBranchServiceService {
 
     const { params, search } = PaginationQueryParser.parse(query);
 
-    // ✅ POPULATE CATEGORY NAME
     const services = await ServiceModel.find()
       .select('name categoryId isDeleted')
       .populate({
@@ -142,12 +143,10 @@ export class BranchServiceService implements IBranchServiceService {
       })
       .lean<ServiceLean[]>();
 
-    // Get branch-service mappings for this branch
     const mappings = await this._repo.findByBranchId(branchId);
     const map = new Map<string, (typeof mappings)[0]>();
     for (const m of mappings) map.set(m.serviceId.toString(), m);
 
-    // Filter deleted and map to response format
     let items = services
       .filter((s) => !s.isDeleted)
       .map((s) => {
@@ -157,7 +156,7 @@ export class BranchServiceService implements IBranchServiceService {
           serviceId: String(s._id),
           name: s.name,
           categoryId: s.categoryId ? String(s.categoryId) : undefined,
-          categoryName: s.categoryId?.name, // ✅ INCLUDE CATEGORY NAME
+          categoryName: s.categoryId?.name,
           price: m ? m.price : null,
           duration: m ? m.duration : null,
           isActive: m ? m.isActive : false,
@@ -165,7 +164,6 @@ export class BranchServiceService implements IBranchServiceService {
         });
       });
 
-    // ✅ Apply search filter
     if (search) {
       const regex = new RegExp(search, 'i');
       items = items.filter(
@@ -173,22 +171,18 @@ export class BranchServiceService implements IBranchServiceService {
       );
     }
 
-    // ✅ Apply configured filter if provided
     const filterConfigured = query.configured;
     if (filterConfigured !== undefined) {
       items = items.filter((item) => item.configured === filterConfigured);
     }
 
-    // ✅ Apply active/inactive filter if provided
     const filterActive = query.isActive;
     if (filterActive !== undefined) {
       items = items.filter((item) => item.isActive === filterActive);
     }
 
-    // Get total count before pagination
     const totalItems = items.length;
 
-    // ✅ Apply pagination
     const paginatedItems = items.slice(params.skip, params.skip + params.limit);
 
     return PaginationResponseBuilder.build(paginatedItems, totalItems, params.page, params.limit);
@@ -208,9 +202,14 @@ export class BranchServiceService implements IBranchServiceService {
       .select('name categoryId description imageUrl whatIncluded status')
       .populate({
         path: 'categoryId',
-        select: 'name',
+        select: 'name status isDeleted',
       })
       .lean<ServiceLean[]>();
+
+    const branchCategories = await this._branchCategoryRepo.findByBranchId(branchId);
+    const activeBranchCategoryIds = new Set(
+      branchCategories.filter((bc) => bc.isActive).map((bc) => bc.categoryId.toString()),
+    );
 
     const mappings = await this._repo.findByBranchId(branchId);
     const map = new Map<string, (typeof mappings)[0]>();
@@ -224,7 +223,7 @@ export class BranchServiceService implements IBranchServiceService {
         branchId,
         serviceId: String(s._id),
         name: s.name,
-        categoryId: s.categoryId ? String(s.categoryId) : undefined,
+        categoryId: s.categoryId ? String(s.categoryId._id) : undefined,
         categoryName: s.categoryId?.name,
         imageUrl: s.imageUrl,
         description: s.description,
@@ -236,15 +235,21 @@ export class BranchServiceService implements IBranchServiceService {
       });
     });
 
-    // Filter only configured services (have price and duration)
-    items = items.filter((item) => item.configured);
+    items = items.filter((item) => {
+      const service = services.find((s) => String(s._id) === item.serviceId);
+      const isGlobalCategoryActive =
+        service?.categoryId?.status === 'ACTIVE' && !service?.categoryId?.isDeleted;
+      const isBranchCategoryActive = item.categoryId
+        ? activeBranchCategoryIds.has(item.categoryId)
+        : true;
+      return item.configured && isGlobalCategoryActive && isBranchCategoryActive;
+    });
 
     if (search) {
       const regex = new RegExp(search, 'i');
       items = items.filter((item) => regex.test(item.name) || regex.test(item.categoryName || ''));
     }
 
-    // Filter by category if provided
     const categoryId = query.categoryId;
     if (categoryId) {
       items = items.filter((item) => item.categoryId === categoryId);
@@ -266,25 +271,33 @@ export class BranchServiceService implements IBranchServiceService {
 
     const service = (await ServiceModel.findById(serviceId)
       .select('name categoryId description imageUrl whatIncluded status isDeleted')
-      .populate({ path: 'categoryId', select: 'name' })
-      .lean()) as {
-      _id: unknown;
-      name?: string;
-      description?: string;
-      imageUrl?: string;
-      whatIncluded?: string[];
-      status?: string;
-      isDeleted?: boolean;
-      categoryId?: { _id: unknown; name: string };
-    } | null;
+      .populate({ path: 'categoryId', select: 'name status isDeleted' })
+      .lean()) as ServiceLean | null;
 
-    if (!service || service.isDeleted || service.status !== 'ACTIVE') {
-      throw new AppError('Service not found', 404);
+    if (
+      !service ||
+      service.isDeleted ||
+      service.status !== 'ACTIVE' ||
+      service.categoryId?.status !== 'ACTIVE' ||
+      service.categoryId?.isDeleted
+    ) {
+      throw new AppError(BRANCH_SERVICE_MESSAGES.SERVICE_NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+
+    if (service.categoryId) {
+      const categoryIdStr = service.categoryId._id.toString();
+      const branchCategories = await this._branchCategoryRepo.findByBranchId(branchId);
+      const isBranchCategoryActive = branchCategories.some(
+        (bc) => bc.categoryId.toString() === categoryIdStr && bc.isActive,
+      );
+      if (!isBranchCategoryActive) {
+        throw new AppError(BRANCH_SERVICE_MESSAGES.SERVICE_NOT_FOUND, HttpStatus.NOT_FOUND);
+      }
     }
 
     const mapping = await this._repo.findOne(branchId, serviceId);
     if (!mapping || !mapping.isActive) {
-      throw new AppError('Service not available at this branch', 404);
+      throw new AppError(BRANCH_SERVICE_MESSAGES.SERVICE_NOT_AVAILABLE, HttpStatus.NOT_FOUND);
     }
 
     return BranchServiceMapper.toItem({

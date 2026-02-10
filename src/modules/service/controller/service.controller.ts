@@ -1,23 +1,47 @@
 import type { Request, Response } from 'express';
 import { injectable, inject } from 'tsyringe';
 import { TOKENS } from '../../../common/di/tokens';
+import { AppError } from '../../../common/errors/appError';
 import { ApiResponse } from '../../../common/response/apiResponse';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { MESSAGES } from '../constants/service.messages';
 import type { IServiceService } from '../service/IServiceService';
-import type { ServicePaginationQueryDto } from '../dto/service.request.dto';
+import type {
+  ServicePaginationQueryDto,
+  CreateServiceDto,
+  UpdateServiceDto,
+  SoftDeleteServiceDto,
+  RestoreServiceDto,
+} from '../dto/service.request.dto';
 
 @injectable()
 export class ServiceController {
   constructor(@inject(TOKENS.ServiceService) private readonly _service: IServiceService) {}
 
   async create(req: Request, res: Response) {
-    const data = await this._service.create(req.body);
+    const dto: CreateServiceDto = {
+      name: req.body.name,
+      description: req.body.description,
+      categoryId: req.body.categoryId,
+      imageUrl: req.body.imageUrl,
+      whatIncluded: req.body.whatIncluded,
+    };
+
+    const data = await this._service.create(dto);
     res.status(HttpStatus.CREATED).json(new ApiResponse(true, MESSAGES.SERVICE.CREATED, data));
   }
 
   async update(req: Request, res: Response) {
-    const data = await this._service.update(req.params.id, req.body);
+    const dto: UpdateServiceDto = {
+      name: req.body.name,
+      description: req.body.description,
+      status: req.body.status,
+      imageUrl: req.body.imageUrl,
+      categoryId: req.body.categoryId,
+      whatIncluded: req.body.whatIncluded,
+    };
+
+    const data = await this._service.update(req.params.id, dto);
     res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.UPDATED, data));
   }
 
@@ -35,12 +59,20 @@ export class ServiceController {
   }
 
   async softDelete(req: Request, res: Response) {
-    const data = await this._service.softDelete({ id: req.params.id });
+    const dto: SoftDeleteServiceDto = {
+      id: req.params.id,
+    };
+
+    const data = await this._service.softDelete(dto);
     res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.DELETED, data));
   }
 
   async restore(req: Request, res: Response) {
-    const data = await this._service.restore({ id: req.params.id });
+    const dto: RestoreServiceDto = {
+      id: req.params.id,
+    };
+
+    const data = await this._service.restore(dto);
     res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.RESTORED, data));
   }
 
@@ -78,6 +110,43 @@ export class ServiceController {
 
     res
       .status(HttpStatus.OK)
-      .json(new ApiResponse(true, 'Services retrieved successfully', result));
+      .json(new ApiResponse(true, MESSAGES.SERVICE.RETRIEVED_SUCCESSFULLY, result));
+  }
+
+  async getPublic(req: Request, res: Response) {
+    const data = await this._service.list(false);
+    const service = data.find(
+      (s) => s.id === req.params.id && !s.isDeleted && s.status === 'ACTIVE',
+    );
+
+    if (!service) {
+      throw new AppError(MESSAGES.SERVICE.NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+
+    res
+      .status(HttpStatus.OK)
+      .json(new ApiResponse(true, MESSAGES.SERVICE.RETRIEVED_SUCCESSFULLY, service));
+  }
+
+  async listPublicPaginated(req: Request, res: Response) {
+    const query: ServicePaginationQueryDto = {
+      page: req.query.page ? Number(req.query.page) : 1,
+      limit: req.query.limit ? Number(req.query.limit) : 10,
+      search: typeof req.query.search === 'string' ? req.query.search : undefined,
+      sortBy: typeof req.query.sortBy === 'string' ? req.query.sortBy : 'createdAt',
+      sortOrder:
+        req.query.sortOrder === 'asc' || req.query.sortOrder === 'desc'
+          ? req.query.sortOrder
+          : 'desc',
+      categoryId: typeof req.query.categoryId === 'string' ? req.query.categoryId : undefined,
+      status: 'ACTIVE',
+      isDeleted: false,
+    };
+
+    const result = await this._service.getPaginatedServices(query);
+
+    res
+      .status(HttpStatus.OK)
+      .json(new ApiResponse(true, MESSAGES.SERVICE.RETRIEVED_SUCCESSFULLY, result));
   }
 }

@@ -42,8 +42,9 @@ export class ServiceRepository implements IServiceRepository {
 
   async listAll(includeDeleted = false): Promise<ServiceDocument[]> {
     const filter = includeDeleted ? {} : { isDeleted: false };
-    // ✅ POPULATE CATEGORY NAME
-    return ServiceModel.find(filter).populate('categoryId', 'name').sort({ createdAt: -1 });
+    return ServiceModel.find(filter)
+      .populate('categoryId', 'name status isDeleted')
+      .sort({ createdAt: -1 });
   }
 
   async updateById(
@@ -81,7 +82,6 @@ export class ServiceRepository implements IServiceRepository {
 
     const finalQuery: MongoFilter = {};
 
-    // ✅ Default: don't include deleted
     if (typeof filters.isDeleted === 'boolean') {
       finalQuery.isDeleted = filters.isDeleted;
     } else {
@@ -103,7 +103,7 @@ export class ServiceRepository implements IServiceRepository {
 
     const [services, totalItems] = await Promise.all([
       ServiceModel.find(finalQuery)
-        .populate('categoryId', 'name')
+        .populate('categoryId', 'name status isDeleted')
         .sort(sort)
         .skip(params.skip)
         .limit(params.limit)

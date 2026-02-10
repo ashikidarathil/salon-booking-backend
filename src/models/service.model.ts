@@ -1,4 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Types } from 'mongoose';
+import { CategoryStatus } from './category.model';
 
 export type ServiceStatus = 'ACTIVE' | 'INACTIVE';
 
@@ -15,6 +16,22 @@ export interface ServiceDocument extends mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type ServiceLean = {
+  _id: Types.ObjectId;
+  name: string;
+  categoryId?: {
+    _id: Types.ObjectId;
+    name: string;
+    status: CategoryStatus;
+    isDeleted: boolean;
+  };
+  imageUrl?: string;
+  description?: string;
+  whatIncluded?: string[];
+  status: ServiceStatus;
+  isDeleted: boolean;
+};
 
 const ServiceSchema = new Schema<ServiceDocument>(
   {

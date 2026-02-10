@@ -91,10 +91,8 @@ export class BranchRepository implements IBranchRepository {
   async findNearestBranches(
     latitude: number,
     longitude: number,
-    maxDistance = 50000,
+    maxDistance = 5000000,
   ): Promise<BranchWithDistanceDto[]> {
-    console.log(`🗺️ Finding branches near: ${latitude}, ${longitude}`);
-
     if (latitude < -90 || latitude > 90) {
       throw new Error('Invalid latitude');
     }

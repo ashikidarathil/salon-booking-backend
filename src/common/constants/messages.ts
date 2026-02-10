@@ -50,6 +50,11 @@ export const MESSAGES = {
     NO_FILE_UPLOADED: 'No file uploaded',
   },
 
+  STYLIST_SCHEDULE: {
+    WORKING_DAY_NEEDS_SHIFT: 'Working days must have at least one shift',
+    END_DATE_BEFORE_START: 'End date cannot be before start date',
+  },
+
   COMMON: {
     UNAUTHORIZED: 'Unauthorized',
     FORBIDDEN: 'Forbidden',

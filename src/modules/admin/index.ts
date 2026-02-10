@@ -12,7 +12,7 @@ import { QueryBuilderService } from '../../common/service/queryBuilder/queryBuil
 
 container.registerSingleton<QueryBuilderService>(TOKENS.QueryBuilder, QueryBuilderService);
 container.registerSingleton<IUserAdminService>(TOKENS.UserAdminService, UserAdminService);
-container.registerSingleton<IUserRepository>(TOKENS.UserRepository, UserRepository); // Add this line
+container.registerSingleton<IUserRepository>(TOKENS.UserRepository, UserRepository);
 
 container.register(UserController, { useClass: UserController });
 

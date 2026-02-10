@@ -11,11 +11,15 @@ const router = Router();
 const controller = resolveBranchController();
 
 /* =========================
-   ADMIN ROUTES
+   PUBLIC ROUTES
 ========================= */
-router.get('/branches', controller.listPublic.bind(controller));
-router.get('/branches/:id', controller.getPublic.bind(controller));
-router.post('/branches/nearest', controller.getNearestBranches.bind(controller));
+router.get(BRANCH_ROUTES.PUBLIC.BRANCH.LIST, controller.listPublic.bind(controller));
+router.get(
+  BRANCH_ROUTES.PUBLIC.BRANCH.PAGINATED_LIST,
+  controller.listPublicPaginated.bind(controller),
+);
+router.get(BRANCH_ROUTES.PUBLIC.BRANCH.BY_ID(':id'), controller.getPublic.bind(controller));
+router.post(BRANCH_ROUTES.PUBLIC.BRANCH.NEAREST, controller.getNearestBranches.bind(controller));
 
 router.get(
   BRANCH_ROUTES.ADMIN.BRANCH.BASE,
@@ -25,7 +29,7 @@ router.get(
 );
 
 router.get(
-  BRANCH_ROUTES.PUBLIC.BRANCH.PAGINATED_LIST,
+  BRANCH_ROUTES.ADMIN.BRANCH.PAGINATED_LIST,
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.getPaginatedBranches.bind(controller),

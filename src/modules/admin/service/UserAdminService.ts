@@ -1,7 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 import { IUserRepository } from '../../auth/repository/IUserRepository';
 import { TOKENS } from '../../../common/di/tokens';
-import { UserEntity } from '../../../common/types/userEntity';
 import { IUserAdminService } from './IUserAdminService';
 import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 
@@ -12,10 +11,6 @@ export class UserAdminService implements IUserAdminService {
     console.log('_userRepo is:', this._userRepo ? 'defined' : 'undefined');
     console.log('_userRepo type:', typeof this._userRepo);
   }
-
-  // async getAllUsers(): Promise<UserEntity[]> {
-  //   return this._userRepo.findAllByRole('USER');
-  // }
 
   async toggleBlockUser(userId: string, isBlocked: boolean): Promise<void> {
     console.log('toggleBlockUser called with:', { userId, isBlocked });

@@ -20,7 +20,7 @@ router.get(CATEGORY_ROUTES.PUBLIC.CATEGORY.LIST, controller.listPublic.bind(cont
    ADMIN ROUTES
 ========================= */
 router.get(
-  '/admin/categories/paginated',
+  CATEGORY_ROUTES.ADMIN.CATEGORY.PAGINATED,
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.getPaginatedCategories.bind(controller),

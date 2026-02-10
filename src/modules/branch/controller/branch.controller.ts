@@ -6,6 +6,8 @@ import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { BRANCH_MESSAGES } from '../constants/branch.messages';
 import type { IBranchService } from '../service/IBranchService';
 import type { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+import type { CreateBranchDto, UpdateBranchDto } from '../dto/branch.request.dto';
+import type { GetNearestBranchesDto } from '../dto/GetNearestBranches.dto';
 
 @injectable()
 export class BranchController {
@@ -15,7 +17,15 @@ export class BranchController {
   ) {}
 
   create = async (req: Request, res: Response) => {
-    const data = await this.service.create(req.body);
+    const dto: CreateBranchDto = {
+      name: req.body.name,
+      address: req.body.address,
+      phone: req.body.phone,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+    };
+
+    const data = await this.service.create(dto);
     return res
       .status(HttpStatus.CREATED)
       .json(new ApiResponse(true, BRANCH_MESSAGES.CREATED, data));
@@ -28,7 +38,15 @@ export class BranchController {
   };
 
   update = async (req: Request, res: Response) => {
-    const data = await this.service.update(req.params.id, req.body);
+    const dto: UpdateBranchDto = {
+      name: req.body.name,
+      address: req.body.address,
+      phone: req.body.phone,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+    };
+
+    const data = await this.service.update(req.params.id, dto);
     return res.json(new ApiResponse(true, BRANCH_MESSAGES.UPDATED, data));
   };
 
@@ -61,60 +79,56 @@ export class BranchController {
 
     res
       .status(HttpStatus.OK)
-      .json(new ApiResponse(true, 'Branches retrieved successfully', result));
+      .json(new ApiResponse(true, BRANCH_MESSAGES.RETRIEVED_SUCCESSFULLY, result));
   };
 
   getNearestBranches = async (req: Request, res: Response) => {
-    const { latitude, longitude, maxDistance } = req.body;
+    const dto: GetNearestBranchesDto = {
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+      maxDistance: req.body.maxDistance,
+    };
 
-    if (latitude === undefined || longitude === undefined) {
-      return res
-        .status(HttpStatus.BAD_REQUEST)
-        .json(new ApiResponse<void>(false, 'latitude and longitude are required'));
-    }
-
-    if (typeof latitude !== 'number' || typeof longitude !== 'number') {
-      return res
-        .status(HttpStatus.BAD_REQUEST)
-        .json(new ApiResponse<void>(false, 'latitude and longitude must be numbers'));
-    }
-
-    if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
-      return res
-        .status(HttpStatus.BAD_REQUEST)
-        .json(new ApiResponse<void>(false, 'Invalid coordinates'));
-    }
-
-    try {
-      const data = await this.service.getNearestBranches(latitude, longitude, maxDistance);
-      return res.json(new ApiResponse(true, 'Nearest branches found', data));
-    } catch (error) {
-      return res
-        .status(HttpStatus.BAD_REQUEST)
-        .json(new ApiResponse<void>(false, error instanceof Error ? error.message : 'Error'));
-    }
+    const data = await this.service.getNearestBranches(
+      dto.latitude,
+      dto.longitude,
+      dto.maxDistance,
+    );
+    return res.json(new ApiResponse(true, BRANCH_MESSAGES.NEAREST_FOUND, data));
   };
 
   listPublic = async (req: Request, res: Response) => {
-    try {
-      const branches = await this.service.listPublic();
-      return res.status(200).json(new ApiResponse(true, 'Branches fetched successfully', branches));
-    } catch (error) {
-      return res
-        .status(HttpStatus.BAD_REQUEST)
-        .json(new ApiResponse<void>(false, error instanceof Error ? error.message : 'Error'));
-    }
+    const branches = await this.service.listPublic();
+    return res
+      .status(HttpStatus.OK)
+      .json(new ApiResponse(true, BRANCH_MESSAGES.FETCHED_SUCCESSFULLY, branches));
   };
 
   getPublic = async (req: Request, res: Response) => {
-    try {
-      const { id } = req.params;
-      const branch = await this.service.getPublic(id);
-      return res.status(200).json(new ApiResponse(true, 'Branch fetched successfully', branch));
-    } catch (error) {
-      return res
-        .status(HttpStatus.BAD_REQUEST)
-        .json(new ApiResponse<void>(false, error instanceof Error ? error.message : 'Error'));
-    }
+    const { id } = req.params;
+    const branch = await this.service.getPublic(id);
+    return res
+      .status(HttpStatus.OK)
+      .json(new ApiResponse(true, BRANCH_MESSAGES.FETCHED_SUCCESSFULLY, branch));
+  };
+
+  listPublicPaginated = async (req: Request, res: Response) => {
+    const query: PaginationQueryDto = {
+      page: req.query.page ? Number(req.query.page) : 1,
+      limit: req.query.limit ? Number(req.query.limit) : 10,
+      search: typeof req.query.search === 'string' ? req.query.search : undefined,
+      sortBy: typeof req.query.sortBy === 'string' ? req.query.sortBy : 'createdAt',
+      sortOrder:
+        req.query.sortOrder === 'asc' || req.query.sortOrder === 'desc'
+          ? req.query.sortOrder
+          : 'desc',
+      isDeleted: false,
+    };
+
+    const result = await this.service.getPaginatedBranches(query);
+
+    res
+      .status(HttpStatus.OK)
+      .json(new ApiResponse(true, BRANCH_MESSAGES.RETRIEVED_SUCCESSFULLY, result));
   };
 }

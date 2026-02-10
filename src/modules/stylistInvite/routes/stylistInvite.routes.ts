@@ -81,6 +81,9 @@ router.post(
 );
 
 /** Apply stylist (from AuthController) */
-router.post('/apply-stylist', authController.applyAsStylist.bind(authController));
+router.post(
+  STYLIST_INVITE_ROUTES.PUBLIC_APPLY_STYLIST,
+  authController.applyAsStylist.bind(authController),
+);
 
 export default router;

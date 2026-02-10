@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema, Types } from 'mongoose';
 
 export type CategoryStatus = 'ACTIVE' | 'INACTIVE';
 
@@ -10,6 +10,13 @@ export interface CategoryDocument extends mongoose.Document {
   deletedAt?: Date | null;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface PopulatedCategory {
+  _id: Types.ObjectId;
+  name: string;
+  status: CategoryStatus;
+  isDeleted: boolean;
 }
 
 const CategorySchema = new Schema<CategoryDocument>(

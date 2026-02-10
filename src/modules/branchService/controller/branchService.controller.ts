@@ -68,43 +68,27 @@ export class BranchServiceController {
     return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.LISTED, data));
   };
 
-  // ✅ NEW: Public - List paginated services for a branch
   listPaginatedPublic = async (req: Request, res: Response) => {
-    try {
-      const query: PaginationQueryDto = {
-        page: req.query.page ? Number(req.query.page) : 1,
-        limit: req.query.limit ? Number(req.query.limit) : 9,
-        search: typeof req.query.search === 'string' ? req.query.search : undefined,
-        sortBy: typeof req.query.sortBy === 'string' ? req.query.sortBy : 'name',
-        sortOrder:
-          req.query.sortOrder === 'asc' || req.query.sortOrder === 'desc'
-            ? req.query.sortOrder
-            : 'asc',
-        ...(typeof req.query.categoryId === 'string' && {
-          categoryId: req.query.categoryId,
-        }),
-      };
+    const query: PaginationQueryDto = {
+      page: req.query.page ? Number(req.query.page) : 1,
+      limit: req.query.limit ? Number(req.query.limit) : 9,
+      search: typeof req.query.search === 'string' ? req.query.search : undefined,
+      sortBy: typeof req.query.sortBy === 'string' ? req.query.sortBy : 'name',
+      sortOrder:
+        req.query.sortOrder === 'asc' || req.query.sortOrder === 'desc'
+          ? req.query.sortOrder
+          : 'asc',
+      ...(typeof req.query.categoryId === 'string' && {
+        categoryId: req.query.categoryId,
+      }),
+    };
 
-      const data = await this._service.listPaginatedPublic(req.params.branchId, query);
-      return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.LISTED, data));
-    } catch (error) {
-      return res.json(
-        new ApiResponse(false, error instanceof Error ? error.message : 'Failed to fetch services'),
-      );
-    }
+    const data = await this._service.listPaginatedPublic(req.params.branchId, query);
+    return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.LISTED, data));
   };
 
   getDetailsPublic = async (req: Request, res: Response) => {
-    try {
-      const data = await this._service.getDetailsPublic(req.params.branchId, req.params.serviceId);
-      return res.json(new ApiResponse(true, 'Service details fetched successfully', data));
-    } catch (error) {
-      return res.json(
-        new ApiResponse(
-          false,
-          error instanceof Error ? error.message : 'Failed to fetch service details',
-        ),
-      );
-    }
+    const data = await this._service.getDetailsPublic(req.params.branchId, req.params.serviceId);
+    return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.DETAILS_FETCHED, data));
   };
 }

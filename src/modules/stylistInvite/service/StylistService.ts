@@ -37,7 +37,6 @@ export class StylistService implements IStylistService {
     return this._stylistRepo.getPaginatedStylists(query);
   }
 
-  // ✅ NEW METHOD: Block/Unblock stylist
   async toggleBlockStylist(stylistId: string, isBlocked: boolean): Promise<StylistListItem | null> {
     return this._stylistRepo.setBlockedById(stylistId, isBlocked);
   }

@@ -23,14 +23,14 @@ router.get(
 );
 
 router.get(
-  '/admin/branches/:branchId/stylists/paginated',
+  STYLIST_BRANCH_ROUTES.ADMIN.LIST_BRANCH_STYLISTS_PAGINATED,
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.listPaginated,
 );
 
 router.get(
-  '/admin/branches/:branchId/stylists/options/paginated',
+  STYLIST_BRANCH_ROUTES.ADMIN.OPTIONS_UNASSIGNED_PAGINATED,
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.optionsPaginated,

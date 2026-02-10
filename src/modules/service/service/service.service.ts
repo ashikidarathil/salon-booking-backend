@@ -14,7 +14,7 @@ import type {
   ServicePaginationQueryDto,
 } from '../dto/service.request.dto';
 import { ServiceMapper } from '../mapper/service.mapper';
-import { CategoryModel } from '../../../models/category.model';
+import { CategoryModel, PopulatedCategory } from '../../../models/category.model';
 import { ServiceUpdatePayload } from '../type/serviceUpdate.type';
 import type { IImageService } from '../../../common/service/image/IImageService';
 import { ServiceResponseDto } from '../dto/service.response.dto';
@@ -29,7 +29,7 @@ export class ServiceService implements IServiceService {
 
   async create(dto: CreateServiceDto) {
     if (!dto.name?.trim()) {
-      throw new AppError('Service name required', HttpStatus.BAD_REQUEST);
+      throw new AppError(MESSAGES.SERVICE.NAME_REQUIRED, HttpStatus.BAD_REQUEST);
     }
 
     const category = await CategoryModel.findById(dto.categoryId);
@@ -64,7 +64,13 @@ export class ServiceService implements IServiceService {
 
   async list(includeDeleted = false) {
     const docs = await this._repo.listAll(includeDeleted);
-    return docs.map(ServiceMapper.toDto);
+    const filtered = includeDeleted
+      ? docs
+      : docs.filter((d) => {
+          const cat = d.categoryId as unknown as PopulatedCategory;
+          return cat && cat.status === 'ACTIVE' && !cat.isDeleted;
+        });
+    return filtered.map(ServiceMapper.toDto);
   }
 
   async softDelete(dto: SoftDeleteServiceDto) {
@@ -122,7 +128,7 @@ export class ServiceService implements IServiceService {
     }
 
     if (!service.imageUrl) {
-      throw new AppError('No image found for this service', HttpStatus.BAD_REQUEST);
+      throw new AppError(MESSAGES.SERVICE.NO_IMAGE_FOUND, HttpStatus.BAD_REQUEST);
     }
 
     await this._imageService.deleteServiceImage(service.imageUrl);

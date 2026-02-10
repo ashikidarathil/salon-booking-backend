@@ -12,4 +12,5 @@ export const STYLIST_INVITE_ROUTES = {
   // Public routes
   PUBLIC_VALIDATE_INVITE: '/stylists/invite/:token',
   PUBLIC_ACCEPT_INVITE: '/stylists/invite/:token/accept',
+  PUBLIC_APPLY_STYLIST: '/apply-stylist',
 } as const;

@@ -17,7 +17,7 @@ router.get(
 );
 
 router.get(
-  '/admin/branches/:branchId/categories/paginated',
+  BRANCH_CATEGORY_ROUTES.ADMIN.LIST_PAGINATED,
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.listPaginated,

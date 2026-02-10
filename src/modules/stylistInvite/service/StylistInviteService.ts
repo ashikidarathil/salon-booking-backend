@@ -187,7 +187,7 @@ export class StylistInviteService implements IStylistInviteService {
    * Accepts an invitation and completes stylist registration
    * Validates password, updates user details, marks invite as accepted
    */
-  async acceptInvite(dto: AcceptInviteRequest, tabId?: string): Promise<{ success: true }> {
+  async acceptInvite(dto: AcceptInviteRequest, _tabId?: string): Promise<{ success: true }> {
     const tokenHash = sha256(dto.token);
 
     const invite = await this._inviteRepo.findPendingByTokenHash(tokenHash);

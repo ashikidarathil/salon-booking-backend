@@ -17,7 +17,7 @@ export interface BranchStylistItemDto {
 }
 
 export interface UnassignedStylistOptionDto {
-  stylistId: string; // Stylist._id
+  stylistId: string;
   userId: string;
 
   name: string;

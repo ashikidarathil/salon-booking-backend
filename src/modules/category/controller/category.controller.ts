@@ -5,27 +5,37 @@ import { ApiResponse } from '../../../common/response/apiResponse';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { MESSAGES } from '../constants/category.messages';
 import type { ICategoryService } from '../service/ICategoryService';
-import type { CategoryPaginationQueryDto } from '../dto/category.request.dto';
+import type {
+  CategoryPaginationQueryDto,
+  CreateCategoryDto,
+  UpdateCategoryDto,
+  SoftDeleteCategoryDto,
+  RestoreCategoryDto,
+} from '../dto/category.request.dto';
 
 @injectable()
 export class CategoryController {
   constructor(@inject(TOKENS.CategoryService) private readonly _service: ICategoryService) {}
 
   async create(req: Request, res: Response) {
-    const data = await this._service.create({
+    const dto: CreateCategoryDto = {
       name: req.body.name,
       description: req.body.description,
-    });
+    };
+
+    const data = await this._service.create(dto);
 
     res.status(HttpStatus.CREATED).json(new ApiResponse(true, MESSAGES.CATEGORY.CREATED, data));
   }
 
   async update(req: Request, res: Response) {
-    const data = await this._service.update(req.params.id, {
+    const dto: UpdateCategoryDto = {
       name: req.body.name,
       description: req.body.description,
       status: req.body.status,
-    });
+    };
+
+    const data = await this._service.update(req.params.id, dto);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.CATEGORY.UPDATED, data));
   }
@@ -45,13 +55,21 @@ export class CategoryController {
   }
 
   async softDelete(req: Request, res: Response) {
-    const data = await this._service.softDelete({ id: req.params.id });
+    const dto: SoftDeleteCategoryDto = {
+      id: req.params.id,
+    };
+
+    const data = await this._service.softDelete(dto);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.CATEGORY.DELETED, data));
   }
 
   async restore(req: Request, res: Response) {
-    const data = await this._service.restore({ id: req.params.id });
+    const dto: RestoreCategoryDto = {
+      id: req.params.id,
+    };
+
+    const data = await this._service.restore(dto);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.CATEGORY.RESTORED, data));
   }
@@ -79,6 +97,6 @@ export class CategoryController {
 
     res
       .status(HttpStatus.OK)
-      .json(new ApiResponse(true, 'Categories retrieved successfully', result));
+      .json(new ApiResponse(true, MESSAGES.CATEGORY.RETRIEVED_SUCCESSFULLY, result));
   }
 }

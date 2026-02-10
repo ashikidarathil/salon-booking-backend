@@ -3,7 +3,7 @@ export interface ServiceResponseDto {
   name: string;
   description?: string;
   categoryId: string;
-  categoryName?: string; // ✅ ALREADY HAS THIS - KEEP IT
+  categoryName?: string;
   imageUrl?: string;
   whatIncluded?: string[];
   status: 'ACTIVE' | 'INACTIVE';

@@ -46,7 +46,6 @@ export interface IUserRepository {
   findAllByRole(role: string): Promise<UserEntity[]>;
   getPaginated(query: PaginationQueryDto): Promise<PaginatedResponse<UserEntity>>;
 
-  // New methods for profile management
   findByIdWithPassword(userId: string): Promise<UserEntity | null>;
   updatePasswordById(userId: string, hashedPassword: string): Promise<UserEntity | null>;
   updateProfile(
