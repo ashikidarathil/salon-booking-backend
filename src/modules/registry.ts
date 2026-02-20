@@ -1,0 +1,15 @@
+import './auth/index';
+import './admin/index';
+import './stylistInvite/index';
+import './category/index';
+import './service/index';
+import './branch/index';
+import './stylistBranch/index';
+import './branchCategory/index';
+import './branchService/index';
+import './holiday/index';
+import './slot/index';
+import './booking/index';
+import './schedule/index';
+import './offDay/index';
+import './stylistService/index';

@@ -17,6 +17,7 @@ export interface UserEntity {
   isBlocked: boolean;
   status: UserStatus;
   profilePicture?: string | null;
+  branchId?: string;
   createdAt: Date;
   updatedAt: Date;
 }

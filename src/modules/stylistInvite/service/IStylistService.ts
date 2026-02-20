@@ -7,4 +7,10 @@ export interface IStylistService {
   listAllWithInviteStatus(): Promise<StylistListResponse[]>;
   getPaginatedStylists(query: PaginationQueryDto): Promise<PaginatedResponse<StylistListItem>>;
   toggleBlockStylist(stylistId: string, isBlocked: boolean): Promise<StylistListItem | null>;
+  updateStylistPosition(
+    stylistId: string,
+    position: 'JUNIOR' | 'SENIOR' | 'TRAINEE',
+  ): Promise<StylistListItem | null>;
+  getPublicStylists(query: PaginationQueryDto): Promise<PaginatedResponse<StylistListItem>>;
+  getPublicStylistById(stylistId: string): Promise<StylistListItem | null>;
 }

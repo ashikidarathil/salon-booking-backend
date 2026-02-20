@@ -10,4 +10,10 @@ export const STYLIST_BRANCH_ROUTES = {
 
     CHANGE_BRANCH: '/admin/branches/:branchId/stylists/change',
   },
+  PUBLIC: {
+    LIST_BRANCH_STYLISTS: '/branches/:branchId/stylists',
+  },
+  STYLIST: {
+    GET_STYLIST_BRANCHES: '/stylists/:stylistId/branches',
+  },
 } as const;

@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import './common/container';
+import './modules/registry';
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -16,13 +17,26 @@ import branchRoutes from './modules/branch/routes/branch.routes';
 import stylistBranchRoutes from './modules/stylistBranch/routes/stylistBranch.routes';
 import branchCategoryRoutes from './modules/branchCategory/routes/branchCategory.routes';
 import branchServiceRoutes from './modules/branchService/routes/branchService.routes';
+import slotRoutes from './modules/slot/routes/slot.routes';
+import bookingRoutes from './modules/booking/routes/booking.routes';
+import scheduleRoutes from './modules/schedule/routes/schedule.routes';
+import offDayRoutes from './modules/offDay/routes/offDay.routes';
+import holidayRoutes from './modules/holiday/routes/holiday.routes';
+import stylistServiceRoutes from './modules/stylistService/routes/stylistService.routes';
 
 import { globalErrorHandler } from './common/errors/errorHandler';
 import { loggerMiddleware } from './common/middleware/logger.middleware';
 import { blockMiddleware } from './common/middleware/block.middleware';
 import { authMiddleware } from './common/middleware/auth.middleware';
 
+import { initCronJobs } from './common/cron';
+
 const app = express();
+
+connectDB();
+connectRedis();
+initCronJobs();
+
 app.use(
   cors({
     origin: env.FRONTEND_ORIGIN,
@@ -48,15 +62,6 @@ app.use((req, res, next) => {
 
 app.use(loggerMiddleware);
 
-connectDB();
-connectRedis();
-
-app.use((req, res, next) => {
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
-  res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
-  next();
-});
-
 app.use('/api/auth', authRoutes);
 app.use('/api', stylistInviteRoutes);
 app.use('/api/admin', adminRoutes);
@@ -66,6 +71,12 @@ app.use('/api', branchRoutes);
 app.use('/api', branchServiceRoutes);
 app.use('/api', stylistBranchRoutes);
 app.use('/api', branchCategoryRoutes);
+app.use('/api', slotRoutes);
+app.use('/api', bookingRoutes);
+app.use('/api/schedules', scheduleRoutes);
+app.use('/api', offDayRoutes);
+app.use('/api', holidayRoutes);
+app.use('/api', stylistServiceRoutes);
 app.use('/api', authMiddleware, blockMiddleware);
 
 app.use(globalErrorHandler);

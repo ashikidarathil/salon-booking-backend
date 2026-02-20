@@ -36,7 +36,7 @@ export class BranchServiceService implements IBranchServiceService {
     }
 
     const services = await ServiceModel.find()
-      .select('name categoryId isDeleted')
+      .select('name categoryId isDeleted createdAt')
       .populate({
         path: 'categoryId',
         select: 'name',
@@ -62,6 +62,7 @@ export class BranchServiceService implements IBranchServiceService {
           duration: m ? m.duration : null,
           isActive: m ? m.isActive : false,
           configured: Boolean(m),
+          createdAt: s.createdAt,
         });
       });
   }
@@ -133,10 +134,10 @@ export class BranchServiceService implements IBranchServiceService {
       throw new AppError(BRANCH_SERVICE_MESSAGES.BRANCH_REQUIRED, HttpStatus.BAD_REQUEST);
     }
 
-    const { params, search } = PaginationQueryParser.parse(query);
+    const { params, search, sort } = PaginationQueryParser.parse(query);
 
     const services = await ServiceModel.find()
-      .select('name categoryId isDeleted')
+      .select('name categoryId isDeleted createdAt')
       .populate({
         path: 'categoryId',
         select: 'name',
@@ -161,6 +162,7 @@ export class BranchServiceService implements IBranchServiceService {
           duration: m ? m.duration : null,
           isActive: m ? m.isActive : false,
           configured: Boolean(m),
+          createdAt: s.createdAt,
         });
       });
 
@@ -181,6 +183,22 @@ export class BranchServiceService implements IBranchServiceService {
       items = items.filter((item) => item.isActive === filterActive);
     }
 
+    const [sortByRaw, sortOrder] = Object.entries(sort)[0];
+    const sortBy = sortByRaw as keyof BranchServiceItemResponse;
+
+    items.sort((a, b) => {
+      const valA = a[sortBy];
+      const valB = b[sortBy];
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        return sortOrder === 1 ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      }
+      if (valA === undefined || valA === null) return sortOrder === 1 ? 1 : -1;
+      if (valB === undefined || valB === null) return sortOrder === 1 ? -1 : 1;
+      if (valA < valB) return sortOrder === 1 ? -1 : 1;
+      if (valA > valB) return sortOrder === 1 ? 1 : -1;
+      return 0;
+    });
+
     const totalItems = items.length;
 
     const paginatedItems = items.slice(params.skip, params.skip + params.limit);
@@ -196,10 +214,10 @@ export class BranchServiceService implements IBranchServiceService {
       throw new AppError(BRANCH_SERVICE_MESSAGES.BRANCH_REQUIRED, HttpStatus.BAD_REQUEST);
     }
 
-    const { params, search } = PaginationQueryParser.parse(query);
+    const { params, search, sort } = PaginationQueryParser.parse(query);
 
     const services = await ServiceModel.find({ status: 'ACTIVE', isDeleted: false })
-      .select('name categoryId description imageUrl whatIncluded status')
+      .select('name categoryId description imageUrl whatIncluded status createdAt')
       .populate({
         path: 'categoryId',
         select: 'name status isDeleted',
@@ -232,6 +250,7 @@ export class BranchServiceService implements IBranchServiceService {
         duration: m ? m.duration : null,
         isActive: m ? m.isActive : false,
         configured: Boolean(m),
+        createdAt: s.createdAt,
       });
     });
 
@@ -254,6 +273,22 @@ export class BranchServiceService implements IBranchServiceService {
     if (categoryId) {
       items = items.filter((item) => item.categoryId === categoryId);
     }
+
+    const [sortByRaw, sortOrder] = Object.entries(sort)[0];
+    const sortBy = sortByRaw as keyof BranchServiceItemResponse;
+
+    items.sort((a, b) => {
+      const valA = a[sortBy];
+      const valB = b[sortBy];
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        return sortOrder === 1 ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      }
+      if (valA === undefined || valA === null) return sortOrder === 1 ? 1 : -1;
+      if (valB === undefined || valB === null) return sortOrder === 1 ? -1 : 1;
+      if (valA < valB) return sortOrder === 1 ? -1 : 1;
+      if (valA > valB) return sortOrder === 1 ? 1 : -1;
+      return 0;
+    });
 
     const totalItems = items.length;
     const paginatedItems = items.slice(params.skip, params.skip + params.limit);

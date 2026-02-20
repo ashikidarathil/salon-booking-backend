@@ -34,6 +34,13 @@ router.patch(
   stylistController.toggleBlock.bind(stylistController),
 );
 
+router.patch(
+  STYLIST_INVITE_ROUTES.ADMIN_UPDATE_POSITION,
+  authMiddleware,
+  roleMiddleware([UserRole.ADMIN]),
+  stylistController.updatePosition.bind(stylistController),
+);
+
 router.post(
   STYLIST_INVITE_ROUTES.ADMIN_SEND_INVITE_TO_APPLIED,
   authMiddleware,
@@ -84,6 +91,17 @@ router.post(
 router.post(
   STYLIST_INVITE_ROUTES.PUBLIC_APPLY_STYLIST,
   authController.applyAsStylist.bind(authController),
+);
+
+/** Public Stylist Listing & Profile */
+router.get(
+  STYLIST_INVITE_ROUTES.PUBLIC_LIST_STYLISTS,
+  stylistController.getPublicStylists.bind(stylistController),
+);
+
+router.get(
+  STYLIST_INVITE_ROUTES.PUBLIC_GET_STYLIST_BY_ID,
+  stylistController.getPublicStylistById.bind(stylistController),
 );
 
 export default router;

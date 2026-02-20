@@ -15,6 +15,8 @@ router.get(
   controller.list,
 );
 
+router.get(STYLIST_BRANCH_ROUTES.PUBLIC.LIST_BRANCH_STYLISTS, controller.list);
+
 router.get(
   STYLIST_BRANCH_ROUTES.ADMIN.OPTIONS_UNASSIGNED,
   authMiddleware,
@@ -55,6 +57,13 @@ router.patch(
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.changeBranch,
+);
+
+router.get(
+  STYLIST_BRANCH_ROUTES.STYLIST.GET_STYLIST_BRANCHES,
+  authMiddleware,
+  roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
+  controller.getStylistBranches,
 );
 
 export default router;

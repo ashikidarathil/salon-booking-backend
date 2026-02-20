@@ -2,7 +2,7 @@ import { injectable, inject } from 'tsyringe';
 import { TOKENS } from '../../../common/di/tokens';
 import bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import { createSessionToken } from '../../../common/utils/cookie.util';
+import { createAuthTokens } from '../../../common/utils/cookie.util';
 import { env } from '../../../config/env';
 import { MESSAGES } from '../../../common/constants/messages';
 import { AppError } from '../../../common/errors/appError';
@@ -43,6 +43,8 @@ import { otpKey, OTP_TTL } from '../constants/otp.constants';
 import { otpEmailTemplate } from '../../../common/service/email/emailTemplates';
 import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 
+import { IStylistBranchRepository } from '../../stylistBranch/repository/IStylistBranchRepository';
+
 const googleClient = new OAuth2Client(env.GOOGLE_CLIENT_ID);
 
 @injectable()
@@ -53,7 +55,24 @@ export class AuthService implements IAuthService {
     @inject(TOKENS.SmsService) private readonly _smsService: ISmsService,
     @inject(TOKENS.EmailService) private readonly _emailService: IEmailService,
     @inject(TOKENS.StylistRepository) private readonly _stylistRepo: IStylistRepository,
+    @inject(TOKENS.StylistBranchRepository)
+    private readonly _stylistBranchRepo: IStylistBranchRepository,
   ) {}
+
+  private async enrichStylistData(user: any, safeUser: any) {
+    if (user.role === UserRole.STYLIST) {
+      const [branchAssignment, stylist] = await Promise.all([
+        this._stylistBranchRepo.findActiveByStylistId(user.id),
+        this._stylistRepo.findByUserId(user.id),
+      ]);
+      if (branchAssignment) {
+        safeUser.branchId = branchAssignment.branchId.toString();
+      }
+      if (stylist) {
+        safeUser.bio = stylist.bio;
+      }
+    }
+  }
 
   /**
    *
@@ -265,10 +284,13 @@ export class AuthService implements IAuthService {
     const ok = await bcrypt.compare(dto.password, user.password);
     if (!ok) throw new AppError(MESSAGES.AUTH.INVALID_CREDENTIALS, HttpStatus.UNAUTHORIZED);
 
-    const token = createSessionToken(user.id, user.role, tabId);
+    const tokens = createAuthTokens(user.id, user.role, tabId);
+    const safeUser = UserMapper.toSafeUser(user);
+    await this.enrichStylistData(user, safeUser);
+
     return {
-      user: UserMapper.toSafeUser(user),
-      token,
+      user: safeUser,
+      tokens,
     };
   }
 
@@ -308,10 +330,10 @@ export class AuthService implements IAuthService {
       throw new AppError(MESSAGES.AUTH.GOOGLE_LOGIN_ONLY_FOR_USERS, HttpStatus.FORBIDDEN);
     }
 
-    const token = createSessionToken(user.id, user.role, tabId);
+    const tokens = createAuthTokens(user.id, user.role, tabId);
     return {
       user: UserMapper.toSafeUser(user),
-      token,
+      tokens,
     };
   }
 
@@ -339,10 +361,18 @@ export class AuthService implements IAuthService {
       throw new AppError(MESSAGES.AUTH.USER_BLOCKED, HttpStatus.FORBIDDEN);
     }
 
-    const token = createSessionToken(user.id, user.role, tabId);
+    const tokens = createAuthTokens(user.id, user.role, tabId);
+    const safeUser = UserMapper.toSafeUser(user);
+    if (user.role === UserRole.STYLIST) {
+      const branchAssignment = await this._stylistBranchRepo.findActiveByStylistId(user.id);
+      if (branchAssignment) {
+        safeUser.branchId = branchAssignment.branchId.toString();
+      }
+    }
+
     return {
-      user: UserMapper.toSafeUser(user),
-      token,
+      user: safeUser,
+      tokens,
     };
   }
 
@@ -363,7 +393,10 @@ export class AuthService implements IAuthService {
       throw new AppError(MESSAGES.AUTH.VERIFY_EMAIL_OR_PHONE, HttpStatus.FORBIDDEN);
     }
 
-    return { user: UserMapper.toSafeUser(user) };
+    const safeUser = UserMapper.toSafeUser(user);
+    await this.enrichStylistData(user, safeUser);
+
+    return { user: safeUser };
   }
 
   /* ========================== PASSWORD ========================== */

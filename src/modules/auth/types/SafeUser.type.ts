@@ -10,4 +10,6 @@ export interface SafeUser {
   isActive: boolean;
   isBlocked: boolean;
   authProvider?: 'LOCAL' | 'GOOGLE';
+  branchId?: string;
+  bio?: string;
 }

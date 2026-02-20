@@ -22,6 +22,7 @@ export const MESSAGES = {
 
     // Login
     LOGIN_SUCCESS: 'Login successful',
+    LOGOUT_SUCCESS: 'Logged out successfully',
     INVALID_CREDENTIALS: 'Invalid email/phone or password',
     USER_BLOCKED: 'Your account has been blocked',
     VERIFY_EMAIL_OR_PHONE: 'Please verify email or phone before login',

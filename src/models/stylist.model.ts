@@ -5,7 +5,9 @@ export interface StylistDocument extends Document {
   specialization: string;
   experience: number;
   rating: number;
+  bio?: string;
   status: 'ACTIVE' | 'INACTIVE';
+  position: 'JUNIOR' | 'SENIOR' | 'TRAINEE';
   profilePicture?: string;
   allowChat: boolean;
   earningsBalance: number;
@@ -20,7 +22,13 @@ const StylistSchema = new Schema<StylistDocument>(
     specialization: { type: String, required: true, trim: true },
     experience: { type: Number, required: true, min: 0 },
     rating: { type: Number, default: 0 },
+    bio: { type: String, trim: true },
     status: { type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'INACTIVE' },
+    position: {
+      type: String,
+      enum: ['JUNIOR', 'SENIOR', 'TRAINEE'],
+      default: 'TRAINEE',
+    },
     profilePicture: { type: String },
     allowChat: { type: Boolean, default: true },
     earningsBalance: { type: Number, default: 0 },

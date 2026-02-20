@@ -6,8 +6,6 @@ import { MESSAGES } from '../common/constants/messages';
 interface IShift {
   startTime: string;
   endTime: string;
-  breakStart?: string;
-  breakEnd?: string;
 }
 
 /**
@@ -38,14 +36,6 @@ const ShiftSchema = new Schema<IShift>(
     endTime: {
       type: String,
       required: true,
-      match: /^([01]\d|2[0-3]):([0-5]\d)$/,
-    },
-    breakStart: {
-      type: String,
-      match: /^([01]\d|2[0-3]):([0-5]\d)$/,
-    },
-    breakEnd: {
-      type: String,
       match: /^([01]\d|2[0-3]):([0-5]\d)$/,
     },
   },

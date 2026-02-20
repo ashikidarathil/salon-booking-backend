@@ -326,4 +326,29 @@ export class StylistBranchService implements IStylistBranchService {
 
     return PaginationResponseBuilder.build(paginatedItems, totalItems, params.page, params.limit);
   }
+
+  async getStylistBranches(userIdOrStylistId: string) {
+    // First, try to find stylist by userId (in case they pass user ID)
+    let stylistId = userIdOrStylistId;
+    const stylistByUserId = await StylistModel.findOne({ userId: userIdOrStylistId })
+      .select('_id')
+      .lean();
+    if (stylistByUserId) {
+      stylistId = stylistByUserId._id.toString();
+    }
+
+    const mappings = await StylistBranchModel.find({
+      stylistId,
+      isActive: true,
+    })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    return mappings.map((m) => ({
+      branchId: m.branchId.toString(),
+      stylistId: m.stylistId.toString(),
+      isActive: m.isActive,
+      assignedAt: m.assignedAt,
+    }));
+  }
 }

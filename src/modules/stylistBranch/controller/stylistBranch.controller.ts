@@ -93,4 +93,10 @@ export class StylistBranchController {
     const data = await this._service.listUnassignedOptionsPaginated(branchId, query);
     return res.json(new ApiResponse(true, STYLIST_BRANCH_MESSAGES.OPTIONS_LISTED, data));
   };
+
+  getStylistBranches = async (req: AuthenticatedRequest, res: Response) => {
+    const { stylistId } = req.params;
+    const data = await this._service.getStylistBranches(stylistId);
+    return res.json(new ApiResponse(true, STYLIST_BRANCH_MESSAGES.LISTED, data));
+  };
 }

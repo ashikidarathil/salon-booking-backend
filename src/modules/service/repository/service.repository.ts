@@ -84,8 +84,6 @@ export class ServiceRepository implements IServiceRepository {
 
     if (typeof filters.isDeleted === 'boolean') {
       finalQuery.isDeleted = filters.isDeleted;
-    } else {
-      finalQuery.isDeleted = false;
     }
 
     if (filters.status) {

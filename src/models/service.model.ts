@@ -31,6 +31,7 @@ export type ServiceLean = {
   whatIncluded?: string[];
   status: ServiceStatus;
   isDeleted: boolean;
+  createdAt: Date;
 };
 
 const ServiceSchema = new Schema<ServiceDocument>(

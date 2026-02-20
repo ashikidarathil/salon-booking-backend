@@ -8,9 +8,12 @@ export const STYLIST_INVITE_ROUTES = {
   ADMIN_REJECT: '/admin/stylists/:userId/reject',
   ADMIN_BLOCK: '/admin/stylists/:userId/block',
   ADMIN_BLOCK_NEW: '/admin/stylists/:stylistId/block',
+  ADMIN_UPDATE_POSITION: '/admin/stylists/:stylistId/position',
 
   // Public routes
   PUBLIC_VALIDATE_INVITE: '/stylists/invite/:token',
   PUBLIC_ACCEPT_INVITE: '/stylists/invite/:token/accept',
   PUBLIC_APPLY_STYLIST: '/apply-stylist',
+  PUBLIC_LIST_STYLISTS: '/stylists',
+  PUBLIC_GET_STYLIST_BY_ID: '/stylists/:stylistId',
 } as const;

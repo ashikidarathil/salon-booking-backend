@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/server.ts",
+    "dev": "nodemon",
     "clean": "rm -rf node_modules dist tsconfig.tsbuildinfo",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
@@ -27,6 +27,7 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.0.1",
     "multer": "^2.0.2",
+    "node-cron": "^4.2.1",
     "nodemailer": "^7.0.12",
     "passport": "^0.7.0",
     "passport-facebook": "^3.0.0",
@@ -48,9 +49,11 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.0.0",
     "@types/node": "^24.10.9",
+    "@types/node-cron": "^3.0.11",
     "@types/nodemailer": "^7.0.4",
     "@types/passport": "^1.0.17",
     "@types/passport-google-oauth20": "^2.0.17",
+    "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^8.49.0",
     "@typescript-eslint/parser": "^8.49.0",
     "eslint": "^8.57.1",
@@ -58,6 +61,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "nodemon": "^3.1.11",
     "prettier": "^3.7.4",
+    "supertest": "^7.2.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }

@@ -37,4 +37,13 @@ export interface IStylistBranchService {
     dto: ChangeStylistBranchRequestDto,
     adminId: string,
   ): Promise<BranchStylistItemDto>;
+
+  getStylistBranches(stylistId: string): Promise<
+    Array<{
+      branchId: string;
+      stylistId: string;
+      isActive: boolean;
+      assignedAt: Date;
+    }>
+  >;
 }

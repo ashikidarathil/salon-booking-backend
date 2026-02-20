@@ -36,6 +36,7 @@ export interface IStylistOffDay extends Document {
   reason?: string;
   approvedBy?: mongoose.Types.ObjectId;
   approvedAt?: Date;
+  rejectionReason?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -89,6 +90,10 @@ const StylistOffDaySchema = new Schema<IStylistOffDay>(
     },
     approvedAt: {
       type: Date,
+    },
+    rejectionReason: {
+      type: String,
+      maxlength: 500,
     },
   },
   {

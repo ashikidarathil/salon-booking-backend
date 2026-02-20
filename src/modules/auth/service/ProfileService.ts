@@ -16,6 +16,8 @@ import type { UpdateProfileResponseDto } from '../dto/profile/UpdateProfile.resp
 import type { IImageService } from '../../../common/service/image/IImageService';
 import type { IUserRepository } from '../repository/IUserRepository';
 import { UserMapper } from '../mapper/user.mapper';
+import { IStylistRepository } from '../../stylistInvite/repository/IStylistRepository';
+import { UserRole } from '../../../common/enums/userRole.enum';
 
 @injectable()
 export class ProfileService implements IProfileService {
@@ -25,6 +27,9 @@ export class ProfileService implements IProfileService {
 
     @inject(TOKENS.UserRepository)
     private readonly userRepository: IUserRepository,
+
+    @inject(TOKENS.StylistRepository)
+    private readonly stylistRepository: IStylistRepository,
   ) {}
 
   async uploadProfilePicture(
@@ -162,12 +167,23 @@ export class ProfileService implements IProfileService {
       }
     }
 
+    if (user.role === UserRole.STYLIST && dto.bio !== undefined) {
+      await this.stylistRepository.updateByUserId(userId, { bio: dto.bio });
+    }
+
     const updatedUser = await this.userRepository.updateProfile(userId, dto);
     if (!updatedUser) {
       throw new AppError('User not found', HttpStatus.NOT_FOUND);
     }
 
     const safeUser = UserMapper.toSafeUser(updatedUser);
+
+    if (user.role === UserRole.STYLIST) {
+      const stylist = await this.stylistRepository.findByUserId(userId);
+      if (stylist) {
+        safeUser.bio = stylist.bio;
+      }
+    }
 
     return {
       success: true,

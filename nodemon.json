@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ext": "ts",
+  "ignore": ["logs", "dist", "node_modules"],
+  "exec": "ts-node -r reflect-metadata ./src/server.ts"
+}

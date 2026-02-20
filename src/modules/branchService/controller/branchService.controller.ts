@@ -51,11 +51,11 @@ export class BranchServiceController {
       page: req.query.page ? Number(req.query.page) : 1,
       limit: req.query.limit ? Number(req.query.limit) : 10,
       search: typeof req.query.search === 'string' ? req.query.search : undefined,
-      sortBy: typeof req.query.sortBy === 'string' ? req.query.sortBy : 'name',
+      sortBy: typeof req.query.sortBy === 'string' ? req.query.sortBy : 'createdAt',
       sortOrder:
         req.query.sortOrder === 'asc' || req.query.sortOrder === 'desc'
           ? req.query.sortOrder
-          : 'asc',
+          : 'desc',
       ...(typeof req.query.configured === 'string' && {
         configured: req.query.configured === 'true',
       }),
@@ -73,11 +73,11 @@ export class BranchServiceController {
       page: req.query.page ? Number(req.query.page) : 1,
       limit: req.query.limit ? Number(req.query.limit) : 9,
       search: typeof req.query.search === 'string' ? req.query.search : undefined,
-      sortBy: typeof req.query.sortBy === 'string' ? req.query.sortBy : 'name',
+      sortBy: typeof req.query.sortBy === 'string' ? req.query.sortBy : 'createdAt',
       sortOrder:
         req.query.sortOrder === 'asc' || req.query.sortOrder === 'desc'
           ? req.query.sortOrder
-          : 'asc',
+          : 'desc',
       ...(typeof req.query.categoryId === 'string' && {
         categoryId: req.query.categoryId,
       }),

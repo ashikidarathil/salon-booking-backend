@@ -11,6 +11,7 @@ export type BranchServiceItemResponse = {
   whatIncluded?: string[];
   isActive: boolean;
   configured: boolean;
+  createdAt?: string | Date;
 };
 
 export type BranchServiceStatusResponse = {

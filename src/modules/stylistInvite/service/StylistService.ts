@@ -40,4 +40,31 @@ export class StylistService implements IStylistService {
   async toggleBlockStylist(stylistId: string, isBlocked: boolean): Promise<StylistListItem | null> {
     return this._stylistRepo.setBlockedById(stylistId, isBlocked);
   }
+
+  async updateStylistPosition(
+    stylistId: string,
+    position: 'JUNIOR' | 'SENIOR' | 'TRAINEE',
+  ): Promise<StylistListItem | null> {
+    return this._stylistRepo.updatePosition(stylistId, position);
+  }
+
+  async getPublicStylists(
+    query: PaginationQueryDto,
+  ): Promise<PaginatedResponse<StylistListItem>> {
+    const publicQuery: PaginationQueryDto = {
+      ...query,
+      status: 'ACTIVE',
+      isBlocked: false,
+      isActive: true,
+    };
+    return this._stylistRepo.getPaginatedStylists(publicQuery);
+  }
+
+  async getPublicStylistById(stylistId: string): Promise<StylistListItem | null> {
+    const stylist = await this._stylistRepo.getById(stylistId);
+    if (!stylist || stylist.status !== 'ACTIVE' || stylist.isBlocked) {
+      return null;
+    }
+    return stylist;
+  }
 }

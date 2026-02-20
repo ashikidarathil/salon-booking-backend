@@ -13,6 +13,7 @@ export class UserMapper {
       isActive: user.isActive,
       isBlocked: user.isBlocked,
       authProvider: user.authProvider,
+      branchId: user.branchId,
     };
   }
 }

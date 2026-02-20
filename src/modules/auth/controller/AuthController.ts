@@ -1,11 +1,12 @@
 import type { Request, Response } from 'express';
 import { ApiResponse } from '../../../common/response/apiResponse';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
+import { UserRole } from '../../../common/enums/userRole.enum';
 import { MESSAGES } from '../../../common/constants/messages';
 import { AppError } from '../../../common/errors/appError';
 import type { IAuthController } from './IAuthController';
 import type { IAuthService } from '../service/IAuthService';
-import { setAuthCookie, clearAuthCookies } from '../../../common/utils/cookie.util';
+import { setAuthCookies, clearAuthCookies } from '../../../common/utils/cookie.util';
 import type { SignupDto } from '../dto/auth/Signup.dto';
 import type { LoginDto } from '../dto/auth/Login.dto';
 import type { VerifyOtpDto } from '../dto/auth/VerifyOtp.dto';
@@ -116,7 +117,7 @@ export class AuthController implements IAuthController {
     };
     const tabId = this.getTabId(req);
     const data = await this._authService.login(dto, tabId);
-    setAuthCookie(res, data.token);
+    setAuthCookies(res, data.user.role, data.tokens);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, 'Login successful', { user: data.user }));
   }
@@ -126,7 +127,7 @@ export class AuthController implements IAuthController {
     const tabId = this.getTabId(req);
 
     const data = await this._authService.googleLogin(dto, tabId);
-    setAuthCookie(res, data.token);
+    setAuthCookies(res, data.user.role, data.tokens);
     res
       .status(HttpStatus.OK)
       .json(new ApiResponse(true, 'Google login successful', { user: data.user }));
@@ -181,10 +182,11 @@ export class AuthController implements IAuthController {
   }
 
   async refresh(req: Request, res: Response) {
-    const token = req.cookies?.refresh_token;
+    const roleHeader = (req.headers['x-auth-role'] as string)?.toUpperCase();
+    const token = req.cookies?.[`${roleHeader?.toLowerCase()}_refresh_token`];
     const tabId = this.getTabId(req);
     const data = await this._authService.refresh(token, tabId);
-    setAuthCookie(res, data.token);
+    setAuthCookies(res, data.user.role, data.tokens);
     res.status(HttpStatus.OK).json(new ApiResponse(true, 'Token refreshed', { user: data.user }));
   }
 
@@ -198,8 +200,11 @@ export class AuthController implements IAuthController {
   }
 
   async logout(req: Request, res: Response) {
-    clearAuthCookies(res);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, 'Logged out'));
+    const roleHeader = (req.headers['x-auth-role'] as string)?.toUpperCase();
+    clearAuthCookies(res, roleHeader as UserRole);
+    res
+      .status(HttpStatus.OK)
+      .json(new ApiResponse(true, MESSAGES.AUTH.LOGOUT_SUCCESS || 'Logged out'));
   }
 
   async applyAsStylist(req: Request, res: Response): Promise<void> {
@@ -261,6 +266,7 @@ export class AuthController implements IAuthController {
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
+      bio: req.body.bio,
     };
 
     const data = await this._profileService.updateProfile(userId, dto);
