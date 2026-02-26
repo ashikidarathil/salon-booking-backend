@@ -20,7 +20,7 @@ const StylistBreakSchema = new Schema<IStylistBreak>(
   {
     stylistId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Stylist',
       required: true,
       index: true,
     },

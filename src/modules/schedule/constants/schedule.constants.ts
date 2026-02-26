@@ -10,7 +10,9 @@ export const SCHEDULE_MESSAGES = {
   BREAK_ADDED: 'Break added successfully',
   BREAK_DELETED: 'Break deleted successfully',
   BREAK_FETCHED: 'Breaks fetched successfully',
-};
+  BREAK_LIMIT_EXCEEDED: (mins: number) =>
+    `Total break time cannot exceed 90 minutes per day. Currently ${mins} mins.`,
+} as const;
 
 export const SCHEDULE_ROUTES = {
   BASE: '/schedules',

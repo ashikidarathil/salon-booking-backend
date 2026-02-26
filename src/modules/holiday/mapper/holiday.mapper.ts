@@ -4,7 +4,7 @@ import { HolidayResponseDto } from '../dto/holiday.dto';
 export class HolidayMapper {
   static toResponse(holiday: IHoliday): HolidayResponseDto {
     return {
-      id: holiday._id.toString(),
+      id: String(holiday._id),
       branchId: holiday.branchId?.toString() || null,
       date: holiday.date.toISOString(),
       name: holiday.name,

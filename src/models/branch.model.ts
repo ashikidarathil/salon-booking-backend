@@ -7,9 +7,15 @@ export interface BranchDocument extends Document {
   isDeleted: boolean;
   latitude: number;
   longitude: number;
+  defaultBreaks: Array<{
+    startTime: string;
+    endTime: string;
+    description: string;
+  }>;
   createdAt: Date;
   updatedAt: Date;
 }
+export type IBranch = BranchDocument;
 
 const branchSchema = new Schema<BranchDocument>(
   {
@@ -42,6 +48,19 @@ const branchSchema = new Schema<BranchDocument>(
     isDeleted: {
       type: Boolean,
       default: false,
+    },
+    defaultBreaks: {
+      type: [
+        {
+          startTime: String,
+          endTime: String,
+          description: String,
+        },
+      ],
+      default: [
+        { startTime: '13:00', endTime: '14:00', description: 'Lunch Break' },
+        { startTime: '16:00', endTime: '16:30', description: 'Tea Break' },
+      ],
     },
   },
   {

@@ -13,3 +13,4 @@ import './booking/index';
 import './schedule/index';
 import './offDay/index';
 import './stylistService/index';
+import './wishlist/index';

@@ -9,10 +9,13 @@ export interface SlotResponseDto {
   endTime: string;
   startTimeUTC: string;
   status: SlotStatus;
-  lockedBy: string | null;
-  lockedUntil: string | null;
   stylistName?: string;
   stylistEmail?: string;
+  lockedBy?: string | null;
+  lockedUntil?: string | null;
+  note?: string;
+  price?: number;
+  bookedServices?: string[];
   createdAt: string;
   updatedAt: string;
 }

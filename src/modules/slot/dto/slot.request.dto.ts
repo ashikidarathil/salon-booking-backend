@@ -14,4 +14,11 @@ export interface GetAvailableSlotsQueryDto {
   date: string; // ISO Date string
   stylistId?: string;
   serviceId?: string;
+  duration?: number;
+}
+export interface ListSpecialSlotsQueryDto {
+  branchId?: string;
+  stylistId?: string;
+  date?: string;
+  status?: string;
 }

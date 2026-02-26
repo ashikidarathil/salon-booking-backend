@@ -4,6 +4,11 @@ export interface CreateBranchDto {
   phone?: string;
   latitude: number;
   longitude: number;
+  defaultBreaks?: Array<{
+    startTime: string;
+    endTime: string;
+    description: string;
+  }>;
 }
 
 export interface UpdateBranchDto {
@@ -12,4 +17,9 @@ export interface UpdateBranchDto {
   phone?: string;
   latitude?: number;
   longitude?: number;
+  defaultBreaks?: Array<{
+    startTime: string;
+    endTime: string;
+    description: string;
+  }>;
 }

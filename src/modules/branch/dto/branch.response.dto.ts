@@ -8,6 +8,11 @@ export interface BranchResponseDto {
   isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
+  defaultBreaks?: Array<{
+    startTime: string;
+    endTime: string;
+    description: string;
+  }>;
 }
 
 export interface BranchWithDistanceDto extends BranchResponseDto {

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { resolveStylistInviteController, resolveStylistController } from '..';
 import { authMiddleware } from '../../../common/middleware/auth.middleware';
+import { optionalAuthMiddleware } from '../../../common/middleware/optionalAuth.middleware';
 import { roleMiddleware } from '../../../common/middleware/role.middleware';
 import { UserRole } from '../../../common/enums/userRole.enum';
 import { resolveAuthController } from '../../auth';
@@ -96,11 +97,13 @@ router.post(
 /** Public Stylist Listing & Profile */
 router.get(
   STYLIST_INVITE_ROUTES.PUBLIC_LIST_STYLISTS,
+  optionalAuthMiddleware,
   stylistController.getPublicStylists.bind(stylistController),
 );
 
 router.get(
   STYLIST_INVITE_ROUTES.PUBLIC_GET_STYLIST_BY_ID,
+  optionalAuthMiddleware,
   stylistController.getPublicStylistById.bind(stylistController),
 );
 

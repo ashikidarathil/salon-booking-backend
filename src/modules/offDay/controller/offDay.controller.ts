@@ -7,13 +7,7 @@ import { ApiResponse } from '../../../common/response/apiResponse';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { OFF_DAY_MESSAGES } from '../constants/offDay.constants';
 import { OffDayRequestDto, OffDayActionDto } from '../dto/offDay.dto';
-
-interface AuthenticatedRequest extends Request {
-  auth?: {
-    userId: string;
-    role: string;
-  };
-}
+import { AuthenticatedRequest } from '../../../common/types/express';
 
 @injectable()
 export class OffDayController implements IOffDayController {
@@ -26,7 +20,9 @@ export class OffDayController implements IOffDayController {
     const authReq = req as AuthenticatedRequest;
     const userId = authReq.auth?.userId;
     if (!userId) {
-      res.status(HttpStatus.UNAUTHORIZED).json(new ApiResponse(false, 'Unauthorized'));
+      res
+        .status(HttpStatus.UNAUTHORIZED)
+        .json(new ApiResponse(false, OFF_DAY_MESSAGES.UNAUTHORIZED));
       return;
     }
 
@@ -39,11 +35,15 @@ export class OffDayController implements IOffDayController {
     const authReq = req as AuthenticatedRequest;
     const userId = authReq.auth?.userId;
     if (!userId) {
-      res.status(HttpStatus.UNAUTHORIZED).json(new ApiResponse(false, 'Unauthorized'));
+      res
+        .status(HttpStatus.UNAUTHORIZED)
+        .json(new ApiResponse(false, OFF_DAY_MESSAGES.UNAUTHORIZED));
       return;
     }
 
-    const { startDate, endDate } = req.query as { startDate?: string; endDate?: string };
+    const startDate = req.query.startDate as string | undefined;
+    const endDate = req.query.endDate as string | undefined;
+
     const offDays = await this.offDayService.getOffDays(
       userId,
       startDate ? new Date(startDate) : undefined,
@@ -54,7 +54,9 @@ export class OffDayController implements IOffDayController {
 
   getStylistOffDays = async (req: Request, res: Response) => {
     const { stylistId } = req.params;
-    const { startDate, endDate } = req.query as { startDate?: string; endDate?: string };
+    const startDate = req.query.startDate as string | undefined;
+    const endDate = req.query.endDate as string | undefined;
+
     const offDays = await this.offDayService.getOffDays(
       stylistId,
       startDate ? new Date(startDate) : undefined,
@@ -64,7 +66,9 @@ export class OffDayController implements IOffDayController {
   };
 
   getAllOffDays = async (req: Request, res: Response) => {
-    const { startDate, endDate } = req.query as { startDate?: string; endDate?: string };
+    const startDate = req.query.startDate as string | undefined;
+    const endDate = req.query.endDate as string | undefined;
+
     const offDays = await this.offDayService.getAllOffDays(
       startDate ? new Date(startDate) : undefined,
       endDate ? new Date(endDate) : undefined,
@@ -77,7 +81,9 @@ export class OffDayController implements IOffDayController {
     const authReq = req as AuthenticatedRequest;
     const adminId = authReq.auth?.userId;
     if (!adminId) {
-      res.status(HttpStatus.UNAUTHORIZED).json(new ApiResponse(false, 'Unauthorized'));
+      res
+        .status(HttpStatus.UNAUTHORIZED)
+        .json(new ApiResponse(false, OFF_DAY_MESSAGES.UNAUTHORIZED));
       return;
     }
 

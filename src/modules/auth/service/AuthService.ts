@@ -44,6 +44,8 @@ import { otpEmailTemplate } from '../../../common/service/email/emailTemplates';
 import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 
 import { IStylistBranchRepository } from '../../stylistBranch/repository/IStylistBranchRepository';
+import { UserEntity } from '../../../common/types/userEntity';
+import { SafeUser } from '../types/SafeUser.type';
 
 const googleClient = new OAuth2Client(env.GOOGLE_CLIENT_ID);
 
@@ -59,17 +61,15 @@ export class AuthService implements IAuthService {
     private readonly _stylistBranchRepo: IStylistBranchRepository,
   ) {}
 
-  private async enrichStylistData(user: any, safeUser: any) {
+  private async enrichStylistData(user: UserEntity, safeUser: SafeUser) {
     if (user.role === UserRole.STYLIST) {
-      const [branchAssignment, stylist] = await Promise.all([
-        this._stylistBranchRepo.findActiveByStylistId(user.id),
-        this._stylistRepo.findByUserId(user.id),
-      ]);
-      if (branchAssignment) {
-        safeUser.branchId = branchAssignment.branchId.toString();
-      }
+      const stylist = await this._stylistRepo.findByUserId(user.id);
       if (stylist) {
         safeUser.bio = stylist.bio;
+        const branchAssignment = await this._stylistBranchRepo.findActiveByStylistId(stylist.id);
+        if (branchAssignment) {
+          safeUser.branchId = branchAssignment.branchId.toString();
+        }
       }
     }
   }
@@ -363,12 +363,7 @@ export class AuthService implements IAuthService {
 
     const tokens = createAuthTokens(user.id, user.role, tabId);
     const safeUser = UserMapper.toSafeUser(user);
-    if (user.role === UserRole.STYLIST) {
-      const branchAssignment = await this._stylistBranchRepo.findActiveByStylistId(user.id);
-      if (branchAssignment) {
-        safeUser.branchId = branchAssignment.branchId.toString();
-      }
-    }
+    await this.enrichStylistData(user, safeUser);
 
     return {
       user: safeUser,

@@ -49,7 +49,7 @@ const StylistDailyOverrideSchema = new Schema<IStylistDailyOverride>(
   {
     stylistId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Stylist',
       required: true,
       index: true,
     },

@@ -5,10 +5,9 @@ import { StylistServiceRepository } from './repository/stylistService.repository
 import { StylistServiceService } from './service/stylistService.service';
 import { StylistServiceController } from './controller/stylistService.controller';
 
-container.register(TOKENS.StylistServiceMappingRepository, {
-  useClass: StylistServiceRepository,
-});
-container.register(TOKENS.StylistServiceMappingService, { useClass: StylistServiceService });
-container.register(StylistServiceController, { useClass: StylistServiceController });
+container.registerSingleton(TOKENS.StylistServiceRepository, StylistServiceRepository);
+container.registerSingleton(TOKENS.StylistServiceService, StylistServiceService);
+container.registerSingleton(TOKENS.StylistServiceController, StylistServiceController);
 
-export const resolveStylistServiceController = () => container.resolve(StylistServiceController);
+export const resolveStylistServiceController = () =>
+  container.resolve<StylistServiceController>(TOKENS.StylistServiceController);

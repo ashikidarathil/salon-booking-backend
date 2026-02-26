@@ -8,6 +8,13 @@ import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { SCHEDULE_MESSAGES } from '../constants/schedule.constants';
 import { WeeklyScheduleRequestDto, DailyOverrideRequestDto } from '../dto/schedule.dto';
 
+interface AuthenticatedRequest extends Request {
+  auth?: {
+    userId: string;
+    role: string;
+  };
+}
+
 @injectable()
 export class ScheduleController implements IScheduleController {
   constructor(
@@ -69,7 +76,9 @@ export class ScheduleController implements IScheduleController {
 
   addBreak = async (req: Request, res: Response) => {
     const dto = req.body;
-    const stylistBreak = await this.scheduleService.addBreak(dto);
+    const authReq = req as AuthenticatedRequest;
+    const role = authReq.auth?.role;
+    const stylistBreak = await this.scheduleService.addBreak(dto, role);
     res
       .status(HttpStatus.CREATED)
       .json(new ApiResponse(true, SCHEDULE_MESSAGES.BREAK_ADDED, stylistBreak));

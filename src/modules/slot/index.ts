@@ -5,6 +5,12 @@ import { SlotService } from './service/slot.service';
 
 import { SlotController } from './controller/slot.controller';
 
+import { SlotRepository } from './repository/slot.repository';
+
+container.register(TOKENS.SlotRepository, {
+  useClass: SlotRepository,
+});
+
 container.register(TOKENS.SlotService, {
   useClass: SlotService,
 });

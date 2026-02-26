@@ -9,26 +9,9 @@ const router = Router();
 const controller = resolveSlotController();
 
 // USER ROUTES
-router.get(
-  SLOT_ROUTES.USER.LIST,
-  authMiddleware,
-  roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
-  controller.getAvailableSlots.bind(controller),
-);
+router.get(SLOT_ROUTES.USER.LIST, controller.getAvailableSlots.bind(controller));
 
-router.get(
-  SLOT_ROUTES.USER.AVAILABILITY,
-  authMiddleware,
-  roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
-  controller.getDynamicAvailability.bind(controller),
-);
-
-router.post(
-  SLOT_ROUTES.USER.LOCK,
-  authMiddleware,
-  roleMiddleware([UserRole.USER]),
-  controller.lockSlot.bind(controller),
-);
+router.get(SLOT_ROUTES.USER.AVAILABILITY, controller.getDynamicAvailability.bind(controller));
 
 // ADMIN ROUTES
 router.get(
@@ -56,8 +39,30 @@ router.patch(
 router.get(
   SLOT_ROUTES.STYLIST.LIST,
   authMiddleware,
-  roleMiddleware([UserRole.STYLIST]),
+  roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
   controller.getStylistSlots.bind(controller),
+);
+
+// Special Slot — Stylist or Admin creates a parallel slot
+router.post(
+  SLOT_ROUTES.ADMIN.CREATE_SPECIAL,
+  authMiddleware,
+  roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
+  controller.createSpecialSlot.bind(controller),
+);
+
+router.get(
+  SLOT_ROUTES.ADMIN.LIST_SPECIAL,
+  authMiddleware,
+  roleMiddleware([UserRole.ADMIN, UserRole.STYLIST]),
+  controller.listSpecialSlots.bind(controller),
+);
+
+router.delete(
+  SLOT_ROUTES.ADMIN.CANCEL_SPECIAL,
+  authMiddleware,
+  roleMiddleware([UserRole.ADMIN, UserRole.STYLIST]),
+  controller.cancelSpecialSlot.bind(controller),
 );
 
 export default router;

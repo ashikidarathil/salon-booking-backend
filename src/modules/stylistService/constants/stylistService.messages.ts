@@ -4,4 +4,6 @@ export const STYLIST_SERVICE_MESSAGES = {
   SERVICE_NOT_FOUND: 'Service not found',
   SERVICE_NOT_AVAILABLE: 'Service not available for this stylist',
   STATUS_UPDATED: 'Service status updated successfully',
-};
+  LISTED: 'Listed successfully',
+  UNAUTHORIZED: 'Unauthorized',
+} as const;

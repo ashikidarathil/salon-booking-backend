@@ -1,0 +1,119 @@
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 13:45:31"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 13:45:31"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 13:45:31"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 13:53:23","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 13:53:24","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError The selected slot is no longer available. Please select another slot.","method":"POST","statusCode":400,"timestamp":"2026-02-21 13:54:38","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError The selected slot is no longer available. Please select another slot.","method":"POST","statusCode":400,"timestamp":"2026-02-21 13:54:39","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 14:00:52"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 14:00:52"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 14:00:52"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 14:01:03"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 14:01:03"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 14:01:04"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 14:05:00"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 14:05:00"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 14:05:00"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 14:05:20"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 14:05:20"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 14:05:20"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 14:05:37"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 14:05:37"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 14:05:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 14:07:27"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 14:07:27"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 14:07:27"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:08:54","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:09:14","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:09:15","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:16:15","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:16:17","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:17:18","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:19:30","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:19:32","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:32:20","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:32:40","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 14:34:08"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 14:34:08"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 14:34:08"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:34:16","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:34:17","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:35:37","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:36:00","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:36:03","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:36:06","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 14:36:12","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 15:08:03","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 15:09:54","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 15:10:02","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 15:13:37"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 15:13:37"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 15:13:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 15:18:07"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 15:18:07"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 15:18:07"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 15:18:22"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 15:18:22"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 15:18:22"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 15:19:16","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 15:19:19","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 15:19:27","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 15:19:28","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 15:39:41","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 15:40:48","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"error","message":"Unhandled Error Cast to ObjectId failed for value \"my\" (type string) at path \"_id\" for model \"Booking\"","method":"GET","stack":"CastError: Cast to ObjectId failed for value \"my\" (type string) at path \"_id\" for model \"Booking\"\n    at SchemaObjectId.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schema/objectId.js:253:11)\n    at SchemaObjectId.SchemaType.applySetters (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1280:12)\n    at SchemaObjectId.SchemaType.castForQuery (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1706:17)\n    at cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/cast.js:390:32)\n    at model.Query.Query.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:5016:12)\n    at model.Query.Query._castConditions (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:2380:10)\n    at model.Query._findOne (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:2708:8)\n    at model.Query.exec (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:4627:80)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BookingRepository.findById (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/repository/booking.repository.ts:14:12)","timestamp":"2026-02-21 15:45:57","url":"/api/bookings/my","userId":"6952c5e37717bc70a397d947"}
+{"level":"error","message":"Unhandled Error Cast to ObjectId failed for value \"my\" (type string) at path \"_id\" for model \"Booking\"","method":"GET","stack":"CastError: Cast to ObjectId failed for value \"my\" (type string) at path \"_id\" for model \"Booking\"\n    at SchemaObjectId.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schema/objectId.js:253:11)\n    at SchemaObjectId.SchemaType.applySetters (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1280:12)\n    at SchemaObjectId.SchemaType.castForQuery (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1706:17)\n    at cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/cast.js:390:32)\n    at model.Query.Query.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:5016:12)\n    at model.Query.Query._castConditions (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:2380:10)\n    at model.Query._findOne (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:2708:8)\n    at model.Query.exec (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:4627:80)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BookingRepository.findById (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/repository/booking.repository.ts:14:12)","timestamp":"2026-02-21 15:45:57","url":"/api/bookings/my","userId":"6952c5e37717bc70a397d947"}
+{"level":"error","message":"Unhandled Error Cast to ObjectId failed for value \"my\" (type string) at path \"_id\" for model \"Booking\"","method":"GET","stack":"CastError: Cast to ObjectId failed for value \"my\" (type string) at path \"_id\" for model \"Booking\"\n    at SchemaObjectId.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schema/objectId.js:253:11)\n    at SchemaObjectId.SchemaType.applySetters (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1280:12)\n    at SchemaObjectId.SchemaType.castForQuery (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1706:17)\n    at cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/cast.js:390:32)\n    at model.Query.Query.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:5016:12)\n    at model.Query.Query._castConditions (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:2380:10)\n    at model.Query._findOne (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:2708:8)\n    at model.Query.exec (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:4627:80)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BookingRepository.findById (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/repository/booking.repository.ts:14:12)","timestamp":"2026-02-21 15:46:09","url":"/api/bookings/my","userId":"6952c5e37717bc70a397d947"}
+{"level":"error","message":"Unhandled Error Cast to ObjectId failed for value \"my\" (type string) at path \"_id\" for model \"Booking\"","method":"GET","stack":"CastError: Cast to ObjectId failed for value \"my\" (type string) at path \"_id\" for model \"Booking\"\n    at SchemaObjectId.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schema/objectId.js:253:11)\n    at SchemaObjectId.SchemaType.applySetters (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1280:12)\n    at SchemaObjectId.SchemaType.castForQuery (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1706:17)\n    at cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/cast.js:390:32)\n    at model.Query.Query.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:5016:12)\n    at model.Query.Query._castConditions (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:2380:10)\n    at model.Query._findOne (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:2708:8)\n    at model.Query.exec (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:4627:80)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BookingRepository.findById (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/repository/booking.repository.ts:14:12)","timestamp":"2026-02-21 15:46:09","url":"/api/bookings/my","userId":"6952c5e37717bc70a397d947"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 15:47:32"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 15:47:32"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 15:47:32"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 15:48:13"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 15:48:13"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 15:48:13"}
+{"level":"error","message":"Unhandled Error Cannot read properties of null (reading 'toString')","method":"GET","stack":"TypeError: Cannot read properties of null (reading 'toString')\n    at Function.toResponse (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/mapper/booking.mapper.ts:22:36)\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/service/booking.service.ts:248:52\n    at Array.map (<anonymous>)\n    at BookingService.listUserBookings (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/service/booking.service.ts:248:21)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BookingController.listMyBookings (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/controller/booking.controller.ts:74:22)","timestamp":"2026-02-21 15:49:20","url":"/api/bookings/my","userId":"6952c5e37717bc70a397d947"}
+{"level":"error","message":"Unhandled Error Cannot read properties of null (reading 'toString')","method":"GET","stack":"TypeError: Cannot read properties of null (reading 'toString')\n    at Function.toResponse (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/mapper/booking.mapper.ts:22:36)\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/service/booking.service.ts:248:52\n    at Array.map (<anonymous>)\n    at BookingService.listUserBookings (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/service/booking.service.ts:248:21)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async BookingController.listMyBookings (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/booking/controller/booking.controller.ts:74:22)","timestamp":"2026-02-21 15:49:20","url":"/api/bookings/my","userId":"6952c5e37717bc70a397d947"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 15:50:42"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 15:50:42"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 15:50:42"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:01:36"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:01:36"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:01:36"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:01:53"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:01:53"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:01:53"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:02:05"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:02:05"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:02:05"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:10:42"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:10:42"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:10:42"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:11:24"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:11:24"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:11:24"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 16:15:47","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 16:15:49","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 16:21:31","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError This slot is already booked","method":"POST","statusCode":400,"timestamp":"2026-02-21 16:26:39","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError This slot is already booked","method":"POST","statusCode":400,"timestamp":"2026-02-21 16:26:52","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError This slot is already booked","method":"POST","statusCode":400,"timestamp":"2026-02-21 16:26:52","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError This slot is already booked","method":"POST","statusCode":400,"timestamp":"2026-02-21 16:26:52","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError This slot is already booked","method":"POST","statusCode":400,"timestamp":"2026-02-21 16:26:52","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError This slot is already booked","method":"POST","statusCode":400,"timestamp":"2026-02-21 16:26:52","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:30:18"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:30:18"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:30:18"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:32:18"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:32:18"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:32:18"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:35:01"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:35:01"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:35:01"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:35:09"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:35:09"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:35:09"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-21 16:36:24"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-21 16:36:24"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-21 16:36:24"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 16:37:36","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-21 16:37:40","url":"/api/auth/refresh","userId":"anonymous"}

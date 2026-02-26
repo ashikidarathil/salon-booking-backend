@@ -16,6 +16,13 @@ export class BranchMapper {
       isDeleted: branch.isDeleted,
       createdAt: branch.createdAt.toISOString(),
       updatedAt: branch.updatedAt.toISOString(),
+      defaultBreaks: branch.defaultBreaks
+        ? branch.defaultBreaks.map((gb) => ({
+            startTime: gb.startTime,
+            endTime: gb.endTime,
+            description: gb.description,
+          }))
+        : undefined,
       ...(distance !== undefined && { distance }),
     };
   }

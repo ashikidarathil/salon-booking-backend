@@ -18,7 +18,8 @@ import { SCHEDULE_MESSAGES } from '../constants/schedule.constants';
 import { IStylistWeeklySchedule } from '../../../models/stylistWeeklySchedule.model';
 import { IStylistDailyOverride } from '../../../models/stylistDailyOverride.model';
 import { IStylistBreakRepository } from '../repository/IStylistBreakRepository';
-import { StylistModel } from '../../../models/stylist.model';
+import { IStylistRepository } from '../../stylistInvite/repository/IStylistRepository';
+import { toObjectId, isValidObjectId } from '../../../common/utils/mongoose.util';
 import mongoose from 'mongoose';
 
 @injectable()
@@ -30,24 +31,29 @@ export class ScheduleService implements IScheduleService {
     private readonly dailyRepo: IDailyOverrideRepository,
     @inject(TOKENS.StylistBreakRepository)
     private readonly breakRepo: IStylistBreakRepository,
+    @inject(TOKENS.StylistRepository)
+    private readonly stylistRepo: IStylistRepository,
   ) {}
+
+  private timeToMinutes(time: string): number {
+    const [hrs, mins] = time.split(':').map(Number);
+    return hrs * 60 + mins;
+  }
 
   // Helper to resolve user ID to stylist ID
   private async resolveStylistId(userIdOrStylistId: string): Promise<string> {
-    const stylistByUserId = await StylistModel.findOne({ userId: userIdOrStylistId })
-      .select('_id')
-      .lean();
-    if (stylistByUserId && stylistByUserId._id) {
-      return stylistByUserId._id.toString();
+    if (!isValidObjectId(userIdOrStylistId)) {
+      return userIdOrStylistId;
     }
-    return userIdOrStylistId;
+    const stylistId = await this.stylistRepo.findIdByUserId(userIdOrStylistId);
+    return stylistId || userIdOrStylistId;
   }
 
   async updateWeeklySchedule(dto: WeeklyScheduleRequestDto): Promise<WeeklyScheduleResponseDto> {
     const stylistId = await this.resolveStylistId(dto.stylistId);
     let schedule = await this.weeklyRepo.findOne({
-      stylistId: new mongoose.Types.ObjectId(stylistId),
-      branchId: new mongoose.Types.ObjectId(dto.branchId),
+      stylistId: toObjectId(stylistId),
+      branchId: toObjectId(dto.branchId),
       dayOfWeek: dto.dayOfWeek,
     });
 
@@ -57,8 +63,8 @@ export class ScheduleService implements IScheduleService {
       schedule = await this.weeklyRepo.save(schedule);
     } else {
       schedule = await this.weeklyRepo.create({
-        stylistId: new mongoose.Types.ObjectId(stylistId),
-        branchId: new mongoose.Types.ObjectId(dto.branchId),
+        stylistId: toObjectId(stylistId),
+        branchId: toObjectId(dto.branchId),
         dayOfWeek: dto.dayOfWeek,
         isWorkingDay: dto.isWorkingDay,
         shifts: dto.shifts,
@@ -74,8 +80,8 @@ export class ScheduleService implements IScheduleService {
   ): Promise<WeeklyScheduleResponseDto[]> {
     const stylistId = await this.resolveStylistId(userIdOrStylistId);
     const schedules = await this.weeklyRepo.find({
-      stylistId: new mongoose.Types.ObjectId(stylistId),
-      branchId: new mongoose.Types.ObjectId(branchId),
+      stylistId: toObjectId(stylistId),
+      branchId: toObjectId(branchId),
     });
     return schedules.map(ScheduleMapper.toWeeklyResponse);
   }
@@ -87,8 +93,8 @@ export class ScheduleService implements IScheduleService {
 
     // Remove existing override for the same date if any
     const existing = await this.dailyRepo.findOne({
-      stylistId: new mongoose.Types.ObjectId(stylistId),
-      branchId: new mongoose.Types.ObjectId(dto.branchId),
+      stylistId: toObjectId(stylistId),
+      branchId: toObjectId(dto.branchId),
       date,
     });
 
@@ -97,8 +103,8 @@ export class ScheduleService implements IScheduleService {
     }
 
     const override = await this.dailyRepo.create({
-      stylistId: new mongoose.Types.ObjectId(stylistId),
-      branchId: new mongoose.Types.ObjectId(dto.branchId),
+      stylistId: toObjectId(stylistId),
+      branchId: toObjectId(dto.branchId),
       date,
       isWorkingDay: dto.isWorkingDay,
       shifts: dto.shifts,
@@ -123,8 +129,8 @@ export class ScheduleService implements IScheduleService {
   ): Promise<DailyOverrideResponseDto[]> {
     const stylistId = await this.resolveStylistId(userIdOrStylistId);
     const filter: Record<string, unknown> = {
-      stylistId: new mongoose.Types.ObjectId(stylistId),
-      branchId: new mongoose.Types.ObjectId(branchId),
+      stylistId: toObjectId(stylistId),
+      branchId: toObjectId(branchId),
     };
 
     if (startDate || endDate) {
@@ -138,14 +144,53 @@ export class ScheduleService implements IScheduleService {
     return overrides.map(ScheduleMapper.toDailyResponse);
   }
 
-  async addBreak(dto: StylistBreakRequestDto): Promise<StylistBreakResponseDto> {
+  async addBreak(dto: StylistBreakRequestDto, userRole?: string): Promise<StylistBreakResponseDto> {
     const stylistId = await this.resolveStylistId(dto.stylistId);
+
+    // Enforce 2-break limit for non-admins
+    if (userRole !== 'ADMIN') {
+      const filter: {
+        stylistId: mongoose.Types.ObjectId;
+        branchId: mongoose.Types.ObjectId;
+        date?: Date;
+        dayOfWeek?: number;
+      } = {
+        stylistId: toObjectId(stylistId),
+        branchId: toObjectId(dto.branchId),
+      };
+
+      if (dto.date) {
+        filter.date = new Date(dto.date);
+        filter.date.setUTCHours(0, 0, 0, 0);
+      } else {
+        filter.dayOfWeek = dto.dayOfWeek;
+      }
+
+      const existingBreaks = await this.breakRepo.find(filter as Record<string, unknown>);
+
+      // Calculate total duration including the new break
+      const newBreakDuration = this.timeToMinutes(dto.endTime) - this.timeToMinutes(dto.startTime);
+      const existingDuration = existingBreaks.reduce(
+        (sum, b) => sum + (this.timeToMinutes(b.endTime) - this.timeToMinutes(b.startTime)),
+        0,
+      );
+
+      if (existingDuration + newBreakDuration > 90) {
+        throw new AppError(
+          (SCHEDULE_MESSAGES.BREAK_LIMIT_EXCEEDED as (mins: number) => string)(
+            existingDuration + newBreakDuration,
+          ),
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+
     const date = dto.date ? new Date(dto.date) : undefined;
     if (date) date.setUTCHours(0, 0, 0, 0);
 
     const stylistBreak = await this.breakRepo.create({
-      stylistId: new mongoose.Types.ObjectId(stylistId),
-      branchId: new mongoose.Types.ObjectId(dto.branchId),
+      stylistId: toObjectId(stylistId),
+      branchId: toObjectId(dto.branchId),
       dayOfWeek: dto.dayOfWeek,
       date,
       startTime: dto.startTime,
@@ -166,8 +211,8 @@ export class ScheduleService implements IScheduleService {
   async getBreaks(userIdOrStylistId: string, branchId: string): Promise<StylistBreakResponseDto[]> {
     const stylistId = await this.resolveStylistId(userIdOrStylistId);
     const breaks = await this.breakRepo.find({
-      stylistId: new mongoose.Types.ObjectId(stylistId),
-      branchId: new mongoose.Types.ObjectId(branchId),
+      stylistId: toObjectId(stylistId),
+      branchId: toObjectId(branchId),
     });
     return breaks.map(ScheduleMapper.toBreakResponse);
   }

@@ -4,7 +4,7 @@ import { OffDayResponseDto } from '../dto/offDay.dto';
 export class OffDayMapper {
   static toResponse(offDay: IStylistOffDay): OffDayResponseDto {
     return {
-      id: offDay._id.toString(),
+      id: String(offDay._id),
       stylistId: offDay.stylistId.toString(),
       type: offDay.type,
       startDate: offDay.startDate.toISOString(),
@@ -13,7 +13,7 @@ export class OffDayMapper {
       status: offDay.status,
       approvedBy: offDay.approvedBy?.toString(),
       approvedAt: offDay.approvedAt?.toISOString(),
-      rejectionReason: offDay.rejectionReason,
+      adminRemarks: offDay.adminRemarks,
       createdAt: offDay.createdAt.toISOString(),
       updatedAt: offDay.updatedAt.toISOString(),
     };

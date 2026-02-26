@@ -7,8 +7,7 @@ import { HolidayMapper } from '../mapper/holiday.mapper';
 import { AppError } from '../../../common/errors/appError';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { HOLIDAY_MESSAGES } from '../constants/holiday.constants';
-import mongoose from 'mongoose';
-import { IHoliday } from '../../../models/holiday.model';
+import { toObjectId } from '../../../common/utils/mongoose.util';
 
 @injectable()
 export class HolidayService implements IHolidayService {
@@ -19,11 +18,11 @@ export class HolidayService implements IHolidayService {
 
   async createHoliday(dto: HolidayRequestDto): Promise<HolidayResponseDto> {
     const holiday = await this.holidayRepo.create({
-      branchId: dto.branchId ? new mongoose.Types.ObjectId(dto.branchId) : null,
+      branchId: dto.branchId ? toObjectId(dto.branchId) : null,
       date: new Date(dto.date),
       name: dto.name,
       isAllBranches: dto.isAllBranches,
-    } as Partial<IHoliday>);
+    });
     return HolidayMapper.toResponse(holiday);
   }
 
@@ -33,8 +32,9 @@ export class HolidayService implements IHolidayService {
     endDate?: Date,
   ): Promise<HolidayResponseDto[]> {
     const filter: Record<string, unknown> = {};
+
     if (branchId) {
-      filter.$or = [{ branchId: new mongoose.Types.ObjectId(branchId) }, { isAllBranches: true }];
+      filter.$or = [{ branchId: toObjectId(branchId) }, { isAllBranches: true }];
     } else {
       filter.isAllBranches = true;
     }

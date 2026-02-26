@@ -30,12 +30,13 @@ export const authMiddleware = (
     const decoded = jwt.verify(accessToken, env.ACCESS_TOKEN_SECRET) as AuthPayload;
 
     if (decoded.tabId && currentTabId && decoded.tabId !== currentTabId) {
-      return res.status(HttpStatus.UNAUTHORIZED).json({
-        message: 'Session conflict detected. Please refresh or login again.',
-      });
+      console.warn(
+        `Session tab mismatch: Token(${decoded.tabId}) vs Header(${currentTabId}). Allowing request.`,
+      );
     }
 
     if (decoded.role !== roleHeader) {
+      console.error(`Role mismatch: Token(${decoded.role}) vs Header(${roleHeader})`);
       return res.status(HttpStatus.FORBIDDEN).json({ message: 'Role mismatch' });
     }
 

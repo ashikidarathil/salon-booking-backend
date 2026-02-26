@@ -6,7 +6,11 @@ import { TOKENS } from '../../../common/di/tokens';
 import { ApiResponse } from '../../../common/response/apiResponse';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { SLOT_MESSAGES } from '../constants/slot.messages';
-import { BlockSlotDto, GetAvailableSlotsQueryDto } from '../dto/slot.request.dto';
+import {
+  BlockSlotDto,
+  GetAvailableSlotsQueryDto,
+  ListSpecialSlotsQueryDto,
+} from '../dto/slot.request.dto';
 
 interface AuthenticatedRequest extends Request {
   auth?: {
@@ -22,25 +26,21 @@ export class SlotController implements ISlotController {
   ) {}
 
   getAvailableSlots = async (req: Request, res: Response) => {
-    const { branchId, date, stylistId, serviceId } =
-      req.query as unknown as GetAvailableSlotsQueryDto;
-
-    let duration: number | undefined;
-    if (serviceId) {
-      const { BranchServiceModel } = await import('../../../models/branchService.model');
-      const branchService = await BranchServiceModel.findOne({ branchId, serviceId })
-        .select('duration')
-        .lean();
-      if (branchService) {
-        duration = branchService.duration;
-      }
-    }
+    const {
+      branchId,
+      date,
+      stylistId,
+      serviceId,
+      duration: queryDuration,
+    } = req.query as unknown as GetAvailableSlotsQueryDto;
 
     const slots = await this.slotService.getDynamicAvailability(
       branchId,
       new Date(date),
       stylistId,
-      duration,
+      queryDuration ? Number(queryDuration) : undefined,
+      false,
+      serviceId,
     );
     res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.FETCHED, slots));
   };
@@ -51,14 +51,20 @@ export class SlotController implements ISlotController {
       branchId,
       new Date(date),
       stylistId,
+      undefined,
+      true,
     );
     res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.FETCHED, slots));
   };
 
   getStylistSlots = async (req: Request, res: Response) => {
-    const { branchId, date } = req.query as unknown as GetAvailableSlotsQueryDto;
+    const {
+      branchId,
+      date,
+      stylistId: queryStylistId,
+    } = req.query as unknown as GetAvailableSlotsQueryDto;
     const authReq = req as AuthenticatedRequest;
-    const stylistId = authReq.auth?.userId;
+    const stylistId = queryStylistId || authReq.auth?.userId;
 
     if (!stylistId) {
       res.status(HttpStatus.UNAUTHORIZED).json(new ApiResponse(false, SLOT_MESSAGES.UNAUTHORIZED));
@@ -69,22 +75,10 @@ export class SlotController implements ISlotController {
       branchId,
       new Date(date),
       stylistId,
+      undefined,
+      true,
     );
     res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.FETCHED, slots));
-  };
-
-  lockSlot = async (req: Request, res: Response) => {
-    const { slotId } = req.params;
-    const authReq = req as AuthenticatedRequest;
-    const userId = authReq.auth?.userId;
-
-    if (!userId) {
-      res.status(HttpStatus.UNAUTHORIZED).json(new ApiResponse(false, SLOT_MESSAGES.UNAUTHORIZED));
-      return;
-    }
-
-    const slot = await this.slotService.lockSlot(slotId, userId);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.LOCKED, slot));
   };
 
   blockSlot = async (req: Request, res: Response) => {
@@ -101,26 +95,51 @@ export class SlotController implements ISlotController {
   };
 
   getDynamicAvailability = async (req: Request, res: Response) => {
-    const { branchId, date, stylistId, serviceId } =
-      req.query as unknown as GetAvailableSlotsQueryDto;
+    await this.getAvailableSlots(req, res);
+  };
 
-    let duration: number | undefined;
-    if (serviceId) {
-      const { BranchServiceModel } = await import('../../../models/branchService.model');
-      const branchService = await BranchServiceModel.findOne({ branchId, serviceId })
-        .select('duration')
-        .lean();
-      if (branchService) {
-        duration = branchService.duration;
-      }
+  createSpecialSlot = async (req: Request, res: Response) => {
+    const authReq = req as AuthenticatedRequest;
+    const { stylistId, branchId, date, startTime, endTime, note } = req.body;
+
+    // If caller is a STYLIST, use their own userId as stylistId if not provided
+    const resolvedStylistId = stylistId || authReq.auth?.userId;
+
+    if (!resolvedStylistId || !branchId || !date || !startTime || !endTime) {
+      res
+        .status(HttpStatus.BAD_REQUEST)
+        .json(
+          new ApiResponse(
+            false,
+            'Missing required fields: stylistId, branchId, date, startTime, endTime',
+          ),
+        );
+      return;
     }
 
-    const slots = await this.slotService.getDynamicAvailability(
+    const slot = await this.slotService.createSpecialSlot({
+      stylistId: resolvedStylistId,
       branchId,
-      new Date(date),
-      stylistId,
-      duration,
-    );
+      date,
+      startTime,
+      endTime,
+      note,
+      serviceId: req.body.serviceId,
+      createdBy: authReq.auth?.userId,
+    });
+
+    res.status(HttpStatus.CREATED).json(new ApiResponse(true, SLOT_MESSAGES.SPECIAL_CREATED, slot));
+  };
+
+  listSpecialSlots = async (req: Request, res: Response) => {
+    const { branchId, stylistId, date, status } = req.query as unknown as ListSpecialSlotsQueryDto;
+    const slots = await this.slotService.listSpecialSlots({ branchId, stylistId, date, status });
     res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.FETCHED, slots));
+  };
+
+  cancelSpecialSlot = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const slot = await this.slotService.cancelSpecialSlot(id);
+    res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.SPECIAL_CANCELLED, slot));
   };
 }

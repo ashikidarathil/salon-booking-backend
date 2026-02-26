@@ -10,10 +10,4 @@ export interface IBookingRepository {
     data: UpdateQuery<IBooking>,
     session?: ClientSession,
   ): Promise<IBooking | null>;
-  findOverlappingBooking(
-    stylistId: string,
-    date: Date,
-    startTime: string,
-    endTime: string,
-  ): Promise<IBooking | null>;
 }

@@ -12,7 +12,7 @@ const controller = resolveBookingController();
 router.post(
   BOOKING_ROUTES.USER.BASE,
   authMiddleware,
-  roleMiddleware([UserRole.USER]),
+  roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
   controller.create.bind(controller),
 );
 
@@ -33,15 +33,37 @@ router.get(
 router.patch(
   BOOKING_ROUTES.USER.CANCEL(':id'),
   authMiddleware,
-  roleMiddleware([UserRole.USER]),
+  roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
   controller.cancel.bind(controller),
 );
 
-router.post(
-  BOOKING_ROUTES.USER.EXTEND(':id'),
+router.patch(
+  BOOKING_ROUTES.USER.RESCHEDULE(':id'),
+  authMiddleware,
+  roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
+  controller.reschedule.bind(controller),
+);
+
+router.patch(
+  BOOKING_ROUTES.USER.STATUS(':id'),
   authMiddleware,
   roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
-  controller.extend.bind(controller),
+  controller.updateStatus.bind(controller),
+);
+
+// STYLIST ROUTES
+router.get(
+  BOOKING_ROUTES.STYLIST.LIST,
+  authMiddleware,
+  roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
+  controller.listStylistBookings.bind(controller),
+);
+
+router.get(
+  BOOKING_ROUTES.STYLIST.TODAY,
+  authMiddleware,
+  roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
+  controller.getStylistTodayBookings.bind(controller),
 );
 
 // ADMIN ROUTES
@@ -49,7 +71,14 @@ router.get(
   BOOKING_ROUTES.ADMIN.LIST,
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
-  // controller.listAll.bind(controller) // Need to add this to controller if needed, but for now routes definition
+  controller.listAll.bind(controller),
+);
+
+router.get(
+  BOOKING_ROUTES.ADMIN.TODAY,
+  authMiddleware,
+  roleMiddleware([UserRole.ADMIN]),
+  controller.getTodayBookings.bind(controller),
 );
 
 export default router;

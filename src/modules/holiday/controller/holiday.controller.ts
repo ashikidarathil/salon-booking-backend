@@ -22,11 +22,9 @@ export class HolidayController implements IHolidayController {
   };
 
   getHolidays = async (req: Request, res: Response) => {
-    const { branchId, startDate, endDate } = req.query as {
-      branchId?: string;
-      startDate?: string;
-      endDate?: string;
-    };
+    const branchId = req.query.branchId as string | undefined;
+    const startDate = req.query.startDate as string | undefined;
+    const endDate = req.query.endDate as string | undefined;
 
     const start = startDate ? new Date(startDate) : undefined;
     const end = endDate ? new Date(endDate) : undefined;

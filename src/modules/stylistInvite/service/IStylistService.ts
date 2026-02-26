@@ -11,6 +11,9 @@ export interface IStylistService {
     stylistId: string,
     position: 'JUNIOR' | 'SENIOR' | 'TRAINEE',
   ): Promise<StylistListItem | null>;
-  getPublicStylists(query: PaginationQueryDto): Promise<PaginatedResponse<StylistListItem>>;
-  getPublicStylistById(stylistId: string): Promise<StylistListItem | null>;
+  getPublicStylists(
+    query: PaginationQueryDto,
+    userId?: string,
+  ): Promise<PaginatedResponse<StylistListItem>>;
+  getPublicStylistById(stylistId: string, userId?: string): Promise<StylistListItem | null>;
 }

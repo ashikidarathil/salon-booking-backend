@@ -17,7 +17,7 @@ router.post(
 );
 
 router.get(
-  OFF_DAY_ROUTES.BASE + '/my',
+  OFF_DAY_ROUTES.BASE + OFF_DAY_ROUTES.MY,
   authMiddleware,
   roleMiddleware([UserRole.STYLIST]),
   controller.getMyOffDays.bind(controller),
@@ -39,7 +39,7 @@ router.get(
 );
 
 router.patch(
-  OFF_DAY_ROUTES.BASE + OFF_DAY_ROUTES.BY_ID + '/status',
+  OFF_DAY_ROUTES.BASE + OFF_DAY_ROUTES.BY_ID + OFF_DAY_ROUTES.STATUS,
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.updateStatus.bind(controller),

@@ -30,9 +30,17 @@ export interface StylistListItem {
   profilePicture?: string;
   branchName?: string;
   assignedServices?: string[];
+  assignedServiceDetails?: {
+    id: string;
+    name: string;
+    price: number;
+    duration: number;
+    imageUrl?: string;
+  }[];
   rating?: number;
   reviewCount?: number;
   weeklySchedule?: IWeeklyScheduleItem[];
+  isFavorite?: boolean;
 }
 
 export type StylistDraft = {
@@ -48,8 +56,12 @@ export interface IStylistRepository {
   getDraftByUserId(userId: string): Promise<StylistDraft | null>;
   getPaginatedStylists(query: PaginationQueryDto): Promise<PaginatedResponse<StylistListItem>>;
   setBlockedById(stylistId: string, isBlocked: boolean): Promise<StylistListItem | null>;
-  updatePosition(stylistId: string, position: 'JUNIOR' | 'SENIOR' | 'TRAINEE'): Promise<StylistListItem | null>;
+  updatePosition(
+    stylistId: string,
+    position: 'JUNIOR' | 'SENIOR' | 'TRAINEE',
+  ): Promise<StylistListItem | null>;
   getById(stylistId: string): Promise<StylistListItem | null>;
   findByUserId(userId: string): Promise<StylistListItem | null>;
+  findIdByUserId(userId: string): Promise<string | null>;
   updateByUserId(userId: string, data: Partial<StylistListItem>): Promise<void>;
 }

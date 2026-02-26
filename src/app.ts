@@ -23,6 +23,7 @@ import scheduleRoutes from './modules/schedule/routes/schedule.routes';
 import offDayRoutes from './modules/offDay/routes/offDay.routes';
 import holidayRoutes from './modules/holiday/routes/holiday.routes';
 import stylistServiceRoutes from './modules/stylistService/routes/stylistService.routes';
+import wishlistRoutes from './modules/wishlist/routes/wishlist.routes';
 
 import { globalErrorHandler } from './common/errors/errorHandler';
 import { loggerMiddleware } from './common/middleware/logger.middleware';
@@ -46,6 +47,12 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
+
+// Security Headers for Google Login & Auth compatibility
+app.use((_req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  next();
+});
 
 app.use((req, res, next) => {
   console.log('=== REQUEST DEBUG ===');
@@ -75,8 +82,9 @@ app.use('/api', slotRoutes);
 app.use('/api', bookingRoutes);
 app.use('/api/schedules', scheduleRoutes);
 app.use('/api', offDayRoutes);
-app.use('/api', holidayRoutes);
 app.use('/api', stylistServiceRoutes);
+app.use('/api', wishlistRoutes);
+app.use('/api', holidayRoutes);
 app.use('/api', authMiddleware, blockMiddleware);
 
 app.use(globalErrorHandler);

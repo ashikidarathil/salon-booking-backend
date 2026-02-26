@@ -15,6 +15,7 @@ export interface StylistDocument extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+export type IStylist = StylistDocument;
 
 const StylistSchema = new Schema<StylistDocument>(
   {

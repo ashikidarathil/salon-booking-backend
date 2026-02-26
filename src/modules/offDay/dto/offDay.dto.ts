@@ -19,12 +19,12 @@ export interface OffDayResponseDto {
   status: OffDayStatus;
   approvedBy?: string;
   approvedAt?: string;
-  rejectionReason?: string;
+  adminRemarks?: string;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface OffDayActionDto {
   status: OffDayStatus.APPROVED | OffDayStatus.REJECTED;
-  rejectionReason?: string;
+  adminRemarks?: string;
 }

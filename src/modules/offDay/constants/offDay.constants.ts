@@ -7,7 +7,8 @@ export const OFF_DAY_MESSAGES = {
   REJECTED: 'Off-day request rejected successfully',
   NOT_FOUND: 'Off-day request not found',
   FAILED_STATUS: 'Failed to process off-day status',
-};
+  UNAUTHORIZED: 'Unauthorized',
+} as const;
 
 export const OFF_DAY_ROUTES = {
   BASE: '/off-days',
@@ -15,4 +16,6 @@ export const OFF_DAY_ROUTES = {
   BY_STYLIST: '/stylist/:stylistId',
   APPROVE: '/:id/approve',
   REJECT: '/:id/reject',
-};
+  MY: '/my',
+  STATUS: '/status',
+} as const;

@@ -8,12 +8,14 @@ import type { StylistListResponse } from '../dto/response/StylistList.response';
 import type { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 import type { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 import type { StylistListItem } from '../repository/IStylistRepository';
+import { WishlistService } from '../../wishlist/service/WishlistService';
 
 @injectable()
 export class StylistService implements IStylistService {
   constructor(
     @inject(TOKENS.StylistRepository) private readonly _stylistRepo: IStylistRepository,
     @inject(TOKENS.StylistInviteRepository) private readonly _inviteRepo: IStylistInviteRepository,
+    @inject(TOKENS.WishlistService) private readonly _wishlistService: WishlistService,
   ) {}
 
   async listAllWithInviteStatus(): Promise<StylistListResponse[]> {
@@ -50,6 +52,7 @@ export class StylistService implements IStylistService {
 
   async getPublicStylists(
     query: PaginationQueryDto,
+    userId?: string,
   ): Promise<PaginatedResponse<StylistListItem>> {
     const publicQuery: PaginationQueryDto = {
       ...query,
@@ -57,14 +60,32 @@ export class StylistService implements IStylistService {
       isBlocked: false,
       isActive: true,
     };
-    return this._stylistRepo.getPaginatedStylists(publicQuery);
+    const result = await this._stylistRepo.getPaginatedStylists(publicQuery);
+
+    if (userId && result.data.length > 0) {
+      const favorites = await this._wishlistService.getFavoritesForStylists(
+        userId,
+        result.data.map((s) => s.id),
+      );
+      result.data = result.data.map((s) => ({
+        ...s,
+        isFavorite: favorites.has(s.id),
+      }));
+    }
+
+    return result;
   }
 
-  async getPublicStylistById(stylistId: string): Promise<StylistListItem | null> {
+  async getPublicStylistById(stylistId: string, userId?: string): Promise<StylistListItem | null> {
     const stylist = await this._stylistRepo.getById(stylistId);
     if (!stylist || stylist.status !== 'ACTIVE' || stylist.isBlocked) {
       return null;
     }
+
+    if (userId) {
+      stylist.isFavorite = await this._wishlistService.isFavorite(userId, stylistId);
+    }
+
     return stylist;
   }
 }

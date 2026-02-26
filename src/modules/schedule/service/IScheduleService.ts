@@ -20,7 +20,7 @@ export interface IScheduleService {
   ): Promise<DailyOverrideResponseDto[]>;
 
   // Break Management
-  addBreak(dto: StylistBreakRequestDto): Promise<StylistBreakResponseDto>;
+  addBreak(dto: StylistBreakRequestDto, userRole?: string): Promise<StylistBreakResponseDto>;
   deleteBreak(id: string): Promise<void>;
   getBreaks(stylistId: string, branchId: string): Promise<StylistBreakResponseDto[]>;
 }

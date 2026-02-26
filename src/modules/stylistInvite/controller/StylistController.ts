@@ -10,7 +10,9 @@ import type { PaginationQueryDto } from '../../../common/dto/pagination.query.dt
 
 @injectable()
 export class StylistController {
-  constructor(@inject(TOKENS.StylistService) private readonly _service: IStylistService) {}
+  constructor(
+    @inject(TOKENS.StylistManagementService) private readonly _service: IStylistService,
+  ) {}
 
   async list(req: AuthRequest, res: Response): Promise<void> {
     const data = await this._service.listAllWithInviteStatus();
@@ -107,7 +109,7 @@ export class StylistController {
       position: typeof req.query.position === 'string' ? req.query.position : undefined,
     };
 
-    const result = await this._service.getPublicStylists(query);
+    const result = await this._service.getPublicStylists(query, (req as AuthRequest).auth?.userId);
 
     res
       .status(HttpStatus.OK)
@@ -116,7 +118,10 @@ export class StylistController {
 
   async getPublicStylistById(req: Request, res: Response): Promise<void> {
     const stylistId = req.params.stylistId;
-    const result = await this._service.getPublicStylistById(stylistId);
+    const result = await this._service.getPublicStylistById(
+      stylistId,
+      (req as AuthRequest).auth?.userId,
+    );
 
     if (!result) {
       res.status(HttpStatus.NOT_FOUND).json(new ApiResponse<void>(false, 'Stylist not found'));

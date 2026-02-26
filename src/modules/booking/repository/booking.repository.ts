@@ -1,42 +1,60 @@
 import { IBooking, BookingModel } from '../../../models/booking.model';
 import { IBookingRepository } from './IBookingRepository';
 import { injectable } from 'tsyringe';
-import { ClientSession, UpdateQuery } from 'mongoose';
+import { ClientSession, PopulateOptions, UpdateQuery } from 'mongoose';
+import { BaseRepository } from '../../../common/repository/baseRepository';
 
 @injectable()
-export class BookingRepository implements IBookingRepository {
-  async create(data: Partial<IBooking>, session?: ClientSession): Promise<IBooking> {
-    const bookings = await BookingModel.create([data], { session });
-    return bookings[0];
+export class BookingRepository
+  extends BaseRepository<IBooking, IBooking>
+  implements IBookingRepository
+{
+  private readonly populateOptions: PopulateOptions[] = [
+    { path: 'userId', select: 'name' },
+    {
+      path: 'stylistId',
+      select: 'profilePicture',
+      populate: { path: 'userId', select: 'name' },
+    },
+    { path: 'items.serviceId', select: 'name' },
+    {
+      path: 'items.stylistId',
+      populate: { path: 'userId', select: 'name' },
+    },
+  ];
+
+  constructor() {
+    super(BookingModel);
   }
 
-  async findById(id: string): Promise<IBooking | null> {
-    return await BookingModel.findById(id);
+  protected toEntity(doc: IBooking): IBooking {
+    return doc;
   }
 
-  async find(filter: Record<string, unknown>): Promise<IBooking[]> {
-    return await BookingModel.find(filter);
+  override async findById(
+    id: string,
+    populate: PopulateOptions[] = this.populateOptions,
+  ): Promise<IBooking | null> {
+    return super.findById(id, populate);
   }
 
-  async update(
+  override async find(
+    filter: Record<string, unknown>,
+    populate: PopulateOptions[] = this.populateOptions,
+    sort: Record<string, 1 | -1> = { createdAt: -1 },
+  ): Promise<IBooking[]> {
+    return super.find(filter, populate, sort);
+  }
+
+  override async update(
     id: string,
     data: UpdateQuery<IBooking>,
     session?: ClientSession,
   ): Promise<IBooking | null> {
-    return await BookingModel.findByIdAndUpdate(id, data, { new: true, session });
-  }
-
-  async findOverlappingBooking(
-    stylistId: string,
-    date: Date,
-    startTime: string,
-    endTime: string,
-  ): Promise<IBooking | null> {
-    return await BookingModel.findOne({
-      stylistId,
-      date,
-      status: 'CONFIRMED',
-      $or: [{ startTime: { $lt: endTime }, endTime: { $gt: startTime } }],
-    });
+    await BookingModel.findByIdAndUpdate(id, data, { new: true, session });
+    return BookingModel.findById(id)
+      .populate(this.populateOptions)
+      .session(session || null)
+      .exec();
   }
 }

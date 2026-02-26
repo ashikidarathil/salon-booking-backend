@@ -85,3 +85,49 @@
 {"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 15:24:29"}
 {"level":"info","message":"Redis connected","timestamp":"2026-02-20 15:24:29"}
 {"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 15:24:29"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:40:22"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:40:22"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:40:22"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:40:33"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:40:33"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:40:33"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:40:55"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:40:55"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:40:55"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:41:11"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:41:11"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:41:11"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:41:34"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:41:34"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:41:34"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:41:45"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:41:45"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:41:45"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:41:55"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:41:55"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:41:55"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:42:08"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:42:08"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:42:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:42:24"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:42:24"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:42:24"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:42:37"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:42:37"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:42:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:42:53"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:42:53"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:42:53"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 17:44:19","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 17:44:20","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 17:46:28","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-20 17:53:14"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-20 17:53:14"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-20 17:53:14"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 18:01:39","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 18:01:39","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 18:01:43","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 18:01:43","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 18:01:46","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 20:21:28","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-20 20:21:31","url":"/api/auth/refresh","userId":"anonymous"}

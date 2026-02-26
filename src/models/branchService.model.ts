@@ -10,6 +10,7 @@ export interface BranchServiceDocument extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+export type IBranchService = BranchServiceDocument;
 
 const BranchServiceSchema = new Schema<BranchServiceDocument>(
   {

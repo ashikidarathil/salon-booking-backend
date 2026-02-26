@@ -34,7 +34,7 @@ container.register<IStylistInviteService>(TOKENS.StylistInviteService, {
   useClass: StylistInviteService,
 });
 
-container.register<IStylistService>(TOKENS.StylistService, {
+container.register<IStylistService>(TOKENS.StylistManagementService, {
   useClass: StylistService,
 });
 

@@ -10,6 +10,7 @@ export interface StylistBranchDocument extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+export type IStylistBranch = StylistBranchDocument;
 
 const StylistBranchSchema = new Schema<StylistBranchDocument>(
   {

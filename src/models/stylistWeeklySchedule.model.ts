@@ -51,7 +51,7 @@ const StylistWeeklyScheduleSchema = new Schema<IStylistWeeklySchedule>(
   {
     stylistId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Stylist',
       required: true,
       index: true,
     },
