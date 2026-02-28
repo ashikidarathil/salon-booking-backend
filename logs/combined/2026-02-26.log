@@ -142,3 +142,37 @@
 {"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 15:40:28"}
 {"level":"info","message":"Redis connected","timestamp":"2026-02-26 15:40:28"}
 {"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 15:40:28"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 15:50:54"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-26 15:50:54"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 15:50:54"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 16:01:15"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-26 16:01:15"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 16:01:15"}
+{"level":"warn","message":"Handled AppError No token provided","method":"POST","statusCode":401,"timestamp":"2026-02-26 16:03:19","url":"/api/auth/refresh","userId":"anonymous"}
+{"level":"warn","message":"Handled AppError Slot for 698c0af63c97fd2ec1155fe0 is unavailable","method":"POST","statusCode":400,"timestamp":"2026-02-26 16:04:55","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError Slot for 698c0af63c97fd2ec1155fe0 is unavailable","method":"POST","statusCode":400,"timestamp":"2026-02-26 16:05:04","url":"/api/bookings","userId":"6952c5e37717bc70a397d947"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 16:09:24"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-26 16:09:24"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 16:09:24"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 16:10:16"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-26 16:10:16"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 16:10:16"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 16:10:33"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-26 16:10:33"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 16:10:33"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 17:03:17"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-26 17:03:17"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 17:03:17"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 17:07:09"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-26 17:07:09"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 17:07:09"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 17:10:10"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-26 17:10:10"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 17:10:10"}
+{"level":"info","message":"Backend running on http://localhost:5001","timestamp":"2026-02-26 17:12:08"}
+{"level":"info","message":"Redis connected","timestamp":"2026-02-26 17:12:08"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-02-26 17:12:08"}
+{"level":"warn","message":"Handled AppError You are not authorized to cancel this booking","method":"PATCH","statusCode":403,"timestamp":"2026-02-26 17:45:42","url":"/api/bookings/69a03907616ca94f095dc958/cancel","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError You are not authorized to cancel this booking","method":"PATCH","statusCode":403,"timestamp":"2026-02-26 17:45:57","url":"/api/bookings/69a03907616ca94f095dc958/cancel","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError You are not authorized to cancel this booking","method":"PATCH","statusCode":403,"timestamp":"2026-02-26 17:46:24","url":"/api/bookings/69a03907616ca94f095dc958/cancel","userId":"6952c5e37717bc70a397d947"}
+{"level":"warn","message":"Handled AppError Only the customer can reschedule their booking","method":"PATCH","statusCode":403,"timestamp":"2026-02-26 17:47:17","url":"/api/bookings/69a03907616ca94f095dc958/reschedule","userId":"6952c5e37717bc70a397d947"}

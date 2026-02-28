@@ -67,8 +67,6 @@ export class UserController implements IUserController {
 
     const result = await this._service.getUsers(query);
 
-    console.log('USERS RESULT:', result);
-
     res.status(HttpStatus.OK).json(new ApiResponse(true, 'Users retrieved successfully', result));
   }
 }

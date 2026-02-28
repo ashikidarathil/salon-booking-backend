@@ -23,10 +23,12 @@ interface PopulatedStylist {
 
 export class BookingMapper {
   static toResponse(booking: IBooking): BookingResponseDto {
+    const user = booking.userId as unknown as PopulatedUser;
+
     return {
       id: (booking._id as mongoose.Types.ObjectId).toString(),
-      userId: (booking.userId as unknown as PopulatedUser)?._id?.toString() || booking.userId?.toString() || '',
-      userName: (booking.userId as unknown as PopulatedUser)?.name || 'Unknown User',
+      userId: user?._id?.toString() || booking.userId?.toString() || '',
+      userName: user?.name || 'Unknown User',
       branchId: booking.branchId?.toString() || '',
       slotId: booking.slotId?.toString(),
       items: (booking.items || []).map((item) => {

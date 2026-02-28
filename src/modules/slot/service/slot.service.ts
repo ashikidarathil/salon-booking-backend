@@ -9,7 +9,7 @@ import { SLOT_MESSAGES } from '../constants/slot.messages';
 import { SlotStatus, SLOT_GRID_SIZE } from '../constants/slot.constants';
 import { IStylist, StylistModel } from '../../../models/stylist.model';
 import { StylistBranchModel } from '../../../models/stylistBranch.model';
-import { BookingModel, BookingStatus, IBooking } from '../../../models/booking.model';
+import { BookingModel, BookingStatus, IBooking, IBookingItem } from '../../../models/booking.model';
 import { IStylistBreak } from '../../../models/stylistBreak.model';
 
 import {
@@ -33,6 +33,8 @@ import {
   SpecialSlotStatus,
 } from '../../../models/specialSlot.model';
 import mongoose, { QueryFilter } from 'mongoose';
+
+import { SALOON_TIMEZONE_OFFSET } from '../../../common/constants/app.constants';
 
 interface PopulatedStylist {
   _id: mongoose.Types.ObjectId;
@@ -79,7 +81,7 @@ export class SlotService implements ISlotService {
   ) {}
 
   // Saloon Timezone Offset (IST = +5:30)
-  private readonly SALOON_OFFSET_MINS = 330;
+  private readonly SALOON_OFFSET_MINS = SALOON_TIMEZONE_OFFSET;
 
   // Helper to resolve user ID to stylist ID
   private async resolveStylistId(userIdOrStylistId: string): Promise<string> {
@@ -236,6 +238,81 @@ export class SlotService implements ISlotService {
       throw new AppError(SLOT_MESSAGES.SPECIAL_NON_WORKING, HttpStatus.BAD_REQUEST);
     }
 
+    // 4. Validate time range
+    const startMins = this.timeToMinutes(startTime);
+    const endMins = this.timeToMinutes(endTime);
+    if (startMins >= endMins) {
+      throw new AppError('End time must be after start time', HttpStatus.BAD_REQUEST);
+    }
+
+    // 5. Future date check
+    const nowRaw = new Date();
+    const nowSaloon = new Date(nowRaw.getTime() + SALOON_TIMEZONE_OFFSET * 60000);
+    const slotStartSaloon = new Date(
+      date.getTime() + startMins * 60000 + SALOON_TIMEZONE_OFFSET * 60000,
+    );
+
+    if (slotStartSaloon < nowSaloon) {
+      throw new AppError('Cannot create special slots in the past', HttpStatus.BAD_REQUEST);
+    }
+
+    // 6. Overlap with regular bookings
+    const existingBookings = await BookingModel.find({
+      branchId: toObjectId(branchId),
+      stylistId: toObjectId(resolvedStylistId),
+      date,
+      status: { $in: [BookingStatus.CONFIRMED, BookingStatus.IN_PROGRESS, BookingStatus.SPECIAL] },
+    }).lean();
+
+    for (const b of existingBookings) {
+      const items: (Pick<IBookingItem, 'startTime' | 'endTime'> & {
+        stylistId?: mongoose.Types.ObjectId | string;
+      })[] =
+        b.status === BookingStatus.BLOCKED
+          ? [{ startTime: b.startTime, endTime: b.endTime }]
+          : (b.items as unknown as (Pick<IBookingItem, 'startTime' | 'endTime'> & {
+              stylistId?: mongoose.Types.ObjectId | string;
+            })[]) || [];
+
+      for (const item of items) {
+        // For blocked slots, the stylist is on the booking itself.
+        // For regular bookings, each item has a stylistId.
+        const itemStylistId = item.stylistId ? item.stylistId.toString() : b.stylistId?.toString();
+
+        if (itemStylistId && itemStylistId !== resolvedStylistId) continue;
+
+        const bStart = this.timeToMinutes(item.startTime);
+        const bEnd = this.timeToMinutes(item.endTime);
+
+        if (startMins < bEnd && endMins > bStart) {
+          throw new AppError(
+            `Overlap with existing booking: ${item.startTime}-${item.endTime}`,
+            HttpStatus.BAD_REQUEST,
+          );
+        }
+      }
+    }
+
+    // 7. Overlap with existing special slots
+    const existingSpecial = await SpecialSlotModel.find({
+      branchId: toObjectId(branchId),
+      stylistId: toObjectId(resolvedStylistId),
+      date,
+      status: { $ne: SpecialSlotStatus.CANCELLED },
+    }).lean();
+
+    for (const ss of existingSpecial) {
+      const ssStart = this.timeToMinutes(ss.startTime);
+      const ssEnd = this.timeToMinutes(ss.endTime);
+
+      if (startMins < ssEnd && endMins > ssStart) {
+        throw new AppError(
+          `Overlap with existing special slot: ${ss.startTime}-${ss.endTime}`,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+
     // ─── Create Special Slot (AVAILABLE) ───
     const specialSlot = await SpecialSlotModel.create({
       branchId: toObjectId(branchId),
@@ -278,7 +355,6 @@ export class SlotService implements ISlotService {
     date.setUTCHours(0, 0, 0, 0);
     const startTime = parts[4];
 
-    // [VALIDATION] Ensure the slot is at least 30 minutes in the future (Saloon Time)
     const now = new Date();
     const slotStartTimeMinutes = this.timeToMinutes(startTime);
     const saloonNow = new Date(now.getTime() + this.SALOON_OFFSET_MINS * 60000);

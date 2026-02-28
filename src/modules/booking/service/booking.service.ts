@@ -20,6 +20,8 @@ import {
 } from '../../../models/booking.model';
 import { StylistModel } from '../../../models/stylist.model';
 import { SpecialSlotModel, SpecialSlotStatus } from '../../../models/specialSlot.model';
+import { SALOON_TIMEZONE_OFFSET } from '../../../common/constants/app.constants';
+import { logInfo } from '../../../logger/log.util';
 
 @injectable()
 export class BookingService implements IBookingService {
@@ -180,15 +182,23 @@ export class BookingService implements IBookingService {
         throw new AppError(BOOKING_MESSAGES.UNAUTHORIZED_CANCEL, HttpStatus.FORBIDDEN);
       }
 
-      // 1. Validation: 12-hour lead time check
+      // 1. Validation: 12-hour lead time check (Saloon Time)
       const bookingDate = new Date(booking.date);
       const [hrs, mins] = booking.startTime.split(':').map(Number);
       bookingDate.setHours(hrs, mins, 0, 0);
 
-      const now = new Date();
+      const nowRaw = new Date();
+      const nowSaloon = new Date(nowRaw.getTime() + SALOON_TIMEZONE_OFFSET * 60000);
+      const bookingSaloon = new Date(bookingDate.getTime() + SALOON_TIMEZONE_OFFSET * 60000);
+
       const twelveHoursInMs = 12 * 60 * 60 * 1000;
 
-      if (bookingDate.getTime() - now.getTime() < twelveHoursInMs) {
+      if (bookingSaloon.getTime() - nowSaloon.getTime() < twelveHoursInMs) {
+        logInfo('Cancellation failed: Lead time requirement not met', {
+          bookingId,
+          bookingTime: bookingSaloon.toISOString(),
+          nowTime: nowSaloon.toISOString(),
+        });
         throw new AppError(BOOKING_MESSAGES.CANCEL_LEAD_TIME, HttpStatus.BAD_REQUEST);
       }
 
@@ -208,9 +218,17 @@ export class BookingService implements IBookingService {
         throw new AppError(BOOKING_MESSAGES.CANCEL_FAILED, HttpStatus.INTERNAL_SERVER_ERROR);
       }
 
+      // 3. Revert Special Slots if any
+      await SpecialSlotModel.updateMany(
+        { bookingId: toObjectId(bookingId) },
+        { status: SpecialSlotStatus.AVAILABLE, $unset: { bookingId: 1 } },
+        { session: session || undefined },
+      );
+
       if (session) {
         await session.commitTransaction();
       }
+      logInfo('Booking cancelled successfully', { bookingId, userId });
       return BookingMapper.toResponse(updatedBooking);
     } catch (error) {
       if (session && session.inTransaction()) {
@@ -401,12 +419,21 @@ export class BookingService implements IBookingService {
       throw new AppError(BOOKING_MESSAGES.RESCHEDULE_ONCE_ONLY, HttpStatus.BAD_REQUEST);
     }
 
-    // 12h rule
-    const bookingDate = new Date(booking.date);
-    const [hrs, mins] = booking.startTime.split(':').map(Number);
-    bookingDate.setHours(hrs, mins, 0, 0);
-    const now = new Date();
-    if (bookingDate.getTime() - now.getTime() < 12 * 60 * 60 * 1000) {
+    // 12h rule (Saloon Time)
+    const bookingDateRaw = new Date(booking.date);
+    const [bhrs, bmins] = booking.startTime.split(':').map(Number);
+    bookingDateRaw.setHours(bhrs, bmins, 0, 0);
+
+    const nowRaw = new Date();
+    const nowSaloon = new Date(nowRaw.getTime() + SALOON_TIMEZONE_OFFSET * 60000);
+    const bookingSaloon = new Date(bookingDateRaw.getTime() + SALOON_TIMEZONE_OFFSET * 60000);
+
+    if (bookingSaloon.getTime() - nowSaloon.getTime() < 12 * 60 * 60 * 1000) {
+      logInfo('Reschedule failed: Lead time requirement not met', {
+        bookingId,
+        bookingTime: bookingSaloon.toISOString(),
+        nowTime: nowSaloon.toISOString(),
+      });
       throw new AppError(BOOKING_MESSAGES.RESCHEDULE_LEAD_TIME, HttpStatus.BAD_REQUEST);
     }
 
@@ -453,9 +480,29 @@ export class BookingService implements IBookingService {
       if (!updatedBooking)
         throw new AppError(BOOKING_MESSAGES.RESCHEDULE_FAILED, HttpStatus.INTERNAL_SERVER_ERROR);
 
+      // Reset old Special Slots
+      await SpecialSlotModel.updateMany(
+        { bookingId: toObjectId(bookingId) },
+        { status: SpecialSlotStatus.AVAILABLE, $unset: { bookingId: 1 } },
+        { session: session || undefined },
+      );
+
+      // Handle new Special Slots if any
+      for (const item of items) {
+        if (item.slotId.startsWith('special_')) {
+          const ssId = item.slotId.split('_')[1];
+          await SpecialSlotModel.findByIdAndUpdate(
+            ssId,
+            { status: SpecialSlotStatus.BOOKED, bookingId: toObjectId(bookingId) },
+            { session: session || undefined },
+          );
+        }
+      }
+
       if (session) {
         await session.commitTransaction();
       }
+      logInfo('Booking rescheduled successfully', { bookingId, userId });
       return BookingMapper.toResponse(updatedBooking);
     } catch (error) {
       if (session && session.inTransaction()) {

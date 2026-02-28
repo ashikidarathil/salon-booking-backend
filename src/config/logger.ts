@@ -26,13 +26,20 @@ winston.addColors(colors);
 const consoleFormat = winston.format.combine(
   winston.format.colorize({ all: true }),
   winston.format.timestamp({ format: 'HH:mm:ss' }),
+  winston.format.metadata({ fillExcept: ['message', 'level', 'timestamp', 'label'] }),
   winston.format.printf((info) => {
-    return `[${info.level}] ${info.message}`;
+    let out = `[${info.timestamp}] [${info.level}] ${info.message}`;
+    const meta = info.metadata as Record<string, unknown>;
+    if (meta && Object.keys(meta).length > 0) {
+      out += ` ${JSON.stringify(meta)}`;
+    }
+    return out;
   }),
 );
 
 const fileFormat = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+  winston.format.metadata({ fillExcept: ['message', 'level', 'timestamp', 'label'] }),
   winston.format.errors({ stack: true }),
   winston.format.json(),
 );
