@@ -1,22 +1,21 @@
 import type { IBooking } from '../../../models/booking.model';
 import type { BookingResponseDto } from '../dto/booking.response.dto';
-import mongoose from 'mongoose';
 
 interface PopulatedService {
-  _id: mongoose.Types.ObjectId;
+  _id: { toString(): string };
   name: string;
 }
 
 interface PopulatedUser {
-  _id: mongoose.Types.ObjectId;
+  _id: { toString(): string };
   name: string;
 }
 
 interface PopulatedStylist {
-  _id: mongoose.Types.ObjectId;
+  _id: { toString(): string };
   profilePicture?: string;
   userId: {
-    _id: mongoose.Types.ObjectId;
+    _id: { toString(): string };
     name: string;
   };
 }
@@ -24,22 +23,23 @@ interface PopulatedStylist {
 export class BookingMapper {
   static toResponse(booking: IBooking): BookingResponseDto {
     const user = booking.userId as unknown as PopulatedUser;
+    const stylist = booking.stylistId as unknown as PopulatedStylist;
 
     return {
-      id: (booking._id as mongoose.Types.ObjectId).toString(),
-      userId: user?._id?.toString() || booking.userId?.toString() || '',
-      userName: user?.name || 'Unknown User',
-      branchId: booking.branchId?.toString() || '',
+      id: (booking._id as { toString(): string }).toString(),
+      userId: user?._id?.toString() ?? booking.userId?.toString() ?? '',
+      userName: user?.name ?? 'Unknown User',
+      branchId: booking.branchId?.toString() ?? '',
       slotId: booking.slotId?.toString(),
-      items: (booking.items || []).map((item) => {
+      items: (booking.items ?? []).map((item) => {
         const service = item.serviceId as unknown as PopulatedService;
-        const stylist = item.stylistId as unknown as PopulatedStylist;
+        const itemStylist = item.stylistId as unknown as PopulatedStylist;
 
         return {
-          serviceId: service?._id?.toString() || item.serviceId?.toString() || '',
-          serviceName: service?.name || 'Unknown Service',
-          stylistId: stylist?._id?.toString() || item.stylistId?.toString() || '',
-          stylistName: stylist?.userId?.name || 'Unknown Stylist',
+          serviceId: service?._id?.toString() ?? item.serviceId?.toString() ?? '',
+          serviceName: service?.name ?? 'Unknown Service',
+          stylistId: itemStylist?._id?.toString() ?? item.stylistId?.toString() ?? '',
+          stylistName: itemStylist?.userId?.name ?? 'Unknown Stylist',
           price: item.price,
           duration: item.duration,
           date:
@@ -48,12 +48,8 @@ export class BookingMapper {
           endTime: item.endTime,
         };
       }),
-      stylistId:
-        (booking.stylistId as unknown as PopulatedStylist)?._id?.toString() ||
-        booking.stylistId?.toString() ||
-        '',
-      stylistName:
-        (booking.stylistId as unknown as PopulatedStylist)?.userId?.name || 'Unknown Stylist',
+      stylistId: stylist?._id?.toString() ?? booking.stylistId?.toString() ?? '',
+      stylistName: stylist?.userId?.name ?? 'Unknown Stylist',
       date:
         booking.date instanceof Date
           ? booking.date.toISOString()
@@ -66,7 +62,7 @@ export class BookingMapper {
       notes: booking.notes,
       cancelledBy: booking.cancelledBy,
       cancelledReason: booking.cancelledReason,
-      cancelledAt: booking.cancelledAt ? booking.cancelledAt.toISOString() : undefined,
+      cancelledAt: booking.cancelledAt?.toISOString(),
       extensionReason: booking.extensionReason,
       rescheduleCount: booking.rescheduleCount,
       rescheduleReason: booking.rescheduleReason,

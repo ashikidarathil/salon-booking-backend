@@ -16,12 +16,6 @@ export interface CancelBookingDto {
   reason?: string;
 }
 
-export interface ExtendBookingDto {
-  additionalDuration?: number;
-  reason: string;
-  newService?: BookingItemInput;
-}
-
 export interface RescheduleBookingDto {
   items: BookingItemInput[];
   reason?: string;

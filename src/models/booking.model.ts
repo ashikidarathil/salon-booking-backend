@@ -145,7 +145,7 @@ const BookingSchema = new Schema<IBooking>(
     },
     cancelledBy: {
       type: String,
-      enum: ['USER', 'ADMIN', 'SYSTEM'],
+      enum: ['USER', 'ADMIN', 'STYLIST', 'SYSTEM'],
     },
     cancelledReason: {
       type: String,

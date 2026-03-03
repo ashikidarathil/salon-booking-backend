@@ -6,7 +6,7 @@ import { MESSAGES } from '../common/constants/messages';
 /**
  * Shift time slot interface
  */
-interface IShift {
+export interface IShift {
   startTime: string;
   endTime: string;
 }

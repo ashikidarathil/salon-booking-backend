@@ -24,6 +24,8 @@ import offDayRoutes from './modules/offDay/routes/offDay.routes';
 import holidayRoutes from './modules/holiday/routes/holiday.routes';
 import stylistServiceRoutes from './modules/stylistService/routes/stylistService.routes';
 import wishlistRoutes from './modules/wishlist/routes/wishlist.routes';
+import walletRoutes from './modules/wallet/routes/wallet.routes';
+import escrowRoutes from './modules/escrow/routes/escrow.routes';
 
 import { globalErrorHandler } from './common/errors/errorHandler';
 import { loggerMiddleware } from './common/middleware/logger.middleware';
@@ -85,6 +87,8 @@ app.use('/api', offDayRoutes);
 app.use('/api', stylistServiceRoutes);
 app.use('/api', wishlistRoutes);
 app.use('/api', holidayRoutes);
+app.use('/api/wallet', walletRoutes);
+app.use('/api/escrow', escrowRoutes);
 app.use('/api', authMiddleware, blockMiddleware);
 
 app.use(globalErrorHandler);

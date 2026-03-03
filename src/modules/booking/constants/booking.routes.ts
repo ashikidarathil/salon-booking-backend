@@ -3,7 +3,6 @@ export const BOOKING_ROUTES = {
     BASE: '/bookings',
     BY_ID: (id: string) => `/bookings/${id}`,
     CANCEL: (id: string) => `/bookings/${id}/cancel`,
-    EXTEND: (id: string) => `/bookings/${id}/extend`,
     RESCHEDULE: (id: string) => `/bookings/${id}/reschedule`,
     STATUS: (id: string) => `/bookings/${id}/status`,
     MY_BOOKINGS: '/bookings/my',

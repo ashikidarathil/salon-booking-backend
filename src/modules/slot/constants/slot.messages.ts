@@ -21,4 +21,10 @@ export const SLOT_MESSAGES = {
     'Cannot create a special slot: no schedule configured for this stylist on this day',
   SPECIAL_NON_WORKING: 'Cannot create a special slot on a non-working day',
   SPECIAL_CANCELLED: 'Special slot cancelled successfully',
+  SPECIAL_OVERLAP: 'Overlaps with another special slot',
+  PAST_DATE: 'Cannot create special slots for past dates',
+  INVALID_TIME_RANGE: 'End time must be after start time',
+  UNAUTHORIZED_ACTION: 'You are not authorized to perform this action',
+  ALREADY_BOOKED: 'Cannot block an already booked slot',
+  NOT_BLOCKED: 'Slot is not blocked/cancelled',
 };

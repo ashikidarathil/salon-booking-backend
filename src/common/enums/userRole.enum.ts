@@ -2,4 +2,5 @@ export enum UserRole {
   ADMIN = 'ADMIN',
   USER = 'USER',
   STYLIST = 'STYLIST',
+  SYSTEM = 'SYSTEM',
 }

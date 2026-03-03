@@ -1,12 +1,16 @@
 import { IBooking, BookingModel } from '../../../models/booking.model';
 import { IBookingRepository } from './IBookingRepository';
-import { injectable } from 'tsyringe';
-import { ClientSession, PopulateOptions, UpdateQuery } from 'mongoose';
-import { BaseRepository } from '../../../common/repository/baseRepository';
+import { injectable, inject } from 'tsyringe';
+import { ClientSession, UpdateQuery, PopulateOptions } from 'mongoose';
+import { PaginatedBaseRepository } from '../../../common/repository/paginatedBaseRepository';
+import { TOKENS } from '../../../common/di/tokens';
+import { QueryBuilderService } from '../../../common/service/queryBuilder/queryBuilder.service';
+import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 
 @injectable()
 export class BookingRepository
-  extends BaseRepository<IBooking, IBooking>
+  extends PaginatedBaseRepository<IBooking, IBooking>
   implements IBookingRepository
 {
   private readonly populateOptions: PopulateOptions[] = [
@@ -23,38 +27,41 @@ export class BookingRepository
     },
   ];
 
-  constructor() {
-    super(BookingModel);
+  constructor(@inject(TOKENS.QueryBuilder) queryBuilder: QueryBuilderService) {
+    super(BookingModel, queryBuilder);
   }
 
   protected toEntity(doc: IBooking): IBooking {
     return doc;
   }
 
-  override async findById(
-    id: string,
-    populate: PopulateOptions[] = this.populateOptions,
-  ): Promise<IBooking | null> {
-    return super.findById(id, populate);
+  async findPaginated(query: PaginationQueryDto): Promise<PaginatedResponse<IBooking>> {
+    return this.getPaginated(query, this.populateOptions);
   }
 
-  override async find(
+  override async findById(id: string): Promise<IBooking | null> {
+    return this._model.findById(id).populate(this.populateOptions).lean<IBooking>().exec();
+  }
+
+  async find(
     filter: Record<string, unknown>,
     populate: PopulateOptions[] = this.populateOptions,
     sort: Record<string, 1 | -1> = { createdAt: -1 },
   ): Promise<IBooking[]> {
-    return super.find(filter, populate, sort);
+    return this._model.find(filter).populate(populate).sort(sort).lean<IBooking[]>().exec();
   }
 
   override async update(
-    id: string,
+    filter: Record<string, unknown>,
     data: UpdateQuery<IBooking>,
-    session?: ClientSession,
+    populate: (string | PopulateOptions)[] = this.populateOptions,
   ): Promise<IBooking | null> {
-    await BookingModel.findByIdAndUpdate(id, data, { new: true, session });
-    return BookingModel.findById(id)
-      .populate(this.populateOptions)
-      .session(session || null)
-      .exec();
+    return super.update(filter, data, populate);
+  }
+
+  async create(data: Partial<IBooking>, session?: ClientSession): Promise<IBooking> {
+    const doc = new this._model(data);
+    const savedDoc = await doc.save({ session });
+    return this.findById(savedDoc._id.toString()) as Promise<IBooking>;
   }
 }

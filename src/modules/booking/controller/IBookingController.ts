@@ -7,6 +7,8 @@ export interface IBookingController {
   listMyBookings(req: Request, res: Response): Promise<void>;
   listAll(req: Request, res: Response): Promise<void>;
   listStylistBookings(req: Request, res: Response): Promise<void>;
-  extend(req: Request, res: Response): Promise<void>;
   reschedule(req: Request, res: Response): Promise<void>;
+  updateStatus(req: Request, res: Response): Promise<void>;
+  getTodayBookings(req: Request, res: Response): Promise<void>;
+  getStylistTodayBookings(req: Request, res: Response): Promise<void>;
 }

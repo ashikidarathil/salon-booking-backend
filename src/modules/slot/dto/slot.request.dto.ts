@@ -22,3 +22,13 @@ export interface ListSpecialSlotsQueryDto {
   date?: string;
   status?: string;
 }
+
+export interface CreateSpecialSlotDto {
+  stylistId: string;
+  branchId: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  note?: string;
+  serviceId?: string;
+}

@@ -4,6 +4,7 @@ import { UserDocument } from '../../../models/user.model';
 import type { UserStatus } from '../../../models/user.model';
 import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
+import { MongoFilter } from '../../../common/types/mongoFilter';
 
 export interface CreateUserInput {
   name: string;
@@ -25,6 +26,7 @@ export type UpdateInvitedStylistInput = {
 };
 
 export interface IUserRepository {
+  findAll(filter?: MongoFilter): Promise<UserEntity[]>;
   findById(id: string): Promise<UserEntity | null>;
   findByEmail(email: string): Promise<UserEntity | null>;
   findByPhone(phone: string): Promise<UserEntity | null>;

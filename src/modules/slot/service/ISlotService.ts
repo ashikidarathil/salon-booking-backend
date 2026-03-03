@@ -1,8 +1,6 @@
 import { SlotResponseDto } from '../dto/slot.response.dto';
 
 export interface ISlotService {
-  blockSlot(slotId: string, reason?: string): Promise<SlotResponseDto>;
-  unblockSlot(slotId: string): Promise<SlotResponseDto>;
   getDynamicAvailability(
     branchId: string,
     date: Date,
@@ -11,6 +9,7 @@ export interface ISlotService {
     includeAll?: boolean,
     serviceId?: string,
   ): Promise<SlotResponseDto[]>;
+
   validateSlot(
     branchId: string,
     stylistId: string,
@@ -18,6 +17,7 @@ export interface ISlotService {
     startTime: string,
     duration: number,
   ): Promise<boolean>;
+
   createSpecialSlot(dto: {
     stylistId: string;
     branchId: string;
@@ -28,11 +28,17 @@ export interface ISlotService {
     serviceId?: string;
     createdBy?: string;
   }): Promise<SlotResponseDto>;
+
   listSpecialSlots(filter: {
     branchId?: string;
     stylistId?: string;
     date?: string;
     status?: string;
   }): Promise<SlotResponseDto[]>;
+
   cancelSpecialSlot(id: string): Promise<SlotResponseDto>;
+
+  blockSlot(slotId: string, reason?: string): Promise<SlotResponseDto>;
+
+  unblockSlot(slotId: string): Promise<SlotResponseDto>;
 }

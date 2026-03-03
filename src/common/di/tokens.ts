@@ -46,4 +46,17 @@ export const TOKENS = {
   WishlistController: Symbol('WishlistController'),
   SlotRepository: Symbol('SlotRepository'),
   StylistManagementService: Symbol('StylistManagementService'),
+  // New tokens for SOLID refactoring
+  SlotValidator: Symbol('SlotValidator'),
+  AvailabilityService: Symbol('AvailabilityService'),
+  SpecialSlotService: Symbol('SpecialSlotService'),
+  BookingValidator: Symbol('BookingValidator'),
+  BookingQueryService: Symbol('BookingQueryService'),
+  WalletRepository: Symbol('WalletRepository'),
+  WalletTransactionRepository: Symbol('WalletTransactionRepository'),
+  WalletService: Symbol('WalletService'),
+  WalletController: Symbol('WalletController'),
+  EscrowRepository: Symbol('EscrowRepository'),
+  EscrowService: Symbol('EscrowService'),
+  EscrowController: Symbol('EscrowController'),
 } as const;

@@ -1,4 +1,4 @@
-import { Model, UpdateQuery } from 'mongoose';
+import { Model, UpdateQuery, PopulateOptions } from 'mongoose';
 import { QueryBuilderService } from '../service/queryBuilder/queryBuilder.service';
 import { PaginationQueryDto } from '../dto/pagination.query.dto';
 import { PaginatedResponse } from '../dto/pagination.response.dto';
@@ -18,33 +18,55 @@ export abstract class PaginatedBaseRepository<TSchema, TEntity> {
     return [];
   }
 
-  async findById(id: string): Promise<TEntity | null> {
-    const doc = await this._model.findById(id).lean<TSchema>().exec();
+  async findById(id: string, populate?: (string | PopulateOptions)[]): Promise<TEntity | null> {
+    let query = this._model.findById(id);
+    if (populate) query = query.populate(populate);
+    const doc = await query.lean<TSchema>().exec();
     return doc ? this.toEntity(doc) : null;
   }
 
-  async findOne(filter: MongoFilter = {}): Promise<TEntity | null> {
-    const doc = await this._model.findOne(filter).lean<TSchema>().exec();
+  async findOne(
+    filter: MongoFilter = {},
+    populate?: (string | PopulateOptions)[],
+  ): Promise<TEntity | null> {
+    let query = this._model.findOne(filter);
+    if (populate) query = query.populate(populate);
+    const doc = await query.lean<TSchema>().exec();
     return doc ? this.toEntity(doc) : null;
   }
 
-  async update(filter: MongoFilter, data: UpdateQuery<TSchema>): Promise<TEntity | null> {
-    const doc = await this._model
-      .findOneAndUpdate(filter, data, { new: true })
-      .lean<TSchema>()
-      .exec();
+  async update(
+    filter: MongoFilter,
+    data: UpdateQuery<TSchema>,
+    populate?: (string | PopulateOptions)[],
+  ): Promise<TEntity | null> {
+    let query = this._model.findOneAndUpdate(filter, data, { new: true });
+    if (populate) query = query.populate(populate);
+    const doc = await query.lean<TSchema>().exec();
 
     return doc ? this.toEntity(doc) : null;
   }
 
-  async findAll(filter: MongoFilter = {}): Promise<TEntity[]> {
-    const docs = await this._model.find(filter).lean<TSchema[]>().exec();
+  async findAll(
+    filter: MongoFilter = {},
+    populate?: (string | PopulateOptions)[],
+  ): Promise<TEntity[]> {
+    let query = this._model.find(filter);
+    if (populate) query = query.populate(populate);
+    const docs = await query.lean<TSchema[]>().exec();
     return docs.map((doc) => this.toEntity(doc));
   }
 
-  async getPaginated(query: PaginationQueryDto): Promise<PaginatedResponse<TEntity>> {
-    return this._queryBuilder.paginate(this._model, query, this.getSearchableFields(), (doc) =>
-      this.toEntity(doc),
+  async getPaginated(
+    query: PaginationQueryDto,
+    populate?: (string | PopulateOptions)[],
+  ): Promise<PaginatedResponse<TEntity>> {
+    return this._queryBuilder.paginate(
+      this._model,
+      query,
+      this.getSearchableFields(),
+      (doc) => this.toEntity(doc),
+      populate,
     );
   }
 

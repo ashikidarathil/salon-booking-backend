@@ -35,4 +35,9 @@ export interface ISlotRepository {
   findSpecialSlots(branchId: string, stylistIds: string[], date: Date): Promise<ISpecialSlot[]>;
   findSpecialSlotById(id: string): Promise<ISpecialSlot | null>;
   updateSpecialSlot(id: string, data: Partial<ISpecialSlot>): Promise<ISpecialSlot | null>;
+  findStylistById(id: string): Promise<IStylist | null>;
+  findStylistByUserId(userId: string): Promise<IStylist | null>;
+  createSpecialSlot(data: Partial<ISpecialSlot>): Promise<ISpecialSlot>;
+  findSpecialSlotsWithStylist(query: Record<string, unknown>): Promise<ISpecialSlot[]>;
+  findActiveStylistIds(branchId: string): Promise<string[]>;
 }

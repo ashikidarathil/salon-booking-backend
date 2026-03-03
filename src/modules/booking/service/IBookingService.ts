@@ -1,14 +1,8 @@
 import { BookingResponseDto } from '../dto/booking.response.dto';
 import { BookingStatus } from '../../../models/booking.model';
-import { ExtendBookingDto } from '../dto/booking.request.dto';
-
-export interface BookingItemInput {
-  serviceId: string;
-  stylistId: string;
-  date: string;
-  startTime: string;
-  slotId: string;
-}
+import { BookingItemInput } from '../dto/booking.request.dto';
+import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 
 export interface IBookingService {
   createBooking(
@@ -23,23 +17,27 @@ export interface IBookingService {
     reason?: string,
     role?: string,
   ): Promise<BookingResponseDto>;
-  getBookingDetails(bookingId: string): Promise<BookingResponseDto>;
-  listUserBookings(userId: string): Promise<BookingResponseDto[]>;
-  listAllBookings(branchId?: string, date?: string): Promise<BookingResponseDto[]>;
-  listStylistBookings(userId: string, date?: string): Promise<BookingResponseDto[]>;
-  getTodayBookings(branchId?: string): Promise<BookingResponseDto[]>;
-  getStylistTodayBookings(userId: string): Promise<BookingResponseDto[]>;
-  extendBooking(bookingId: string, data: ExtendBookingDto): Promise<BookingResponseDto>;
   rescheduleBooking(
     bookingId: string,
     userId: string,
     items: BookingItemInput[],
     reason?: string,
+    role?: string,
   ): Promise<BookingResponseDto>;
+
   updateBookingStatus(
     bookingId: string,
-    actorId: string,
+    userId: string,
     status: BookingStatus,
     role: string,
   ): Promise<BookingResponseDto>;
+  getBookingDetails(bookingId: string): Promise<BookingResponseDto>;
+  listUserBookings(userId: string): Promise<BookingResponseDto[]>;
+  listAllBookings(branchId?: string, date?: string): Promise<BookingResponseDto[]>;
+  listStylistBookings(
+    userId: string,
+    query: PaginationQueryDto,
+  ): Promise<PaginatedResponse<BookingResponseDto>>;
+  getTodayBookings(branchId?: string): Promise<BookingResponseDto[]>;
+  getStylistTodayBookings(userId: string): Promise<BookingResponseDto[]>;
 }

@@ -14,3 +14,5 @@ import './schedule/index';
 import './offDay/index';
 import './stylistService/index';
 import './wishlist/index';
+import './wallet/index';
+import './escrow/index';

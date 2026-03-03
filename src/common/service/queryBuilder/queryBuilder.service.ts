@@ -1,5 +1,5 @@
 import { injectable } from 'tsyringe';
-import { Model } from 'mongoose';
+import { PopulateOptions, Model } from 'mongoose';
 import { PaginationQueryDto, PaginationQueryParser } from '../../dto/pagination.query.dto';
 import { PaginatedResponse, PaginationResponseBuilder } from '../../dto/pagination.response.dto';
 import { MongoFilter } from '../../types/mongoFilter';
@@ -11,6 +11,7 @@ export class QueryBuilderService {
     query: PaginationQueryDto,
     searchableFields: readonly (keyof TSchema & string)[],
     mapper: (doc: TSchema) => TEntity,
+    populate?: (string | PopulateOptions)[],
   ): Promise<PaginatedResponse<TEntity>> {
     const { params, search, sort, filters } = PaginationQueryParser.parse(query);
 
@@ -23,14 +24,14 @@ export class QueryBuilderService {
       ...filters,
     };
 
+    let mongoQuery = model.find(finalQuery).sort(sort).skip(params.skip).limit(params.limit);
+
+    if (populate) {
+      mongoQuery = mongoQuery.populate(populate);
+    }
+
     const [data, totalItems] = await Promise.all([
-      model
-        .find(finalQuery)
-        .sort(sort)
-        .skip(params.skip)
-        .limit(params.limit)
-        .lean<TSchema[]>()
-        .exec(),
+      mongoQuery.lean<TSchema[]>().exec(),
       model.countDocuments(finalQuery),
     ]);
 

@@ -8,7 +8,8 @@ import { BOOKING_ROUTES } from '../constants/booking.routes';
 const router = Router();
 const controller = resolveBookingController();
 
-// USER ROUTES
+// ─── User Routes ───────────────────────────────────────────────────────────
+
 router.post(
   BOOKING_ROUTES.USER.BASE,
   authMiddleware,
@@ -51,7 +52,8 @@ router.patch(
   controller.updateStatus.bind(controller),
 );
 
-// STYLIST ROUTES
+// ─── Stylist Routes ────────────────────────────────────────────────────────
+
 router.get(
   BOOKING_ROUTES.STYLIST.LIST,
   authMiddleware,
@@ -66,7 +68,8 @@ router.get(
   controller.getStylistTodayBookings.bind(controller),
 );
 
-// ADMIN ROUTES
+// ─── Admin Routes ──────────────────────────────────────────────────────────
+
 router.get(
   BOOKING_ROUTES.ADMIN.LIST,
   authMiddleware,

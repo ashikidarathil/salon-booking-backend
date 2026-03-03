@@ -137,4 +137,32 @@ export class SlotRepository implements ISlotRepository {
   async updateSpecialSlot(id: string, data: Partial<ISpecialSlot>): Promise<ISpecialSlot | null> {
     return await SpecialSlotModel.findByIdAndUpdate(id, data, { new: true }).lean();
   }
+  async findStylistById(id: string): Promise<IStylist | null> {
+    return await StylistModel.findById(id).populate('userId', 'name email').lean();
+  }
+
+  async findStylistByUserId(userId: string): Promise<IStylist | null> {
+    return await StylistModel.findOne({ userId: toObjectId(userId) })
+      .populate('userId', 'name email')
+      .lean();
+  }
+
+  async createSpecialSlot(data: Partial<ISpecialSlot>): Promise<ISpecialSlot> {
+    const slot = await SpecialSlotModel.create(data);
+    return slot.toObject();
+  }
+
+  async findSpecialSlotsWithStylist(query: Record<string, unknown>): Promise<ISpecialSlot[]> {
+    return (await SpecialSlotModel.find(query)
+      .populate('stylistId')
+      .sort({ date: 1, startTime: 1 })
+      .lean()) as unknown as ISpecialSlot[];
+  }
+
+  async findActiveStylistIds(branchId: string): Promise<string[]> {
+    const activeStylists = await StylistBranchModel.find({ branchId, isActive: true })
+      .select('stylistId')
+      .lean();
+    return activeStylists.map((s) => s.stylistId.toString());
+  }
 }

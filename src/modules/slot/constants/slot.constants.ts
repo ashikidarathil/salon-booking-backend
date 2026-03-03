@@ -12,3 +12,9 @@ export enum SlotStatus {
 
 export const BOOKING_WINDOW_DAYS = 14;
 export const SLOT_GRID_SIZE = 15;
+
+export const SLOT_PREFIXES = {
+  DYNAMIC: 'dynamic_',
+  SPECIAL: 'special_',
+  HOLIDAY: 'holiday_',
+};
