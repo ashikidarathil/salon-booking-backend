@@ -2,7 +2,7 @@ import { Schema, model, Document } from 'mongoose';
 import { UserRole } from '../common/enums/userRole.enum';
 import { AuthProvider } from '../common/enums/authProvider.enum';
 
-export type UserStatus = 'APPLIED' | 'PENDING' | 'ACTIVE' | 'REJECTED' | 'EXPIRED';
+export type UserStatus = 'APPLIED' | 'PENDING' | 'ACCEPTED' | 'ACTIVE' | 'REJECTED' | 'EXPIRED';
 
 export interface UserDocument extends Document {
   name: string;
