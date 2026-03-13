@@ -59,4 +59,32 @@ export const TOKENS = {
   EscrowRepository: Symbol('EscrowRepository'),
   EscrowService: Symbol('EscrowService'),
   EscrowController: Symbol('EscrowController'),
+  StylistWalletRepository: Symbol('StylistWalletRepository'),
+  StylistWalletService: Symbol('StylistWalletService'),
+  StylistWalletController: Symbol('StylistWalletController'),
+
+  // Coupon
+  CouponRepository: Symbol('CouponRepository'),
+  CouponService: Symbol('CouponService'),
+  CouponController: Symbol('CouponController'),
+
+  // Payment
+  PaymentRepository: Symbol('PaymentRepository'),
+  RazorpayService: Symbol('RazorpayService'),
+  PaymentService: Symbol('PaymentService'),
+  PaymentController: Symbol('PaymentController'),
+
+  // Chat
+  ChatRoomRepository: Symbol('ChatRoomRepository'),
+  MessageRepository: Symbol('MessageRepository'),
+  ChatService: Symbol('ChatService'),
+  ChatController: Symbol('ChatController'),
+
+  // Notification
+  NotificationRepository: Symbol('NotificationRepository'),
+  NotificationService: Symbol('NotificationService'),
+  NotificationController: Symbol('NotificationController'),
+  // Admin Dashboard
+  AdminDashboardService: Symbol('AdminDashboardService'),
+  AdminDashboardController: Symbol('AdminDashboardController'),
 } as const;

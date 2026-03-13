@@ -5,6 +5,7 @@ import {
 } from '../../../models/walletTransaction.model';
 import { IWalletTransactionRepository } from './IWalletTransactionRepository';
 import { injectable } from 'tsyringe';
+import { ObjectId } from '../../../common/utils/mongoose.util';
 
 @injectable()
 export class WalletTransactionRepository

@@ -7,13 +7,18 @@ import {
   IWalletTransaction,
   TransactionType,
   TransactionStatus,
+  TransactionReferenceType,
 } from '../../../models/walletTransaction.model';
 import { AppError } from '../../../common/errors/appError';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
-import { Types, ClientSession } from 'mongoose';
+import { ClientSession } from 'mongoose';
 import { WALLET_MESSAGES } from '../constants/wallet.messages';
-import { toObjectId } from '../../../common/utils/mongoose.util';
+import { toObjectId, ObjectId } from '../../../common/utils/mongoose.util';
 import { TOKENS } from '../../../common/di/tokens';
+import { IRazorpayService, RazorpayOrder } from '../../payment/service/IRazorpayService';
+import { IPaymentRepository } from '../../payment/repository/IPaymentRepository';
+import { PaymentStatus } from '../../../models/payment.model';
+import { env } from '../../../config/env';
 
 @injectable()
 export class WalletService implements IWalletService {
@@ -22,6 +27,10 @@ export class WalletService implements IWalletService {
     private walletRepository: IWalletRepository,
     @inject(TOKENS.WalletTransactionRepository)
     private transactionRepository: IWalletTransactionRepository,
+    @inject(TOKENS.RazorpayService)
+    private razorpayService: IRazorpayService,
+    @inject(TOKENS.PaymentRepository)
+    private paymentRepository: IPaymentRepository,
   ) {}
 
   async getWalletByUserId(userId: string): Promise<IWallet> {
@@ -48,7 +57,7 @@ export class WalletService implements IWalletService {
     amount: number,
     description: string,
     referenceId?: string,
-    referenceType?: 'BOOKING' | 'ESCROW' | 'DEPOSIT' | 'WITHDRAWAL',
+    referenceType?: TransactionReferenceType,
     session?: ClientSession,
   ): Promise<IWallet> {
     if (amount <= 0) {
@@ -65,7 +74,7 @@ export class WalletService implements IWalletService {
     // Record transaction
     await this.transactionRepository.create(
       {
-        walletId: wallet._id as Types.ObjectId,
+        walletId: wallet._id as ObjectId,
         amount,
         type: TransactionType.CREDIT,
         status: TransactionStatus.COMPLETED,
@@ -84,7 +93,7 @@ export class WalletService implements IWalletService {
     amount: number,
     description: string,
     referenceId?: string,
-    referenceType?: 'BOOKING' | 'ESCROW' | 'DEPOSIT' | 'WITHDRAWAL',
+    referenceType?: TransactionReferenceType,
     session?: ClientSession,
   ): Promise<IWallet> {
     if (amount <= 0) {
@@ -104,7 +113,7 @@ export class WalletService implements IWalletService {
     // Record transaction
     await this.transactionRepository.create(
       {
-        walletId: wallet._id as Types.ObjectId,
+        walletId: wallet._id as ObjectId,
         amount,
         type: TransactionType.DEBIT,
         status: TransactionStatus.COMPLETED,
@@ -121,5 +130,68 @@ export class WalletService implements IWalletService {
   async getTransactionHistory(userId: string): Promise<IWalletTransaction[]> {
     const wallet = await this.getWalletByUserId(userId);
     return this.transactionRepository.findByWalletId(wallet._id.toString());
+  }
+
+  async createTopupOrder(
+    userId: string,
+    amount: number,
+  ): Promise<{ orderId: string; amount: number; currency: string; keyId: string }> {
+    if (amount < 100) {
+      throw new AppError(WALLET_MESSAGES.MIN_TOPUP_ERROR, HttpStatus.BAD_REQUEST);
+    }
+
+    // Ensure wallet exists
+    await this.ensureWalletExists(userId);
+
+    const shortUserId = userId.slice(-8);
+    const shortTs = Date.now().toString().slice(-8);
+    const order = (await this.razorpayService.createOrder(
+      amount,
+      'INR',
+      `tp_${shortUserId}_${shortTs}`,
+    )) as RazorpayOrder;
+
+    await this.paymentRepository.create({
+      orderId: order.id,
+      amount,
+      currency: 'INR',
+      status: PaymentStatus.PENDING,
+      userId: toObjectId(userId),
+    });
+
+    return { orderId: order.id, amount, currency: 'INR', keyId: env.RAZORPAY_KEY_ID };
+  }
+
+  async verifyTopupAndCredit(
+    userId: string,
+    orderId: string,
+    paymentId: string,
+    signature: string,
+  ): Promise<IWallet> {
+    const isVerified = this.razorpayService.verifySignature(orderId, paymentId, signature);
+    if (!isVerified) {
+      throw new AppError(WALLET_MESSAGES.INVALID_SIGNATURE, HttpStatus.BAD_REQUEST);
+    }
+
+    const payment = await this.paymentRepository.findByOrderId(orderId);
+    if (!payment) {
+      throw new AppError(WALLET_MESSAGES.PAYMENT_NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+
+    // Mark payment as completed
+    await this.paymentRepository.update(payment._id.toString(), {
+      status: PaymentStatus.COMPLETED,
+      paymentId,
+      signature,
+    });
+
+    // Credit the wallet
+    return this.creditBalance(
+      userId,
+      payment.amount,
+      'Wallet top-up via Razorpay',
+      payment._id.toString(),
+      'DEPOSIT',
+    );
   }
 }

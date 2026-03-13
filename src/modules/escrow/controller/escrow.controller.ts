@@ -4,41 +4,60 @@ import { IEscrowController } from './IEscrowController';
 import { IEscrowService } from '../service/IEscrowService';
 import { TOKENS } from '../../../common/di/tokens';
 import { ApiResponse } from '../../../common/response/apiResponse';
-import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { ESCROW_MESSAGES } from '../constants/escrow.constants';
-import { IEscrowRepository } from '../repository/IEscrowRepository';
-import { AppError } from '../../../common/errors/appError';
+import { AuthPayload } from '../../../common/types/authPayload';
+import { EscrowPaginationQueryDto } from '../dto/escrow.request.dto';
 
 @injectable()
 export class EscrowController implements IEscrowController {
   constructor(
     @inject(TOKENS.EscrowService)
     private readonly escrowService: IEscrowService,
-    @inject(TOKENS.EscrowRepository)
-    private readonly escrowRepository: IEscrowRepository,
   ) {}
 
   getAllEscrows = async (req: Request, res: Response): Promise<void> => {
-    // For admin panel: using repository directly for simple listing or implement a query service later
-    // For now, let's use the repository's find method
-    const escrows = await this.escrowRepository.find(
-      {},
-      [{ path: 'bookingId' }, { path: 'userId' }],
-      { createdAt: -1 },
-    );
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, 'Escrow records fetched successfully', escrows));
+    const query = req.query as unknown as EscrowPaginationQueryDto;
+    const escrows = await this.escrowService.getAllEscrows(query);
+    res.json(ApiResponse.success(ESCROW_MESSAGES.FETCHED_ALL, escrows));
   };
 
   getEscrowByBooking = async (req: Request, res: Response): Promise<void> => {
     const { bookingId } = req.params;
     const escrow = await this.escrowService.getEscrowByBookingId(bookingId);
-    if (!escrow) {
-      throw new AppError(ESCROW_MESSAGES.ERROR.NOT_FOUND, HttpStatus.NOT_FOUND);
+    res.json(ApiResponse.success(ESCROW_MESSAGES.FETCHED_ONE, escrow));
+  };
+
+  getStylistEscrows = async (req: Request & { auth?: AuthPayload }, res: Response): Promise<void> => {
+    const userId = req.auth?.userId;
+    if (!userId) {
+      res.status(401).json(ApiResponse.error('Unauthorized'));
+      return;
     }
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, 'Escrow record fetched successfully', escrow));
+    const query = req.query as unknown as EscrowPaginationQueryDto;
+    const escrows = await this.escrowService.getStylistEscrows(userId, query);
+    res.json(ApiResponse.success(ESCROW_MESSAGES.FETCHED_ALL, escrows));
+  };
+
+  getHeldBalance = async (req: Request & { auth?: AuthPayload }, res: Response): Promise<void> => {
+    const userId = req.auth?.userId;
+    if (!userId) {
+      res.status(401).json(ApiResponse.error('Unauthorized'));
+      return;
+    }
+    const balance = await this.escrowService.getHeldBalance(userId);
+    res.json(ApiResponse.success('Held balance fetched successfully', balance));
+  };
+
+  getAdminStylistEscrows = async (req: Request, res: Response): Promise<void> => {
+    const { stylistId } = req.params;
+    const query = req.query as unknown as EscrowPaginationQueryDto;
+    const escrows = await this.escrowService.getAdminStylistEscrows(stylistId, query);
+    res.json(ApiResponse.success(ESCROW_MESSAGES.FETCHED_ALL, escrows));
+  };
+
+  getAdminStylistHeldBalance = async (req: Request, res: Response): Promise<void> => {
+    const { stylistId } = req.params;
+    const balance = await this.escrowService.getHeldBalance(stylistId);
+    res.json(ApiResponse.success('Held balance fetched successfully', balance));
   };
 }

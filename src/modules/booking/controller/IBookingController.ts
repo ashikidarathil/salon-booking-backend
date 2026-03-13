@@ -11,4 +11,7 @@ export interface IBookingController {
   updateStatus(req: Request, res: Response): Promise<void>;
   getTodayBookings(req: Request, res: Response): Promise<void>;
   getStylistTodayBookings(req: Request, res: Response): Promise<void>;
+  getStylistStats(req: Request, res: Response): Promise<void>;
+  applyCoupon(req: Request, res: Response): Promise<void>;
+  removeCoupon(req: Request, res: Response): Promise<void>;
 }

@@ -7,4 +7,8 @@ export const WALLET_MESSAGES = {
   TRANSACTIONS_FETCH_SUCCESS: 'Wallet transactions fetched successfully',
   CREDIT_SUCCESS: 'Wallet credited successfully',
   DEBIT_SUCCESS: 'Wallet debited successfully',
+  TOPUP_ORDER_SUCCESS: 'Order created successfully',
+  MIN_TOPUP_ERROR: 'Minimum top-up amount is ₹100',
+  INVALID_SIGNATURE: 'Invalid payment signature',
+  PAYMENT_NOT_FOUND: 'Payment record not found',
 };

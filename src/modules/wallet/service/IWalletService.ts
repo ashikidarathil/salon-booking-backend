@@ -1,5 +1,5 @@
 import { IWallet } from '../../../models/wallet.model';
-import { IWalletTransaction } from '../../../models/walletTransaction.model';
+import { IWalletTransaction, TransactionReferenceType } from '../../../models/walletTransaction.model';
 import { ClientSession } from 'mongoose';
 
 export interface IWalletService {
@@ -9,7 +9,7 @@ export interface IWalletService {
     amount: number,
     description: string,
     referenceId?: string,
-    referenceType?: 'BOOKING' | 'ESCROW' | 'DEPOSIT' | 'WITHDRAWAL',
+    referenceType?: TransactionReferenceType,
     session?: ClientSession,
   ): Promise<IWallet>;
   debitBalance(
@@ -17,9 +17,19 @@ export interface IWalletService {
     amount: number,
     description: string,
     referenceId?: string,
-    referenceType?: 'BOOKING' | 'ESCROW' | 'DEPOSIT' | 'WITHDRAWAL',
+    referenceType?: TransactionReferenceType,
     session?: ClientSession,
   ): Promise<IWallet>;
   getTransactionHistory(userId: string): Promise<IWalletTransaction[]>;
   ensureWalletExists(userId: string, session?: ClientSession): Promise<IWallet>;
+  createTopupOrder(
+    userId: string,
+    amount: number,
+  ): Promise<{ orderId: string; amount: number; currency: string; keyId: string }>;
+  verifyTopupAndCredit(
+    userId: string,
+    orderId: string,
+    paymentId: string,
+    signature: string,
+  ): Promise<IWallet>;
 }

@@ -66,7 +66,7 @@ export class SlotRepository implements ISlotRepository {
       status: {
         $in: [
           BookingStatus.CONFIRMED,
-          BookingStatus.PENDING,
+          BookingStatus.PENDING_PAYMENT,
           BookingStatus.BLOCKED,
           BookingStatus.SPECIAL,
         ],

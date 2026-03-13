@@ -38,4 +38,6 @@ export const env = {
   AWS_SECRET_ACCESS_KEY: requireEnv('AWS_SECRET_ACCESS_KEY'),
   AWS_REGION: requireEnv('AWS_REGION'),
   AWS_S3_BUCKET_NAME: requireEnv('AWS_S3_BUCKET_NAME'),
+  RAZORPAY_KEY_ID: requireEnv('RAZORPAY_KEY_ID'),
+  RAZORPAY_KEY_SECRET: requireEnv('RAZORPAY_KEY_SECRET'),
 };

@@ -1,6 +1,7 @@
 import { IWallet } from '../../../models/wallet.model';
 import { IWalletTransaction } from '../../../models/walletTransaction.model';
-import { WalletResponseDto, WalletTransactionResponseDto } from '../dto/wallet.dto';
+import { WalletResponseDto, WalletTransactionResponseDto } from '../dto/wallet.response.dto';
+import { ObjectId } from '../../../common/utils/mongoose.util';
 
 export class WalletMapper {
   static toResponseDto(wallet: IWallet): WalletResponseDto {
@@ -13,9 +14,9 @@ export class WalletMapper {
 
   static toTransactionResponseDto(transaction: IWalletTransaction): WalletTransactionResponseDto {
     return {
-      id: transaction._id.toString(),
+      id: (transaction._id as ObjectId).toString(),
       amount: transaction.amount,
-      type: transaction.type,
+      type: transaction.type as 'CREDIT' | 'DEBIT',
       status: transaction.status,
       description: transaction.description,
       referenceId: transaction.referenceId?.toString(),

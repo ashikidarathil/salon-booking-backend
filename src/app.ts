@@ -26,6 +26,11 @@ import stylistServiceRoutes from './modules/stylistService/routes/stylistService
 import wishlistRoutes from './modules/wishlist/routes/wishlist.routes';
 import walletRoutes from './modules/wallet/routes/wallet.routes';
 import escrowRoutes from './modules/escrow/routes/escrow.routes';
+import stylistWalletRoutes from './modules/stylistWallet/routes/stylistWallet.routes';
+import couponRoutes from './modules/coupon/routes/coupon.routes';
+import paymentRoutes from './modules/payment/routes/payment.routes';
+import chatRoutes from './modules/chat/routes/chat.routes';
+import notificationRoutes from './modules/notification/routes/notification.routes';
 
 import { globalErrorHandler } from './common/errors/errorHandler';
 import { loggerMiddleware } from './common/middleware/logger.middleware';
@@ -89,6 +94,11 @@ app.use('/api', wishlistRoutes);
 app.use('/api', holidayRoutes);
 app.use('/api/wallet', walletRoutes);
 app.use('/api/escrow', escrowRoutes);
+app.use('/api/stylist-wallet', stylistWalletRoutes);
+app.use('/api/coupons', couponRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api', chatRoutes);
+app.use('/api/notifications', notificationRoutes);
 app.use('/api', authMiddleware, blockMiddleware);
 
 app.use(globalErrorHandler);

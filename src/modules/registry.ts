@@ -16,3 +16,8 @@ import './stylistService/index';
 import './wishlist/index';
 import './wallet/index';
 import './escrow/index';
+import './stylistWallet/index';
+import './coupon/index';
+import './payment';
+import './chat/index';
+import './notification/index';

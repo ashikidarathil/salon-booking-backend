@@ -1,4 +1,4 @@
-import { SlotStatus } from '../constants/slot.constants';
+import { SlotStatus, SLOT_LABELS } from '../constants/slot.constants';
 import type { SlotResponseDto } from '../dto/slot.response.dto';
 import { SpecialSlotStatus } from '../../../models/specialSlot.model';
 import { timeToMinutes } from '../service/slot.helpers';
@@ -48,7 +48,7 @@ export class SlotMapper {
       id: slot._id.toString(),
       branchId: slot.branchId.toString(),
       stylistId: (stylist?._id || slot.stylistId || '').toString(),
-      stylistName: stylist?.userId?.name || 'Unknown',
+      stylistName: stylist?.userId?.name || SLOT_LABELS.UNKNOWN,
       stylistEmail: stylist?.userId?.email,
       date: date.toISOString(),
       startTime: slot.startTime,

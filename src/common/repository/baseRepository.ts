@@ -65,6 +65,15 @@ export abstract class BaseRepository<TDocument extends Document, TEntity> {
     return !!result;
   }
 
+  async softDelete(id: string, session?: ClientSession): Promise<boolean> {
+    const doc = await this._model.findByIdAndUpdate(
+      id,
+      { isDeleted: true } as UpdateQuery<TDocument>,
+      { new: true, session },
+    );
+    return !!doc;
+  }
+
   async save(doc: TDocument): Promise<TEntity> {
     const savedDoc = await doc.save();
     return this.toEntity(savedDoc);

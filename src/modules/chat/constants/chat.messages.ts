@@ -1,0 +1,16 @@
+export const CHAT_MESSAGES = {
+  ROOM_CREATED: 'Chat room created successfully',
+  MESSAGE_SENT: 'Message sent successfully',
+  FETCHED: 'Chat history fetched successfully',
+  ROOM_NOT_FOUND: 'Chat room not found',
+  UNAUTHORIZED: 'You are not authorized to access this chat',
+  UPLOAD_FAILED: 'Media upload failed',
+  INVALID_MESSAGE: 'Invalid message content',
+  BOOKING_NOT_FOUND: 'Booking not found',
+  ROOM_CLOSED: 'This chat has been closed.',
+  ROOM_EXPIRED: 'This chat has been closed (24h after booking completion/cancellation).',
+  UNSUPPORTED_MEDIA: 'Unsupported media type',
+  BOOKING_REQUIRED: 'Booking ID is required',
+  ROOM_REQUIRED: 'Room ID is required',
+  MESSAGES_READ: 'Messages marked as read',
+};

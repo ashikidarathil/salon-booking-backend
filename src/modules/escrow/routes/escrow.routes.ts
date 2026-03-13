@@ -19,10 +19,39 @@ router.get(
 );
 
 router.get(
+  ESCROW_ROUTES.ADMIN_STYLIST_LIST,
+  authMiddleware,
+  roleMiddleware([UserRole.ADMIN]),
+  escrowController.getAdminStylistEscrows,
+);
+
+router.get(
+  ESCROW_ROUTES.ADMIN_STYLIST_BALANCE,
+  authMiddleware,
+  roleMiddleware([UserRole.ADMIN]),
+  escrowController.getAdminStylistHeldBalance,
+);
+
+router.get(
   ESCROW_ROUTES.ADMIN_BY_BOOKING,
   authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   escrowController.getEscrowByBooking,
+);
+
+// Stylist routes
+router.get(
+  ESCROW_ROUTES.STYLIST_LIST,
+  authMiddleware,
+  roleMiddleware([UserRole.STYLIST]),
+  escrowController.getStylistEscrows,
+);
+
+router.get(
+  ESCROW_ROUTES.STYLIST_BALANCE,
+  authMiddleware,
+  roleMiddleware([UserRole.STYLIST]),
+  escrowController.getHeldBalance,
 );
 
 export default router;

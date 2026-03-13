@@ -52,6 +52,20 @@ router.patch(
   controller.updateStatus.bind(controller),
 );
 
+router.post(
+  BOOKING_ROUTES.USER.APPLY_COUPON(':id'),
+  authMiddleware,
+  roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
+  controller.applyCoupon.bind(controller),
+);
+
+router.post(
+  BOOKING_ROUTES.USER.REMOVE_COUPON(':id'),
+  authMiddleware,
+  roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
+  controller.removeCoupon.bind(controller),
+);
+
 // ─── Stylist Routes ────────────────────────────────────────────────────────
 
 router.get(
@@ -66,6 +80,13 @@ router.get(
   authMiddleware,
   roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
   controller.getStylistTodayBookings.bind(controller),
+);
+
+router.get(
+  BOOKING_ROUTES.STYLIST.STATS,
+  authMiddleware,
+  roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
+  controller.getStylistStats.bind(controller),
 );
 
 // ─── Admin Routes ──────────────────────────────────────────────────────────

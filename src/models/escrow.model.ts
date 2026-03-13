@@ -3,36 +3,30 @@ import mongoose, { Schema, Document } from 'mongoose';
 export enum EscrowStatus {
   HELD = 'HELD',
   RELEASED = 'RELEASED',
-  REFUNDED = 'REFUNDED',
-  CANCELLED = 'CANCELLED',
 }
 
 export interface IEscrow extends Document {
   bookingId: mongoose.Types.ObjectId;
-  userId: mongoose.Types.ObjectId;
+  stylistId: mongoose.Types.ObjectId;
   amount: number;
   status: EscrowStatus;
-  heldAt: Date;
-  releasedAt?: Date;
-  refundedAt?: Date;
-  metadata?: Record<string, unknown>;
+  releaseMonth: string; // Format: YYYY-MM eg. "2026-03"
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface IEscrowDocument extends IEscrow, Document {}
-
-const EscrowSchema = new Schema<IEscrowDocument>(
+const EscrowSchema = new Schema<IEscrow>(
   {
     bookingId: {
       type: Schema.Types.ObjectId,
       ref: 'Booking',
       required: true,
+      unique: true,
       index: true,
     },
-    userId: {
+    stylistId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Stylist',
       required: true,
       index: true,
     },
@@ -47,18 +41,10 @@ const EscrowSchema = new Schema<IEscrowDocument>(
       default: EscrowStatus.HELD,
       index: true,
     },
-    heldAt: {
-      type: Date,
-      default: Date.now,
-    },
-    releasedAt: {
-      type: Date,
-    },
-    refundedAt: {
-      type: Date,
-    },
-    metadata: {
-      type: Schema.Types.Mixed,
+    releaseMonth: {
+      type: String,
+      required: true,
+      index: true,
     },
   },
   {

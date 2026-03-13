@@ -1,13 +1,11 @@
 import { BookingResponseDto } from '../dto/booking.response.dto';
 import { BookingStatus } from '../../../models/booking.model';
-import { BookingItemInput } from '../dto/booking.request.dto';
-import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+import { BookingItemInput, StylistBookingPaginationQueryDto } from '../dto/booking.request.dto';
 import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 
 export interface IBookingService {
   createBooking(
     userId: string,
-    slotId: string | undefined,
     items: BookingItemInput[],
     notes?: string,
   ): Promise<BookingResponseDto>;
@@ -36,8 +34,11 @@ export interface IBookingService {
   listAllBookings(branchId?: string, date?: string): Promise<BookingResponseDto[]>;
   listStylistBookings(
     userId: string,
-    query: PaginationQueryDto,
+    query: StylistBookingPaginationQueryDto,
   ): Promise<PaginatedResponse<BookingResponseDto>>;
   getTodayBookings(branchId?: string): Promise<BookingResponseDto[]>;
   getStylistTodayBookings(userId: string): Promise<BookingResponseDto[]>;
+  getStylistStats(userId: string, period?: string, date?: string): Promise<Record<string, unknown>>;
+  applyCoupon(bookingId: string, couponCode: string, userId: string): Promise<BookingResponseDto>;
+  removeCoupon(bookingId: string, userId: string): Promise<BookingResponseDto>;
 }

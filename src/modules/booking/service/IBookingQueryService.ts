@@ -1,5 +1,5 @@
 import { BookingResponseDto } from '../dto/booking.response.dto';
-import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+import { StylistBookingPaginationQueryDto } from '../dto/booking.request.dto';
 import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 
 export interface IBookingQueryService {
@@ -8,8 +8,10 @@ export interface IBookingQueryService {
   listAllBookings(branchId?: string, date?: string): Promise<BookingResponseDto[]>;
   listStylistBookings(
     userId: string,
-    query: PaginationQueryDto,
+    query: StylistBookingPaginationQueryDto,
   ): Promise<PaginatedResponse<BookingResponseDto>>;
   getTodayBookings(branchId?: string): Promise<BookingResponseDto[]>;
   getStylistTodayBookings(userId: string): Promise<BookingResponseDto[]>;
+  getStylistStats(userId: string, period?: string, date?: string): Promise<Record<string, unknown>>;
+  checkExpiredBookings(): Promise<number>;
 }

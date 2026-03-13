@@ -16,4 +16,12 @@ router.get(
 
 router.post(WALLET_ROUTES.CREDIT, authMiddleware, controller.creditMyWallet.bind(controller));
 
+router.post(
+  WALLET_ROUTES.TOPUP_ORDER,
+  authMiddleware,
+  controller.createTopupOrder.bind(controller),
+);
+
+router.post(WALLET_ROUTES.TOPUP_VERIFY, authMiddleware, controller.verifyTopup.bind(controller));
+
 export default router;

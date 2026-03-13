@@ -9,11 +9,12 @@ import { AppError } from '../../../common/errors/appError';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { BOOKING_MESSAGES } from '../constants/booking.messages';
 import { resolveStylistId } from './booking.helpers';
-import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+import { StylistBookingPaginationQueryDto } from '../dto/booking.request.dto';
 import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 import { IUserRepository } from '../../auth/repository/IUserRepository';
-import { toObjectId } from '../../../common/utils/mongoose.util';
+import { toObjectId, getIdString } from '../../../common/utils/mongoose.util';
 import { UserEntity } from '../../../common/types/userEntity';
+import { BookingStatus, PaymentStatus, IBooking } from '../../../models/booking.model';
 
 @injectable()
 export class BookingQueryService implements IBookingQueryService {
@@ -35,21 +36,21 @@ export class BookingQueryService implements IBookingQueryService {
   }
 
   async listUserBookings(userId: string): Promise<BookingResponseDto[]> {
-    const bookings = await this.bookingRepo.find({ userId });
-    return bookings.map(BookingMapper.toResponse);
+    const bookings = await this.bookingRepo.find({ userId: toObjectId(userId) });
+    return BookingMapper.toResponseList(bookings);
   }
 
   async listAllBookings(branchId?: string, date?: string): Promise<BookingResponseDto[]> {
     const query: Record<string, unknown> = {};
-    if (branchId) query.branchId = branchId;
+    if (branchId) query.branchId = toObjectId(branchId);
     if (date) query.date = new Date(date);
     const bookings = await this.bookingRepo.find(query);
-    return bookings.map(BookingMapper.toResponse);
+    return BookingMapper.toResponseList(bookings);
   }
 
   async listStylistBookings(
     userId: string,
-    query: PaginationQueryDto,
+    query: StylistBookingPaginationQueryDto,
   ): Promise<PaginatedResponse<BookingResponseDto>> {
     const stylistId = await resolveStylistId(userId, this.slotRepo);
     const filter: Record<string, unknown> = {
@@ -57,7 +58,7 @@ export class BookingQueryService implements IBookingQueryService {
     };
 
     if (query.date) {
-      const date = new Date(query.date as string);
+      const date = new Date(query.date);
       date.setUTCHours(0, 0, 0, 0);
       filter.date = date;
     }
@@ -70,19 +71,15 @@ export class BookingQueryService implements IBookingQueryService {
       filter.userId = { $in: userIds };
     }
 
-    const paginatedQuery: PaginationQueryDto = {
+    const result = await this.bookingRepo.findPaginated({
       ...query,
+      ...filter,
       sortBy: query.sortBy || 'date',
       sortOrder: query.sortOrder || 'desc',
-    };
-
-    const result = await this.bookingRepo.findPaginated({
-      ...paginatedQuery,
-      ...filter,
-    } as unknown as PaginationQueryDto);
+    });
 
     return {
-      data: result.data.map(BookingMapper.toResponse),
+      data: BookingMapper.toResponseList(result.data),
       pagination: result.pagination,
     };
   }
@@ -91,9 +88,9 @@ export class BookingQueryService implements IBookingQueryService {
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
     const query: Record<string, unknown> = { date: today };
-    if (branchId) query.branchId = branchId;
+    if (branchId) query.branchId = toObjectId(branchId);
     const bookings = await this.bookingRepo.find(query);
-    return bookings.map(BookingMapper.toResponse);
+    return BookingMapper.toResponseList(bookings);
   }
 
   async getStylistTodayBookings(userId: string): Promise<BookingResponseDto[]> {
@@ -104,5 +101,160 @@ export class BookingQueryService implements IBookingQueryService {
       limit: 100,
     });
     return result.data;
+  }
+
+  async getStylistStats(userId: string, period: string = 'today', date?: string): Promise<Record<string, unknown>> {
+    const stylistId = await resolveStylistId(userId, this.slotRepo);
+    const filter: Record<string, unknown> = {
+      $or: [{ stylistId: toObjectId(stylistId) }, { 'items.stylistId': toObjectId(stylistId) }],
+    };
+
+    let startDate: Date;
+    let endDate: Date;
+    let groupBy: 'hour' | 'day' | 'month' = 'hour';
+
+    const baseDate = date ? new Date(date) : new Date();
+
+    if (period === 'today') {
+      startDate = new Date(baseDate);
+      startDate.setUTCHours(0, 0, 0, 0);
+      endDate = new Date(baseDate);
+      endDate.setUTCHours(23, 59, 59, 999);
+      groupBy = 'hour';
+    } else if (period === 'week') {
+      startDate = new Date(baseDate);
+      startDate.setUTCDate(startDate.getUTCDate() - 6);
+      startDate.setUTCHours(0, 0, 0, 0);
+      endDate = new Date(baseDate);
+      endDate.setUTCHours(23, 59, 59, 999);
+      groupBy = 'day';
+    } else if (period === 'month') {
+      startDate = new Date(baseDate);
+      startDate.setUTCDate(startDate.getUTCDate() - 29);
+      startDate.setUTCHours(0, 0, 0, 0);
+      endDate = new Date(baseDate);
+      endDate.setUTCHours(23, 59, 59, 999);
+      groupBy = 'day';
+    } else if (period === 'year') {
+      startDate = new Date(baseDate);
+      startDate.setUTCMonth(0, 1);
+      startDate.setUTCHours(0, 0, 0, 0);
+      endDate = new Date(baseDate);
+      endDate.setUTCMonth(11, 31);
+      endDate.setUTCHours(23, 59, 59, 999);
+      groupBy = 'month';
+    } else {
+      startDate = new Date(baseDate);
+      startDate.setUTCHours(0, 0, 0, 0);
+      endDate = new Date(baseDate);
+      endDate.setUTCHours(23, 59, 59, 999);
+    }
+
+    filter.date = { $gte: startDate, $lte: endDate };
+
+    const bookings = await this.bookingRepo.find(filter);
+
+    const summary = {
+      total: bookings.length,
+      confirmed: bookings.filter((b) => b.status === BookingStatus.CONFIRMED).length,
+      pending: bookings.filter((b) => b.status === BookingStatus.PENDING_PAYMENT).length,
+      cancelled: bookings.filter((b) => b.status === BookingStatus.CANCELLED).length,
+      completed: bookings.filter((b) => b.status === BookingStatus.COMPLETED).length,
+      revenue: bookings
+        .filter((b) => b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED)
+        .reduce((sum, b) => sum + (b.payableAmount ?? b.totalPrice ?? 0), 0),
+    };
+
+    const chartData: { label: string; bookings: number; revenue: number }[] = [];
+
+    if (groupBy === 'hour') {
+      for (let i = 0; i < 24; i++) {
+        const hourStr = i.toString().padStart(2, '0');
+        const label = `${hourStr}:00`;
+        const hourBookings = bookings.filter((b) => b.startTime.startsWith(hourStr));
+        chartData.push({
+          label,
+          bookings: hourBookings.length,
+          revenue: hourBookings
+            .filter((b) => b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED)
+            .reduce((sum, b) => sum + (b.payableAmount ?? b.totalPrice ?? 0), 0),
+        });
+      }
+    } else if (groupBy === 'day') {
+      const days = period === 'week' ? 7 : 30;
+      for (let i = days - 1; i >= 0; i--) {
+        const d = new Date(endDate);
+        d.setUTCDate(d.getUTCDate() - i);
+        const label = d.toISOString().split('T')[0];
+        const dayBookings = bookings.filter(
+          (b) => new Date(b.date).toISOString().split('T')[0] === label,
+        );
+        chartData.push({
+          label,
+          bookings: dayBookings.length,
+          revenue: dayBookings
+            .filter((b) => b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED)
+            .reduce((sum, b) => sum + (b.payableAmount ?? b.totalPrice ?? 0), 0),
+        });
+      }
+    } else if (groupBy === 'month') {
+      for (let i = 11; i >= 0; i--) {
+        const d = new Date(endDate);
+        d.setUTCMonth(d.getUTCMonth() - i);
+        const year = d.getUTCFullYear();
+        const month = d.getUTCMonth();
+        const label = `${year}-${(month + 1).toString().padStart(2, '0')}`;
+        const monthBookings = bookings.filter((b) => {
+          const bDate = new Date(b.date);
+          return bDate.getUTCFullYear() === year && bDate.getUTCMonth() === month;
+        });
+        chartData.push({
+          label,
+          bookings: monthBookings.length,
+          revenue: monthBookings
+            .filter((b) => b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED)
+            .reduce((sum, b) => sum + (b.payableAmount ?? b.totalPrice ?? 0), 0),
+        });
+      }
+    }
+
+    const statusBreakdown = [
+      { name: 'Confirmed', value: summary.confirmed, color: '#10b981' },
+      { name: 'Pending', value: summary.pending, color: '#f59e0b' },
+      { name: 'Cancelled', value: summary.cancelled, color: '#ef4444' },
+      { name: 'Completed', value: summary.completed, color: '#3b82f6' },
+    ];
+
+    return {
+      summary,
+      chartData,
+      statusBreakdown,
+      period,
+      range: { start: startDate, end: endDate },
+    };
+  }
+
+  async checkExpiredBookings(): Promise<number> {
+    const expiredBookings = await this.bookingRepo.find({
+      status: BookingStatus.PENDING_PAYMENT,
+      paymentStatus: PaymentStatus.PENDING,
+      paymentWindowExpiresAt: { $lt: new Date() },
+    });
+
+    let count = 0;
+    for (const booking of expiredBookings) {
+      const updated = await this.bookingRepo.update(
+        { _id: toObjectId(getIdString(booking._id)) },
+        {
+          status: BookingStatus.FAILED,
+          paymentStatus: PaymentStatus.FAILED,
+          cancelledBy: 'SYSTEM',
+          cancelledReason: 'Payment window expired (15 minutes)',
+          cancelledAt: new Date(),
+        },
+      );
+      if (updated) count++;
+    }
+    return count;
   }
 }

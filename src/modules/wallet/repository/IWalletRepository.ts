@@ -1,4 +1,5 @@
 import { IWallet } from '../../../models/wallet.model';
+import { ObjectId } from '../../../common/utils/mongoose.util';
 import { ClientSession } from 'mongoose';
 
 export interface IWalletRepository {

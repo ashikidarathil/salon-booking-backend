@@ -18,3 +18,13 @@ export const SLOT_PREFIXES = {
   SPECIAL: 'special_',
   HOLIDAY: 'holiday_',
 };
+
+export const SLOT_LABELS = {
+  SYSTEM: 'SYSTEM',
+  UNKNOWN: 'Unknown',
+  LUNCH_BREAK: 'Lunch Break',
+  TEA_BREAK: 'Tea Break',
+  GENERIC_BREAK: 'Break',
+  BLOCKED_NOTE: 'Blocked',
+  HOLIDAY_PREFIX: 'HOLIDAY: ',
+};

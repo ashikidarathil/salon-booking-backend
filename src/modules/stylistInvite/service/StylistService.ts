@@ -9,6 +9,8 @@ import type { PaginationQueryDto } from '../../../common/dto/pagination.query.dt
 import type { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 import type { StylistListItem } from '../repository/IStylistRepository';
 import { WishlistService } from '../../wishlist/service/WishlistService';
+import { INotificationService } from '../../notification/service/INotificationService';
+import { NotificationType } from '../../../models/notification.model';
 
 @injectable()
 export class StylistService implements IStylistService {
@@ -16,6 +18,7 @@ export class StylistService implements IStylistService {
     @inject(TOKENS.StylistRepository) private readonly _stylistRepo: IStylistRepository,
     @inject(TOKENS.StylistInviteRepository) private readonly _inviteRepo: IStylistInviteRepository,
     @inject(TOKENS.WishlistService) private readonly _wishlistService: WishlistService,
+    @inject(TOKENS.NotificationService) private readonly _notificationService: INotificationService,
   ) {}
 
   async listAllWithInviteStatus(): Promise<StylistListResponse[]> {
@@ -40,14 +43,36 @@ export class StylistService implements IStylistService {
   }
 
   async toggleBlockStylist(stylistId: string, isBlocked: boolean): Promise<StylistListItem | null> {
-    return this._stylistRepo.setBlockedById(stylistId, isBlocked);
+    const stylist = await this._stylistRepo.setBlockedById(stylistId, isBlocked);
+    
+    if (stylist) {
+      this._notificationService.createNotification({
+        recipientId: stylist.userId,
+        type: NotificationType.SYSTEM,
+        title: isBlocked ? 'Account Blocked' : 'Account Unblocked',
+        message: `Your account has been ${isBlocked ? 'blocked' : 'unblocked'} by the administrator.`,
+      }).catch(err => console.error('Failed to notify stylist of block status change:', err));
+    }
+
+    return stylist;
   }
 
   async updateStylistPosition(
     stylistId: string,
     position: 'JUNIOR' | 'SENIOR' | 'TRAINEE',
   ): Promise<StylistListItem | null> {
-    return this._stylistRepo.updatePosition(stylistId, position);
+    const stylist = await this._stylistRepo.updatePosition(stylistId, position);
+    
+    if (stylist) {
+      this._notificationService.createNotification({
+        recipientId: stylist.userId,
+        type: NotificationType.SYSTEM,
+        title: 'Position Updated',
+        message: `Your professional position has been updated to ${position}.`,
+      }).catch(err => console.error('Failed to notify stylist of position update:', err));
+    }
+
+    return stylist;
   }
 
   async getPublicStylists(

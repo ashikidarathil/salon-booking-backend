@@ -1,19 +1,21 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export enum BookingStatus {
-  PENDING = 'PENDING',
+  PENDING_PAYMENT = 'PENDING_PAYMENT',
   CONFIRMED = 'CONFIRMED',
-  IN_PROGRESS = 'IN_PROGRESS',
   COMPLETED = 'COMPLETED',
   NO_SHOW = 'NO_SHOW',
   CANCELLED = 'CANCELLED',
+  FAILED = 'FAILED',
   BLOCKED = 'BLOCKED',
   SPECIAL = 'SPECIAL',
 }
 
 export enum PaymentStatus {
   PENDING = 'PENDING',
+  ADVANCE_PAID = 'ADVANCE_PAID',
   PAID = 'PAID',
+  REFUNDED = 'REFUNDED',
   FAILED = 'FAILED',
 }
 
@@ -28,30 +30,42 @@ export interface IBookingItem {
 }
 
 export interface IBooking extends Document {
+  bookingNumber: string;
   userId: mongoose.Types.ObjectId;
   branchId: mongoose.Types.ObjectId;
-  slotId?: mongoose.Types.ObjectId; // Kept for backward compatibility or primary slot
+  slotId?: mongoose.Types.ObjectId;
   items: IBookingItem[];
-  stylistId: mongoose.Types.ObjectId; // Primary stylist (usually the one people associate the booking with)
+  stylistId: mongoose.Types.ObjectId;
   date: Date;
   startTime: string;
   endTime: string;
   totalPrice: number;
+  discountAmount?: number;
+  payableAmount: number;
+  advanceAmount: number;
+  couponId?: mongoose.Types.ObjectId;
   status: BookingStatus;
   paymentStatus: PaymentStatus;
   notes?: string;
   cancelledBy?: 'USER' | 'ADMIN' | 'STYLIST' | 'SYSTEM';
   cancelledReason?: string;
   cancelledAt?: Date;
-  extensionReason?: string;
+  completedAt?: Date;
   rescheduleCount: number;
   rescheduleReason?: string;
+  paymentWindowExpiresAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
 
 const BookingSchema = new Schema<IBooking>(
   {
+    bookingNumber: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -128,10 +142,28 @@ const BookingSchema = new Schema<IBooking>(
       required: true,
       min: 0,
     },
+    discountAmount: {
+      type: Number,
+      default: 0,
+    },
+    payableAmount: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    advanceAmount: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    couponId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Coupon',
+    },
     status: {
       type: String,
       enum: Object.values(BookingStatus),
-      default: BookingStatus.PENDING,
+      default: BookingStatus.PENDING_PAYMENT,
       index: true,
     },
     paymentStatus: {
@@ -154,9 +186,8 @@ const BookingSchema = new Schema<IBooking>(
     cancelledAt: {
       type: Date,
     },
-    extensionReason: {
-      type: String,
-      maxlength: 200,
+    completedAt: {
+      type: Date,
     },
     rescheduleCount: {
       type: Number,
@@ -166,6 +197,10 @@ const BookingSchema = new Schema<IBooking>(
       type: String,
       maxlength: 200,
     },
+    paymentWindowExpiresAt: {
+      type: Date,
+      index: true,
+    },
   },
   {
     timestamps: true,
@@ -174,7 +209,12 @@ const BookingSchema = new Schema<IBooking>(
 
 BookingSchema.index(
   { branchId: 1, stylistId: 1, date: 1, startTime: 1 },
-  { unique: true, partialFilterExpression: { status: 'CONFIRMED' } },
+  {
+    unique: true,
+    partialFilterExpression: {
+      status: { $in: ['PENDING_PAYMENT', 'CONFIRMED', 'BLOCKED', 'SPECIAL'] },
+    },
+  },
 );
 BookingSchema.index({ stylistId: 1, date: 1 });
 BookingSchema.index({ 'items.stylistId': 1, date: 1 });

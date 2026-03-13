@@ -1,3 +1,6 @@
+import { BookingStatus } from '../../../models/booking.model';
+import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+
 export interface BookingItemInput {
   serviceId: string;
   stylistId: string;
@@ -7,7 +10,6 @@ export interface BookingItemInput {
 }
 
 export interface CreateBookingDto {
-  slotId?: string;
   items: BookingItemInput[];
   notes?: string;
 }
@@ -22,5 +24,9 @@ export interface RescheduleBookingDto {
 }
 
 export interface UpdateBookingStatusDto {
-  status: string;
+  status: BookingStatus;
+}
+
+export interface StylistBookingPaginationQueryDto extends PaginationQueryDto {
+  date?: string;
 }

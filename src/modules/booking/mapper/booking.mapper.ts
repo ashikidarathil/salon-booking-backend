@@ -1,24 +1,10 @@
 import type { IBooking } from '../../../models/booking.model';
-import type { BookingResponseDto } from '../dto/booking.response.dto';
-
-interface PopulatedService {
-  _id: { toString(): string };
-  name: string;
-}
-
-interface PopulatedUser {
-  _id: { toString(): string };
-  name: string;
-}
-
-interface PopulatedStylist {
-  _id: { toString(): string };
-  profilePicture?: string;
-  userId: {
-    _id: { toString(): string };
-    name: string;
-  };
-}
+import type { 
+  BookingResponseDto, 
+  PopulatedUser, 
+  PopulatedStylist, 
+  PopulatedService 
+} from '../dto/booking.response.dto';
 
 export class BookingMapper {
   static toResponse(booking: IBooking): BookingResponseDto {
@@ -27,6 +13,7 @@ export class BookingMapper {
 
     return {
       id: (booking._id as { toString(): string }).toString(),
+      bookingNumber: booking.bookingNumber || `BK-${(booking._id as { toString(): string }).toString().slice(-6).toUpperCase()}`,
       userId: user?._id?.toString() ?? booking.userId?.toString() ?? '',
       userName: user?.name ?? 'Unknown User',
       branchId: booking.branchId?.toString() ?? '',
@@ -38,6 +25,7 @@ export class BookingMapper {
         return {
           serviceId: service?._id?.toString() ?? item.serviceId?.toString() ?? '',
           serviceName: service?.name ?? 'Unknown Service',
+          serviceImageUrl: service?.imageUrl,
           stylistId: itemStylist?._id?.toString() ?? item.stylistId?.toString() ?? '',
           stylistName: itemStylist?.userId?.name ?? 'Unknown Stylist',
           price: item.price,
@@ -57,17 +45,25 @@ export class BookingMapper {
       startTime: booking.startTime,
       endTime: booking.endTime,
       totalPrice: booking.totalPrice,
+      discountAmount: booking.discountAmount || 0,
+      payableAmount: booking.payableAmount,
+      advanceAmount: booking.advanceAmount,
+      couponId: booking.couponId?.toString(),
       status: booking.status,
       paymentStatus: booking.paymentStatus,
       notes: booking.notes,
       cancelledBy: booking.cancelledBy,
       cancelledReason: booking.cancelledReason,
       cancelledAt: booking.cancelledAt?.toISOString(),
-      extensionReason: booking.extensionReason,
       rescheduleCount: booking.rescheduleCount,
       rescheduleReason: booking.rescheduleReason,
+      paymentWindowExpiresAt: booking.paymentWindowExpiresAt?.toISOString(),
       createdAt: booking.createdAt.toISOString(),
       updatedAt: booking.updatedAt.toISOString(),
     };
+  }
+
+  static toResponseList(bookings: IBooking[]): BookingResponseDto[] {
+    return bookings.map(booking => this.toResponse(booking));
   }
 }

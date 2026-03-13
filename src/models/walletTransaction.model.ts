@@ -12,6 +12,13 @@ export enum TransactionStatus {
   REFUNDED = 'REFUNDED',
 }
 
+export type TransactionReferenceType =
+  | 'BOOKING'
+  | 'ESCROW'
+  | 'DEPOSIT'
+  | 'WITHDRAWAL'
+  | 'REFUND';
+
 export interface IWalletTransaction extends Document {
   walletId: mongoose.Types.ObjectId;
   amount: number;
@@ -19,7 +26,7 @@ export interface IWalletTransaction extends Document {
   status: TransactionStatus;
   description: string;
   referenceId?: mongoose.Types.ObjectId;
-  referenceType?: 'BOOKING' | 'ESCROW' | 'DEPOSIT' | 'WITHDRAWAL';
+  referenceType?: TransactionReferenceType;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -56,7 +63,7 @@ const WalletTransactionSchema = new Schema<IWalletTransaction>(
     },
     referenceType: {
       type: String,
-      enum: ['BOOKING', 'ESCROW', 'DEPOSIT', 'WITHDRAWAL'],
+      enum: ['BOOKING', 'ESCROW', 'DEPOSIT', 'WITHDRAWAL', 'REFUND'],
     },
   },
   {

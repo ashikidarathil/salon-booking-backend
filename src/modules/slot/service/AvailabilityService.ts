@@ -5,7 +5,12 @@ import { IHolidayRepository } from '../../holiday/repository/IHolidayRepository'
 import { ISlotValidator } from './ISlotValidator';
 import { SlotResponseDto } from '../dto/slot.response.dto';
 import { IAvailabilityService } from './IAvailabilityService';
-import { SlotStatus, SLOT_GRID_SIZE, SLOT_PREFIXES } from '../constants/slot.constants';
+import {
+  SlotStatus,
+  SLOT_GRID_SIZE,
+  SLOT_PREFIXES,
+  SLOT_LABELS,
+} from '../constants/slot.constants';
 import { BookingStatus, IBooking, IBookingItem } from '../../../models/booking.model';
 import { toObjectId } from '../../../common/utils/mongoose.util';
 import { IStylistOffDay } from '../../../models/stylistOffDay.model';
@@ -110,8 +115,8 @@ export class AvailabilityService implements IAvailabilityService {
       stylistsData.map((s) => [s._id.toString(), s as unknown as PopulatedStylist]),
     );
     const defaultBreaks: BreakObject[] = branchData?.defaultBreaks || [
-      { startTime: '13:00', endTime: '14:00', description: 'Lunch Break' },
-      { startTime: '16:00', endTime: '16:30', description: 'Tea Break' },
+      { startTime: '13:00', endTime: '14:00', description: SLOT_LABELS.LUNCH_BREAK },
+      { startTime: '16:00', endTime: '16:30', description: SLOT_LABELS.TEA_BREAK },
     ];
 
     const breakMap = new Map<string, BreakObject[]>();
@@ -121,7 +126,7 @@ export class AvailabilityService implements IAvailabilityService {
       breakMap.get(sid)?.push({
         startTime: b.startTime,
         endTime: b.endTime,
-        description: b.description || 'Break',
+        description: b.description || SLOT_LABELS.GENERIC_BREAK,
       });
     });
 
@@ -156,15 +161,15 @@ export class AvailabilityService implements IAvailabilityService {
         {
           id: `${SLOT_PREFIXES.HOLIDAY}${branchId}_${queryDate.toISOString().split('T')[0]}`,
           branchId,
-          stylistId: 'SYSTEM',
-          stylistName: 'SYSTEM',
+          stylistId: SLOT_LABELS.SYSTEM,
+          stylistName: SLOT_LABELS.SYSTEM,
           stylistEmail: '',
           date: queryDate.toISOString(),
           startTime: '00:00',
           endTime: '23:59',
           startTimeUTC: queryDate.toISOString(),
           status: SlotStatus.HOLIDAY,
-          note: `HOLIDAY: ${holiday.name}`,
+          note: `${SLOT_LABELS.HOLIDAY_PREFIX}${holiday.name}`,
           createdAt: queryDate.toISOString(),
           updatedAt: queryDate.toISOString(),
         },
@@ -176,7 +181,7 @@ export class AvailabilityService implements IAvailabilityService {
 
     for (const stylistId of stylistIds) {
       const stylistData = stylistInfoMap.get(stylistId);
-      const stylistName = stylistData?.userId?.name || 'Unknown';
+      const stylistName = stylistData?.userId?.name || SLOT_LABELS.UNKNOWN;
       const stylistEmail = stylistData?.userId?.email || '';
 
       const offDay = offDayMap.get(stylistId);
@@ -277,7 +282,7 @@ export class AvailabilityService implements IAvailabilityService {
             );
             if (overlapped) {
               status = isBlocked ? SlotStatus.BLOCKED : SlotStatus.BOOKED;
-              note = b.notes || (isBlocked ? 'Blocked' : undefined);
+              note = b.notes || (isBlocked ? SLOT_LABELS.BLOCKED_NOTE : undefined);
               break;
             }
           }
@@ -348,7 +353,7 @@ export class AvailabilityService implements IAvailabilityService {
         id: `${SLOT_PREFIXES.SPECIAL}${ss._id}`,
         branchId,
         stylistId: sid,
-        stylistName: stylistData.userId?.name || 'Unknown',
+        stylistName: stylistData.userId?.name || SLOT_LABELS.UNKNOWN,
         stylistEmail: stylistData.userId?.email || '',
         date: queryDate.toISOString(),
         startTime: ss.startTime,

@@ -1,0 +1,96 @@
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 15:15:58"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 15:15:58"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 15:15:58"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 15:34:28"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 15:34:28"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 15:34:28"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69afeff1692692a0baa7e054/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 15:48:37"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69afeff1692692a0baa7e054/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 15:48:38"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69afeff1692692a0baa7e054/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 15:48:39"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69afeff1692692a0baa7e054/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 15:48:39"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69afeff1692692a0baa7e054/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 15:48:39"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69afeff1692692a0baa7e054/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 15:48:39"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69afeff1692692a0baa7e054/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 15:48:39"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69afeff1692692a0baa7e054/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 15:48:39"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69afeff1692692a0baa7e054/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 15:48:42"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 15:50:50"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 15:50:50"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 15:50:50"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 16:29:48"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 16:29:48"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 16:29:48"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69aff9fc2079705e3bed7cdd/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:31:18"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69aff9fc2079705e3bed7cdd/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:31:22"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69aff9fc2079705e3bed7cdd/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:31:22"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69aff9fc2079705e3bed7cdd/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:31:23"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69aff9fc2079705e3bed7cdd/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:31:23"}
+{"level":"warn","message":"Handled AppError Unauthorized","metadata":{"method":"POST","statusCode":403,"url":"/api/bookings/69aff9fc2079705e3bed7cdd/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:31:23"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 16:45:22"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 16:45:22"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 16:45:22"}
+{"level":"warn","message":"Handled AppError Minimum booking amount for this coupon is 3000","metadata":{"method":"POST","statusCode":400,"url":"/api/bookings/69affda482211548585e5d11/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:47:06"}
+{"level":"warn","message":"Handled AppError Minimum booking amount for this coupon is 3000","metadata":{"method":"POST","statusCode":400,"url":"/api/bookings/69affda482211548585e5d11/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:47:08"}
+{"level":"warn","message":"Handled AppError Minimum booking amount for this coupon is 3000","metadata":{"method":"POST","statusCode":400,"url":"/api/bookings/69affda482211548585e5d11/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:47:08"}
+{"level":"warn","message":"Handled AppError Minimum booking amount for this coupon is 3000","metadata":{"method":"POST","statusCode":400,"url":"/api/bookings/69affda482211548585e5d11/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:47:09"}
+{"level":"warn","message":"Handled AppError Minimum booking amount for this coupon is 3000","metadata":{"method":"POST","statusCode":400,"url":"/api/bookings/69affda482211548585e5d11/apply-coupon","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:47:17"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 16:49:42"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 16:49:42"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 16:49:42"}
+{"level":"warn","message":"Handled AppError Insufficient wallet balance","metadata":{"method":"POST","statusCode":400,"url":"/api/payments/pay-remaining-with-wallet","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-10 16:58:22"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 17:12:31"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 17:12:31"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 17:12:31"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 17:12:45"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 17:12:45"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 17:12:45"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 17:13:16"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 17:13:16"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 17:13:16"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 17:13:38"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 17:13:38"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 17:13:38"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 17:18:39"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 17:18:39"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 17:18:39"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 17:26:45"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 17:26:45"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 17:26:45"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 17:28:16"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 17:28:16"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 17:28:16"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 18:07:28"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 18:07:28"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 18:07:28"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 19:29:03"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 19:29:03"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 19:29:03"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 19:29:26"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 19:29:26"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 19:29:26"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 19:30:50"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 19:30:50"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 19:30:50"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 19:44:24"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 19:44:24"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 19:44:24"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 20:01:11"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 20:01:11"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 20:01:11"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 20:05:43"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 20:05:43"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 20:05:43"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 20:06:09"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 20:06:09"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 20:06:09"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 20:06:47"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 20:06:47"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 20:06:47"}
+{"level":"error","message":"Unhandled Error coupon.toObject is not a function","metadata":{"method":"PUT","stack":"TypeError: coupon.toObject is not a function\n    at CouponService.updateCoupon (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/coupon/service/coupon.service.ts:56:41)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async CouponController.updateCoupon (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/coupon/controller/coupon.controller.ts:26:20)","url":"/api/coupons/69b02a69dde83a2529c6d2f8","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-10 20:14:19"}
+{"level":"error","message":"Unhandled Error coupon.toObject is not a function","metadata":{"method":"PUT","stack":"TypeError: coupon.toObject is not a function\n    at CouponService.updateCoupon (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/coupon/service/coupon.service.ts:56:41)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async CouponController.updateCoupon (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/coupon/controller/coupon.controller.ts:26:20)","url":"/api/coupons/69b02a69dde83a2529c6d2f8","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-10 20:14:31"}
+{"level":"error","message":"Unhandled Error coupon.toObject is not a function","metadata":{"method":"PUT","stack":"TypeError: coupon.toObject is not a function\n    at CouponService.updateCoupon (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/coupon/service/coupon.service.ts:56:41)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async CouponController.updateCoupon (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/modules/coupon/controller/coupon.controller.ts:26:20)","url":"/api/coupons/69b02a69dde83a2529c6d2f8","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-10 20:14:36"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 20:15:41"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 20:15:41"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 20:15:41"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-10 20:16:54"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-10 20:16:54"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-10 20:16:54"}

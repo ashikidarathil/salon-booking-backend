@@ -11,6 +11,7 @@ import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { SLOT_MESSAGES } from '../constants/slot.messages';
 import { SpecialSlotStatus } from '../../../models/specialSlot.model';
 import { SlotMapper, SlotLike } from '../mapper/slot.mapper';
+import { isValidObjectId } from '../../../common/utils/mongoose.util';
 
 @injectable()
 export class SlotService implements ISlotService {
@@ -26,6 +27,9 @@ export class SlotService implements ISlotService {
   ) {}
 
   async blockSlot(slotId: string, reason?: string): Promise<SlotResponseDto> {
+    if (!isValidObjectId(slotId)) {
+      throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.BAD_REQUEST);
+    }
     const slot = await this.slotRepo.findSpecialSlotById(slotId);
     if (!slot) {
       throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.NOT_FOUND);
@@ -47,6 +51,9 @@ export class SlotService implements ISlotService {
   }
 
   async unblockSlot(slotId: string): Promise<SlotResponseDto> {
+    if (!isValidObjectId(slotId)) {
+      throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.BAD_REQUEST);
+    }
     const slot = await this.slotRepo.findSpecialSlotById(slotId);
     if (!slot) {
       throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.NOT_FOUND);
@@ -115,6 +122,9 @@ export class SlotService implements ISlotService {
   }
 
   async cancelSpecialSlot(id: string): Promise<SlotResponseDto> {
+    if (!isValidObjectId(id)) {
+      throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.BAD_REQUEST);
+    }
     return this.specialSlotService.cancelSpecialSlot(id);
   }
 }

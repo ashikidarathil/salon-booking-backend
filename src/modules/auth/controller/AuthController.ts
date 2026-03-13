@@ -262,6 +262,8 @@ export class AuthController implements IAuthController {
       throw new AppError(MESSAGES.AUTH.AUTH_REQUIRED, HttpStatus.UNAUTHORIZED);
     }
 
+    //Validate input
+
     const dto = {
       name: req.body.name,
       email: req.body.email,
