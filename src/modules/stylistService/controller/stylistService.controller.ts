@@ -16,28 +16,22 @@ export class StylistServiceController {
     private readonly _service: IStylistServiceService,
   ) {}
 
-  list = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  list = async (req: AuthenticatedRequest, res: Response): Promise<Response> => {
     const { role, userId } = req.auth || {};
     const { branchId } = req.query as { branchId?: string };
 
     if (role === 'STYLIST' && userId !== req.params.stylistId) {
-      res
-        .status(HttpStatus.FORBIDDEN)
-        .json(ApiResponse.error(STYLIST_SERVICE_MESSAGES.UNAUTHORIZED));
-      return;
+      return ApiResponse.error(res, STYLIST_SERVICE_MESSAGES.UNAUTHORIZED, HttpStatus.FORBIDDEN);
     }
 
     const data = await this._service.list(req.params.stylistId, branchId);
-    res.json(ApiResponse.success(STYLIST_SERVICE_MESSAGES.LISTED, data));
+    return ApiResponse.success(res, data, STYLIST_SERVICE_MESSAGES.LISTED);
   };
 
-  toggleStatus = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  toggleStatus = async (req: AuthenticatedRequest, res: Response): Promise<Response> => {
     const adminId = req.auth?.userId;
     if (!adminId) {
-      res
-        .status(HttpStatus.UNAUTHORIZED)
-        .json(ApiResponse.error(STYLIST_SERVICE_MESSAGES.UNAUTHORIZED));
-      return;
+      return ApiResponse.error(res, STYLIST_SERVICE_MESSAGES.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
     }
 
     const data = await this._service.toggleStatus(
@@ -46,17 +40,17 @@ export class StylistServiceController {
       req.body as ToggleStylistServiceStatusRequestDto,
       adminId,
     );
-    res.json(ApiResponse.success(STYLIST_SERVICE_MESSAGES.STATUS_UPDATED, data));
+    return ApiResponse.success(res, data, STYLIST_SERVICE_MESSAGES.STATUS_UPDATED);
   };
 
-  listPaginated = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  listPaginated = async (req: AuthenticatedRequest, res: Response): Promise<Response> => {
     const query = req.query as unknown as PaginationQueryDto;
     const data = await this._service.listPaginated(req.params.stylistId, query);
-    res.json(ApiResponse.success(STYLIST_SERVICE_MESSAGES.LISTED, data));
+    return ApiResponse.success(res, data, STYLIST_SERVICE_MESSAGES.LISTED);
   };
 
-  getStylistsByService = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  getStylistsByService = async (req: AuthenticatedRequest, res: Response): Promise<Response> => {
     const data = await this._service.getStylistsByService(req.params.serviceId);
-    res.json(ApiResponse.success(STYLIST_SERVICE_MESSAGES.LISTED, data));
+    return ApiResponse.success(res, data, STYLIST_SERVICE_MESSAGES.LISTED);
   };
 }

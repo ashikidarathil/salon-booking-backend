@@ -217,7 +217,9 @@ export class BranchServiceService implements IBranchServiceService {
     const { params, search, sort } = PaginationQueryParser.parse(query);
 
     const services = await ServiceModel.find({ status: 'ACTIVE', isDeleted: false })
-      .select('name categoryId description imageUrl whatIncluded status createdAt')
+      .select(
+        'name categoryId description imageUrl whatIncluded status rating reviewCount createdAt',
+      )
       .populate({
         path: 'categoryId',
         select: 'name status isDeleted',
@@ -250,6 +252,8 @@ export class BranchServiceService implements IBranchServiceService {
         duration: m ? m.duration : null,
         isActive: m ? m.isActive : false,
         configured: Boolean(m),
+        rating: s.rating,
+        reviewCount: s.reviewCount,
         createdAt: s.createdAt,
       });
     });
@@ -305,7 +309,9 @@ export class BranchServiceService implements IBranchServiceService {
     }
 
     const service = (await ServiceModel.findById(serviceId)
-      .select('name categoryId description imageUrl whatIncluded status isDeleted')
+      .select(
+        'name categoryId description imageUrl whatIncluded status isDeleted rating reviewCount',
+      )
       .populate({ path: 'categoryId', select: 'name status isDeleted' })
       .lean()) as ServiceLean | null;
 
@@ -348,6 +354,8 @@ export class BranchServiceService implements IBranchServiceService {
       duration: mapping.duration,
       isActive: mapping.isActive,
       configured: true,
+      rating: service.rating,
+      reviewCount: service.reviewCount,
     });
   }
 }

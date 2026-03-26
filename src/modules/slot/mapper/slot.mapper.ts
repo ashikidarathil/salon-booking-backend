@@ -37,7 +37,6 @@ export class SlotMapper {
     const stylist = slot.stylistId as unknown as PopulatedStylist | undefined;
     const date = slot.date instanceof Date ? slot.date : new Date(slot.date);
 
-    // Calculate startTimeUTC if not present (for special slots)
     const startTimeUTC = slot.startTimeUTC
       ? slot.startTimeUTC instanceof Date
         ? slot.startTimeUTC

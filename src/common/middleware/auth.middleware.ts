@@ -11,7 +11,6 @@ export const authMiddleware = (
   next: NextFunction,
 ) => {
   const roleHeader = (req.headers['x-auth-role'] as string)?.toUpperCase();
-  const currentTabId = req.headers['x-tab-id'] as string;
 
   if (!roleHeader) {
     return res.status(HttpStatus.UNAUTHORIZED).json({ message: 'Auth role header missing' });
@@ -26,7 +25,6 @@ export const authMiddleware = (
 
   try {
     const decoded = jwt.verify(accessToken, env.ACCESS_TOKEN_SECRET) as AuthPayload;
-
 
     if (decoded.role !== roleHeader) {
       console.error(`Role mismatch: Token(${decoded.role}) vs Header(${roleHeader})`);

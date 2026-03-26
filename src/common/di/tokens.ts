@@ -87,4 +87,11 @@ export const TOKENS = {
   // Admin Dashboard
   AdminDashboardService: Symbol('AdminDashboardService'),
   AdminDashboardController: Symbol('AdminDashboardController'),
+  // Review
+  ReviewRepository: Symbol('ReviewRepository'),
+  ReviewService: Symbol('ReviewService'),
+  ReviewController: Symbol('ReviewController'),
+  ReviewMapper: Symbol.for('ReviewMapper'),
+  AdminRepository: Symbol.for('AdminRepository'),
+  AdminMapper: Symbol.for('AdminMapper'),
 } as const;

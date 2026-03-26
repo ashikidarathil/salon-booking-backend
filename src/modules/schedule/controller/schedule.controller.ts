@@ -22,42 +22,36 @@ export class ScheduleController implements IScheduleController {
     private readonly scheduleService: IScheduleService,
   ) {}
 
-  updateWeekly = async (req: Request, res: Response) => {
+  updateWeekly = async (req: Request, res: Response): Promise<Response> => {
     const { dayOfWeek } = req.params;
     const dto: WeeklyScheduleRequestDto = {
       ...req.body,
       dayOfWeek: dayOfWeek ? parseInt(dayOfWeek) : req.body.dayOfWeek,
     };
     const schedule = await this.scheduleService.updateWeeklySchedule(dto);
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, SCHEDULE_MESSAGES.WEEKLY_UPDATED, schedule));
+    return ApiResponse.success(res, schedule, SCHEDULE_MESSAGES.WEEKLY_UPDATED);
   };
 
-  getWeekly = async (req: Request, res: Response) => {
+  getWeekly = async (req: Request, res: Response): Promise<Response> => {
     const { stylistId } = req.params;
     const { branchId } = req.query as { branchId: string };
     const schedules = await this.scheduleService.getWeeklySchedule(stylistId, branchId);
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, SCHEDULE_MESSAGES.WEEKLY_FETCHED, schedules));
+    return ApiResponse.success(res, schedules, SCHEDULE_MESSAGES.WEEKLY_FETCHED);
   };
 
-  createDailyOverride = async (req: Request, res: Response) => {
+  createDailyOverride = async (req: Request, res: Response): Promise<Response> => {
     const dto: DailyOverrideRequestDto = req.body;
     const override = await this.scheduleService.createDailyOverride(dto);
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, SCHEDULE_MESSAGES.OVERRIDE_CREATED, override));
+    return ApiResponse.success(res, override, SCHEDULE_MESSAGES.OVERRIDE_CREATED);
   };
 
-  deleteDailyOverride = async (req: Request, res: Response) => {
+  deleteDailyOverride = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     await this.scheduleService.deleteDailyOverride(id);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SCHEDULE_MESSAGES.OVERRIDE_DELETED));
+    return ApiResponse.success(res, undefined, SCHEDULE_MESSAGES.OVERRIDE_DELETED);
   };
 
-  getDailyOverrides = async (req: Request, res: Response) => {
+  getDailyOverrides = async (req: Request, res: Response): Promise<Response> => {
     const { stylistId } = req.params;
     const { branchId, startDate, endDate } = req.query as {
       branchId: string;
@@ -69,31 +63,32 @@ export class ScheduleController implements IScheduleController {
     const end = endDate ? new Date(endDate) : undefined;
 
     const overrides = await this.scheduleService.getDailyOverrides(stylistId, branchId, start, end);
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, SCHEDULE_MESSAGES.OVERRIDE_FETCHED, overrides));
+    return ApiResponse.success(res, overrides, SCHEDULE_MESSAGES.OVERRIDE_FETCHED);
   };
 
-  addBreak = async (req: Request, res: Response) => {
+  addBreak = async (req: Request, res: Response): Promise<Response> => {
     const dto = req.body;
     const authReq = req as AuthenticatedRequest;
     const role = authReq.auth?.role;
     const stylistBreak = await this.scheduleService.addBreak(dto, role);
-    res
-      .status(HttpStatus.CREATED)
-      .json(new ApiResponse(true, SCHEDULE_MESSAGES.BREAK_ADDED, stylistBreak));
+    return ApiResponse.success(
+      res,
+      stylistBreak,
+      SCHEDULE_MESSAGES.BREAK_ADDED,
+      HttpStatus.CREATED,
+    );
   };
 
-  deleteBreak = async (req: Request, res: Response) => {
+  deleteBreak = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     await this.scheduleService.deleteBreak(id);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SCHEDULE_MESSAGES.BREAK_DELETED));
+    return ApiResponse.success(res, undefined, SCHEDULE_MESSAGES.BREAK_DELETED);
   };
 
-  getBreaks = async (req: Request, res: Response) => {
+  getBreaks = async (req: Request, res: Response): Promise<Response> => {
     const { stylistId } = req.params;
     const { branchId } = req.query as { branchId: string };
     const breaks = await this.scheduleService.getBreaks(stylistId, branchId);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SCHEDULE_MESSAGES.BREAK_FETCHED, breaks));
+    return ApiResponse.success(res, breaks, SCHEDULE_MESSAGES.BREAK_FETCHED);
   };
 }

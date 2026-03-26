@@ -9,6 +9,7 @@ export interface CouponResponseDto {
   expiryDate: string;
   maxUsage: number;
   usedCount: number;
+  maxDiscountAmount: number;
   isActive: boolean;
   isDeleted: boolean;
   applicableServices?: string[];

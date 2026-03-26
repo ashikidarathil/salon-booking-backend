@@ -110,7 +110,12 @@ export class SpecialSlotService implements ISpecialSlotService {
       d.setUTCHours(0, 0, 0, 0);
       query.date = d;
     }
-    if (filter.status) query.status = filter.status;
+    if (filter.status) {
+      query.status = filter.status;
+    } else {
+      // Exclude CANCELLED (system-created blocked slots) — they show in the normal slot grid
+      query.status = { $ne: SpecialSlotStatus.CANCELLED };
+    }
 
     const slots = await this.slotRepo.findSpecialSlotsWithStylist(query);
     return slots.map((s) => SlotMapper.toResponse(s as unknown as SlotLike));

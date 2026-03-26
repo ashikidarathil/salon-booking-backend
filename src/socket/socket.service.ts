@@ -3,12 +3,14 @@ import { Server, Socket } from 'socket.io';
 import { container } from 'tsyringe';
 import { TOKENS } from '../common/di/tokens';
 import { IChatService } from '../modules/chat/service/IChatService';
-import { logInfo, logError, logWarn } from '../logger/log.util';
+import { logInfo, logError } from '../logger/log.util';
 import { env } from '../config/env';
 
 const messageRateLimits = new Map<string, { count: number; windowStart: number }>();
 const RATE_LIMIT_MS = 5000;
 const RATE_LIMIT_MAX_MESSAGES = 5;
+
+type SendMessageData = Parameters<IChatService['sendMessage']>[0];
 
 export class SocketService {
   private static io: Server;
@@ -47,15 +49,7 @@ export class SocketService {
         logInfo(`User ${socket.data.userId} left room ${roomId}`);
       });
 
-      socket.on('sendMessage', async (data: {
-        chatRoomId: string;
-        senderId: string;
-        senderType: any;
-        messageType: any;
-        content?: string;
-        mediaUrl?: string;
-        duration?: number;
-      }) => {
+      socket.on('sendMessage', async (data: SendMessageData) => {
         try {
           // Rate limiting
           const now = Date.now();
@@ -72,14 +66,14 @@ export class SocketService {
           }
 
           const chatService = container.resolve<IChatService>(TOKENS.ChatService);
-          
+
           const message = await chatService.sendMessage(data);
-          
+
           this.io.to(data.chatRoomId).emit('newMessage', message);
-          
-        } catch (error: any) {
-          logError('Socket sendMessage error', error);
-          socket.emit('error', { message: error.message || 'Failed to send message' });
+        } catch (error) {
+          const err = error as Error;
+          logError('Socket sendMessage error', { message: err.message });
+          socket.emit('error', { message: err.message || 'Failed to send message' });
         }
       });
 
@@ -96,7 +90,7 @@ export class SocketService {
     return this.io;
   }
 
-  static sendToUser(userId: string, event: string, data: any) {
+  static sendToUser(userId: string, event: string, data: unknown) {
     if (this.io) {
       this.io.to(`user_${userId}`).emit(event, data);
     }

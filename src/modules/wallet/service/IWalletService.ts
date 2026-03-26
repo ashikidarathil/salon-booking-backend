@@ -1,5 +1,8 @@
 import { IWallet } from '../../../models/wallet.model';
-import { IWalletTransaction, TransactionReferenceType } from '../../../models/walletTransaction.model';
+import {
+  IWalletTransaction,
+  TransactionReferenceType,
+} from '../../../models/walletTransaction.model';
 import { ClientSession } from 'mongoose';
 
 export interface IWalletService {

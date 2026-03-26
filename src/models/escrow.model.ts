@@ -10,7 +10,7 @@ export interface IEscrow extends Document {
   stylistId: mongoose.Types.ObjectId;
   amount: number;
   status: EscrowStatus;
-  releaseMonth: string; // Format: YYYY-MM eg. "2026-03"
+  releaseDate: string; // Format: YYYY-MM-DD eg. "2026-03-20"
   createdAt: Date;
   updatedAt: Date;
 }
@@ -41,7 +41,7 @@ const EscrowSchema = new Schema<IEscrow>(
       default: EscrowStatus.HELD,
       index: true,
     },
-    releaseMonth: {
+    releaseDate: {
       type: String,
       required: true,
       index: true,

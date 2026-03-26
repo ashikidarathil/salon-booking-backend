@@ -12,11 +12,19 @@ import { QueryBuilderService } from '../../common/service/queryBuilder/queryBuil
 import { IAdminDashboardService } from './service/IAdminDashboardService';
 import { AdminDashboardService } from './service/AdminDashboardService';
 import { AdminDashboardController } from './controller/admin.stats.controller';
+import { AdminRepository } from './repository/AdminRepository';
+import { IAdminRepository } from './repository/IAdminRepository';
+import { AdminMapper } from './mapper/AdminMapper';
 
 container.registerSingleton<QueryBuilderService>(TOKENS.QueryBuilder, QueryBuilderService);
 container.registerSingleton<IUserAdminService>(TOKENS.UserAdminService, UserAdminService);
 container.registerSingleton<IUserRepository>(TOKENS.UserRepository, UserRepository);
-container.registerSingleton<IAdminDashboardService>(TOKENS.AdminDashboardService, AdminDashboardService);
+container.registerSingleton<IAdminDashboardService>(
+  TOKENS.AdminDashboardService,
+  AdminDashboardService,
+);
+container.registerSingleton<IAdminRepository>(TOKENS.AdminRepository, AdminRepository);
+container.registerSingleton<AdminMapper>(TOKENS.AdminMapper, AdminMapper);
 
 container.register(UserController, { useClass: UserController });
 container.register(AdminDashboardController, { useClass: AdminDashboardController });

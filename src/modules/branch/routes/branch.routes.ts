@@ -6,61 +6,51 @@ import { roleMiddleware } from '../../../common/middleware/role.middleware';
 import { UserRole } from '../../../common/enums/userRole.enum';
 
 import { BRANCH_ROUTES } from '../constants/branch.routes';
+import { validate } from '../../../common/middleware/validation.middleware';
+import {
+  CreateBranchSchema,
+  UpdateBranchSchema,
+  GetNearestBranchesSchema,
+} from '../dto/branch.schema';
 
 const router = Router();
 const controller = resolveBranchController();
 
-/* =========================
-   PUBLIC ROUTES
-========================= */
 router.get(BRANCH_ROUTES.PUBLIC.BRANCH.LIST, controller.listPublic.bind(controller));
 router.get(
   BRANCH_ROUTES.PUBLIC.BRANCH.PAGINATED_LIST,
   controller.listPublicPaginated.bind(controller),
 );
 router.get(BRANCH_ROUTES.PUBLIC.BRANCH.BY_ID(':id'), controller.getPublic.bind(controller));
-router.post(BRANCH_ROUTES.PUBLIC.BRANCH.NEAREST, controller.getNearestBranches.bind(controller));
-
-router.get(
-  BRANCH_ROUTES.ADMIN.BRANCH.BASE,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
-  controller.list.bind(controller),
+router.post(
+  BRANCH_ROUTES.PUBLIC.BRANCH.NEAREST,
+  validate({ body: GetNearestBranchesSchema }),
+  controller.getNearestBranches.bind(controller),
 );
+
+router.use('/admin', authMiddleware, roleMiddleware([UserRole.ADMIN]));
+
+router.get(BRANCH_ROUTES.ADMIN.BRANCH.BASE, controller.list.bind(controller));
 
 router.get(
   BRANCH_ROUTES.ADMIN.BRANCH.PAGINATED_LIST,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
   controller.getPaginatedBranches.bind(controller),
 );
 
 router.post(
   BRANCH_ROUTES.ADMIN.BRANCH.BASE,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ body: CreateBranchSchema }),
   controller.create.bind(controller),
 );
 
 router.patch(
   BRANCH_ROUTES.ADMIN.BRANCH.BY_ID(':id'),
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ body: UpdateBranchSchema }),
   controller.update.bind(controller),
 );
 
-router.patch(
-  BRANCH_ROUTES.ADMIN.BRANCH.SOFT_DELETE(':id'),
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
-  controller.disable.bind(controller),
-);
+router.patch(BRANCH_ROUTES.ADMIN.BRANCH.SOFT_DELETE(':id'), controller.disable.bind(controller));
 
-router.patch(
-  BRANCH_ROUTES.ADMIN.BRANCH.RESTORE(':id'),
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
-  controller.restore.bind(controller),
-);
+router.patch(BRANCH_ROUTES.ADMIN.BRANCH.RESTORE(':id'), controller.restore.bind(controller));
 
 export default router;

@@ -16,23 +16,18 @@ export class StylistWalletController implements IStylistWalletController {
     private walletService: IStylistWalletService,
   ) {}
 
-
-  async getStylistWallet(req: Request & { auth?: AuthPayload }, res: Response): Promise<void> {
+  async getStylistWallet(req: Request & { auth?: AuthPayload }, res: Response): Promise<Response> {
     const userId = req.auth?.userId;
     if (!userId) {
       throw new AppError(STYLIST_WALLET_MESSAGES.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
     }
     const wallet = await this.walletService.getWallet(userId);
-    res
-      .status(HttpStatus.OK)
-      .json(ApiResponse.success(STYLIST_WALLET_MESSAGES.WALLET_RETRIEVED, wallet));
+    return ApiResponse.success(res, wallet, STYLIST_WALLET_MESSAGES.WALLET_RETRIEVED);
   }
 
-  async getWalletByStylistId(req: Request, res: Response): Promise<void> {
+  async getWalletByStylistId(req: Request, res: Response): Promise<Response> {
     const { stylistId } = req.params;
     const wallet = await this.walletService.getWallet(stylistId);
-    res
-      .status(HttpStatus.OK)
-      .json(ApiResponse.success(STYLIST_WALLET_MESSAGES.WALLET_RETRIEVED, wallet));
+    return ApiResponse.success(res, wallet, STYLIST_WALLET_MESSAGES.WALLET_RETRIEVED);
   }
 }

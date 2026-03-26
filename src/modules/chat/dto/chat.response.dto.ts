@@ -20,7 +20,6 @@ export interface ChatRoomResponseDto {
   booking?: { bookingNumber?: string; status: string; completedAt?: string; cancelledAt?: string };
 }
 
-
 export interface MessageResponseDto {
   id: string;
   chatRoomId: string;
@@ -32,9 +31,11 @@ export interface MessageResponseDto {
   duration?: number;
   isRead: boolean;
   createdAt: Date;
-  bookingId?: string | {
-    bookingNumber: string;
-    status: string;
-    bookingName?: string;
-  };
+  bookingId?:
+    | string
+    | {
+        bookingNumber: string;
+        status: string;
+        bookingName?: string;
+      };
 }

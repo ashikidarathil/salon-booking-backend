@@ -12,6 +12,8 @@ export interface ServiceDocument extends mongoose.Document {
   status: ServiceStatus;
   isDeleted: boolean;
   deletedAt?: Date | null;
+  rating: number;
+  reviewCount: number;
 
   createdAt: Date;
   updatedAt: Date;
@@ -32,6 +34,8 @@ export type ServiceLean = {
   status: ServiceStatus;
   isDeleted: boolean;
   createdAt: Date;
+  rating: number;
+  reviewCount: number;
 };
 
 const ServiceSchema = new Schema<ServiceDocument>(
@@ -47,6 +51,8 @@ const ServiceSchema = new Schema<ServiceDocument>(
     status: { type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'ACTIVE' },
     isDeleted: { type: Boolean, default: false },
     deletedAt: { type: Date, default: null },
+    rating: { type: Number, default: 0 },
+    reviewCount: { type: Number, default: 0 },
   },
   { timestamps: true },
 );

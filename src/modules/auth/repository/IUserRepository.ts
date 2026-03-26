@@ -49,9 +49,11 @@ export interface IUserRepository {
   getPaginated(query: PaginationQueryDto): Promise<PaginatedResponse<UserEntity>>;
 
   findByIdWithPassword(userId: string): Promise<UserEntity | null>;
+  getProfile(userId: string): Promise<UserEntity>;
   updatePasswordById(userId: string, hashedPassword: string): Promise<UserEntity | null>;
   updateProfile(
     userId: string,
     data: { name?: string; email?: string; phone?: string },
   ): Promise<UserEntity | null>;
+  count(filter: MongoFilter): Promise<number>;
 }

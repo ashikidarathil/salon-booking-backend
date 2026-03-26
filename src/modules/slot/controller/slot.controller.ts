@@ -27,12 +27,10 @@ export class SlotController implements ISlotController {
     private readonly slotService: ISlotService,
   ) {}
 
-  // ─── Private helper ────────────────────────────────────────────────────────
-
   private extractAuth(req: Request, res: Response): AuthPayload | null {
     const auth = (req as AuthenticatedRequest).auth;
     if (!auth?.userId) {
-      res.status(HttpStatus.UNAUTHORIZED).json(new ApiResponse(false, SLOT_MESSAGES.UNAUTHORIZED));
+      ApiResponse.error(res, SLOT_MESSAGES.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
       return null;
     }
     return auth;
@@ -40,7 +38,7 @@ export class SlotController implements ISlotController {
 
   // ─── Handlers ──────────────────────────────────────────────────────────────
 
-  getAvailableSlots = async (req: Request, res: Response): Promise<void> => {
+  getAvailableSlots = async (req: Request, res: Response): Promise<Response> => {
     const {
       branchId,
       date,
@@ -57,10 +55,10 @@ export class SlotController implements ISlotController {
       false,
       serviceId,
     );
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.FETCHED, slots));
+    return ApiResponse.success(res, slots, SLOT_MESSAGES.FETCHED);
   };
 
-  adminListSlots = async (req: Request, res: Response): Promise<void> => {
+  adminListSlots = async (req: Request, res: Response): Promise<Response> => {
     const { branchId, date, stylistId } = req.query as unknown as GetAvailableSlotsQueryDto;
     const slots = await this.slotService.getDynamicAvailability(
       branchId,
@@ -69,12 +67,12 @@ export class SlotController implements ISlotController {
       undefined,
       true,
     );
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.FETCHED, slots));
+    return ApiResponse.success(res, slots, SLOT_MESSAGES.FETCHED);
   };
 
-  getStylistSlots = async (req: Request, res: Response): Promise<void> => {
+  getStylistSlots = async (req: Request, res: Response): Promise<Response> => {
     const auth = this.extractAuth(req, res);
-    if (!auth) return;
+    if (!auth) return res as unknown as Response; // We have already sent an error response
 
     const {
       branchId,
@@ -91,29 +89,29 @@ export class SlotController implements ISlotController {
       undefined,
       true,
     );
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.FETCHED, slots));
+    return ApiResponse.success(res, slots, SLOT_MESSAGES.FETCHED);
   };
 
-  blockSlot = async (req: Request, res: Response): Promise<void> => {
+  blockSlot = async (req: Request, res: Response): Promise<Response> => {
     const { slotId } = req.params;
     const { reason }: BlockSlotDto = req.body;
     const slot = await this.slotService.blockSlot(slotId, reason);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.BLOCKED, slot));
+    return ApiResponse.success(res, slot, SLOT_MESSAGES.BLOCKED);
   };
 
-  unblockSlot = async (req: Request, res: Response): Promise<void> => {
+  unblockSlot = async (req: Request, res: Response): Promise<Response> => {
     const { slotId } = req.params;
     const slot = await this.slotService.unblockSlot(slotId);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.UNBLOCKED, slot));
+    return ApiResponse.success(res, slot, SLOT_MESSAGES.UNBLOCKED);
   };
 
-  getDynamicAvailability = async (req: Request, res: Response): Promise<void> => {
-    await this.getAvailableSlots(req, res);
+  getDynamicAvailability = async (req: Request, res: Response): Promise<Response> => {
+    return this.getAvailableSlots(req, res);
   };
 
-  createSpecialSlot = async (req: Request, res: Response): Promise<void> => {
+  createSpecialSlot = async (req: Request, res: Response): Promise<Response> => {
     const auth = this.extractAuth(req, res);
-    if (!auth) return;
+    if (!auth) return res as unknown as Response;
 
     const { stylistId, branchId, date, startTime, endTime, note, serviceId } = req.body;
 
@@ -128,18 +126,18 @@ export class SlotController implements ISlotController {
       createdBy: auth.userId,
     });
 
-    res.status(HttpStatus.CREATED).json(new ApiResponse(true, SLOT_MESSAGES.SPECIAL_CREATED, slot));
+    return ApiResponse.success(res, slot, SLOT_MESSAGES.SPECIAL_CREATED, HttpStatus.CREATED);
   };
 
-  listSpecialSlots = async (req: Request, res: Response): Promise<void> => {
+  listSpecialSlots = async (req: Request, res: Response): Promise<Response> => {
     const { branchId, stylistId, date, status } = req.query as unknown as ListSpecialSlotsQueryDto;
     const slots = await this.slotService.listSpecialSlots({ branchId, stylistId, date, status });
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.FETCHED, slots));
+    return ApiResponse.success(res, slots, SLOT_MESSAGES.FETCHED);
   };
 
-  cancelSpecialSlot = async (req: Request, res: Response): Promise<void> => {
+  cancelSpecialSlot = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     const slot = await this.slotService.cancelSpecialSlot(id);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, SLOT_MESSAGES.SPECIAL_CANCELLED, slot));
+    return ApiResponse.success(res, slot, SLOT_MESSAGES.SPECIAL_CANCELLED);
   };
 }

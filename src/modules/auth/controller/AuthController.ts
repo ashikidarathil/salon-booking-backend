@@ -7,17 +7,21 @@ import { AppError } from '../../../common/errors/appError';
 import type { IAuthController } from './IAuthController';
 import type { IAuthService } from '../service/IAuthService';
 import { setAuthCookies, clearAuthCookies } from '../../../common/utils/cookie.util';
-import type { SignupDto } from '../dto/auth/Signup.dto';
-import type { LoginDto } from '../dto/auth/Login.dto';
-import type { VerifyOtpDto } from '../dto/auth/VerifyOtp.dto';
-import type { ResetPasswordDto } from '../dto/password/ResetPassword.dto';
-import type { ForgotPasswordDto } from '../dto/password/ForgotPassword.dto';
-import type { SendSmsOtpDto } from '../dto/sms/SendSmsOtp.dto';
-import type { VerifySmsOtpDto } from '../dto/sms/VerifySmsOtp.dto';
 import { injectable, inject } from 'tsyringe';
 import { TOKENS } from '../../../common/di/tokens';
-import { ApplyAsStylistDto } from '../dto/stylist/ApplyAsStylist.dto';
 import { IProfileService } from '../service/IProfileService';
+
+import type {
+  SignupDto,
+  LoginDto,
+  VerifyOtpDto,
+  GoogleLoginDto,
+  ResetPasswordDto,
+  ForgotPasswordDto,
+  SendSmsOtpDto,
+  VerifySignupSmsOtpDto,
+  ApplyAsStylistDto,
+} from '../dto/auth.schema';
 
 @injectable()
 export class AuthController implements IAuthController {
@@ -44,141 +48,89 @@ export class AuthController implements IAuthController {
   }
 
   async signup(req: Request, res: Response) {
-    const dto: SignupDto = {
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      password: req.body.password,
-    };
+    const dto: SignupDto = req.body;
     const data = await this._authService.signup(dto);
-    res.status(HttpStatus.CREATED).json(new ApiResponse(true, 'Signup successful', data));
+    res.status(HttpStatus.CREATED).json(new ApiResponse(true, MESSAGES.AUTH.SIGNUP_SUCCESS, data));
   }
 
   async verifyOtp(req: Request, res: Response) {
-    const dto: VerifyOtpDto = {
-      email: req.body.email,
-      otp: req.body.otp,
-    };
+    const dto: VerifyOtpDto = req.body;
     const data = await this._authService.verifyOtp(dto);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, 'OTP verified', data));
+    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.AUTH.OTP_VERIFIED, data));
   }
 
   async sendSmsOtp(req: Request, res: Response) {
-    const dto: SendSmsOtpDto = {
-      phone: req.body.phone,
-    };
+    const dto: SendSmsOtpDto = req.body;
     const data = await this._authService.sendSmsOtp(dto);
-    res.json(new ApiResponse(true, 'SMS OTP sent', data));
+    res.json(new ApiResponse(true, MESSAGES.AUTH.SMS_OTP_SENT, data));
   }
 
   async verifySignupSmsOtp(req: Request, res: Response) {
-    const dto: VerifySmsOtpDto = {
-      phone: req.body.phone,
-      otp: req.body.otp,
-    };
+    const dto: VerifySignupSmsOtpDto = req.body;
     await this._authService.verifySignupSmsOtp(dto);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, 'Phone verified'));
+    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.AUTH.PHONE_VERIFIED));
   }
 
   async resendEmailOtp(req: Request, res: Response) {
     const { email } = req.body;
-    if (!email) throw new AppError('Email required', HttpStatus.BAD_REQUEST);
-
     await this._authService.resendEmailOtp(email);
-    res.json(new ApiResponse(true, 'New OTP sent to email'));
+    res.json(new ApiResponse(true, MESSAGES.AUTH.EMAIL_OTP_SENT));
   }
 
   async resendSmsOtp(req: Request, res: Response) {
     const { phone } = req.body;
-    if (!phone) throw new AppError('Phone required', HttpStatus.BAD_REQUEST);
-
     await this._authService.resendSmsOtp(phone);
-    res.json(new ApiResponse(true, 'New OTP sent to phone'));
+    res.json(new ApiResponse(true, MESSAGES.AUTH.SMS_OTP_RESENT));
   }
-
-  /*
-  async verifySmsOtp(req: Request & { auth?: { userId: string } }, res: Response) {
-    const dto: VerifySmsOtpDto = {
-      phone: req.body.phone,
-      otp: req.body.otp,
-    };
-
-    const userId = req.auth!.userId;
-    await this._authService.verifySmsOtp(userId, dto);
-    res.json(new ApiResponse(true, 'Mobile verified'));
-  }
-  */
 
   async login(req: Request, res: Response) {
-    const dto: LoginDto = {
-      identifier: req.body.identifier,
-      password: req.body.password,
-      role: req.body.role,
-    };
+    const dto: LoginDto = req.body;
     const tabId = this.getTabId(req);
     const data = await this._authService.login(dto, tabId);
     setAuthCookies(res, data.user.role, data.tokens);
 
-    res.status(HttpStatus.OK).json(new ApiResponse(true, 'Login successful', { user: data.user }));
+    res
+      .status(HttpStatus.OK)
+      .json(new ApiResponse(true, MESSAGES.AUTH.LOGIN_SUCCESS, { user: data.user }));
   }
 
   async googleLogin(req: Request, res: Response) {
-    const dto = { idToken: req.body.idToken };
+    const dto: GoogleLoginDto = req.body;
     const tabId = this.getTabId(req);
 
     const data = await this._authService.googleLogin(dto, tabId);
     setAuthCookies(res, data.user.role, data.tokens);
     res
       .status(HttpStatus.OK)
-      .json(new ApiResponse(true, 'Google login successful', { user: data.user }));
+      .json(new ApiResponse(true, MESSAGES.AUTH.GOOGLE_LOGIN_SUCCESS, { user: data.user }));
   }
 
   async forgotPassword(req: Request, res: Response) {
-    const dto: ForgotPasswordDto = {
-      email: req.body.email,
-    };
+    const dto: ForgotPasswordDto = req.body;
     const data = await this._authService.forgotPassword(dto);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, 'Reset OTP sent', data));
+    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.AUTH.RESET_OTP_SENT, data));
   }
 
   async resendResetOtp(req: Request, res: Response): Promise<void> {
     const { email } = req.body;
 
-    if (!email) {
-      res.status(HttpStatus.BAD_REQUEST).json({
-        message: MESSAGES.AUTH.EMAIL_REQUIRED,
-      });
-      return;
-    }
-
     await this._authService.resendResetOtp(email.trim().toLowerCase());
 
-    res.json(new ApiResponse(true, 'Reset OTP sent to your email'));
+    res.json(new ApiResponse(true, MESSAGES.AUTH.RESET_OTP_RESENT));
   }
 
   async verifyResetOtp(req: Request, res: Response): Promise<void> {
     const { email, otp } = req.body;
 
-    if (!email || !otp) {
-      res.status(HttpStatus.BAD_REQUEST).json({
-        message: MESSAGES.AUTH.EMAIL_AND_OTP_REQUIRED,
-      });
-      return;
-    }
-
     await this._authService.verifyResetOtp(email.trim().toLowerCase(), otp);
 
-    res.json(new ApiResponse(true, 'Reset OTP verified'));
+    res.json(new ApiResponse(true, MESSAGES.AUTH.RESET_OTP_VERIFIED));
   }
 
   async resetPassword(req: Request, res: Response) {
-    const dto: ResetPasswordDto = {
-      email: req.body.email,
-      otp: req.body.otp,
-      newPassword: req.body.newPassword,
-    };
+    const dto: ResetPasswordDto = req.body;
     const data = await this._authService.resetPassword(dto);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, 'Password reset successful', data));
+    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.AUTH.RESET_OK, data));
   }
 
   async refresh(req: Request, res: Response) {
@@ -187,7 +139,9 @@ export class AuthController implements IAuthController {
     const tabId = this.getTabId(req);
     const data = await this._authService.refresh(token, tabId);
     setAuthCookies(res, data.user.role, data.tokens);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, 'Token refreshed', { user: data.user }));
+    res
+      .status(HttpStatus.OK)
+      .json(new ApiResponse(true, MESSAGES.AUTH.TOKEN_REFRESHED, { user: data.user }));
   }
 
   async me(req: Request & { auth?: { userId: string } }, res: Response) {
@@ -196,7 +150,7 @@ export class AuthController implements IAuthController {
     }
     const data = await this._authService.me(req.auth.userId);
 
-    res.status(HttpStatus.OK).json(new ApiResponse(true, 'Me', data));
+    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.AUTH.ME_SUCCESS, data));
   }
 
   async logout(req: Request, res: Response) {
@@ -208,19 +162,12 @@ export class AuthController implements IAuthController {
   }
 
   async applyAsStylist(req: Request, res: Response): Promise<void> {
-    const dto: ApplyAsStylistDto = {
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      specialization: req.body.specialization,
-      experience: Number(req.body.experience),
-    };
-
+    const dto: ApplyAsStylistDto = req.body;
     const data = await this._authService.applyAsStylist(dto);
 
     res
       .status(HttpStatus.CREATED)
-      .json(new ApiResponse(true, 'Stylist application submitted', data));
+      .json(new ApiResponse(true, MESSAGES.AUTH.STYLIST_APPLICATION_SUBMITTED, data));
   }
 
   async uploadProfilePicture(req: Request & { auth?: { userId: string } }, res: Response) {
@@ -228,7 +175,7 @@ export class AuthController implements IAuthController {
 
     res
       .status(HttpStatus.OK)
-      .json(new ApiResponse(true, 'Profile picture uploaded successfully', data));
+      .json(new ApiResponse(true, MESSAGES.AUTH.PROFILE_PICTURE_UPLOAD_SUCCESS, data));
   }
 
   async updateProfilePicture(req: Request & { auth?: { userId: string } }, res: Response) {
@@ -236,7 +183,7 @@ export class AuthController implements IAuthController {
 
     res
       .status(HttpStatus.OK)
-      .json(new ApiResponse(true, 'Profile picture updated successfully', data));
+      .json(new ApiResponse(true, MESSAGES.AUTH.PROFILE_PICTURE_UPDATE_SUCCESS, data));
   }
 
   async changePassword(req: Request & { auth?: { userId: string } }, res: Response) {
@@ -245,13 +192,7 @@ export class AuthController implements IAuthController {
       throw new AppError(MESSAGES.AUTH.AUTH_REQUIRED, HttpStatus.UNAUTHORIZED);
     }
 
-    const dto = {
-      currentPassword: req.body.currentPassword,
-      newPassword: req.body.newPassword,
-      confirmPassword: req.body.confirmPassword,
-    };
-
-    const data = await this._profileService.changePassword(userId, dto);
+    const data = await this._profileService.changePassword(userId, req.body);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, data.message, data));
   }
@@ -262,16 +203,7 @@ export class AuthController implements IAuthController {
       throw new AppError(MESSAGES.AUTH.AUTH_REQUIRED, HttpStatus.UNAUTHORIZED);
     }
 
-    //Validate input
-
-    const dto = {
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      bio: req.body.bio,
-    };
-
-    const data = await this._profileService.updateProfile(userId, dto);
+    const data = await this._profileService.updateProfile(userId, req.body);
 
     res.status(HttpStatus.OK).json(new ApiResponse(true, data.message, data));
   }

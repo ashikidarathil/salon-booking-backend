@@ -8,7 +8,6 @@ import { IChatService } from '../modules/chat/service/IChatService';
 export const initCronJobs = () => {
   console.log('[CRON] Initializing Cron Jobs...');
 
-  // 1. Cleanup expired pending bookings every 5 minutes
   cron.schedule('*/5 * * * *', async () => {
     try {
       const bookingQueryService = container.resolve<IBookingQueryService>(
@@ -23,15 +22,15 @@ export const initCronJobs = () => {
     }
   });
 
-  // 2. Monthly escrow release — runs on 1st of every month at midnight
-  cron.schedule('0 0 1 * *', async () => {
+  // Escrow release — runs every 2 minutes (User requested)
+  cron.schedule('*/2 * * * *', async () => {
     try {
-      console.log('[CRON] Starting monthly escrow release...');
+      console.log('[CRON] Starting daily escrow release...');
       const escrowService = container.resolve<IEscrowService>(TOKENS.EscrowService);
-      await escrowService.releaseMonthlyEscrow();
-      console.log('[CRON] Monthly escrow release completed.');
+      await escrowService.releaseDailyEscrow();
+      console.log('[CRON] Daily escrow release completed.');
     } catch (error) {
-      console.error('[CRON] Error in monthly escrow release job:', error);
+      console.error('[CRON] Error in daily escrow release job:', error);
     }
   });
 
@@ -49,6 +48,6 @@ export const initCronJobs = () => {
   });
 
   console.log('[CRON] Booking cleanup job scheduled (every 5 minutes)');
-  console.log('[CRON] Monthly escrow release job scheduled (1st of every month)');
+  console.log('[CRON] Escrow release job scheduled (every 2 minutes)');
   console.log('[CRON] Chat auto-close job scheduled (every hour)');
 };

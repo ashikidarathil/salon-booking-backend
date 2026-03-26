@@ -4,7 +4,7 @@ process.on('uncaughtException', (err) => {
   console.error('CRITICAL UNCAUGHT EXCEPTION:', err);
   process.exit(1);
 });
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', (reason) => {
   console.error('CRITICAL UNHANDLED REJECTION:', reason);
 });
 import { env } from './config/env';

@@ -27,40 +27,38 @@ export class ChatController {
     const userId = req.auth!.userId;
     const room = await this.chatService.initializeRoom(bookingId, userId);
 
-    res
-      .status(HttpStatus.OK)
-      .json(
-        ApiResponse.success(CHAT_MESSAGES.ROOM_CREATED, ChatMapper.toRoomResponse(room)),
-      );
+    return ApiResponse.success(res, ChatMapper.toRoomResponse(room), CHAT_MESSAGES.ROOM_CREATED);
   };
 
-  getUserRooms = async (req: Request & { auth?: AuthPayload }, res: Response) => {
+  getUserRooms = async (
+    req: Request & { auth?: AuthPayload },
+    res: Response,
+  ): Promise<Response> => {
     const userId = req.auth!.userId;
-    const rooms = await this.chatService.getUserRooms(userId);
+    const search = req.query.search as string | undefined;
+    const rooms = await this.chatService.getUserRooms(userId, search);
 
-    res
-      .status(HttpStatus.OK)
-      .json(ApiResponse.success(CHAT_MESSAGES.FETCHED, rooms.map(ChatMapper.toRoomResponse)));
+    return ApiResponse.success(res, rooms.map(ChatMapper.toRoomResponse), CHAT_MESSAGES.FETCHED);
   };
 
-  getStylistRooms = async (req: Request & { auth?: AuthPayload }, res: Response) => {
+  getStylistRooms = async (
+    req: Request & { auth?: AuthPayload },
+    res: Response,
+  ): Promise<Response> => {
     const userId = req.auth!.userId;
-    const rooms = await this.chatService.getStylistRooms(userId);
+    const search = req.query.search as string | undefined;
+    const rooms = await this.chatService.getStylistRooms(userId, search);
 
-    res
-      .status(HttpStatus.OK)
-      .json(ApiResponse.success(CHAT_MESSAGES.FETCHED, rooms.map(ChatMapper.toRoomResponse)));
+    return ApiResponse.success(res, rooms.map(ChatMapper.toRoomResponse), CHAT_MESSAGES.FETCHED);
   };
 
-  getAllRoomsAdmin = async (req: Request, res: Response) => {
+  getAllRoomsAdmin = async (req: Request, res: Response): Promise<Response> => {
     const limit = req.query.limit ? parseInt(req.query.limit as string) : 50;
     const skip = req.query.skip ? parseInt(req.query.skip as string) : 0;
 
     const rooms = await this.chatService.getAllRooms(limit, skip);
 
-    res
-      .status(HttpStatus.OK)
-      .json(ApiResponse.success(CHAT_MESSAGES.FETCHED, rooms.map(ChatMapper.toRoomResponse)));
+    return ApiResponse.success(res, rooms.map(ChatMapper.toRoomResponse), CHAT_MESSAGES.FETCHED);
   };
 
   getRoomMessages = async (req: Request & { auth?: AuthPayload }, res: Response) => {
@@ -73,11 +71,11 @@ export class ChatController {
     }
 
     const messages = await this.chatService.getRoomMessages(roomId, limit, skip);
-    res
-      .status(HttpStatus.OK)
-      .json(
-        ApiResponse.success(CHAT_MESSAGES.FETCHED, messages.map(ChatMapper.toMessageResponse)),
-      );
+    return ApiResponse.success(
+      res,
+      messages.map((m) => ChatMapper.toMessageResponse(m)),
+      CHAT_MESSAGES.FETCHED,
+    );
   };
 
   markAsRead = async (req: Request & { auth?: AuthPayload }, res: Response) => {
@@ -90,10 +88,13 @@ export class ChatController {
 
     await this.chatService.markMessagesAsRead(roomId, userId);
 
-    res.status(HttpStatus.OK).json(ApiResponse.success(CHAT_MESSAGES.MESSAGES_READ));
+    return ApiResponse.success(res, null, CHAT_MESSAGES.MESSAGES_READ);
   };
 
-  getUnreadCount = async (req: Request & { auth?: AuthPayload }, res: Response) => {
+  getUnreadCount = async (
+    req: Request & { auth?: AuthPayload },
+    res: Response,
+  ): Promise<Response> => {
     const { roomId } = req.params;
     const userId = req.auth!.userId;
 
@@ -102,7 +103,13 @@ export class ChatController {
     }
 
     const count = await this.chatService.getUnreadCount(roomId, userId);
-    res.status(HttpStatus.OK).json(ApiResponse.success(CHAT_MESSAGES.FETCHED, { count }));
+    return ApiResponse.success(res, { count }, CHAT_MESSAGES.FETCHED);
+  };
+
+  getTotalUnreadCount = async (req: Request & { auth?: AuthPayload }, res: Response) => {
+    const userId = req.auth!.userId;
+    const count = await this.chatService.getTotalUnreadCount(userId);
+    return ApiResponse.success(res, { count }, CHAT_MESSAGES.FETCHED);
   };
 
   uploadMedia = async (req: Request & { auth?: AuthPayload }, res: Response) => {
@@ -129,6 +136,6 @@ export class ChatController {
       throw new AppError(CHAT_MESSAGES.UNSUPPORTED_MEDIA, HttpStatus.BAD_REQUEST);
     }
 
-    res.status(HttpStatus.OK).json(ApiResponse.success(CHAT_MESSAGES.MESSAGE_SENT, { mediaUrl }));
+    return ApiResponse.success(res, { mediaUrl }, CHAT_MESSAGES.MESSAGE_SENT);
   };
 }

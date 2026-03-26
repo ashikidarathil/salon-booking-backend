@@ -2,6 +2,7 @@ import type {
   BranchStylistItemDto,
   UnassignedStylistOptionDto,
 } from '../dto/stylistBranch.response.dto';
+import type { StylistStatus } from '../../stylistInvite/constants/stylist.enum';
 
 export class StylistBranchMapper {
   static toBranchStylistItem(input: {
@@ -14,7 +15,7 @@ export class StylistBranchMapper {
     phone?: string;
     specialization: string;
     experience: number;
-    stylistStatus: 'ACTIVE' | 'INACTIVE';
+    stylistStatus: StylistStatus;
     assignedAt: Date;
   }): BranchStylistItemDto {
     return {
@@ -40,7 +41,7 @@ export class StylistBranchMapper {
     phone?: string;
     specialization: string;
     experience: number;
-    stylistStatus: 'ACTIVE' | 'INACTIVE';
+    stylistStatus: StylistStatus;
   }): UnassignedStylistOptionDto {
     return {
       stylistId: input.stylistId,

@@ -21,3 +21,4 @@ import './coupon/index';
 import './payment';
 import './chat/index';
 import './notification/index';
+import './review/index';

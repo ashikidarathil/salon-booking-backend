@@ -3,7 +3,7 @@ import { BaseRepository } from '../../../common/repository/baseRepository';
 import { IStylistWallet, StylistWalletModel } from '../../../models/stylistWallet.model';
 import { IStylistWalletRepository } from './IStylistWalletRepository';
 import { ClientSession, UpdateQuery } from 'mongoose';
-import { toObjectId, ObjectId } from '../../../common/utils/mongoose.util';
+import { toObjectId } from '../../../common/utils/mongoose.util';
 
 @injectable()
 export class StylistWalletRepository

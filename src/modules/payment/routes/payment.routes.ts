@@ -4,31 +4,52 @@ import { authMiddleware } from '../../../common/middleware/auth.middleware';
 import { roleMiddleware } from '../../../common/middleware/role.middleware';
 import { UserRole } from '../../../common/enums/userRole.enum';
 import { API_ROUTES } from '../constants/payment.routes';
+import { validate } from '../../../common/middleware/validation.middleware';
+import {
+  CreateOrderSchema,
+  PaymentVerificationSchema,
+  PayWithWalletSchema,
+  CreateRemainingOrderSchema,
+  PayRemainingWithWalletSchema,
+} from '../dto/payment.schema';
 
 const router = Router();
 const controller = resolvePaymentController();
 
+router.use(authMiddleware);
+
 // User routes
-router.post(API_ROUTES.USER.CREATE_ORDER, authMiddleware, controller.createOrder);
+router.post(
+  API_ROUTES.USER.CREATE_ORDER,
+  validate({ body: CreateOrderSchema }),
+  controller.createOrder,
+);
 
-router.post(API_ROUTES.USER.VERIFY, authMiddleware, controller.verifyPayment);
+router.post(
+  API_ROUTES.USER.VERIFY,
+  validate({ body: PaymentVerificationSchema }),
+  controller.verifyPayment,
+);
 
-router.post(API_ROUTES.USER.PAY_WITH_WALLET, authMiddleware, controller.payWithWallet);
+router.post(
+  API_ROUTES.USER.PAY_WITH_WALLET,
+  validate({ body: PayWithWalletSchema }),
+  controller.payWithWallet,
+);
 
-router.post(API_ROUTES.USER.PAY_REMAINING_ORDER, authMiddleware, controller.createRemainingOrder);
+router.post(
+  API_ROUTES.USER.PAY_REMAINING_ORDER,
+  validate({ body: CreateRemainingOrderSchema }),
+  controller.createRemainingOrder,
+);
 
 router.post(
   API_ROUTES.USER.PAY_REMAINING_WALLET,
-  authMiddleware,
+  validate({ body: PayRemainingWithWalletSchema }),
   controller.payRemainingWithWallet,
 );
 
 // Admin routes
-router.get(
-  API_ROUTES.ADMIN.BASE,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
-  controller.getPaymentById,
-);
+router.get(API_ROUTES.ADMIN.BASE, roleMiddleware([UserRole.ADMIN]), controller.getPaymentById);
 
 export default router;

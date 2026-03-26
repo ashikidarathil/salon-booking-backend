@@ -4,64 +4,72 @@ import { authMiddleware } from '../../../common/middleware/auth.middleware';
 import { roleMiddleware } from '../../../common/middleware/role.middleware';
 import { UserRole } from '../../../common/enums/userRole.enum';
 import { BOOKING_ROUTES } from '../constants/booking.routes';
+import { validate } from '../../../common/middleware/validation.middleware';
+import {
+  CreateBookingSchema,
+  CancelBookingSchema,
+  RescheduleBookingSchema,
+  UpdateBookingStatusSchema,
+  BookingPaginationSchema,
+  BookingStatsSchema,
+} from '../dto/booking.schema';
 
 const router = Router();
 const controller = resolveBookingController();
+
+router.use(['/bookings', '/admin', '/stylist'], authMiddleware);
 
 // ─── User Routes ───────────────────────────────────────────────────────────
 
 router.post(
   BOOKING_ROUTES.USER.BASE,
-  authMiddleware,
   roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
+  validate({ body: CreateBookingSchema }),
   controller.create.bind(controller),
 );
 
 router.get(
   BOOKING_ROUTES.USER.MY_BOOKINGS,
-  authMiddleware,
   roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
+  validate({ query: BookingPaginationSchema }),
   controller.listMyBookings.bind(controller),
 );
 
 router.get(
   BOOKING_ROUTES.USER.BY_ID(':id'),
-  authMiddleware,
   roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
   controller.getDetails.bind(controller),
 );
 
 router.patch(
   BOOKING_ROUTES.USER.CANCEL(':id'),
-  authMiddleware,
   roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
+  validate({ body: CancelBookingSchema }),
   controller.cancel.bind(controller),
 );
 
 router.patch(
   BOOKING_ROUTES.USER.RESCHEDULE(':id'),
-  authMiddleware,
   roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
+  validate({ body: RescheduleBookingSchema }),
   controller.reschedule.bind(controller),
 );
 
 router.patch(
   BOOKING_ROUTES.USER.STATUS(':id'),
-  authMiddleware,
   roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
+  validate({ body: UpdateBookingStatusSchema }),
   controller.updateStatus.bind(controller),
 );
 
 router.post(
   BOOKING_ROUTES.USER.APPLY_COUPON(':id'),
-  authMiddleware,
   roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
   controller.applyCoupon.bind(controller),
 );
 
 router.post(
   BOOKING_ROUTES.USER.REMOVE_COUPON(':id'),
-  authMiddleware,
   roleMiddleware([UserRole.USER, UserRole.STYLIST, UserRole.ADMIN]),
   controller.removeCoupon.bind(controller),
 );
@@ -70,22 +78,21 @@ router.post(
 
 router.get(
   BOOKING_ROUTES.STYLIST.LIST,
-  authMiddleware,
   roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
+  validate({ query: BookingPaginationSchema }),
   controller.listStylistBookings.bind(controller),
 );
 
 router.get(
   BOOKING_ROUTES.STYLIST.TODAY,
-  authMiddleware,
   roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
   controller.getStylistTodayBookings.bind(controller),
 );
 
 router.get(
   BOOKING_ROUTES.STYLIST.STATS,
-  authMiddleware,
   roleMiddleware([UserRole.STYLIST, UserRole.ADMIN]),
+  validate({ query: BookingStatsSchema }),
   controller.getStylistStats.bind(controller),
 );
 
@@ -93,14 +100,13 @@ router.get(
 
 router.get(
   BOOKING_ROUTES.ADMIN.LIST,
-  authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
+  validate({ query: BookingPaginationSchema }),
   controller.listAll.bind(controller),
 );
 
 router.get(
   BOOKING_ROUTES.ADMIN.TODAY,
-  authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.getTodayBookings.bind(controller),
 );

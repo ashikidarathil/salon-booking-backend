@@ -12,40 +12,31 @@ import { WishlistToggleRequestDto } from '../dto/wishlist.dto';
 export class WishlistController {
   constructor(@inject(TOKENS.WishlistService) private readonly _service: WishlistService) {}
 
-  toggle = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  toggle = async (req: AuthenticatedRequest, res: Response): Promise<Response> => {
     const userId = req.auth?.userId;
     if (!userId) {
-      res
-        .status(HttpStatus.UNAUTHORIZED)
-        .json(new ApiResponse(false, WISHLIST_MESSAGES.UNAUTHORIZED));
-      return;
+      return ApiResponse.error(res, WISHLIST_MESSAGES.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
     }
 
     const { stylistId } = req.body as WishlistToggleRequestDto;
     if (!stylistId) {
-      res
-        .status(HttpStatus.BAD_REQUEST)
-        .json(new ApiResponse(false, WISHLIST_MESSAGES.STYLIST_REQUIRED));
-      return;
+      return ApiResponse.error(res, WISHLIST_MESSAGES.STYLIST_REQUIRED, HttpStatus.BAD_REQUEST);
     }
 
     const isAdded = await this._service.toggleFavorite(userId, stylistId);
     const message = isAdded ? WISHLIST_MESSAGES.ADDED : WISHLIST_MESSAGES.REMOVED;
 
-    res.status(HttpStatus.OK).json(new ApiResponse(true, message, { isAdded }));
+    return ApiResponse.success(res, { isAdded }, message);
   };
 
-  getMyFavorites = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  getMyFavorites = async (req: AuthenticatedRequest, res: Response): Promise<Response> => {
     const userId = req.auth?.userId;
     if (!userId) {
-      res
-        .status(HttpStatus.UNAUTHORIZED)
-        .json(new ApiResponse(false, WISHLIST_MESSAGES.UNAUTHORIZED));
-      return;
+      return ApiResponse.error(res, WISHLIST_MESSAGES.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
     }
 
     const { branchId } = req.query;
     const favorites = await this._service.getMyFavorites(userId, branchId as string);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, WISHLIST_MESSAGES.RETRIEVED, favorites));
+    return ApiResponse.success(res, favorites, WISHLIST_MESSAGES.RETRIEVED);
   };
 }

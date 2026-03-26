@@ -15,12 +15,12 @@ export class BranchServiceController {
     private readonly _service: IBranchServiceService,
   ) {}
 
-  list = async (req: Request, res: Response) => {
+  list = async (req: Request, res: Response): Promise<Response> => {
     const data = await this._service.list(req.params.branchId);
-    return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.LISTED, data));
+    return ApiResponse.success(res, data, BRANCH_SERVICE_MESSAGES.LISTED);
   };
 
-  upsert = async (req: AuthReq, res: Response) => {
+  upsert = async (req: AuthReq, res: Response): Promise<Response> => {
     const data = await this._service.upsert(
       req.params.branchId,
       req.params.serviceId,
@@ -32,10 +32,10 @@ export class BranchServiceController {
       req.auth!.userId,
     );
 
-    return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.UPSERTED, data));
+    return ApiResponse.success(res, data, BRANCH_SERVICE_MESSAGES.UPSERTED);
   };
 
-  toggleStatus = async (req: AuthReq, res: Response) => {
+  toggleStatus = async (req: AuthReq, res: Response): Promise<Response> => {
     const data = await this._service.toggleStatus(
       req.params.branchId,
       req.params.serviceId,
@@ -43,10 +43,10 @@ export class BranchServiceController {
       req.auth!.userId,
     );
 
-    return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.STATUS_UPDATED, data));
+    return ApiResponse.success(res, data, BRANCH_SERVICE_MESSAGES.STATUS_UPDATED);
   };
 
-  listPaginated = async (req: Request, res: Response) => {
+  listPaginated = async (req: Request, res: Response): Promise<Response> => {
     const query: PaginationQueryDto = {
       page: req.query.page ? Number(req.query.page) : 1,
       limit: req.query.limit ? Number(req.query.limit) : 10,
@@ -65,10 +65,10 @@ export class BranchServiceController {
     };
 
     const data = await this._service.listPaginated(req.params.branchId, query);
-    return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.LISTED, data));
+    return ApiResponse.success(res, data, BRANCH_SERVICE_MESSAGES.LISTED);
   };
 
-  listPaginatedPublic = async (req: Request, res: Response) => {
+  listPaginatedPublic = async (req: Request, res: Response): Promise<Response> => {
     const query: PaginationQueryDto = {
       page: req.query.page ? Number(req.query.page) : 1,
       limit: req.query.limit ? Number(req.query.limit) : 9,
@@ -84,11 +84,11 @@ export class BranchServiceController {
     };
 
     const data = await this._service.listPaginatedPublic(req.params.branchId, query);
-    return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.LISTED, data));
+    return ApiResponse.success(res, data, BRANCH_SERVICE_MESSAGES.LISTED);
   };
 
-  getDetailsPublic = async (req: Request, res: Response) => {
+  getDetailsPublic = async (req: Request, res: Response): Promise<Response> => {
     const data = await this._service.getDetailsPublic(req.params.branchId, req.params.serviceId);
-    return res.json(new ApiResponse(true, BRANCH_SERVICE_MESSAGES.DETAILS_FETCHED, data));
+    return ApiResponse.success(res, data, BRANCH_SERVICE_MESSAGES.DETAILS_FETCHED);
   };
 }

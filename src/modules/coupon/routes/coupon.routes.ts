@@ -4,46 +4,56 @@ import { authMiddleware } from '../../../common/middleware/auth.middleware';
 import { roleMiddleware } from '../../../common/middleware/role.middleware';
 import { UserRole } from '../../../common/enums/userRole.enum';
 import { API_ROUTES } from '../constants/coupon.routes';
+import { validate } from '../../../common/middleware/validation.middleware';
+import {
+  CreateCouponSchema,
+  UpdateCouponSchema,
+  ValidateCouponSchema,
+  CouponPaginationSchema,
+} from '../dto/coupon.schema';
 
 const router = Router();
 const controller = resolveCouponController();
 
-// User routes (Publicly authenticated)
-router.post(API_ROUTES.USER.VALIDATE, authMiddleware, controller.validateCoupon.bind(controller));
-router.get(API_ROUTES.USER.AVAILABLE, authMiddleware, controller.listAvailableCoupons.bind(controller));
+router.use(authMiddleware);
+
+router.post(
+  API_ROUTES.USER.VALIDATE,
+  validate({ body: ValidateCouponSchema }),
+  controller.validateCoupon.bind(controller),
+);
+router.get(API_ROUTES.USER.AVAILABLE, controller.listAvailableCoupons.bind(controller));
 
 // Admin routes
 router.post(
   API_ROUTES.ADMIN.BASE,
-  authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
+  validate({ body: CreateCouponSchema }),
   controller.createCoupon.bind(controller),
 );
 
 router.get(
   API_ROUTES.ADMIN.BASE,
-  authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
+  validate({ query: CouponPaginationSchema }),
   controller.listAllCoupons.bind(controller),
 );
 
 router.put(
   API_ROUTES.ADMIN.UPDATE,
-  authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
+  validate({ body: UpdateCouponSchema }),
   controller.updateCoupon.bind(controller),
 );
 
 router.patch(
   API_ROUTES.ADMIN.TOGGLE_STATUS,
-  authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.toggleStatus.bind(controller),
 );
 
 router.patch(
   API_ROUTES.ADMIN.DELETE,
-  authMiddleware,
   roleMiddleware([UserRole.ADMIN]),
   controller.toggleDelete.bind(controller),
 );

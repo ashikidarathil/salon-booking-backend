@@ -126,7 +126,7 @@ export class SlotRepository implements ISlotRepository {
       branchId: toObjectId(branchId),
       stylistId: { $in: sIds },
       date,
-      status: SpecialSlotStatus.AVAILABLE,
+      status: { $in: [SpecialSlotStatus.AVAILABLE, SpecialSlotStatus.CANCELLED] },
     }).lean();
   }
 

@@ -1,54 +1,76 @@
-import type { IBooking } from '../../../models/booking.model';
-import type { 
-  BookingResponseDto, 
-  PopulatedUser, 
-  PopulatedStylist, 
-  PopulatedService 
-} from '../dto/booking.response.dto';
+import type {
+  BookingEntity,
+  BookingRef,
+  BookingItemEntity,
+  PopulatedUserRef,
+  PopulatedStylistRef,
+  PopulatedServiceRef,
+} from '../../../common/types/bookingEntity';
+import type { BookingResponseDto } from '../dto/booking.response.dto';
 
 export class BookingMapper {
-  static toResponse(booking: IBooking): BookingResponseDto {
-    const user = booking.userId as unknown as PopulatedUser;
-    const stylist = booking.stylistId as unknown as PopulatedStylist;
+  static toResponse(booking: BookingEntity): BookingResponseDto {
+    const isPopulated = (
+      ref: BookingRef | PopulatedUserRef | PopulatedStylistRef | PopulatedServiceRef,
+    ): ref is { _id: string | { toString(): string } } =>
+      !!ref && typeof ref === 'object' && '_id' in ref;
+
+    const userId = isPopulated(booking.userId) ? booking.userId._id.toString() : booking.userId;
+    const userName = isPopulated(booking.userId)
+      ? (booking.userId as PopulatedUserRef).name
+      : 'Unknown User';
+
+    const stylist = booking.stylistId;
+    const stylistIdStr = isPopulated(stylist) ? stylist._id.toString() : (stylist as string);
+    const stylistName = isPopulated(stylist)
+      ? (stylist as PopulatedStylistRef).userId?.name
+      : 'Unknown Stylist';
 
     return {
-      id: (booking._id as { toString(): string }).toString(),
-      bookingNumber: booking.bookingNumber || `BK-${(booking._id as { toString(): string }).toString().slice(-6).toUpperCase()}`,
-      userId: user?._id?.toString() ?? booking.userId?.toString() ?? '',
-      userName: user?.name ?? 'Unknown User',
-      branchId: booking.branchId?.toString() ?? '',
-      slotId: booking.slotId?.toString(),
-      items: (booking.items ?? []).map((item) => {
-        const service = item.serviceId as unknown as PopulatedService;
-        const itemStylist = item.stylistId as unknown as PopulatedStylist;
+      id: booking.id,
+      bookingNumber: booking.bookingNumber,
+      userId: userId,
+      userName: userName,
+      branchId: booking.branchId,
+      slotId: booking.slotId,
+      items: (booking.items ?? []).map((item: BookingItemEntity) => {
+        const service = item.serviceId;
+        const itemStylist = item.stylistId;
 
         return {
-          serviceId: service?._id?.toString() ?? item.serviceId?.toString() ?? '',
-          serviceName: service?.name ?? 'Unknown Service',
-          serviceImageUrl: service?.imageUrl,
-          stylistId: itemStylist?._id?.toString() ?? item.stylistId?.toString() ?? '',
-          stylistName: itemStylist?.userId?.name ?? 'Unknown Stylist',
+          serviceId: isPopulated(service) ? service._id.toString() : (service as string),
+          serviceName: isPopulated(service)
+            ? (service as PopulatedServiceRef).name
+            : 'Unknown Service',
+          serviceImageUrl: isPopulated(service)
+            ? (service as PopulatedServiceRef).imageUrl
+            : undefined,
+          stylistId: isPopulated(itemStylist)
+            ? itemStylist._id.toString()
+            : (itemStylist as string),
+          stylistName: isPopulated(itemStylist)
+            ? (itemStylist as PopulatedStylistRef).userId?.name
+            : 'Unknown Stylist',
           price: item.price,
           duration: item.duration,
-          date:
-            item.date instanceof Date ? item.date.toISOString() : new Date(item.date).toISOString(),
+          date: item.date.toISOString(),
           startTime: item.startTime,
           endTime: item.endTime,
         };
       }),
-      stylistId: stylist?._id?.toString() ?? booking.stylistId?.toString() ?? '',
-      stylistName: stylist?.userId?.name ?? 'Unknown Stylist',
-      date:
-        booking.date instanceof Date
-          ? booking.date.toISOString()
-          : new Date(booking.date).toISOString(),
+      stylistId: stylistIdStr,
+      stylistName: stylistName || 'Unknown Stylist',
+      date: booking.date.toISOString(),
       startTime: booking.startTime,
       endTime: booking.endTime,
       totalPrice: booking.totalPrice,
       discountAmount: booking.discountAmount || 0,
       payableAmount: booking.payableAmount,
       advanceAmount: booking.advanceAmount,
-      couponId: booking.couponId?.toString(),
+      couponId:
+        booking.couponId && typeof booking.couponId === 'object'
+          ? booking.couponId.toString()
+          : (booking.couponId as string),
       status: booking.status,
       paymentStatus: booking.paymentStatus,
       notes: booking.notes,
@@ -63,7 +85,7 @@ export class BookingMapper {
     };
   }
 
-  static toResponseList(bookings: IBooking[]): BookingResponseDto[] {
-    return bookings.map(booking => this.toResponse(booking));
+  static toResponseList(bookings: BookingEntity[]): BookingResponseDto[] {
+    return bookings.map((booking) => this.toResponse(booking));
   }
 }

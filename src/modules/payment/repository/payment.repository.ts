@@ -3,7 +3,7 @@ import { IPayment, PaymentModel } from '../../../models/payment.model';
 import { IPaymentRepository } from './IPaymentRepository';
 import { injectable } from 'tsyringe';
 import { ClientSession, UpdateQuery } from 'mongoose';
-import { toObjectId, ObjectId } from '../../../common/utils/mongoose.util';
+import { toObjectId } from '../../../common/utils/mongoose.util';
 
 @injectable()
 export class PaymentRepository
@@ -23,7 +23,11 @@ export class PaymentRepository
   }
 
   async softDelete(id: string, session?: ClientSession): Promise<boolean> {
-    const result = await this.update(toObjectId(id).toString(), { isDeleted: true } as UpdateQuery<IPayment>, session);
+    const result = await this.update(
+      toObjectId(id).toString(),
+      { isDeleted: true } as UpdateQuery<IPayment>,
+      session,
+    );
     return !!result;
   }
 

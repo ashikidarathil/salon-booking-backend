@@ -29,6 +29,7 @@ import type { Response, NextFunction } from 'express';
 import { AppError } from './appError';
 import { HttpStatus } from '../enums/httpStatus.enum';
 import { ApiResponse } from '../response/apiResponse';
+import { ValidationError } from './validationError';
 import { logger } from '../../config/logger';
 import { MESSAGES } from '../constants/messages';
 import type { AuthenticatedRequest } from '../types/express';
@@ -47,6 +48,15 @@ export function globalErrorHandler(
       url: req.originalUrl,
       userId: req.auth?.userId ?? 'anonymous',
     });
+
+    if (err instanceof ValidationError) {
+      res.status(err.statusCode).json({
+        success: false,
+        message: err.message,
+        errors: err.errors,
+      });
+      return;
+    }
 
     res.status(err.statusCode).json(new ApiResponse(false, err.message));
     return;

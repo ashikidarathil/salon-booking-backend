@@ -9,6 +9,10 @@ export const STYLIST_INVITE_MESSAGES = {
   USER_BLOCKED: 'User blocked',
   USER_UNBLOCKED: 'User unblocked',
   STYLISTS_LISTED: 'Stylists fetched successfully',
+  STYLIST_FETCHED: 'Stylist retrieved successfully',
+  STYLIST_BLOCKED: 'Stylist blocked',
+  STYLIST_UNBLOCKED: 'Stylist unblocked',
+  POSITION_UPDATED: 'Stylist position updated successfully',
 
   // Error messages
   EMAIL_ALREADY_REGISTERED: 'Email already registered',
@@ -16,8 +20,11 @@ export const STYLIST_INVITE_MESSAGES = {
   INVITE_EXPIRED: 'Invite expired',
   PASSWORD_TOO_SHORT: 'Password must be at least 6 characters',
   USER_NOT_FOUND: 'User not found',
+  STYLIST_NOT_FOUND: 'Stylist not found',
   NOT_STYLIST_APPLICANT: 'User is not a stylist applicant',
   STYLIST_ALREADY_INVITED: 'Stylist already invited / accepted / active',
   MISSING_EMAIL: 'Applied stylist must have an email to send invite',
   UPDATE_FAILED: 'Failed to update stylist account. User not found.',
+  IS_BLOCKED_BOOLEAN: 'isBlocked must be boolean',
+  INVALID_POSITION: 'Invalid position. Must be JUNIOR, SENIOR, or TRAINEE',
 } as const;

@@ -12,6 +12,7 @@ export class CouponMapper {
       expiryDate: coupon.expiryDate.toISOString(),
       maxUsage: coupon.maxUsage,
       usedCount: coupon.usedCount,
+      maxDiscountAmount: coupon.maxDiscountAmount,
       isActive: coupon.isActive,
       isDeleted: coupon.isDeleted,
       applicableServices: coupon.applicableServices?.map((s) => s.toString()),

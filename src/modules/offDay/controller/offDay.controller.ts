@@ -16,29 +16,23 @@ export class OffDayController implements IOffDayController {
     private readonly offDayService: IOffDayService,
   ) {}
 
-  requestOffDay = async (req: Request, res: Response) => {
+  requestOffDay = async (req: Request, res: Response): Promise<Response> => {
     const authReq = req as AuthenticatedRequest;
     const userId = authReq.auth?.userId;
     if (!userId) {
-      res
-        .status(HttpStatus.UNAUTHORIZED)
-        .json(new ApiResponse(false, OFF_DAY_MESSAGES.UNAUTHORIZED));
-      return;
+      return ApiResponse.error(res, OFF_DAY_MESSAGES.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
     }
 
     const dto: OffDayRequestDto = { ...req.body, stylistId: userId };
     const offDay = await this.offDayService.requestOffDay(dto);
-    res.status(HttpStatus.CREATED).json(new ApiResponse(true, OFF_DAY_MESSAGES.CREATED, offDay));
+    return ApiResponse.success(res, offDay, OFF_DAY_MESSAGES.CREATED, HttpStatus.CREATED);
   };
 
-  getMyOffDays = async (req: Request, res: Response) => {
+  getMyOffDays = async (req: Request, res: Response): Promise<Response> => {
     const authReq = req as AuthenticatedRequest;
     const userId = authReq.auth?.userId;
     if (!userId) {
-      res
-        .status(HttpStatus.UNAUTHORIZED)
-        .json(new ApiResponse(false, OFF_DAY_MESSAGES.UNAUTHORIZED));
-      return;
+      return ApiResponse.error(res, OFF_DAY_MESSAGES.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
     }
 
     const startDate = req.query.startDate as string | undefined;
@@ -49,10 +43,10 @@ export class OffDayController implements IOffDayController {
       startDate ? new Date(startDate) : undefined,
       endDate ? new Date(endDate) : undefined,
     );
-    res.status(HttpStatus.OK).json(new ApiResponse(true, OFF_DAY_MESSAGES.FETCHED, offDays));
+    return ApiResponse.success(res, offDays, OFF_DAY_MESSAGES.FETCHED);
   };
 
-  getStylistOffDays = async (req: Request, res: Response) => {
+  getStylistOffDays = async (req: Request, res: Response): Promise<Response> => {
     const { stylistId } = req.params;
     const startDate = req.query.startDate as string | undefined;
     const endDate = req.query.endDate as string | undefined;
@@ -62,10 +56,10 @@ export class OffDayController implements IOffDayController {
       startDate ? new Date(startDate) : undefined,
       endDate ? new Date(endDate) : undefined,
     );
-    res.status(HttpStatus.OK).json(new ApiResponse(true, OFF_DAY_MESSAGES.FETCHED, offDays));
+    return ApiResponse.success(res, offDays, OFF_DAY_MESSAGES.FETCHED);
   };
 
-  getAllOffDays = async (req: Request, res: Response) => {
+  getAllOffDays = async (req: Request, res: Response): Promise<Response> => {
     const startDate = req.query.startDate as string | undefined;
     const endDate = req.query.endDate as string | undefined;
 
@@ -73,28 +67,25 @@ export class OffDayController implements IOffDayController {
       startDate ? new Date(startDate) : undefined,
       endDate ? new Date(endDate) : undefined,
     );
-    res.status(HttpStatus.OK).json(new ApiResponse(true, OFF_DAY_MESSAGES.FETCHED, offDays));
+    return ApiResponse.success(res, offDays, OFF_DAY_MESSAGES.FETCHED);
   };
 
-  updateStatus = async (req: Request, res: Response) => {
+  updateStatus = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     const authReq = req as AuthenticatedRequest;
     const adminId = authReq.auth?.userId;
     if (!adminId) {
-      res
-        .status(HttpStatus.UNAUTHORIZED)
-        .json(new ApiResponse(false, OFF_DAY_MESSAGES.UNAUTHORIZED));
-      return;
+      return ApiResponse.error(res, OFF_DAY_MESSAGES.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
     }
 
     const dto: OffDayActionDto = req.body;
     const offDay = await this.offDayService.updateOffDayStatus(id, adminId, dto);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, OFF_DAY_MESSAGES.UPDATED, offDay));
+    return ApiResponse.success(res, offDay, OFF_DAY_MESSAGES.UPDATED);
   };
 
-  deleteOffDay = async (req: Request, res: Response) => {
+  deleteOffDay = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     await this.offDayService.deleteOffDay(id);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, OFF_DAY_MESSAGES.DELETED));
+    return ApiResponse.success(res, undefined, OFF_DAY_MESSAGES.DELETED);
   };
 }

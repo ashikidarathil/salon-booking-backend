@@ -27,7 +27,7 @@ export class StylistInviteController {
     return req.auth?.userId ?? '';
   }
 
-  async createInvite(req: AuthRequest, res: Response): Promise<void> {
+  async createInvite(req: AuthRequest, res: Response): Promise<Response> {
     const adminId = this.adminId(req);
 
     const dto: CreateStylistInviteRequest = {
@@ -38,22 +38,23 @@ export class StylistInviteController {
 
     const data = await this._service.createInvite(adminId, dto);
 
-    res
-      .status(HttpStatus.CREATED)
-      .json(new ApiResponse(true, STYLIST_INVITE_MESSAGES.INVITE_CREATED, data));
+    return ApiResponse.success(
+      res,
+      data,
+      STYLIST_INVITE_MESSAGES.INVITE_CREATED,
+      HttpStatus.CREATED,
+    );
   }
 
-  async validate(req: AuthRequest, res: Response): Promise<void> {
+  async validate(req: AuthRequest, res: Response): Promise<Response> {
     const dto: ValidateInviteRequest = { token: String(req.params.token || '') };
 
     const data = await this._service.validateInvite(dto);
 
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, STYLIST_INVITE_MESSAGES.INVITE_VALID, data));
+    return ApiResponse.success(res, data, STYLIST_INVITE_MESSAGES.INVITE_VALID);
   }
 
-  async accept(req: AuthRequest, res: Response): Promise<void> {
+  async accept(req: AuthRequest, res: Response): Promise<Response> {
     const tabId = this.getTabId(req);
 
     const dto: AcceptInviteRequest = {
@@ -65,59 +66,47 @@ export class StylistInviteController {
 
     const data = await this._service.acceptInvite(dto, tabId);
 
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, STYLIST_INVITE_MESSAGES.INVITE_ACCEPTED, data));
+    return ApiResponse.success(res, data, STYLIST_INVITE_MESSAGES.INVITE_ACCEPTED);
   }
 
-  async approve(req: AuthRequest, res: Response): Promise<void> {
+  async approve(req: AuthRequest, res: Response): Promise<Response> {
     const adminId = this.adminId(req);
     const userId = String(req.params.userId || '');
 
     const data = await this._service.approveStylist(adminId, userId);
 
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, STYLIST_INVITE_MESSAGES.STYLIST_APPROVED, data));
+    return ApiResponse.success(res, data, STYLIST_INVITE_MESSAGES.STYLIST_APPROVED);
   }
 
-  async reject(req: AuthRequest, res: Response): Promise<void> {
+  async reject(req: AuthRequest, res: Response): Promise<Response> {
     const adminId = this.adminId(req);
     const userId = String(req.params.userId || '');
 
     const data = await this._service.rejectStylist(adminId, userId);
 
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, STYLIST_INVITE_MESSAGES.STYLIST_REJECTED, data));
+    return ApiResponse.success(res, data, STYLIST_INVITE_MESSAGES.STYLIST_REJECTED);
   }
 
-  async toggleBlock(req: AuthRequest, res: Response): Promise<void> {
+  async toggleBlock(req: AuthRequest, res: Response): Promise<Response> {
     const adminId = this.adminId(req);
     const userId = String(req.params.userId || '');
     const block = Boolean(req.body.block);
 
     const data = await this._service.toggleBlock(adminId, userId, block);
 
-    res
-      .status(HttpStatus.OK)
-      .json(
-        new ApiResponse(
-          true,
-          block ? STYLIST_INVITE_MESSAGES.USER_BLOCKED : STYLIST_INVITE_MESSAGES.USER_UNBLOCKED,
-          data,
-        ),
-      );
+    return ApiResponse.success(
+      res,
+      data,
+      block ? STYLIST_INVITE_MESSAGES.USER_BLOCKED : STYLIST_INVITE_MESSAGES.USER_UNBLOCKED,
+    );
   }
 
-  async sendInviteToApplied(req: AuthRequest, res: Response): Promise<void> {
+  async sendInviteToApplied(req: AuthRequest, res: Response): Promise<Response> {
     const adminId = this.adminId(req);
     const userId = String(req.params.userId || '');
 
     const data = await this._service.sendInviteToAppliedStylist(adminId, userId);
 
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, STYLIST_INVITE_MESSAGES.INVITE_SENT, data));
+    return ApiResponse.success(res, data, STYLIST_INVITE_MESSAGES.INVITE_SENT);
   }
 }

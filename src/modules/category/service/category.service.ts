@@ -13,6 +13,7 @@ import type {
   CategoryPaginationQueryDto,
 } from '../dto/category.request.dto';
 import type { CategoryPaginatedResponse } from '../dto/category.response.dto';
+import { CategoryStatus } from '../constants/category.constants';
 import { CategoryMapper } from '../mapper/category.mapper';
 
 @injectable()
@@ -34,7 +35,7 @@ export class CategoryService implements ICategoryService {
     const update: Partial<{
       name: string;
       description?: string;
-      status: 'ACTIVE' | 'INACTIVE';
+      status: CategoryStatus;
     }> = {};
 
     if (dto.name?.trim()) {

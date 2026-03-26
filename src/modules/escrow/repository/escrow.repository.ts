@@ -4,15 +4,16 @@ import { injectable, inject } from 'tsyringe';
 import { PaginatedBaseRepository } from '../../../common/repository/paginatedBaseRepository';
 import { TOKENS } from '../../../common/di/tokens';
 import { QueryBuilderService } from '../../../common/service/queryBuilder/queryBuilder.service';
+import { PaginationQueryParser } from '../../../common/dto/pagination.query.dto';
 import {
-  PaginationQueryDto,
-  PaginationQueryParser,
-} from '../../../common/dto/pagination.query.dto';
-import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
+  PaginatedResponse,
+  PaginationResponseBuilder,
+} from '../../../common/dto/pagination.response.dto';
 import { BookingModel } from '../../../models/booking.model';
 import { StylistModel } from '../../../models/stylist.model';
 import { UserModel } from '../../../models/user.model';
-import { ServiceModel } from '../../../models/service.model';
+import { EscrowPaginationQueryDto } from '../dto/escrow.request.dto';
+
 import {
   toObjectId,
   PopulateOptions,
@@ -79,76 +80,92 @@ export class EscrowRepository
     return query.lean<IEscrow>().exec();
   }
 
-  async findHeldBeforeMonth(currentMonth: string): Promise<IEscrow[]> {
+  async findHeldBeforeDate(date: string): Promise<IEscrow[]> {
     return this._model
       .find({
         status: EscrowStatus.HELD,
-        releaseMonth: { $lt: currentMonth },
+        releaseDate: { $lte: date },
       })
+      .populate('stylistId')
       .lean<IEscrow[]>()
       .exec();
   }
 
-  async findPaginated(query: PaginationQueryDto): Promise<PaginatedResponse<IEscrow>> {
-    const { search, filters } = PaginationQueryParser.parse(query);
-    const complexFilter: Record<string, any> = { ...filters };
+  async findPaginated(query: EscrowPaginationQueryDto): Promise<PaginatedResponse<IEscrow>> {
+    const { search, params, sort } = PaginationQueryParser.parse(query);
+    const complexFilter: Record<string, unknown> & { $or?: Array<Record<string, unknown>> } = {};
 
+    // Apply scalar filters
+    if (query.status) complexFilter.status = query.status;
+    if (query.releaseDate) complexFilter.releaseDate = query.releaseDate;
+    if (query.stylistId) complexFilter.stylistId = toObjectId(query.stylistId);
+
+    // Apply date range filter
+    if (query.startDate || query.endDate) {
+      const dateFilter: Record<string, unknown> = {};
+      if (query.startDate) dateFilter.$gte = new Date(query.startDate);
+      if (query.endDate) dateFilter.$lte = new Date(query.endDate);
+      complexFilter.createdAt = dateFilter;
+    }
+
+    // Apply full-text search by joining related models
     if (search) {
       const regex = new RegExp(search, 'i');
 
-      const matchingBookings = await BookingModel.find({
-        bookingNumber: regex,
-      })
+      const matchingBookings = await BookingModel.find({ bookingNumber: regex })
         .select('_id')
         .lean();
       const bookingIds = matchingBookings.map((b) => b._id);
 
-      const matchingUsers = await UserModel.find({
-        name: regex,
-      })
-        .select('_id')
-        .lean();
+      const matchingUsers = await UserModel.find({ name: regex }).select('_id').lean();
       const userIds = matchingUsers.map((u) => u._id);
 
-      const matchingStylists = await StylistModel.find({
-        userId: { $in: userIds },
-      })
+      const matchingStylists = await StylistModel.find({ userId: { $in: userIds } })
         .select('_id')
         .lean();
       const stylistIds = matchingStylists.map((s) => s._id);
 
       complexFilter.$or = [{ bookingId: { $in: bookingIds } }, { stylistId: { $in: stylistIds } }];
 
-      const customersAsBookings = await BookingModel.find({
-        userId: { $in: userIds },
-      })
+      const customersAsBookings = await BookingModel.find({ userId: { $in: userIds } })
         .select('_id')
         .lean();
       if (customersAsBookings.length > 0) {
-        complexFilter.$or.push({
-          bookingId: { $in: customersAsBookings.map((b) => b._id) },
-        });
+        complexFilter.$or.push({ bookingId: { $in: customersAsBookings.map((b) => b._id) } });
       }
     }
 
-    return this._queryBuilder.paginate(
-      this._model,
-      { ...query, search: undefined, ...complexFilter },
-      [],
-      (doc) => this.toEntity(doc),
-      [
-        {
-          path: 'bookingId',
-          populate: [
-            { path: 'userId', select: 'name' },
-            { path: 'items.serviceId', select: 'name' },
-          ],
-        },
-        {
-          path: 'stylistId',
-          populate: { path: 'userId', select: 'name' },
-        },
-      ],
+    const populateOptions = [
+      {
+        path: 'bookingId',
+        populate: [
+          { path: 'userId', select: 'name' },
+          { path: 'items.serviceId', select: 'name' },
+        ],
+      },
+      {
+        path: 'stylistId',
+        populate: { path: 'userId', select: 'name' },
+      },
+    ];
+
+    const [data, totalItems] = await Promise.all([
+      this._model
+        .find(complexFilter)
+        .sort(sort)
+        .skip(params.skip)
+        .limit(params.limit)
+        .populate(populateOptions)
+        .lean<IEscrow[]>()
+        .exec(),
+      this._model.countDocuments(complexFilter),
+    ]);
+
+    return PaginationResponseBuilder.build(
+      data.map((doc) => this.toEntity(doc)),
+      totalItems,
+      params.page,
+      params.limit,
     );
   }
 }

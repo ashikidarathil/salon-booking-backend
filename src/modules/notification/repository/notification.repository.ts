@@ -28,7 +28,6 @@ export class NotificationRepository
       filter.isRead = isRead;
     }
 
-
     const docs = await this._model
       .find(filter)
       .sort({ createdAt: -1 })
@@ -52,7 +51,7 @@ export class NotificationRepository
   async markAllAsRead(userId: string): Promise<void> {
     await this._model.updateMany(
       { recipientId: toObjectId(userId), isRead: false },
-      { $set: { isRead: true } }
+      { $set: { isRead: true } },
     );
   }
 }

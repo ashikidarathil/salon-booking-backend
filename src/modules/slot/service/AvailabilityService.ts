@@ -260,30 +260,43 @@ export class AvailabilityService implements IAvailabilityService {
           let status = SlotStatus.AVAILABLE;
           let note: string | undefined;
 
-          for (const b of bookingsForStylist) {
-            const isBlocked = b.status === BookingStatus.BLOCKED;
-            const bookingIntervals = isBlocked
-              ? [
-                  {
-                    start: timeToMinutes(b.startTime),
-                    end: timeToMinutes(b.endTime),
-                  },
-                ]
-              : (b.items || [])
-                  .filter((i: IBookingItem) => i.stylistId.toString() === stylistId)
-                  .map((i: IBookingItem) => ({
-                    start: timeToMinutes(i.startTime),
-                    end: timeToMinutes(i.endTime),
-                  }));
+          // Check if a CANCELLED (blocked) special slot covers this time slot
+          const blockedSpecialSlot = allSpecialSlots.find((ss) => {
+            if (ss.stylistId.toString() !== stylistId) return false;
+            const ssStart = timeToMinutes(ss.startTime);
+            const ssEnd = timeToMinutes(ss.endTime);
+            return ss.status === 'CANCELLED' && slotStart < ssEnd && slotEnd > ssStart;
+          });
 
-            const overlapped = bookingIntervals.some(
-              (interval: { start: number; end: number }) =>
-                slotStart < interval.end && slotEnd > interval.start,
-            );
-            if (overlapped) {
-              status = isBlocked ? SlotStatus.BLOCKED : SlotStatus.BOOKED;
-              note = b.notes || (isBlocked ? SLOT_LABELS.BLOCKED_NOTE : undefined);
-              break;
+          if (blockedSpecialSlot) {
+            status = SlotStatus.BLOCKED;
+            note = blockedSpecialSlot.note || SLOT_LABELS.BLOCKED_NOTE;
+          } else {
+            for (const b of bookingsForStylist) {
+              const isBlocked = b.status === BookingStatus.BLOCKED;
+              const bookingIntervals = isBlocked
+                ? [
+                    {
+                      start: timeToMinutes(b.startTime),
+                      end: timeToMinutes(b.endTime),
+                    },
+                  ]
+                : (b.items || [])
+                    .filter((i: IBookingItem) => i.stylistId.toString() === stylistId)
+                    .map((i: IBookingItem) => ({
+                      start: timeToMinutes(i.startTime),
+                      end: timeToMinutes(i.endTime),
+                    }));
+
+              const overlapped = bookingIntervals.some(
+                (interval: { start: number; end: number }) =>
+                  slotStart < interval.end && slotEnd > interval.start,
+              );
+              if (overlapped) {
+                status = isBlocked ? SlotStatus.BLOCKED : SlotStatus.BOOKED;
+                note = b.notes || (isBlocked ? SLOT_LABELS.BLOCKED_NOTE : undefined);
+                break;
+              }
             }
           }
 

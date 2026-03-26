@@ -4,6 +4,15 @@ import { ChatRoomModel, ChatRoomStatus, IChatRoom } from '../../../models/chatRo
 import { IChatRoomRepository } from './IChatRoomRepository';
 import { toObjectId } from '../../../common/utils/mongoose.util';
 
+// Typed interfaces for populated references within this repository
+interface PopulatedStylistSearch {
+  userId?: { name?: string };
+}
+
+interface PopulatedBookingSearch {
+  bookingNumber?: string;
+}
+
 @injectable()
 export class ChatRoomRepository
   extends BaseRepository<IChatRoom, IChatRoom>
@@ -28,11 +37,10 @@ export class ChatRoomRepository
     });
   }
 
-  async findUserRooms(userId: string): Promise<IChatRoom[]> {
-    return this.find(
+  async findUserRooms(userId: string, search?: string): Promise<IChatRoom[]> {
+    const rooms = await this.find(
       { userId: toObjectId(userId) },
       [
-        // Stylist has no name — populate its userId to get the User name
         {
           path: 'stylistId',
           select: 'userId profilePicture',
@@ -42,18 +50,39 @@ export class ChatRoomRepository
       ],
       { lastMessageAt: -1 },
     );
+
+    if (!search) return rooms;
+
+    const lowerSearch = search.toLowerCase();
+    return rooms.filter((room) => {
+      const stylist = room.stylistId as unknown as PopulatedStylistSearch;
+      const booking = room.bookingId as unknown as PopulatedBookingSearch;
+      const stylistName = stylist?.userId?.name?.toLowerCase() ?? '';
+      const bookingRef = booking?.bookingNumber?.toLowerCase() ?? '';
+      return stylistName.includes(lowerSearch) || bookingRef.includes(lowerSearch);
+    });
   }
 
-  async findStylistRooms(stylistId: string): Promise<IChatRoom[]> {
-    return this.find(
+  async findStylistRooms(stylistId: string, search?: string): Promise<IChatRoom[]> {
+    const rooms = await this.find(
       { stylistId: toObjectId(stylistId) },
       [
-        // User model has a single `name` field
         { path: 'userId', select: 'name profilePicture' },
         { path: 'bookingId', select: 'bookingNumber status completedAt cancelledAt' },
       ],
       { lastMessageAt: -1 },
     );
+
+    if (!search) return rooms;
+
+    const lowerSearch = search.toLowerCase();
+    return rooms.filter((room) => {
+      const user = room.userId as unknown as { name?: string };
+      const booking = room.bookingId as unknown as PopulatedBookingSearch;
+      const userName = user?.name?.toLowerCase() ?? '';
+      const bookingRef = booking?.bookingNumber?.toLowerCase() ?? '';
+      return userName.includes(lowerSearch) || bookingRef.includes(lowerSearch);
+    });
   }
 
   async findAll(limit = 50, skip = 0): Promise<IChatRoom[]> {
@@ -74,7 +103,6 @@ export class ChatRoomRepository
       .exec();
     return docs.map((d) => this.toEntity(d));
   }
-
 
   async updateLastMessage(roomId: string, message: string): Promise<void> {
     await this.update(roomId, {
@@ -109,9 +137,7 @@ export class ChatRoomRepository
       .exec();
 
     // Only rooms where the populate matched (booking not null)
-    const roomIdsToClose = expiredRooms
-      .filter((r) => r.bookingId != null)
-      .map((r) => r._id);
+    const roomIdsToClose = expiredRooms.filter((r) => r.bookingId != null).map((r) => r._id);
 
     if (roomIdsToClose.length === 0) return 0;
 

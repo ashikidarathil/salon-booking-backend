@@ -64,4 +64,5 @@ export interface IStylistRepository {
   findByUserId(userId: string): Promise<StylistListItem | null>;
   findIdByUserId(userId: string): Promise<string | null>;
   updateByUserId(userId: string, data: Partial<StylistListItem>): Promise<void>;
+  update(id: string, data: unknown): Promise<void>;
 }

@@ -1,3 +1,5 @@
+import type { StylistStatus } from '../../stylistInvite/constants/stylist.enum';
+
 export interface BranchStylistItemDto {
   mappingId: string;
   branchId: string;
@@ -11,7 +13,7 @@ export interface BranchStylistItemDto {
 
   specialization: string;
   experience: number;
-  stylistStatus: 'ACTIVE' | 'INACTIVE';
+  stylistStatus: StylistStatus;
 
   assignedAt: string;
 }
@@ -26,5 +28,5 @@ export interface UnassignedStylistOptionDto {
 
   specialization: string;
   experience: number;
-  stylistStatus: 'ACTIVE' | 'INACTIVE';
+  stylistStatus: StylistStatus;
 }

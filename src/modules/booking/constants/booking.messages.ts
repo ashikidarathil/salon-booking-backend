@@ -14,12 +14,23 @@ export const BOOKING_MESSAGES = {
   NO_SERVICES: 'No services selected for booking',
   CANCEL_LEAD_TIME: 'Bookings can only be cancelled at least 12 hours before the appointment.',
   CANCEL_FAILED: 'Failed to cancel booking',
+  FAILED_TO_UPDATE: 'Failed to update booking status',
 
   RESCHEDULE_CUSTOMER_ONLY: 'You are not authorized to reschedule this booking',
+  ONLY_CONFIRMED_BOOKING_RESCHEDULE: 'Only confirmed bookings can be rescheduled',
   RESCHEDULE_ONCE_ONLY: 'Booking can only be rescheduled once.',
   RESCHEDULE_LEAD_TIME: 'Rescheduling must be done at least 12 hours in advance.',
   RESCHEDULE_FAILED: 'Failed to reschedule booking',
+  RESCHEDULE_ADVANCE_PAYMENT: 'Rescheduling is only allowed after advance payment',
+  RESCHEDULE_LEAD_TIME_24: 'Rescheduling must be done at least 24 hours before the appointment',
   SERVICES_NOT_AVAILABLE: 'One or more services are not available',
+  RESCHEDULE_FAILED_24: 'Failed to reschedule booking',
+
+  COUPON_PENDING_BOOKING: 'Coupon can only be applied to pending bookings',
+  FAILED_TO_APPLY_COUPON: 'Failed to apply coupon',
+  COUPON_REMOVE_PENDING_BOOKING: 'Coupon can only be removed from pending bookings',
+  NO_COUPON_APPLIED: 'No coupon applied to this booking',
+  FAILED_TO_REMOVE_COUPON: 'Failed to remove coupon',
 
   // Dynamic message factories
   SERVICE_NOT_FOUND: (serviceId: string) => `Service ${serviceId} not found`,

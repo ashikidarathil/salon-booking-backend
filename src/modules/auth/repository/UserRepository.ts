@@ -164,14 +164,24 @@ export class UserRepository
     return !!updated;
   }
 
+  async getProfile(userId: string): Promise<UserEntity> {
+    const user = await this.findById(userId);
+    if (!user) {
+      throw new AppError('User not found', HttpStatus.NOT_FOUND);
+    }
+    return user;
+  }
+
+  async count(filter: Record<string, unknown>): Promise<number> {
+    return this._model.countDocuments(filter);
+  }
+
   async setActiveById(userId: string, isActive: boolean): Promise<void> {
     await this._model.findByIdAndUpdate(userId, { isActive });
   }
 
   async setBlockedById(userId: string, isBlocked: boolean): Promise<void> {
-    console.log(`🔄 Updating user ${userId}: isBlocked = ${isBlocked}`);
-    const updated = await this._model.findByIdAndUpdate(userId, { isBlocked });
-    console.log(`✅ Updated result:`, updated);
+    await this._model.findByIdAndUpdate(userId, { isBlocked });
   }
 
   async setStatusById(userId: string, status: UserStatus): Promise<void> {

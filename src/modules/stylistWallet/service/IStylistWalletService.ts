@@ -1,4 +1,4 @@
-import { StylistWalletResponseDto } from '../dto/stylistWallet.dto';
+import { StylistWalletResponseDto } from '../dto/stylistWallet.response.dto';
 
 export interface IStylistWalletService {
   getWallet(stylistId: string): Promise<StylistWalletResponseDto>;

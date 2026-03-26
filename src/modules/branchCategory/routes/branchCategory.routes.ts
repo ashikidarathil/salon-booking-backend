@@ -5,28 +5,28 @@ import { UserRole } from '../../../common/enums/userRole.enum';
 
 import { BRANCH_CATEGORY_ROUTES } from '../constants/branchCategory.routes';
 import { resolveBranchCategoryController } from '../index';
+import { validate } from '../../../common/middleware/validation.middleware';
+import {
+  ToggleBranchCategorySchema,
+  BranchCategoryPaginationSchema,
+} from '../dto/branchCategory.schema';
 
 const router = Router();
 const controller = resolveBranchCategoryController();
 
-router.get(
-  BRANCH_CATEGORY_ROUTES.ADMIN.LIST,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
-  controller.list,
-);
+router.use('/admin', authMiddleware, roleMiddleware([UserRole.ADMIN]));
+
+router.get(BRANCH_CATEGORY_ROUTES.ADMIN.LIST, controller.list);
 
 router.get(
   BRANCH_CATEGORY_ROUTES.ADMIN.LIST_PAGINATED,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ query: BranchCategoryPaginationSchema }),
   controller.listPaginated,
 );
 
 router.patch(
   BRANCH_CATEGORY_ROUTES.ADMIN.TOGGLE,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ body: ToggleBranchCategorySchema }),
   controller.toggle,
 );
 

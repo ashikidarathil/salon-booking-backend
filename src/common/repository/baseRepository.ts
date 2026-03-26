@@ -5,9 +5,28 @@ export type SortOptions =
   | string
   | { [key: string]: SortOrder | { $meta: 'textScore' } }
   | [string, SortOrder][];
-type MongoFilter = Record<string, unknown>;
+export type MongoFilter = Record<string, unknown>;
 
-export abstract class BaseRepository<TDocument extends Document, TEntity> {
+export interface IBaseRepository<TDocument, TEntity> {
+  findById(id: string, populate?: PopulateOptions[]): Promise<TEntity | null>;
+  findOne(filter: MongoFilter, populate?: PopulateOptions[]): Promise<TEntity | null>;
+  find(filter: MongoFilter, populate?: PopulateOptions[], sort?: SortOptions): Promise<TEntity[]>;
+  create(data: Partial<TDocument>, session?: ClientSession): Promise<TEntity>;
+  update(
+    id: string,
+    data: UpdateQuery<TDocument>,
+    session?: ClientSession,
+  ): Promise<TEntity | null>;
+  delete(id: string, session?: ClientSession): Promise<boolean>;
+  softDelete(id: string, session?: ClientSession): Promise<boolean>;
+  save(doc: TDocument): Promise<TEntity>;
+  count(filter: MongoFilter): Promise<number>;
+}
+
+export abstract class BaseRepository<
+  TDocument extends Document,
+  TEntity,
+> implements IBaseRepository<TDocument, TEntity> {
   protected readonly _model: Model<TDocument>;
 
   constructor(model: Model<TDocument>) {

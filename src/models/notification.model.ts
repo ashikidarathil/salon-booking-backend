@@ -61,7 +61,7 @@ const NotificationSchema = new Schema<INotification>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export const NotificationModel = mongoose.model<INotification>('Notification', NotificationSchema);

@@ -6,7 +6,12 @@ import { TOKENS } from '../../../common/di/tokens';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { ApiResponse } from '../../../common/response/apiResponse';
 import { COUPON_MESSAGES } from '../constants/coupon.messages';
-import { CouponPaginationQueryDto, ValidateCouponRequestDto, CreateCouponRequestDto, UpdateCouponRequestDto } from '../dto/coupon.request.dto';
+import {
+  CouponPaginationQueryDto,
+  ValidateCouponRequestDto,
+  CreateCouponRequestDto,
+  UpdateCouponRequestDto,
+} from '../dto/coupon.request.dto';
 
 @injectable()
 export class CouponController implements ICouponController {
@@ -15,47 +20,46 @@ export class CouponController implements ICouponController {
     private couponService: ICouponService,
   ) {}
 
-  createCoupon = async (req: Request, res: Response): Promise<void> => {
+  createCoupon = async (req: Request, res: Response): Promise<Response> => {
     const body = req.body as CreateCouponRequestDto;
     const coupon = await this.couponService.createCoupon(body);
-    res
-      .status(HttpStatus.CREATED)
-      .json(ApiResponse.success(COUPON_MESSAGES.CREATE_SUCCESS, coupon));
+    return ApiResponse.success(res, coupon, COUPON_MESSAGES.CREATE_SUCCESS, HttpStatus.CREATED);
   };
 
-  updateCoupon = async (req: Request, res: Response): Promise<void> => {
+  updateCoupon = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     const body = req.body as UpdateCouponRequestDto;
     const coupon = await this.couponService.updateCoupon(id, body);
-    res.status(HttpStatus.OK).json(ApiResponse.success('Coupon updated successfully', coupon));
+    return ApiResponse.success(res, coupon, COUPON_MESSAGES.COUPON_UPDATED);
   };
 
-  validateCoupon = async (req: Request, res: Response): Promise<void> => {
+  validateCoupon = async (req: Request, res: Response): Promise<Response> => {
     const { code, amount } = req.body as ValidateCouponRequestDto;
     const coupon = await this.couponService.validateCoupon(code, amount);
-    res.status(HttpStatus.OK).json(ApiResponse.success(COUPON_MESSAGES.VALIDATE_SUCCESS, coupon));
+    return ApiResponse.success(res, coupon, COUPON_MESSAGES.VALIDATE_SUCCESS);
   };
 
-  listAvailableCoupons = async (_req: Request, res: Response): Promise<void> => {
+  listAvailableCoupons = async (_req: Request, res: Response): Promise<Response> => {
     const coupons = await this.couponService.listAvailableCoupons();
-    res.status(HttpStatus.OK).json(ApiResponse.success(COUPON_MESSAGES.FETCH_SUCCESS, coupons));
+    return ApiResponse.success(res, coupons, COUPON_MESSAGES.FETCH_SUCCESS);
   };
 
-  listAllCoupons = async (req: Request, res: Response): Promise<void> => {
-    const query = req.query as unknown as CouponPaginationQueryDto;
-    const coupons = await this.couponService.listCoupons(query);
-    res.status(HttpStatus.OK).json(ApiResponse.success(COUPON_MESSAGES.FETCH_SUCCESS, coupons));
+  listAllCoupons = async (req: Request, res: Response): Promise<Response> => {
+    const coupons = await this.couponService.listCoupons(
+      req.query as unknown as CouponPaginationQueryDto,
+    );
+    return ApiResponse.success(res, coupons, COUPON_MESSAGES.FETCH_SUCCESS);
   };
 
-  toggleStatus = async (req: Request, res: Response): Promise<void> => {
+  toggleStatus = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     const coupon = await this.couponService.toggleCouponStatus(id);
-    res.status(HttpStatus.OK).json(ApiResponse.success(COUPON_MESSAGES.TOGGLE_SUCCESS, coupon));
+    return ApiResponse.success(res, coupon, COUPON_MESSAGES.TOGGLE_SUCCESS);
   };
 
-  toggleDelete = async (req: Request, res: Response): Promise<void> => {
+  toggleDelete = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     const coupon = await this.couponService.toggleDeleteStatus(id);
-    res.status(HttpStatus.OK).json(ApiResponse.success(COUPON_MESSAGES.DELETE_SUCCESS, coupon));
+    return ApiResponse.success(res, coupon, COUPON_MESSAGES.DELETE_SUCCESS);
   };
 }

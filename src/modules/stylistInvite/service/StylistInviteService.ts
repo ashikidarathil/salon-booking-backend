@@ -9,6 +9,8 @@ import { UserRole } from '../../../common/enums/userRole.enum';
 import { env } from '../../../config/env';
 import type { IEmailService } from '../../../common/service/email/IEmailService';
 import { stylistInviteEmailTemplate } from '../../../common/service/email/stylistInvite.template';
+import type { INotificationService } from '../../notification/service/INotificationService';
+import { NotificationType } from '../../../models/notification.model';
 
 import type { IStylistInviteService } from './IStylistInviteService';
 import type { CreateStylistInviteRequest } from '../dto/request/CreateStylistInvite.request';
@@ -38,6 +40,7 @@ export class StylistInviteService implements IStylistInviteService {
     @inject(TOKENS.StylistRepository) private readonly _stylistRepo: IStylistRepository,
     @inject(TOKENS.UserRepository) private readonly _userRepo: IUserRepository,
     @inject(TOKENS.EmailService) private readonly _email: IEmailService,
+    @inject(TOKENS.NotificationService) private readonly _notification: INotificationService,
   ) {}
 
   /**
@@ -230,6 +233,18 @@ export class StylistInviteService implements IStylistInviteService {
     await this._userRepo.setActiveById(userId, true);
     await this._userRepo.setStatusById(userId, 'ACTIVE');
     await this._stylistRepo.activateByUserId(userId);
+
+    // Notify Stylist
+    await this._notification.createNotification({
+      recipientId: userId,
+      senderId: adminId,
+      type: NotificationType.STYLIST_STATUS_UPDATE,
+      title: 'Stylist Application Approved 🎉',
+      message:
+        'Congratulations! Your application to join as a stylist has been approved. You can now log in to the Stylist Portal.',
+      link: '/stylist',
+    });
+
     return { success: true };
   }
 
@@ -242,6 +257,17 @@ export class StylistInviteService implements IStylistInviteService {
     await this._userRepo.setActiveById(userId, false);
     await this._userRepo.setStatusById(userId, 'REJECTED');
     await this._userRepo.setBlockedById(userId, true);
+
+    // Notify Stylist
+    await this._notification.createNotification({
+      recipientId: userId,
+      senderId: adminId,
+      type: NotificationType.STYLIST_STATUS_UPDATE,
+      title: 'Stylist Application Update',
+      message:
+        'Unfortunately, your application to join as a stylist has not been approved at this time.',
+    });
+
     return { success: true };
   }
 

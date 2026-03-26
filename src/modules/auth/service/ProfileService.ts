@@ -8,9 +8,7 @@ import { MESSAGES } from '../../../common/constants/messages';
 import type { IProfileService } from './IProfileService';
 import type { UploadProfilePictureDto } from '../dto/profile/UploadProfilePicture.dto';
 import type { UploadProfilePictureResponseDto } from '../dto/profile/UploadProfilePictureResponse.dto';
-import type { ChangePasswordDto } from '../dto/profile/ChangePassword.request';
 import type { ChangePasswordResponseDto } from '../dto/profile/ChangePassword.response';
-import type { UpdateProfileDto } from '../dto/profile/UpdateProfile.request';
 import type { UpdateProfileResponseDto } from '../dto/profile/UpdateProfile.response';
 
 import type { IImageService } from '../../../common/service/image/IImageService';
@@ -18,6 +16,7 @@ import type { IUserRepository } from '../repository/IUserRepository';
 import { UserMapper } from '../mapper/user.mapper';
 import { IStylistRepository } from '../../stylistInvite/repository/IStylistRepository';
 import { UserRole } from '../../../common/enums/userRole.enum';
+import type { ChangePasswordDto, UpdateProfileDto } from '../dto/auth.schema';
 
 @injectable()
 export class ProfileService implements IProfileService {
@@ -68,10 +67,6 @@ export class ProfileService implements IProfileService {
       throw new AppError('New password and confirm password do not match', HttpStatus.BAD_REQUEST);
     }
 
-    if (dto.newPassword.length < 8) {
-      throw new AppError('Password must be at least 8 characters long', HttpStatus.BAD_REQUEST);
-    }
-
     const user = await this.userRepository.findByIdWithPassword(userId);
     if (!user) {
       throw new AppError('User not found', HttpStatus.NOT_FOUND);
@@ -109,6 +104,7 @@ export class ProfileService implements IProfileService {
       throw new AppError('User not found', HttpStatus.NOT_FOUND);
     }
 
+    // Business logic check (not just validation)
     if (user.authProvider === 'GOOGLE' && dto.email !== undefined && dto.email !== user.email) {
       throw new AppError(
         'Email cannot be changed for Google authenticated accounts',
@@ -116,23 +112,7 @@ export class ProfileService implements IProfileService {
       );
     }
 
-    if (dto.name !== undefined) {
-      const trimmedName = dto.name.trim();
-      if (trimmedName.length < 2) {
-        throw new AppError('Name must be at least 2 characters long', HttpStatus.BAD_REQUEST);
-      }
-      if (trimmedName.length > 50) {
-        throw new AppError('Name must not exceed 50 characters', HttpStatus.BAD_REQUEST);
-      }
-      dto.name = trimmedName;
-    }
-
     if (dto.email !== undefined && dto.email.trim().length > 0) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(dto.email)) {
-        throw new AppError('Invalid email format', HttpStatus.BAD_REQUEST);
-      }
-
       const existingUserWithEmail = await this.userRepository.findByEmail(dto.email);
       if (existingUserWithEmail && existingUserWithEmail.id !== userId) {
         throw new AppError(
@@ -142,28 +122,13 @@ export class ProfileService implements IProfileService {
       }
     }
 
-    if (dto.phone !== undefined) {
-      const cleanedPhone = dto.phone.replace(/\s+/g, '');
-
-      if (cleanedPhone.length > 0) {
-        const coreNumber = cleanedPhone.startsWith('+91') ? cleanedPhone.slice(3) : cleanedPhone;
-
-        const phoneRegex = /^\d{10}$/;
-        if (!phoneRegex.test(coreNumber)) {
-          throw new AppError('Phone number must contain exactly 10 digits', HttpStatus.BAD_REQUEST);
-        }
-
-        const existingUserWithPhone = await this.userRepository.findByPhone(cleanedPhone);
-        if (existingUserWithPhone && existingUserWithPhone.id !== userId) {
-          throw new AppError(
-            'This phone number is already registered with another account',
-            HttpStatus.CONFLICT,
-          );
-        }
-
-        dto.phone = cleanedPhone;
-      } else {
-        dto.phone = '';
+    if (dto.phone !== undefined && dto.phone.trim().length > 0) {
+      const existingUserWithPhone = await this.userRepository.findByPhone(dto.phone);
+      if (existingUserWithPhone && existingUserWithPhone.id !== userId) {
+        throw new AppError(
+          'This phone number is already registered with another account',
+          HttpStatus.CONFLICT,
+        );
       }
     }
 

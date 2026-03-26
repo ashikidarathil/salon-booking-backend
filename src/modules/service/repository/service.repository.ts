@@ -140,4 +140,8 @@ export class ServiceRepository implements IServiceRepository {
       },
     };
   }
+
+  async update(id: string, data: Partial<ServiceDocument>): Promise<void> {
+    await ServiceModel.findByIdAndUpdate(id, data);
+  }
 }

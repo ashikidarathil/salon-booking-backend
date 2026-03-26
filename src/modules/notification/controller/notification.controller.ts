@@ -13,13 +13,16 @@ import { isValidObjectId } from '../../../common/utils/mongoose.util';
 export class NotificationController {
   constructor(
     @inject(TOKENS.NotificationService)
-    private notificationService: INotificationService
+    private notificationService: INotificationService,
   ) {}
 
-  getMyNotifications = async (req: Request & { auth?: { userId: string } }, res: Response) => {
+  getMyNotifications = async (
+    req: Request & { auth?: { userId: string } },
+    res: Response,
+  ): Promise<Response> => {
     const userId = req.auth!.userId;
     const { limit, skip, isRead } = req.query;
-    
+
     let isReadBool: boolean | undefined = undefined;
     if (isRead === 'true') isReadBool = true;
     else if (isRead === 'false') isReadBool = false;
@@ -32,31 +35,32 @@ export class NotificationController {
     );
     const unreadCount = await this.notificationService.getUnreadCount(userId);
 
-    return res.status(HttpStatus.OK).json(
-      ApiResponse.success(NOTIFICATION_MESSAGES.FETCHED, {
+    return ApiResponse.success(
+      res,
+      {
         notifications: NotificationMapper.toResponseDtoList(notifications),
         unreadCount,
-      })
+      },
+      NOTIFICATION_MESSAGES.FETCHED,
     );
   };
 
-  markAsRead = async (req: Request, res: Response) => {
+  markAsRead = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     if (!id || !isValidObjectId(id)) {
       throw new AppError(NOTIFICATION_MESSAGES.ID_REQUIRED, HttpStatus.BAD_REQUEST);
     }
 
     await this.notificationService.markAsRead(id);
-    return res.status(HttpStatus.OK).json(
-      ApiResponse.success(NOTIFICATION_MESSAGES.READ_SUCCESS)
-    );
+    return ApiResponse.success(res, undefined, NOTIFICATION_MESSAGES.READ_SUCCESS);
   };
 
-  markAllAsRead = async (req: Request & { auth?: { userId: string } }, res: Response) => {
+  markAllAsRead = async (
+    req: Request & { auth?: { userId: string } },
+    res: Response,
+  ): Promise<Response> => {
     const userId = req.auth!.userId;
     await this.notificationService.markAllAsRead(userId);
-    return res.status(HttpStatus.OK).json(
-      ApiResponse.success(NOTIFICATION_MESSAGES.ALL_READ_SUCCESS)
-    );
+    return ApiResponse.success(res, undefined, NOTIFICATION_MESSAGES.ALL_READ_SUCCESS);
   };
 }

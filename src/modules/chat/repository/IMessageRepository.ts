@@ -5,4 +5,5 @@ export interface IMessageRepository {
   findByRoomId(roomId: string, limit?: number, skip?: number): Promise<IMessage[]>;
   markAsRead(roomId: string, receiverId: string): Promise<void>;
   countUnreadMessages(roomId: string, receiverId: string): Promise<number>;
+  countTotalUnread(roomIds: string[], receiverId: string): Promise<number>;
 }

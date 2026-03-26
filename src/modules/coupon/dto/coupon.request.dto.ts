@@ -1,4 +1,4 @@
-import { DiscountType } from '../../../models/coupon.model';
+import { DiscountType, CouponFilterStatus } from '../../../models/coupon.model';
 import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 
 export interface CreateCouponRequestDto {
@@ -8,6 +8,7 @@ export interface CreateCouponRequestDto {
   minBookingAmount: number;
   expiryDate: string;
   maxUsage: number;
+  maxDiscountAmount: number;
   applicableServices?: string[];
 }
 
@@ -21,5 +22,5 @@ export interface ValidateCouponRequestDto {
 }
 
 export interface CouponPaginationQueryDto extends PaginationQueryDto {
-  status?: 'ACTIVE' | 'INACTIVE' | 'DELETED' | 'ALL';
+  status?: CouponFilterStatus;
 }

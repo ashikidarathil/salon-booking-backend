@@ -44,14 +44,16 @@ export class StylistService implements IStylistService {
 
   async toggleBlockStylist(stylistId: string, isBlocked: boolean): Promise<StylistListItem | null> {
     const stylist = await this._stylistRepo.setBlockedById(stylistId, isBlocked);
-    
+
     if (stylist) {
-      this._notificationService.createNotification({
-        recipientId: stylist.userId,
-        type: NotificationType.SYSTEM,
-        title: isBlocked ? 'Account Blocked' : 'Account Unblocked',
-        message: `Your account has been ${isBlocked ? 'blocked' : 'unblocked'} by the administrator.`,
-      }).catch(err => console.error('Failed to notify stylist of block status change:', err));
+      this._notificationService
+        .createNotification({
+          recipientId: stylist.userId,
+          type: NotificationType.SYSTEM,
+          title: isBlocked ? 'Account Blocked' : 'Account Unblocked',
+          message: `Your account has been ${isBlocked ? 'blocked' : 'unblocked'} by the administrator.`,
+        })
+        .catch(() => {}); // Silent failure for notifications
     }
 
     return stylist;
@@ -62,14 +64,16 @@ export class StylistService implements IStylistService {
     position: 'JUNIOR' | 'SENIOR' | 'TRAINEE',
   ): Promise<StylistListItem | null> {
     const stylist = await this._stylistRepo.updatePosition(stylistId, position);
-    
+
     if (stylist) {
-      this._notificationService.createNotification({
-        recipientId: stylist.userId,
-        type: NotificationType.SYSTEM,
-        title: 'Position Updated',
-        message: `Your professional position has been updated to ${position}.`,
-      }).catch(err => console.error('Failed to notify stylist of position update:', err));
+      this._notificationService
+        .createNotification({
+          recipientId: stylist.userId,
+          type: NotificationType.SYSTEM,
+          title: 'Position Updated',
+          message: `Your professional position has been updated to ${position}.`,
+        })
+        .catch(() => {}); // Silent failure for notifications
     }
 
     return stylist;

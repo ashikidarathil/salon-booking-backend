@@ -1,4 +1,5 @@
-import { CouponResponseDto, CreateCouponRequestDto } from '../dto/coupon.dto';
+import { CouponResponseDto } from '../dto/coupon.response.dto';
+import { CreateCouponRequestDto } from '../dto/coupon.request.dto';
 import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 

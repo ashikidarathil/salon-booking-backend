@@ -10,14 +10,8 @@ import {
   BookingStatus,
   PaymentStatus as BookingPaymentStatus,
 } from '../../../models/booking.model';
-import {
-  PaymentResponseDto,
-  OrderResponseDto,
-} from '../dto/payment.response.dto';
-import {
-  CreateOrderRequestDto,
-  PaymentVerificationDto,
-} from '../dto/payment.request.dto';
+import { PaymentResponseDto, OrderResponseDto } from '../dto/payment.response.dto';
+import { CreateOrderRequestDto, PaymentVerificationDto } from '../dto/payment.request.dto';
 import { PaymentMapper } from '../mapper/payment.mapper';
 import { PAYMENT_MESSAGES } from '../constants/payment.messages';
 import { IBookingRepository } from '../../booking/repository/IBookingRepository';
@@ -29,7 +23,6 @@ import { ICouponService } from '../../coupon/service/ICouponService';
 import { IChatService } from '../../chat/service/IChatService';
 import { INotificationService } from '../../notification/service/INotificationService';
 import { NotificationType } from '../../../models/notification.model';
-import { ClientSession } from 'mongoose';
 
 const getIdString = (ref: unknown): string => {
   if (!ref) return '';
@@ -61,9 +54,6 @@ export class PaymentService implements IPaymentService {
     private notificationService: INotificationService,
   ) {}
 
-  /**
-   * CREATE ORDER — for advance payment (20%) of a new PENDING_PAYMENT booking.
-   */
   async createOrder(dto: CreateOrderRequestDto, userId: string): Promise<OrderResponseDto> {
     if (!isValidObjectId(dto.bookingId)) {
       throw new AppError(PAYMENT_MESSAGES.BOOKING_NOT_FOUND, HttpStatus.BAD_REQUEST);
@@ -100,15 +90,11 @@ export class PaymentService implements IPaymentService {
         currency: 'INR',
         keyId: env.RAZORPAY_KEY_ID,
       };
-    } catch (_error) {
+    } catch {
       throw new AppError(PAYMENT_MESSAGES.ORDER_CREATE_FAILED, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
-  /**
-   * VERIFY PAYMENT — handles both advance (20%) and remaining (80%) Razorpay payments.
-   * Escrow is created ONLY when the remaining payment is made and paymentStatus becomes PAID.
-   */
   async verifyPayment(dto: PaymentVerificationDto): Promise<PaymentResponseDto> {
     const isVerified = this.razorpayService.verifySignature(
       dto.orderId,
@@ -158,12 +144,18 @@ export class PaymentService implements IPaymentService {
           if (rawBooking.couponId) {
             await this.couponService.incrementUsedCount(rawBooking.couponId.toString());
           }
-          
+
           const stylistId = getIdString(rawBooking.stylistId);
           const userId = getIdString(rawBooking.userId);
-          await this.chatService.createRoom(rawBooking._id.toString(), userId, stylistId);
-          const stylistUserData = rawBooking.stylistId as unknown as { userId: { _id: string | ObjectId } | string | ObjectId };
-          const stylistUserId = getIdString(typeof stylistUserData.userId === 'object' ? stylistUserData.userId : stylistUserData.userId);
+          await this.chatService.createRoom(rawBooking.id, userId, stylistId);
+          const stylistUserData = rawBooking.stylistId as unknown as {
+            userId: { _id: string | ObjectId } | string | ObjectId;
+          };
+          const stylistUserId = getIdString(
+            typeof stylistUserData.userId === 'object'
+              ? stylistUserData.userId
+              : stylistUserData.userId,
+          );
 
           this.notificationService
             .createNotification({
@@ -185,15 +177,17 @@ export class PaymentService implements IPaymentService {
 
         if (isRemainingPayment) {
           const stylistId = getIdString(rawBooking.stylistId);
-          await this.escrowService.holdAmount(
-            rawBooking._id.toString(),
-            stylistId,
-            rawBooking.payableAmount,
+          await this.escrowService.holdAmount(rawBooking.id, stylistId, rawBooking.payableAmount);
+
+          const stylistUserData = rawBooking.stylistId as unknown as {
+            userId: { _id: string | ObjectId } | string | ObjectId;
+          };
+          const stylistUserId = getIdString(
+            typeof stylistUserData.userId === 'object'
+              ? stylistUserData.userId
+              : stylistUserData.userId,
           );
 
-          const stylistUserData = rawBooking.stylistId as unknown as { userId: { _id: string | ObjectId } | string | ObjectId };
-          const stylistUserId = getIdString(typeof stylistUserData.userId === 'object' ? stylistUserData.userId : stylistUserData.userId);
-          
           this.notificationService
             .createNotification({
               recipientId: stylistUserId,
@@ -210,10 +204,6 @@ export class PaymentService implements IPaymentService {
     return PaymentMapper.toResponseDto(updatedPayment);
   }
 
-  /**
-   * PAY WITH WALLET — handles advance (20%) or remaining (80%) via user wallet.
-   * Escrow is created ONLY when the remaining payment is made.
-   */
   async payWithWallet(bookingId: string, userId: string): Promise<PaymentResponseDto> {
     if (!isValidObjectId(bookingId)) {
       throw new AppError(PAYMENT_MESSAGES.BOOKING_NOT_FOUND, HttpStatus.BAD_REQUEST);
@@ -247,8 +237,8 @@ export class PaymentService implements IPaymentService {
       userId,
       amount,
       isRemainingPayment
-        ? PAYMENT_MESSAGES.WALLET_REMAINING(bookingId)
-        : PAYMENT_MESSAGES.WALLET_ADVANCE(bookingId),
+        ? PAYMENT_MESSAGES.WALLET_REMAINING(booking.bookingNumber)
+        : PAYMENT_MESSAGES.WALLET_ADVANCE(booking.bookingNumber),
       bookingId,
       'BOOKING',
     );
@@ -278,9 +268,15 @@ export class PaymentService implements IPaymentService {
       const bookingUserIdRaw = getIdString(booking.userId);
       await this.chatService.createRoom(bookingId, bookingUserIdRaw, stylistId);
 
-      const stylistUserData = booking.stylistId as unknown as { userId: { _id: string | ObjectId } | string | ObjectId };
-      const stylistUserId = getIdString(typeof stylistUserData.userId === 'object' ? stylistUserData.userId : stylistUserData.userId);
-      
+      const stylistUserData = booking.stylistId as unknown as {
+        userId: { _id: string | ObjectId } | string | ObjectId;
+      };
+      const stylistUserId = getIdString(
+        typeof stylistUserData.userId === 'object'
+          ? stylistUserData.userId
+          : stylistUserData.userId,
+      );
+
       this.notificationService
         .createNotification({
           recipientId: stylistUserId,
@@ -292,7 +288,6 @@ export class PaymentService implements IPaymentService {
         .catch((err) => console.error('Failed to notify stylist of confirmation (wallet):', err));
     }
 
-
     await this.bookingRepository.update({ _id: toObjectId(bookingId) }, updateData);
 
     if (isRemainingPayment) {
@@ -303,10 +298,6 @@ export class PaymentService implements IPaymentService {
     return PaymentMapper.toResponseDto(payment);
   }
 
-  /**
-   * CREATE REMAINING ORDER — separate Razorpay order for the 80% remaining payment.
-   * Only applicable when booking is COMPLETED and paymentStatus is ADVANCE_PAID.
-   */
   async createRemainingOrder(bookingId: string, userId: string): Promise<OrderResponseDto> {
     if (!isValidObjectId(bookingId)) {
       throw new AppError(PAYMENT_MESSAGES.BOOKING_NOT_FOUND, HttpStatus.BAD_REQUEST);
@@ -347,14 +338,11 @@ export class PaymentService implements IPaymentService {
         currency: 'INR',
         keyId: env.RAZORPAY_KEY_ID,
       };
-    } catch (_error) {
+    } catch {
       throw new AppError(PAYMENT_MESSAGES.ORDER_CREATE_FAILED, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
-  /**
-   * PAY REMAINING WITH WALLET — pays the 80% remaining via wallet and creates escrow.
-   */
   async payRemainingWithWallet(bookingId: string, userId: string): Promise<PaymentResponseDto> {
     if (!isValidObjectId(bookingId)) {
       throw new AppError(PAYMENT_MESSAGES.BOOKING_NOT_FOUND, HttpStatus.BAD_REQUEST);
@@ -376,7 +364,7 @@ export class PaymentService implements IPaymentService {
     await this.walletService.debitBalance(
       userId,
       remainingAmount,
-      PAYMENT_MESSAGES.WALLET_REMAINING(bookingId),
+      PAYMENT_MESSAGES.WALLET_REMAINING(booking.bookingNumber),
       bookingId,
       'BOOKING',
     );

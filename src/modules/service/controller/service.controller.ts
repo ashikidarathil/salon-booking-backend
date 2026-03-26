@@ -18,7 +18,7 @@ import type {
 export class ServiceController {
   constructor(@inject(TOKENS.ServiceService) private readonly _service: IServiceService) {}
 
-  async create(req: Request, res: Response) {
+  async create(req: Request, res: Response): Promise<Response> {
     const dto: CreateServiceDto = {
       name: req.body.name,
       description: req.body.description,
@@ -28,10 +28,10 @@ export class ServiceController {
     };
 
     const data = await this._service.create(dto);
-    res.status(HttpStatus.CREATED).json(new ApiResponse(true, MESSAGES.SERVICE.CREATED, data));
+    return ApiResponse.success(res, data, MESSAGES.SERVICE.CREATED, HttpStatus.CREATED);
   }
 
-  async update(req: Request, res: Response) {
+  async update(req: Request, res: Response): Promise<Response> {
     const dto: UpdateServiceDto = {
       name: req.body.name,
       description: req.body.description,
@@ -42,51 +42,50 @@ export class ServiceController {
     };
 
     const data = await this._service.update(req.params.id, dto);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.UPDATED, data));
+    return ApiResponse.success(res, data, MESSAGES.SERVICE.UPDATED);
   }
 
-  async listAdmin(req: Request, res: Response) {
+  async listAdmin(req: Request, res: Response): Promise<Response> {
     const includeDeleted = req.query.includeDeleted === 'true';
     const data = await this._service.list(includeDeleted);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.LISTED, data));
+    return ApiResponse.success(res, data, MESSAGES.SERVICE.LISTED);
   }
 
-  async listPublic(_req: Request, res: Response) {
+  async listPublic(_req: Request, res: Response): Promise<Response> {
     const data = await this._service.list(false);
     const activeOnly = data.filter((s) => !s.isDeleted && s.status === 'ACTIVE');
-
-    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.LISTED, activeOnly));
+    return ApiResponse.success(res, activeOnly, MESSAGES.SERVICE.LISTED);
   }
 
-  async softDelete(req: Request, res: Response) {
+  async softDelete(req: Request, res: Response): Promise<Response> {
     const dto: SoftDeleteServiceDto = {
       id: req.params.id,
     };
 
     const data = await this._service.softDelete(dto);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.DELETED, data));
+    return ApiResponse.success(res, data, MESSAGES.SERVICE.DELETED);
   }
 
-  async restore(req: Request, res: Response) {
+  async restore(req: Request, res: Response): Promise<Response> {
     const dto: RestoreServiceDto = {
       id: req.params.id,
     };
 
     const data = await this._service.restore(dto);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.RESTORED, data));
+    return ApiResponse.success(res, data, MESSAGES.SERVICE.RESTORED);
   }
 
-  async uploadImage(req: Request, res: Response) {
+  async uploadImage(req: Request, res: Response): Promise<Response> {
     const data = await this._service.uploadServiceImage(req.params.id, req.file!);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.IMAGE_UPLOADED, data));
+    return ApiResponse.success(res, data, MESSAGES.SERVICE.IMAGE_UPLOADED);
   }
 
-  async deleteImage(req: Request, res: Response) {
+  async deleteImage(req: Request, res: Response): Promise<Response> {
     const data = await this._service.deleteServiceImage(req.params.id);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, MESSAGES.SERVICE.IMAGE_DELETED, data));
+    return ApiResponse.success(res, data, MESSAGES.SERVICE.IMAGE_DELETED);
   }
 
-  async getPaginatedServices(req: Request, res: Response) {
+  async getPaginatedServices(req: Request, res: Response): Promise<Response> {
     const query: ServicePaginationQueryDto = {
       page: req.query.page ? Number(req.query.page) : 1,
       limit: req.query.limit ? Number(req.query.limit) : 10,
@@ -107,13 +106,10 @@ export class ServiceController {
     };
 
     const result = await this._service.getPaginatedServices(query);
-
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, MESSAGES.SERVICE.RETRIEVED_SUCCESSFULLY, result));
+    return ApiResponse.success(res, result, MESSAGES.SERVICE.RETRIEVED_SUCCESSFULLY);
   }
 
-  async getPublic(req: Request, res: Response) {
+  async getPublic(req: Request, res: Response): Promise<Response> {
     const data = await this._service.list(false);
     const service = data.find(
       (s) => s.id === req.params.id && !s.isDeleted && s.status === 'ACTIVE',
@@ -123,12 +119,10 @@ export class ServiceController {
       throw new AppError(MESSAGES.SERVICE.NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, MESSAGES.SERVICE.RETRIEVED_SUCCESSFULLY, service));
+    return ApiResponse.success(res, service, MESSAGES.SERVICE.RETRIEVED_SUCCESSFULLY);
   }
 
-  async listPublicPaginated(req: Request, res: Response) {
+  async listPublicPaginated(req: Request, res: Response): Promise<Response> {
     const query: ServicePaginationQueryDto = {
       page: req.query.page ? Number(req.query.page) : 1,
       limit: req.query.limit ? Number(req.query.limit) : 10,
@@ -144,9 +138,6 @@ export class ServiceController {
     };
 
     const result = await this._service.getPaginatedServices(query);
-
-    res
-      .status(HttpStatus.OK)
-      .json(new ApiResponse(true, MESSAGES.SERVICE.RETRIEVED_SUCCESSFULLY, result));
+    return ApiResponse.success(res, result, MESSAGES.SERVICE.RETRIEVED_SUCCESSFULLY);
   }
 }

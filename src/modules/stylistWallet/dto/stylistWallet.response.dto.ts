@@ -1,6 +1,10 @@
 export interface StylistWalletResponseDto {
-  id: string;
+  _id: string;
   stylistId: string;
-  balance: number;
+  withdrawableBalance: number;
+  pendingWithdrawal: number;
   totalEarnings: number;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }

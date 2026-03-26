@@ -1,0 +1,950 @@
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:24:29"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:24:29"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:24:29"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: vFM21Wy66rL3_Zp0AAAC","metadata":{},"timestamp":"2026-03-23 07:24:55"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:25:00"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 0yPZIDQ4O2qz3jxxAAAE","metadata":{},"timestamp":"2026-03-23 07:25:00"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: AVa3MnsvMhwB-dSWAAAH","metadata":{},"timestamp":"2026-03-23 07:26:12"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:26:19"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: -wQWL_2Gm3a_NyeEAAAJ","metadata":{},"timestamp":"2026-03-23 07:26:19"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: avTTzHLDFmStwqDpAAAM","metadata":{},"timestamp":"2026-03-23 07:26:52"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:26:59"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: qt3krs8nkP9QsvNtAAAP","metadata":{},"timestamp":"2026-03-23 07:26:59"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 07:28:13"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: qRO5WzGHD_djnezRAAAS","metadata":{},"timestamp":"2026-03-23 07:28:13"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:34:28"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:34:28"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:34:28"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 0kGZbxEsRLiAf3d6AAAB","metadata":{},"timestamp":"2026-03-23 07:34:29"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: Wz1u6r6P86jARgE1AAAD","metadata":{},"timestamp":"2026-03-23 07:34:30"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: ZZp2eg7t1zcVQIhuAAAF","metadata":{},"timestamp":"2026-03-23 07:34:32"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:37:39"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:37:39"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:37:39"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: a_DdBWPdg7J3cAvJAAAB","metadata":{},"timestamp":"2026-03-23 07:37:41"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 0vMPjF1arUz5kkLTAAAE","metadata":{},"timestamp":"2026-03-23 07:37:45"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: rDJf6MfN2iCqCN32AAAF","metadata":{},"timestamp":"2026-03-23 07:37:45"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:38:03"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: tvZnxWqBV7wiNm08AAAI","metadata":{},"timestamp":"2026-03-23 07:38:03"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:38:17"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: Ywbd6DJMmOvOaLMfAAAL","metadata":{},"timestamp":"2026-03-23 07:38:18"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:38:18"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: oyUjD80AECuD0TDNAAAO","metadata":{},"timestamp":"2026-03-23 07:38:18"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:40:33"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:40:33"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:40:33"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 0H2_ti2OEs825ik-AAAB","metadata":{},"timestamp":"2026-03-23 07:40:36"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 3xoS-uOYLjYAQ8x4AAAD","metadata":{},"timestamp":"2026-03-23 07:40:36"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: VTpFsuBmqM4Sd9_cAAAF","metadata":{},"timestamp":"2026-03-23 07:40:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:41:09"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:41:09"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:41:09"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 1_jlmZbEjEUVx1yDAAAB","metadata":{},"timestamp":"2026-03-23 07:41:12"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: vyuh0yfOWduRZS90AAAD","metadata":{},"timestamp":"2026-03-23 07:41:13"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: R_5k4XmyrWoKV6YKAAAF","metadata":{},"timestamp":"2026-03-23 07:41:14"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:41:28"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: mY42hsta2BZYtVneAAAI","metadata":{},"timestamp":"2026-03-23 07:41:29"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:41:29"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: FupzyKTmnf8e0zaQAAAL","metadata":{},"timestamp":"2026-03-23 07:41:29"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:48:09"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:48:09"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:48:09"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: wPPQ00ynfcllCwjZAAAB","metadata":{},"timestamp":"2026-03-23 07:48:10"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: cdhjElIexUIUHgGsAAAD","metadata":{},"timestamp":"2026-03-23 07:48:11"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: SAfRXF25BYYaaYgAAAAF","metadata":{},"timestamp":"2026-03-23 07:48:12"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:48:30"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: lwlAwJePGu5jnK3BAAAI","metadata":{},"timestamp":"2026-03-23 07:48:30"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:48:35"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: X9vhpona5ciXHgQBAAAL","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: q925_AbLnuZRhHDCAAAO","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: tqGkDXUgFnI3IjooAAAR","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: Z1CfxicM6dw-PknuAAAU","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: Bn7U-12O1hW0zhzPAAAX","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 6ljF_JfckhrIwHhyAAAa","metadata":{},"timestamp":"2026-03-23 07:48:36"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:48:37"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: vMgBAJ5-J3DU-X-kAAAd","metadata":{},"timestamp":"2026-03-23 07:48:37"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: nTgtTycwk7Elp8XPAAAg","metadata":{},"timestamp":"2026-03-23 07:48:37"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:48:37"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: i2iqHFurhcH8Szp2AAAj","metadata":{},"timestamp":"2026-03-23 07:48:37"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: ctREDhL402R9UyyvAAAm","metadata":{},"timestamp":"2026-03-23 07:48:41"}
+{"level":"info","message":"User 6952c5e37717bc70a397d947 joined room 69b3952fac2d38ffcd551060","metadata":{},"timestamp":"2026-03-23 07:48:41"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:48:42"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:50:01"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 07:50:02"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:54:22"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:54:22"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:54:22"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 662xLOZqoDfUb1bsAAAB","metadata":{},"timestamp":"2026-03-23 07:54:23"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:54:36"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:54:36"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:54:36"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: bydPvQ35qcJP8d6CAAAB","metadata":{},"timestamp":"2026-03-23 07:54:39"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: _OErBgo3mWtiGLDtAAAE","metadata":{},"timestamp":"2026-03-23 07:54:40"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: Pjjx884I_yMOVJIyAAAF","metadata":{},"timestamp":"2026-03-23 07:54:40"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:54:47"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:54:47"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:54:47"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: jJwibq-DIAopDI6XAAAB","metadata":{},"timestamp":"2026-03-23 07:54:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: sbT07TgKDKjShIpeAAAD","metadata":{},"timestamp":"2026-03-23 07:54:50"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: fuCdRX7OKZCv0JpSAAAF","metadata":{},"timestamp":"2026-03-23 07:54:51"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:55:44"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:55:44"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:55:44"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 73fFbNJ_OuhHDDM_AAAC","metadata":{},"timestamp":"2026-03-23 07:55:46"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 7bfpVwceTVUQcIkrAAAD","metadata":{},"timestamp":"2026-03-23 07:55:46"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:56:03"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:56:03"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:56:03"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: CWET-Wy-2IOQDtrpAAAC","metadata":{},"timestamp":"2026-03-23 07:56:05"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 8L-sZWvGF17IOAZzAAAD","metadata":{},"timestamp":"2026-03-23 07:56:05"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: KDjJaULd6_WSihuyAAAF","metadata":{},"timestamp":"2026-03-23 07:56:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 07:57:24"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 07:57:24"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 07:57:24"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 3PpVFyK2vW5yXPBbAAAC","metadata":{},"timestamp":"2026-03-23 07:57:27"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Uwd0lqZ7KRKDgktwAAAD","metadata":{},"timestamp":"2026-03-23 07:57:27"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: aE2h1t91UGF0g-e4AAAF","metadata":{},"timestamp":"2026-03-23 07:57:28"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 08:00:20"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 08:00:20"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 08:00:20"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: Yi-ioz6Mgiw12-SnAAAB","metadata":{},"timestamp":"2026-03-23 08:00:22"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: OvDBMJYkuUwp3bBOAAAE","metadata":{},"timestamp":"2026-03-23 08:00:23"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: hYAFFIfwykxzR9eyAAAF","metadata":{},"timestamp":"2026-03-23 08:00:23"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 08:00:43"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 08:00:43"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 08:00:43"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 6wDiFcNZPwMzMKJ2AAAB","metadata":{},"timestamp":"2026-03-23 08:00:44"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: M9aEKKVLdq-AAn2zAAAD","metadata":{},"timestamp":"2026-03-23 08:00:46"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: JyBGJAiWJHkdjA2iAAAF","metadata":{},"timestamp":"2026-03-23 08:00:47"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 08:01:15"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 08:01:15"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 08:01:15"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: JhygwpjE5z38_9ybAAAB","metadata":{},"timestamp":"2026-03-23 08:01:17"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: _W3-LMy_PWP1TWruAAAE","metadata":{},"timestamp":"2026-03-23 08:01:17"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: gqCfZ3xy1P_fUrfZAAAG","metadata":{},"timestamp":"2026-03-23 08:01:18"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 08:01:21"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: T_TUYz_LjLmhFn2GAAAJ","metadata":{},"timestamp":"2026-03-23 08:01:21"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 08:06:57"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: AXIqfqyIkYx7CuuhAAAM","metadata":{},"timestamp":"2026-03-23 08:06:57"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 08:30:57"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: KqOgDUm0VWE7vHM2AAAP","metadata":{},"timestamp":"2026-03-23 08:30:57"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 09:25:46"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 09:25:46"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 09:25:46"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: ry_-prZ3HRskYUTgAAAB","metadata":{},"timestamp":"2026-03-23 09:25:46"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 7SoxqakP1MFYoH6DAAAE","metadata":{},"timestamp":"2026-03-23 09:25:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: vesnLhi9V34DqkZnAAAF","metadata":{},"timestamp":"2026-03-23 09:25:48"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 09:26:08"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 09:26:08"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 09:26:08"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Cmw5y1-CJbvSKdjjAAAC","metadata":{},"timestamp":"2026-03-23 09:26:09"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: STm5WfWUNbDMwoPwAAAE","metadata":{},"timestamp":"2026-03-23 09:26:09"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: nzADDeKERVcaOaMkAAAF","metadata":{},"timestamp":"2026-03-23 09:26:09"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 09:26:23"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 09:26:23"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 09:26:23"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: R9Lh7a5zfIkqjxTnAAAB","metadata":{},"timestamp":"2026-03-23 09:26:24"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: oPf-jS_Dh6ce1PgFAAAD","metadata":{},"timestamp":"2026-03-23 09:26:25"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 09:26:32"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 09:26:32"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 09:26:32"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: MsXHASPmPMXHG56EAAAB","metadata":{},"timestamp":"2026-03-23 09:26:32"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: fczUN_EdgEermfLTAAAE","metadata":{},"timestamp":"2026-03-23 09:26:35"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: ACQTicJi4wOCRfHUAAAF","metadata":{},"timestamp":"2026-03-23 09:26:35"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 09:26:44"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 09:26:44"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 09:26:44"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: StY4P6Fe9GGHpYkDAAAB","metadata":{},"timestamp":"2026-03-23 09:26:46"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: cNcdXb3Lj015vqt3AAAD","metadata":{},"timestamp":"2026-03-23 09:26:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: TuCkrZRTIOsy_e1cAAAF","metadata":{},"timestamp":"2026-03-23 09:26:50"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 09:27:03"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 09:27:03"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 09:27:03"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 6RIdPO71zyraQ2_wAAAB","metadata":{},"timestamp":"2026-03-23 09:27:04"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: HogwUZDNorIHY-lgAAAD","metadata":{},"timestamp":"2026-03-23 09:27:05"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: kpxqi3nkblJtwcygAAAF","metadata":{},"timestamp":"2026-03-23 09:27:07"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 09:27:44"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 09:27:44"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 09:27:44"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: rmMLXbw-DGnA8cpSAAAB","metadata":{},"timestamp":"2026-03-23 09:27:45"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: JSlom1l_YTg1f6P1AAAD","metadata":{},"timestamp":"2026-03-23 09:27:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: tY05ItlSW4jKO9R9AAAF","metadata":{},"timestamp":"2026-03-23 09:27:48"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:38:46"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:38:46"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:38:46"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: tCUtcmAXbUKArkw5AAAB","metadata":{},"timestamp":"2026-03-23 10:38:46"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: z1Qyovwkpe9l7SSxAAAE","metadata":{},"timestamp":"2026-03-23 10:38:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: RE1RdiyVbMkslw4YAAAF","metadata":{},"timestamp":"2026-03-23 10:38:48"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:39:11"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:39:11"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:39:11"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: vAHI5yl-P62lQI5FAAAB","metadata":{},"timestamp":"2026-03-23 10:39:13"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: NLhTdj2x9SoHoGIEAAAE","metadata":{},"timestamp":"2026-03-23 10:39:17"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: qdV2SIiQL-ZNFX61AAAF","metadata":{},"timestamp":"2026-03-23 10:39:17"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:39:42"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:39:42"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:39:42"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 5ndARnjnNfC6JCPJAAAB","metadata":{},"timestamp":"2026-03-23 10:39:43"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: i9htt6_ZeFey456bAAAD","metadata":{},"timestamp":"2026-03-23 10:39:44"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: WUP8A9Ng3C1LAJfPAAAF","metadata":{},"timestamp":"2026-03-23 10:39:45"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:40:10"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:40:10"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:40:10"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: XI0fuRx62HT7NwU1AAAB","metadata":{},"timestamp":"2026-03-23 10:40:12"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: -NkY-MA6Tz7glwVxAAAE","metadata":{},"timestamp":"2026-03-23 10:40:13"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: VXc9u0CmsDVZUG1QAAAF","metadata":{},"timestamp":"2026-03-23 10:40:13"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:40:39"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:40:39"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:40:39"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: TFo5z4jK8cTbvrHTAAAC","metadata":{},"timestamp":"2026-03-23 10:40:43"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: yFyVwLUj95in858XAAAD","metadata":{},"timestamp":"2026-03-23 10:40:43"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: NCp9VqpSts97JnPWAAAF","metadata":{},"timestamp":"2026-03-23 10:40:44"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:41:04"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:41:04"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:41:04"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: JxuhTCnsC9l_piH1AAAB","metadata":{},"timestamp":"2026-03-23 10:41:04"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 6vTsw2ax-DxZQGQ0AAAD","metadata":{},"timestamp":"2026-03-23 10:41:05"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 5_zk8eABprLw8d7bAAAF","metadata":{},"timestamp":"2026-03-23 10:41:06"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:41:36"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:41:36"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:41:36"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Aod0zBAhLzvdK5DcAAAB","metadata":{},"timestamp":"2026-03-23 10:41:37"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: nCVG5hRbQ7CN1EidAAAD","metadata":{},"timestamp":"2026-03-23 10:41:40"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: B6puL89d7SgYNqeCAAAF","metadata":{},"timestamp":"2026-03-23 10:41:41"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:42:03"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:42:03"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:42:03"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: zD04ZNRzhtsdtBqlAAAB","metadata":{},"timestamp":"2026-03-23 10:42:04"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: PFFuHNaOC1lyUnLUAAAD","metadata":{},"timestamp":"2026-03-23 10:42:05"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 4JENXFdvbdB0CQZDAAAF","metadata":{},"timestamp":"2026-03-23 10:42:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:42:28"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:42:28"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:42:28"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: MNqCSEZXMg4v2khcAAAB","metadata":{},"timestamp":"2026-03-23 10:42:28"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: JkOwvI6ADUp3t2uhAAAE","metadata":{},"timestamp":"2026-03-23 10:42:29"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: qYrFZWr14vpmJmdYAAAF","metadata":{},"timestamp":"2026-03-23 10:42:29"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:42:52"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:42:52"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:42:52"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: bFILKOFSIwyC6KjVAAAB","metadata":{},"timestamp":"2026-03-23 10:42:53"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: SUh3uCXiLLgCGcV4AAAD","metadata":{},"timestamp":"2026-03-23 10:42:54"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: MRz446M1Rlp3Ump7AAAF","metadata":{},"timestamp":"2026-03-23 10:42:56"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:43:34"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:43:35"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:43:35"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: EQXDAEpaoWuHH-j6AAAB","metadata":{},"timestamp":"2026-03-23 10:43:35"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: wIdIQiVEUASFHGi1AAAE","metadata":{},"timestamp":"2026-03-23 10:43:39"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: G8Aj-B7ancH-WLUwAAAF","metadata":{},"timestamp":"2026-03-23 10:43:39"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:55:21"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:55:21"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:55:21"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Nw9iUBYKhfZPD-zVAAAB","metadata":{},"timestamp":"2026-03-23 10:55:23"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 1deM6kUMQGYM0fFsAAAD","metadata":{},"timestamp":"2026-03-23 10:55:24"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: bqnyfPcApZ7pnk6mAAAF","metadata":{},"timestamp":"2026-03-23 10:55:25"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 10:58:11"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 10:58:11"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 10:58:12"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 3EY8YDVvv2NS3fIKAAAB","metadata":{},"timestamp":"2026-03-23 10:58:12"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Mf8B3ogkAShvjGqjAAAD","metadata":{},"timestamp":"2026-03-23 10:58:13"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: LGacWXbXmU-B4KNUAAAF","metadata":{},"timestamp":"2026-03-23 10:58:17"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 11:00:05"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 11:00:05"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 11:00:05"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: jStCtIRIwjtZj8THAAAB","metadata":{},"timestamp":"2026-03-23 11:00:05"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: gFpRVBhYQxl9I_GoAAAD","metadata":{},"timestamp":"2026-03-23 11:00:06"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: MNBX9-FVYuGuW1WwAAAF","metadata":{},"timestamp":"2026-03-23 11:00:10"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 05pYiARLXIHWXk1gAAAI","metadata":{},"timestamp":"2026-03-23 12:03:33"}
+{"level":"error","message":"Unhandled Error Cannot set property query of #<IncomingMessage> which has only a getter","metadata":{"method":"GET","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/common/middleware/validation.middleware.ts:18:18\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","url":"/api/notifications?limit=20&skip=0","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 12:03:33"}
+{"level":"error","message":"Unhandled Error Cannot set property query of #<IncomingMessage> which has only a getter","metadata":{"method":"GET","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/common/middleware/validation.middleware.ts:18:18\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","url":"/api/notifications?limit=20&skip=0","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 12:03:33"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:03:38"}
+{"level":"error","message":"Unhandled Error Cannot set property query of #<IncomingMessage> which has only a getter","metadata":{"method":"GET","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/common/middleware/validation.middleware.ts:18:18\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","url":"/api/notifications?limit=20&skip=0","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 12:03:38"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: Yn13D0iK8BSsCa2AAAAK","metadata":{},"timestamp":"2026-03-23 12:03:38"}
+{"level":"error","message":"Unhandled Error Cannot set property query of #<IncomingMessage> which has only a getter","metadata":{"method":"GET","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/common/middleware/validation.middleware.ts:18:18\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","url":"/api/notifications?isRead=false&limit=20&skip=0","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 12:03:39"}
+{"level":"error","message":"Unhandled Error Cannot set property query of #<IncomingMessage> which has only a getter","metadata":{"method":"GET","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/common/middleware/validation.middleware.ts:18:18\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","url":"/api/notifications?isRead=false&limit=20&skip=0","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 12:03:39"}
+{"level":"error","message":"Unhandled Error Cannot set property query of #<IncomingMessage> which has only a getter","metadata":{"method":"GET","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/common/middleware/validation.middleware.ts:18:18\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","url":"/api/admin/users?page=1&limit=5&sortBy=createdAt&sortOrder=desc","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 12:03:41"}
+{"level":"error","message":"Unhandled Error Cannot set property query of #<IncomingMessage> which has only a getter","metadata":{"method":"GET","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/common/middleware/validation.middleware.ts:18:18\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","url":"/api/admin/users?page=1&limit=5&sortBy=createdAt&sortOrder=desc","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 12:03:41"}
+{"level":"error","message":"Unhandled Error Cannot set property query of #<IncomingMessage> which has only a getter","metadata":{"method":"GET","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at /Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/src/common/middleware/validation.middleware.ts:18:18\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","url":"/api/admin/users?page=1&limit=5&sortBy=createdAt&sortOrder=desc","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 12:03:43"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:04:47"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:04:47"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:04:47"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: oRyj0koTsx-gq1YcAAAB","metadata":{},"timestamp":"2026-03-23 12:04:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 048VPiIqN8z4j6XbAAAE","metadata":{},"timestamp":"2026-03-23 12:04:50"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 8H5J1Dj09xSZGIiyAAAF","metadata":{},"timestamp":"2026-03-23 12:04:50"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: nqpXChzv8iF4J1SeAAAH","metadata":{},"timestamp":"2026-03-23 12:04:51"}
+{"level":"warn","message":"Handled AppError Slot not found","metadata":{"method":"PATCH","statusCode":400,"url":"/api/slots/dynamic_698b46bfe65366c147965cf4_695adad0e5e49754e37c9c4d_2026-03-23_14:15_14:30/block","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 12:05:28"}
+{"level":"warn","message":"Handled AppError Slot not found","metadata":{"method":"PATCH","statusCode":400,"url":"/api/slots/dynamic_698b46bfe65366c147965cf4_695adad0e5e49754e37c9c4d_2026-03-23_14:30_14:45/block","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 12:06:24"}
+{"level":"warn","message":"Handled AppError Slot not found","metadata":{"method":"PATCH","statusCode":400,"url":"/api/slots/dynamic_698b46bfe65366c147965cf4_695adad0e5e49754e37c9c4d_2026-03-25_09:00_09:15/block","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 12:07:08"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: nntJ4MLZ5SAKcMofAAAK","metadata":{},"timestamp":"2026-03-23 12:07:55"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:08:03"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: uSvRG-V_S5l5GKZgAAAM","metadata":{},"timestamp":"2026-03-23 12:08:03"}
+{"level":"warn","message":"Handled AppError Slot not found","metadata":{"method":"PATCH","statusCode":400,"url":"/api/slots/dynamic_698b46bfe65366c147965cf4_695adad0e5e49754e37c9c4d_2026-03-23_15:30_15:45/block","userId":"695adad0e5e49754e37c9c4b"},"timestamp":"2026-03-23 12:08:15"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:10:44"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:10:44"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:10:44"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 6u5NVGTXfY4bZ7HuAAAC","metadata":{},"timestamp":"2026-03-23 12:10:45"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: M9sfswiLA5Gb3w5QAAAD","metadata":{},"timestamp":"2026-03-23 12:10:45"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 0ms1OXLfWOFf_YSgAAAF","metadata":{},"timestamp":"2026-03-23 12:10:48"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: fbmmXgvBvaSjQz8dAAAI","metadata":{},"timestamp":"2026-03-23 12:10:50"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: wMme16ZuYF50lbbNAAAJ","metadata":{},"timestamp":"2026-03-23 12:10:50"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:11:16"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:11:16"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:11:16"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: k1l8dyW_EOKyKHWuAAAB","metadata":{},"timestamp":"2026-03-23 12:11:16"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: PMz6Or-c9OaK4pp5AAAD","metadata":{},"timestamp":"2026-03-23 12:11:17"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: WfLwm_fxa_uyZ0u1AAAF","metadata":{},"timestamp":"2026-03-23 12:11:18"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: KhOJpovJ-hGott1TAAAH","metadata":{},"timestamp":"2026-03-23 12:11:19"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 0ME36nFpHEiM-xp_AAAJ","metadata":{},"timestamp":"2026-03-23 12:11:21"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 12:13:27"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 02mVJ7CORs_mEBVPAAAM","metadata":{},"timestamp":"2026-03-23 12:13:27"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:16:23"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:16:23"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:16:23"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 1s2I8ent6x_KxHUEAAAC","metadata":{},"timestamp":"2026-03-23 12:16:25"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: WP23XIC6JCX9PLZuAAAD","metadata":{},"timestamp":"2026-03-23 12:16:25"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: lkzVyEpJd1H7g-4EAAAF","metadata":{},"timestamp":"2026-03-23 12:16:26"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: HbiqCpIZmO8rwslVAAAH","metadata":{},"timestamp":"2026-03-23 12:16:28"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: MuwlDqRvgF_UivoDAAAJ","metadata":{},"timestamp":"2026-03-23 12:16:29"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 12:21:56"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: n7L-rg-ct7eT8GVjAAAM","metadata":{},"timestamp":"2026-03-23 12:21:56"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 12:22:00"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: qrsw7WW_o3uUGGxHAAAP","metadata":{},"timestamp":"2026-03-23 12:22:00"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:24:52"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:24:52"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:24:52"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: zA395RkrdCt9DRv2AAAB","metadata":{},"timestamp":"2026-03-23 12:24:52"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 62EZxK48Gh8oQN5BAAAE","metadata":{},"timestamp":"2026-03-23 12:24:53"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: yQwGbIpm6qHXc4FGAAAF","metadata":{},"timestamp":"2026-03-23 12:24:53"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: m4sLC9K18wb6CSWKAAAH","metadata":{},"timestamp":"2026-03-23 12:24:55"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: omHC8lk9ywXjRYt_AAAJ","metadata":{},"timestamp":"2026-03-23 12:24:57"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 12:25:10"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: cEH0lYo5WtsWpsqVAAAM","metadata":{},"timestamp":"2026-03-23 12:25:10"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:26:46"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:26:46"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:26:46"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: _oXDxRI_StRF6f4YAAAC","metadata":{},"timestamp":"2026-03-23 12:26:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: IWE9fMjWlrTeuxKFAAAD","metadata":{},"timestamp":"2026-03-23 12:26:47"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 7hSCnJFfvEJiUYX-AAAH","metadata":{},"timestamp":"2026-03-23 12:26:48"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: vvbFUVOcpyW3VagDAAAI","metadata":{},"timestamp":"2026-03-23 12:26:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Yh3QOsts-VAF-U9fAAAJ","metadata":{},"timestamp":"2026-03-23 12:26:48"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 12:27:00"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: TDBq0WkIVZ919bKeAAAM","metadata":{},"timestamp":"2026-03-23 12:27:00"}
+{"level":"warn","message":"Handled AppError : Invalid input: expected object, received undefined","metadata":{"method":"PATCH","statusCode":400,"url":"/api/slots/dynamic_698b46bfe65366c147965cf4_695adad0e5e49754e37c9c4d_2026-03-25_09:00_09:15/unblock","userId":"695adad0e5e49754e37c9c4b"},"timestamp":"2026-03-23 12:27:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:28:09"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:28:09"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:28:09"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: c73SnJIAuVjWXzJGAAAC","metadata":{},"timestamp":"2026-03-23 12:28:10"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 5VjBlSfbV3FzwbczAAAD","metadata":{},"timestamp":"2026-03-23 12:28:10"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 1tw4LTo623d_APmtAAAF","metadata":{},"timestamp":"2026-03-23 12:28:11"}
+{"level":"warn","message":"Handled AppError Slot not found","metadata":{"method":"PATCH","statusCode":400,"url":"/api/slots/dynamic_698b46bfe65366c147965cf4_695adad0e5e49754e37c9c4d_2026-03-25_09:00_09:15/unblock","userId":"695adad0e5e49754e37c9c4b"},"timestamp":"2026-03-23 12:28:11"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 9HZB0mOZHciUysQ7AAAH","metadata":{},"timestamp":"2026-03-23 12:28:12"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 12:28:14"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: N0OgmbHgEN4UuvuYAAAK","metadata":{},"timestamp":"2026-03-23 12:28:14"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: ZPy7SBA5LP-yGgNMAAAM","metadata":{},"timestamp":"2026-03-23 12:28:14"}
+{"level":"warn","message":"Handled AppError Slot not found","metadata":{"method":"PATCH","statusCode":400,"url":"/api/slots/dynamic_698b46bfe65366c147965cf4_695adad0e5e49754e37c9c4d_2026-03-25_09:00_09:15/unblock","userId":"695adad0e5e49754e37c9c4b"},"timestamp":"2026-03-23 12:28:19"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:28:48"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:28:48"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:28:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Poovb7jFdXRPvfHCAAAB","metadata":{},"timestamp":"2026-03-23 12:28:49"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: AqU7pe71bEeVw-NRAAAD","metadata":{},"timestamp":"2026-03-23 12:28:50"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: OjaR1LWzOeQepkPWAAAF","metadata":{},"timestamp":"2026-03-23 12:28:51"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: eKNanjw2zqAtdZMWAAAH","metadata":{},"timestamp":"2026-03-23 12:28:53"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Lm0xx7N_Puntf_LTAAAJ","metadata":{},"timestamp":"2026-03-23 12:28:54"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 12:32:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 6C1dPyem0-N3Q8oWAAAM","metadata":{},"timestamp":"2026-03-23 12:32:48"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:36:55"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:36:55"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:36:55"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 1qJzGScbn09dilxPAAAC","metadata":{},"timestamp":"2026-03-23 12:36:56"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 0mfnuPYwmxkHGAkwAAAD","metadata":{},"timestamp":"2026-03-23 12:36:56"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: dOLQ9ySUvikR3TXOAAAF","metadata":{},"timestamp":"2026-03-23 12:36:57"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: ckDYjS6I-i-fh5HyAAAH","metadata":{},"timestamp":"2026-03-23 12:37:00"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 08mOnw2MxVg3koNlAAAJ","metadata":{},"timestamp":"2026-03-23 12:37:01"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:37:16"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:37:16"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:37:16"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: jrhgfxDckUboAvKrAAAB","metadata":{},"timestamp":"2026-03-23 12:37:17"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: zSlKqX9MeAiix1XhAAAD","metadata":{},"timestamp":"2026-03-23 12:37:18"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: bD7O5-NLH6w9UD1AAAAG","metadata":{},"timestamp":"2026-03-23 12:37:19"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: _RbMKAF0qjWhAUDBAAAH","metadata":{},"timestamp":"2026-03-23 12:37:19"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: mlu7P_ekWV2TZZo7AAAJ","metadata":{},"timestamp":"2026-03-23 12:37:22"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:38:01"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:38:01"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:38:01"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: dyz4Cmaas2Ek4pXsAAAB","metadata":{},"timestamp":"2026-03-23 12:38:01"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: r3G7Sz_WaIIRr-r0AAAD","metadata":{},"timestamp":"2026-03-23 12:38:03"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: N7qSc4rHDyRLiDB3AAAH","metadata":{},"timestamp":"2026-03-23 12:38:06"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: VMx7zLP_V1caLGptAAAI","metadata":{},"timestamp":"2026-03-23 12:38:06"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: hI_ql6TqJbN1bEigAAAJ","metadata":{},"timestamp":"2026-03-23 12:38:06"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:38:21"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:38:21"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:38:21"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: nQP90xBiKeikdrAzAAAB","metadata":{},"timestamp":"2026-03-23 12:38:22"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: boLgntIooJqnH86ZAAAD","metadata":{},"timestamp":"2026-03-23 12:38:24"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: cfsMCWA954co2qTOAAAF","metadata":{},"timestamp":"2026-03-23 12:38:25"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: z_Y5UH1Vb8UUn2NYAAAI","metadata":{},"timestamp":"2026-03-23 12:38:27"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 7qfdSb1Ys440ykDVAAAJ","metadata":{},"timestamp":"2026-03-23 12:38:27"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:42:28"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:42:28"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:42:28"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: V9uevF24wowii4MPAAAB","metadata":{},"timestamp":"2026-03-23 12:42:29"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: DfVS91yF26_MoIdEAAAE","metadata":{},"timestamp":"2026-03-23 12:42:31"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: orn-TRS9gGM7CHkrAAAF","metadata":{},"timestamp":"2026-03-23 12:42:31"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: eQJdqBgWm3q7RUEhAAAH","metadata":{},"timestamp":"2026-03-23 12:42:33"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: dHfLrQLIzSVsjxSTAAAJ","metadata":{},"timestamp":"2026-03-23 12:42:34"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:43:02"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:43:02"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:43:02"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: VcnTrNtZEXvY1GmJAAAC","metadata":{},"timestamp":"2026-03-23 12:43:03"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 6gxYyxjAXA8dBv9eAAAD","metadata":{},"timestamp":"2026-03-23 12:43:03"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: aQFRP40j3WTZdKC0AAAF","metadata":{},"timestamp":"2026-03-23 12:43:04"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: WVs44pMzwtRAnydHAAAH","metadata":{},"timestamp":"2026-03-23 12:43:05"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: nbTOSw4pu3nfyuMgAAAJ","metadata":{},"timestamp":"2026-03-23 12:43:07"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:48:24"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:48:24"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:48:24"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: xWKXLiczhaRJbiZ0AAAC","metadata":{},"timestamp":"2026-03-23 12:48:24"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: rOSzEc7jtmSc_MrrAAAD","metadata":{},"timestamp":"2026-03-23 12:48:24"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: snakvcfwgu4ugswBAAAF","metadata":{},"timestamp":"2026-03-23 12:48:25"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: kIKfri8jMWnf4jFBAAAI","metadata":{},"timestamp":"2026-03-23 12:48:29"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 6tlTg4N8IaQHkllfAAAJ","metadata":{},"timestamp":"2026-03-23 12:48:29"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:48:37"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:48:37"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:48:37"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: cwOVEqbCuYcS9odJAAAC","metadata":{},"timestamp":"2026-03-23 12:48:38"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 1GqxPzYdMfBwTEl1AAAD","metadata":{},"timestamp":"2026-03-23 12:48:38"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: diDa_epI04bbVfqNAAAG","metadata":{},"timestamp":"2026-03-23 12:48:39"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: Irgz0rXhbskCSf7LAAAH","metadata":{},"timestamp":"2026-03-23 12:48:39"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:48:46"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:48:46"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:48:46"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: BgAevjKC_XaFRZjwAAAB","metadata":{},"timestamp":"2026-03-23 12:48:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: dw-rFTHDQfyRmNUJAAAE","metadata":{},"timestamp":"2026-03-23 12:48:48"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: BNnT7IEUyoVg9JHpAAAF","metadata":{},"timestamp":"2026-03-23 12:48:48"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 9s9Hvr38m1l5_J8QAAAI","metadata":{},"timestamp":"2026-03-23 12:48:52"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: a5XyYhEsgW6_j4QxAAAJ","metadata":{},"timestamp":"2026-03-23 12:48:52"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:49:06"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:49:06"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:49:06"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: oIwgfWth6hsHm_AFAAAC","metadata":{},"timestamp":"2026-03-23 12:49:07"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: JT_uPKx4gjr_eKi9AAAD","metadata":{},"timestamp":"2026-03-23 12:49:07"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: tIR7uTFOvhU7ArTzAAAF","metadata":{},"timestamp":"2026-03-23 12:49:08"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: QcF94YtyaC1CeS5DAAAI","metadata":{},"timestamp":"2026-03-23 12:49:09"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: tTAtWO8cuM7ISKdpAAAJ","metadata":{},"timestamp":"2026-03-23 12:49:09"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: cC-505FrRdsJIvi0AAAM","metadata":{},"timestamp":"2026-03-23 12:51:52"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:51:55"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 12:53:13"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 12:53:13"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 12:53:13"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: RxaG4RJLzkQmv1dBAAAC","metadata":{},"timestamp":"2026-03-23 12:53:15"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: AxwFWzmExcobMxQAAAAD","metadata":{},"timestamp":"2026-03-23 12:53:15"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: qaSRrNIH7ENYM54oAAAF","metadata":{},"timestamp":"2026-03-23 12:53:16"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: zSTayM7TwWv0_uPtAAAI","metadata":{},"timestamp":"2026-03-23 12:53:17"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: kBlvzIz93kZbfTYzAAAJ","metadata":{},"timestamp":"2026-03-23 12:53:17"}
+{"level":"warn","message":"Handled AppError No token provided","metadata":{"method":"POST","statusCode":401,"url":"/api/auth/refresh","userId":"anonymous"},"timestamp":"2026-03-23 12:57:53"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: lNLKyNkcg8drrvFBAAAL","metadata":{},"timestamp":"2026-03-23 12:58:03"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:58:06"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: b_yJxoX9ANl9PSiEAAAO","metadata":{},"timestamp":"2026-03-23 12:58:06"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: _3t39rSK1GRvTGVaAAAR","metadata":{},"timestamp":"2026-03-23 12:58:06"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:58:06"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: cWAWsYH3ygBrIpzbAAAU","metadata":{},"timestamp":"2026-03-23 12:58:07"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:58:07"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: K006bqZNkwRf8Y9XAAAX","metadata":{},"timestamp":"2026-03-23 12:58:07"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:58:07"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 2bbFNX_4k143uVJhAAAa","metadata":{},"timestamp":"2026-03-23 12:58:07"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:58:11"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 2nqS8Zi3O7mTUSMLAAAd","metadata":{},"timestamp":"2026-03-23 12:58:12"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:58:15"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: A5XqpQGVpFZ1h08qAAAg","metadata":{},"timestamp":"2026-03-23 12:58:16"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:58:23"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: Aj6VKHB-RmzFsEnzAAAj","metadata":{},"timestamp":"2026-03-23 12:58:23"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:58:24"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: FxqqGi3mZNISUZ8yAAAm","metadata":{},"timestamp":"2026-03-23 12:58:24"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:58:28"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: VvB2SlB6_eg0RMa0AAAp","metadata":{},"timestamp":"2026-03-23 12:58:28"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 12:59:31"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 13:09:45"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 13:09:45"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 13:09:45"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: rYeY34M0mCjImTLOAAAC","metadata":{},"timestamp":"2026-03-23 13:09:46"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: iJhOCclN8WFWKAyuAAAD","metadata":{},"timestamp":"2026-03-23 13:09:46"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: jNitgCbe2b1mxomcAAAH","metadata":{},"timestamp":"2026-03-23 13:09:47"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: wG8drkfytJgU9fT9AAAI","metadata":{},"timestamp":"2026-03-23 13:09:47"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 2huon2C7J3HW6Y0WAAAJ","metadata":{},"timestamp":"2026-03-23 13:09:47"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: N6SbiQddfG_BEHZpAAAL","metadata":{},"timestamp":"2026-03-23 13:09:50"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 13:10:02"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 13:10:02"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 13:10:02"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: BXdDTMhZuu2BAVLZAAAC","metadata":{},"timestamp":"2026-03-23 13:10:03"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: fio4BCyAlR0genFeAAAD","metadata":{},"timestamp":"2026-03-23 13:10:03"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: rmmNH2Kn3D54fOlcAAAF","metadata":{},"timestamp":"2026-03-23 13:10:07"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: k3TxQY_WZ_xAFY62AAAJ","metadata":{},"timestamp":"2026-03-23 13:10:08"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: vlurrxQyOsJXWgwSAAAK","metadata":{},"timestamp":"2026-03-23 13:10:08"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: nA5wkZOU-MGNU_IZAAAL","metadata":{},"timestamp":"2026-03-23 13:10:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 13:10:28"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 13:10:28"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 13:10:28"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: WMRyJZ93eLPwKVoFAAAD","metadata":{},"timestamp":"2026-03-23 13:10:29"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: CF6Rl1DWyF0G5op3AAAE","metadata":{},"timestamp":"2026-03-23 13:10:29"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: tsombcVF6shOsfklAAAF","metadata":{},"timestamp":"2026-03-23 13:10:29"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 0cNlxEF_GtuSfUNZAAAH","metadata":{},"timestamp":"2026-03-23 13:10:31"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 13:10:42"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 13:10:42"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 13:10:42"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: yUwYWFixrmt-_0gBAAAB","metadata":{},"timestamp":"2026-03-23 13:10:42"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: m9ygLtpS0EGsU9U2AAAF","metadata":{},"timestamp":"2026-03-23 13:10:45"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 0JLvLaUpsYcWgD4lAAAG","metadata":{},"timestamp":"2026-03-23 13:10:45"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: BruDgqw71WuVVBDZAAAH","metadata":{},"timestamp":"2026-03-23 13:10:45"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: edTYqof2fM77EA1mAAAK","metadata":{},"timestamp":"2026-03-23 13:10:47"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: Px3nPDZfNW8m3DxKAAAL","metadata":{},"timestamp":"2026-03-23 13:10:47"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 13:11:12"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 13:11:12"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 13:11:12"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: mLpcV6iCkbFSezpEAAAC","metadata":{},"timestamp":"2026-03-23 13:11:14"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: JArQ0Bumi4sdom5_AAAE","metadata":{},"timestamp":"2026-03-23 13:11:14"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: -iGD5DSxgpcwNT4kAAAF","metadata":{},"timestamp":"2026-03-23 13:11:14"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: N_XJATDxJrmSZhH0AAAH","metadata":{},"timestamp":"2026-03-23 13:11:15"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: QbS4xkfFF_ZTdWIxAAAK","metadata":{},"timestamp":"2026-03-23 13:11:16"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: DjbwoVHqZIjBrOMuAAAL","metadata":{},"timestamp":"2026-03-23 13:11:16"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 13:12:22"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 13:12:22"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 13:12:22"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: zehT988plQx1M4PYAAAF","metadata":{},"timestamp":"2026-03-23 13:12:25"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: m2SVn-vPLsxWyPI8AAAG","metadata":{},"timestamp":"2026-03-23 13:12:25"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: p_91_No5ENcZkiTcAAAH","metadata":{},"timestamp":"2026-03-23 13:12:25"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: gNPTF9Q-syylAMFBAAAI","metadata":{},"timestamp":"2026-03-23 13:12:25"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: I6ELxFU1qnPMsTwiAAAJ","metadata":{},"timestamp":"2026-03-23 13:12:25"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: X1Mcb9sPghddkAA1AAAL","metadata":{},"timestamp":"2026-03-23 13:12:27"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 13:13:09"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 13:13:09"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 13:13:09"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 4FkdAa1jyO1Bcw4LAAAD","metadata":{},"timestamp":"2026-03-23 13:13:11"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: GZE5NO_hH4ZXFyeYAAAE","metadata":{},"timestamp":"2026-03-23 13:13:11"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: A6ASbOBtVtf5Fn4TAAAF","metadata":{},"timestamp":"2026-03-23 13:13:11"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 7yPq_4_sJmOTDInvAAAJ","metadata":{},"timestamp":"2026-03-23 13:13:12"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: CknelIgS3ZB_mOQ0AAAK","metadata":{},"timestamp":"2026-03-23 13:13:12"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: dVrsvrGuCwxBacXTAAAL","metadata":{},"timestamp":"2026-03-23 13:13:12"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 13:14:18"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 13:14:18"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 13:14:18"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 13:14:18"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 13:14:18"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 13:14:18"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: HbD6nyvW7svLJFiaAAAS","metadata":{},"timestamp":"2026-03-23 13:54:07"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: fMm-PyDq_BLBfynoAAAX","metadata":{},"timestamp":"2026-03-23 13:54:07"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: mORUJYpA19TrTYVTAAAY","metadata":{},"timestamp":"2026-03-23 13:54:07"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: _173BK9ADBpJcF65AAAZ","metadata":{},"timestamp":"2026-03-23 13:54:07"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: syaqnu9HornZpQN1AAAa","metadata":{},"timestamp":"2026-03-23 13:54:07"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Vo0A4gJPS_fz83sRAAAd","metadata":{},"timestamp":"2026-03-23 13:54:07"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 13:55:21"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 13:55:21"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 13:55:21"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 13:55:21"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 13:55:21"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 13:55:21"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: dE8vmIcNCSB1eW7gAAAg","metadata":{},"timestamp":"2026-03-23 13:55:22"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 0Q_v3SKR627_8T6jAAAl","metadata":{},"timestamp":"2026-03-23 13:55:22"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 6TI0weIVK4FPtNLeAAAm","metadata":{},"timestamp":"2026-03-23 13:55:22"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: FmJwd3SHfXQWLw6UAAAp","metadata":{},"timestamp":"2026-03-23 13:55:22"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: UDHzyorC3_2TAmLCAAAu","metadata":{},"timestamp":"2026-03-23 13:55:22"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: vNkQ_Obph1hWt6ACAAAv","metadata":{},"timestamp":"2026-03-23 13:55:22"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 13:55:25"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 13:55:25"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 13:55:25"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 13:55:25"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 13:55:25"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 13:55:25"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: iLA8OLgBHhBkjhfyAAA1","metadata":{},"timestamp":"2026-03-23 13:55:26"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 3yl_FfHGXedOt0nfAAA3","metadata":{},"timestamp":"2026-03-23 13:55:26"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: I_kaVcN5KfJevGgHAAA8","metadata":{},"timestamp":"2026-03-23 13:55:26"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: FbaJkFgffe8-XWicAAA_","metadata":{},"timestamp":"2026-03-23 13:55:26"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: HV3ufO0xWyG5IDt6AABA","metadata":{},"timestamp":"2026-03-23 13:55:26"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: V4B43Gb3GKTy25YRAABB","metadata":{},"timestamp":"2026-03-23 13:55:26"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 14:10:03"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 2UwhJZa9xDQFVr_UAABE","metadata":{},"timestamp":"2026-03-23 14:10:03"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 14:10:03"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 01k5pWp34cgQzj_cAABH","metadata":{},"timestamp":"2026-03-23 14:10:03"}
+{"level":"warn","message":"Handled AppError bookingId: Invalid input: expected string, received undefined","metadata":{"method":"POST","statusCode":400,"url":"/api/payments/verify","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 14:10:48"}
+{"level":"warn","message":"Handled AppError bookingId: Invalid input: expected string, received undefined","metadata":{"method":"POST","statusCode":400,"url":"/api/payments/verify","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 14:11:34"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:24:05"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: FB2L4yOApor09beXAABK","metadata":{},"timestamp":"2026-03-23 16:24:06"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:24:06"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:24:06"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:24:06"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:24:06"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:24:06"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 0WF3udfAcznKu18BAABP","metadata":{},"timestamp":"2026-03-23 16:24:07"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: TyAr0YnCn8ihfahRAABS","metadata":{},"timestamp":"2026-03-23 16:24:07"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: WwSkrBAn48NtNJjbAABT","metadata":{},"timestamp":"2026-03-23 16:24:07"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: EVkB2qGJaxbR_XYwAABW","metadata":{},"timestamp":"2026-03-23 16:24:07"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 9vve6KldPYMe-8cwAABZ","metadata":{},"timestamp":"2026-03-23 16:24:07"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:24:50"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:24:50"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:24:50"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:24:50"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:24:50"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:24:50"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: FY6scGDs6fG6CetfAABe","metadata":{},"timestamp":"2026-03-23 16:24:51"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: YHNv9WMWChZrEev_AABf","metadata":{},"timestamp":"2026-03-23 16:24:51"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: krzVNDb8U3wvAFMUAABm","metadata":{},"timestamp":"2026-03-23 16:24:51"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: ZWZvr81wzbuOQysBAABn","metadata":{},"timestamp":"2026-03-23 16:24:51"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: UUjz5ytg9hmvwY0eAABo","metadata":{},"timestamp":"2026-03-23 16:24:51"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: jUfs4ul4WxoDSpCWAABr","metadata":{},"timestamp":"2026-03-23 16:24:51"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:25:03"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:25:03"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:25:03"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:25:03"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:25:03"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:25:03"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: BWI2vNsLIFTbLuWzAABy","metadata":{},"timestamp":"2026-03-23 16:25:04"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 7Y2pFhtdNCUqEGAoAABz","metadata":{},"timestamp":"2026-03-23 16:25:04"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 85S-nhCMD7dk-I_1AAB0","metadata":{},"timestamp":"2026-03-23 16:25:04"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: joT1jTVNKXmB_0t_AAB7","metadata":{},"timestamp":"2026-03-23 16:25:04"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: UnvIC8EHOyoNDXQqAAB8","metadata":{},"timestamp":"2026-03-23 16:25:04"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: HLxUgBgYPiZ_u0JpAAB9","metadata":{},"timestamp":"2026-03-23 16:25:04"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:25:26"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:25:26"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:25:26"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:25:26"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:25:26"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:25:26"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: kKVe5nPMvRVh8BsRAACA","metadata":{},"timestamp":"2026-03-23 16:25:27"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: jsVrpVcpvqgQK-xjAACD","metadata":{},"timestamp":"2026-03-23 16:25:27"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: RFmUJKWP7cvGeYPZAACH","metadata":{},"timestamp":"2026-03-23 16:25:27"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: NqZ3ZBkFdtcHfbGFAACL","metadata":{},"timestamp":"2026-03-23 16:25:27"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: _HDCjtnCa23MCVpEAACM","metadata":{},"timestamp":"2026-03-23 16:25:27"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 3vOAk7EP8O885zv_AACP","metadata":{},"timestamp":"2026-03-23 16:25:27"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:25:32"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:25:32"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:25:32"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:25:32"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:25:32"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:25:32"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: gabtXMx_9GMrzR4QAACT","metadata":{},"timestamp":"2026-03-23 16:25:33"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: AVZUR4citc4sZzHJAACV","metadata":{},"timestamp":"2026-03-23 16:25:33"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: H0y4KfkvXXGZUfPTAACc","metadata":{},"timestamp":"2026-03-23 16:25:33"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: wbpRMQ3LqP7ZYQw8AACd","metadata":{},"timestamp":"2026-03-23 16:25:33"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: sKXc2TkU6WtBG-VSAACe","metadata":{},"timestamp":"2026-03-23 16:25:33"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: mYSVUCwi1NEZKJ3AAACh","metadata":{},"timestamp":"2026-03-23 16:25:33"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:25:35"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:25:35"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:25:35"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:25:35"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:25:35"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:25:35"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: LQaVBZj-nxibCImnAACk","metadata":{},"timestamp":"2026-03-23 16:25:36"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: wDytkp7aFrREZ7z_AACn","metadata":{},"timestamp":"2026-03-23 16:25:36"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: AKl2iOWUmFGmLiSVAACq","metadata":{},"timestamp":"2026-03-23 16:25:36"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: NsdgzOvM775T8uNzAACv","metadata":{},"timestamp":"2026-03-23 16:25:36"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: YVgXw0Dsi_Bf7h7OAACw","metadata":{},"timestamp":"2026-03-23 16:25:36"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: BPrF3Yb_QA7I9H32AACz","metadata":{},"timestamp":"2026-03-23 16:25:36"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: il49iBV1HfYBfpjDAAC2","metadata":{},"timestamp":"2026-03-23 16:26:36"}
+{"level":"info","message":"User 6952c5e37717bc70a397d947 joined room 69b3952fac2d38ffcd551060","metadata":{},"timestamp":"2026-03-23 16:26:36"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:26:52"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:27:02"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: xe4AtoSAEwKDABuGAAC5","metadata":{},"timestamp":"2026-03-23 16:27:02"}
+{"level":"warn","message":"Handled AppError You can only review your own bookings","metadata":{"method":"POST","statusCode":403,"url":"/api/reviews","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 16:27:44"}
+{"level":"warn","message":"Handled AppError You can only review your own bookings","metadata":{"method":"POST","statusCode":403,"url":"/api/reviews","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 16:27:52"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 16:31:43"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 16:31:43"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 16:31:43"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: qz7gLtEt_Qt3UC41AAAB","metadata":{},"timestamp":"2026-03-23 16:31:43"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: i7KCLUKVfbTuzdPzAAAE","metadata":{},"timestamp":"2026-03-23 16:31:44"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: Kq6HFcoLccoI4MpqAAAF","metadata":{},"timestamp":"2026-03-23 16:31:44"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: oHU2x_XsS8sS8-pGAAAH","metadata":{},"timestamp":"2026-03-23 16:31:45"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 2iLgTe3FRY1SizoeAAAJ","metadata":{},"timestamp":"2026-03-23 16:31:47"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: AdudaUFWMP1xsCXrAAAL","metadata":{},"timestamp":"2026-03-23 16:31:48"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:34:11"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: GMjfkYG15jghKuQ4AAAO","metadata":{},"timestamp":"2026-03-23 16:34:11"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c11c7a18132977f248e592/read","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 16:34:14"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c11c7a18132977f248e592/read","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 16:34:15"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c11c7a18132977f248e592/read","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 16:34:15"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c11c7a18132977f248e592/read","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 16:34:16"}
+{"level":"error","message":"Unhandled Error Notification validation failed: type: `INFO` is not a valid enum value for path `type`.","metadata":{"method":"POST","stack":"ValidationError: Notification validation failed: type: `INFO` is not a valid enum value for path `type`.\n    at model.Document.invalidate (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/document.js:3370:32)\n    at validatePath (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/document.js:3145:13)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Promise.all (index 1)\n    at async model.$__validate (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/document.js:3086:3)\n    at async model.validate (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/document.js:2663:5)\n    at async model.validateBeforeSave (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/plugins/validateBeforeSave.js:34:7)\n    at async Kareem.execPre (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/kareem/index.js:65:24)\n    at async model.$__save (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/model.js:369:5)\n    at async model.save (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/model.js:609:5)","url":"/api/reviews","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 16:34:26"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:34:49"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: wGV1SH1jx_2two4rAAAR","metadata":{},"timestamp":"2026-03-23 16:34:49"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 16:35:13"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 16:35:13"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 16:35:13"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: CyNPXaCyiWyZSfSHAAAB","metadata":{},"timestamp":"2026-03-23 16:35:14"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: Q-AglxFn_lEkUC5RAAAD","metadata":{},"timestamp":"2026-03-23 16:35:16"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 3gGT4Au6g4jMKr8YAAAF","metadata":{},"timestamp":"2026-03-23 16:35:17"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: ZViOXcC2FgBSbjG0AAAI","metadata":{},"timestamp":"2026-03-23 16:35:18"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: ElJddg-b0gBSYhwAAAAJ","metadata":{},"timestamp":"2026-03-23 16:35:18"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: tJfrClaWLXUN475EAAAL","metadata":{},"timestamp":"2026-03-23 16:35:19"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 16:35:58"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 16:35:58"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 16:35:58"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 0TA8szmSn9qNVQJjAAAD","metadata":{},"timestamp":"2026-03-23 16:36:01"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: jxu1VHskvqvEnuqmAAAF","metadata":{},"timestamp":"2026-03-23 16:36:01"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: t01X-cyTCA20-ZJMAAAG","metadata":{},"timestamp":"2026-03-23 16:36:01"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: kdj86pHnXVKB-uW7AAAH","metadata":{},"timestamp":"2026-03-23 16:36:01"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: pftt3p4yuJXFTCCgAAAJ","metadata":{},"timestamp":"2026-03-23 16:36:02"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 4TEBrZZNjWu9A-JrAAAL","metadata":{},"timestamp":"2026-03-23 16:36:04"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:39:33"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: Qdw8yWR4awU4_J8WAAAO","metadata":{},"timestamp":"2026-03-23 16:39:33"}
+{"level":"warn","message":"Handled AppError You have already reviewed this booking","metadata":{"method":"POST","statusCode":409,"url":"/api/reviews","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 16:39:49"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:39:53"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: bgX3ibO0GhQQNtNrAAAR","metadata":{},"timestamp":"2026-03-23 16:39:53"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:39:53"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 4fJoDkbGQHhrOxqjAAAU","metadata":{},"timestamp":"2026-03-23 16:39:53"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:40:05"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: zT5DSXTQNejBIY1MAAAX","metadata":{},"timestamp":"2026-03-23 16:40:05"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:40:51"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: k-QZz_YYpAVGw-MyAAAa","metadata":{},"timestamp":"2026-03-23 16:40:51"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:40:51"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: m9UZGd58P6PoEcOQAAAd","metadata":{},"timestamp":"2026-03-23 16:40:51"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:40:52"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: dZuBlFmuXWmLVyNaAAAg","metadata":{},"timestamp":"2026-03-23 16:40:52"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:41:58"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: IeMJTTlC6C57LtiGAAAj","metadata":{},"timestamp":"2026-03-23 16:41:59"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:35"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: EMpzDBn19nS6zjYOAAAm","metadata":{},"timestamp":"2026-03-23 16:42:35"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:45"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 85gbXGRRE2_HYrDSAAAp","metadata":{},"timestamp":"2026-03-23 16:42:46"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:46"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: tVA8nUkBVAP7PDXEAAAs","metadata":{},"timestamp":"2026-03-23 16:42:46"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:46"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: JiYfqS3D09gyxZnAAAAv","metadata":{},"timestamp":"2026-03-23 16:42:46"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: AhrGv1eUp7TTEjSmAAAy","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: zxpJzBSbefT89jyTAAA1","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: -lZbxUtiiczrFQp9AAA4","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: TsZtZjJaNhNTuAEYAAA7","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 0Uco4SWX4WBOxxtQAAA-","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:47"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: CAR6xrjSmoBXyJVkAABB","metadata":{},"timestamp":"2026-03-23 16:42:48"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 6Gx1MWRUr1DvbgMeAABE","metadata":{},"timestamp":"2026-03-23 16:42:48"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: tThXrycOvMel-NEVAABH","metadata":{},"timestamp":"2026-03-23 16:42:48"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: HX-5UxnbBqAcYm_AAABK","metadata":{},"timestamp":"2026-03-23 16:42:48"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c1201412d274d1a5e8cb49/read","userId":"695adad0e5e49754e37c9c4b"},"timestamp":"2026-03-23 16:42:51"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:42:57"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:57"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:42:57"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 16:42:57"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:42:57"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 16:42:57"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: meVdtC90L5F0AGdNAABO","metadata":{},"timestamp":"2026-03-23 16:42:58"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: klOM9LvrdXnFby9yAABQ","metadata":{},"timestamp":"2026-03-23 16:42:58"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: C7mZpv1JqSgBhFvCAABT","metadata":{},"timestamp":"2026-03-23 16:42:59"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: Soy8RzUziESw08r_AABW","metadata":{},"timestamp":"2026-03-23 16:42:59"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: dIOLDlZDkbSeqoZ7AABa","metadata":{},"timestamp":"2026-03-23 16:42:59"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: g43NLr0R1jy6d3WDAABc","metadata":{},"timestamp":"2026-03-23 16:42:59"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 16:58:29"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 19:28:21"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: UFo1qNSAWZ2d3ACoAABf","metadata":{},"timestamp":"2026-03-23 19:28:21"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c1201412d274d1a5e8cb49/read","userId":"695adad0e5e49754e37c9c4b"},"timestamp":"2026-03-23 19:28:31"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c1201412d274d1a5e8cb49/read","userId":"695adad0e5e49754e37c9c4b"},"timestamp":"2026-03-23 19:28:31"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c1201412d274d1a5e8cb49/read","userId":"695adad0e5e49754e37c9c4b"},"timestamp":"2026-03-23 19:28:31"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c1201412d274d1a5e8cb49/read","userId":"695adad0e5e49754e37c9c4b"},"timestamp":"2026-03-23 19:28:31"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 19:28:38"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: a29VXwFJd2B5W2KMAABi","metadata":{},"timestamp":"2026-03-23 19:28:38"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 19:30:14"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 19:30:14"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 19:30:14"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: hzmUhanDIoYnDGwcAAAC","metadata":{},"timestamp":"2026-03-23 19:30:16"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: ZEEvT0h5e5aNSKbKAAAD","metadata":{},"timestamp":"2026-03-23 19:30:16"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: SKuykuKNdd_PrAKTAAAF","metadata":{},"timestamp":"2026-03-23 19:30:17"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: eHJroxdjHO07DpxJAAAJ","metadata":{},"timestamp":"2026-03-23 19:30:20"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 1j3VIgM-B7OOj6DkAAAK","metadata":{},"timestamp":"2026-03-23 19:30:20"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: A23tMPM8Bwqg-lC6AAAL","metadata":{},"timestamp":"2026-03-23 19:30:20"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 19:30:33"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 19:30:33"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 19:30:33"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: ldT82178Kzz2gWalAAAE","metadata":{},"timestamp":"2026-03-23 19:30:34"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 2nW0ODpFY6LkB57DAAAF","metadata":{},"timestamp":"2026-03-23 19:30:34"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: ge8JYzAnnDClUhVJAAAG","metadata":{},"timestamp":"2026-03-23 19:30:34"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: mILHj1W6Q6AYJ5UvAAAH","metadata":{},"timestamp":"2026-03-23 19:30:34"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: HfPTgu0lyFvcmXCVAAAK","metadata":{},"timestamp":"2026-03-23 19:30:37"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 0CMw2nZfI3z8Xn6EAAAL","metadata":{},"timestamp":"2026-03-23 19:30:37"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 19:30:50"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 19:30:50"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 19:30:50"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 6u7ZrDSnHZvzwYpgAAAD","metadata":{},"timestamp":"2026-03-23 19:30:51"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: q9KH946nSXLkK9baAAAF","metadata":{},"timestamp":"2026-03-23 19:30:51"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 924mtrIACFdGMc-tAAAG","metadata":{},"timestamp":"2026-03-23 19:30:51"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: I9crLP8JloXXYT8xAAAI","metadata":{},"timestamp":"2026-03-23 19:30:51"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: OAIxpPm33nWwp-usAAAJ","metadata":{},"timestamp":"2026-03-23 19:30:51"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 7sravBt_EaSPzRCaAAAL","metadata":{},"timestamp":"2026-03-23 19:30:53"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 19:31:53"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 19:31:53"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 19:31:53"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: pV3FaEB27q1zDoPvAAAB","metadata":{},"timestamp":"2026-03-23 19:31:54"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: dMxvCVZnNgLBMAPZAAAE","metadata":{},"timestamp":"2026-03-23 19:31:55"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 8QwpHcEnzRpg8X9gAAAF","metadata":{},"timestamp":"2026-03-23 19:31:55"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 3_8mCnJ188pGgN7nAAAH","metadata":{},"timestamp":"2026-03-23 19:31:57"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: yUtNYUaXItrok5GKAAAJ","metadata":{},"timestamp":"2026-03-23 19:31:58"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: tGEm2rNTWUg2V9fDAAAL","metadata":{},"timestamp":"2026-03-23 19:31:58"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 19:34:22"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 19:34:22"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 19:34:22"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: gYEczs_E58DaGEd1AAAC","metadata":{},"timestamp":"2026-03-23 19:34:22"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: cnYbnLQbyB9NuiC8AAAD","metadata":{},"timestamp":"2026-03-23 19:34:22"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: AOwLdQD9rlwkr5qoAAAF","metadata":{},"timestamp":"2026-03-23 19:34:23"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: lVFS3DOueryW_UiLAAAI","metadata":{},"timestamp":"2026-03-23 19:34:24"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: QNja8H1aIT7RazKGAAAJ","metadata":{},"timestamp":"2026-03-23 19:34:24"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: xRRxwpbDY0ilmpUpAAAL","metadata":{},"timestamp":"2026-03-23 19:34:25"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 19:35:32"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: VtP9PKZTznd82F16AAAO","metadata":{},"timestamp":"2026-03-23 19:35:32"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 19:36:58"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: h81HtCsBWCpke1LkAAAR","metadata":{},"timestamp":"2026-03-23 19:36:59"}
+{"level":"error","message":"Unhandled Error Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"Review\"","metadata":{"method":"DELETE","stack":"CastError: Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"Review\"\n    at SchemaObjectId.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schema/objectId.js:253:11)\n    at SchemaObjectId.SchemaType.applySetters (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1280:12)\n    at SchemaObjectId.SchemaType.castForQuery (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/schemaType.js:1706:17)\n    at cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/cast.js:390:32)\n    at model.Query.Query.cast (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:5016:12)\n    at model.Query.Query._castConditions (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:2380:10)\n    at model.Query._updateThunk (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:4049:8)\n    at model.Query._updateOne (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:4149:23)\n    at model.Query.exec (/Users/ashikmuhammed/Desktop/Saloon Booking Managment/backend/node_modules/mongoose/lib/query.js:4627:80)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","url":"/api/reviews/undefined","userId":"693d1d1c955b52394a731682"},"timestamp":"2026-03-23 19:37:08"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 19:40:15"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 19:40:15"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 19:40:15"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: Cnywlda2P7szizVGAAAD","metadata":{},"timestamp":"2026-03-23 19:40:16"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: fcIStsJfHSAdo-NLAAAE","metadata":{},"timestamp":"2026-03-23 19:40:16"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: AZGbMl0-846jwfEFAAAF","metadata":{},"timestamp":"2026-03-23 19:40:16"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: fsfagYzxNaCQXrsNAAAH","metadata":{},"timestamp":"2026-03-23 19:40:17"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 4ZcCF1r1GuNjq_L2AAAJ","metadata":{},"timestamp":"2026-03-23 19:40:18"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: RIXVZ6ApHv_CEFlEAAAL","metadata":{},"timestamp":"2026-03-23 19:40:21"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 19:40:31"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 19:40:31"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 19:40:31"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 4mFhOfz846N4pttoAAAD","metadata":{},"timestamp":"2026-03-23 19:40:32"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: CatF9bgzszUhnF2jAAAF","metadata":{},"timestamp":"2026-03-23 19:40:32"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: wkagzTX0Djd-aHqqAAAG","metadata":{},"timestamp":"2026-03-23 19:40:32"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 9VZK54lb7yvZvQnUAAAH","metadata":{},"timestamp":"2026-03-23 19:40:32"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: xB5qneGvkdLF3AJAAAAJ","metadata":{},"timestamp":"2026-03-23 19:40:33"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: x9KQdtvw-b7cVuIAAAAL","metadata":{},"timestamp":"2026-03-23 19:40:34"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 19:40:49"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 19:40:49"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 19:40:49"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 19:40:49"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 19:40:49"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 19:40:49"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: g36WEfWBOv9WwXUQAAAO","metadata":{},"timestamp":"2026-03-23 19:40:50"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: IY0Z4A70pAOILzNzAAAV","metadata":{},"timestamp":"2026-03-23 19:40:50"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 14llnAnoaONvPB46AAAW","metadata":{},"timestamp":"2026-03-23 19:40:50"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: zDcrF5ToU8yB3QbjAAAX","metadata":{},"timestamp":"2026-03-23 19:40:50"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 9pL8lkV4Foy90xmXAAAc","metadata":{},"timestamp":"2026-03-23 19:40:50"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: EQKOb2qluM6LRxKJAAAd","metadata":{},"timestamp":"2026-03-23 19:40:50"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 19:54:37"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 19:54:37"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 19:54:37"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: G5nUAakYco46mawtAAAF","metadata":{},"timestamp":"2026-03-23 19:54:37"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: DyrrVk0-25pMdaJaAAAG","metadata":{},"timestamp":"2026-03-23 19:54:37"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: IU0DaKuNv6un2xWDAAAH","metadata":{},"timestamp":"2026-03-23 19:54:37"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: YKqSGDmvcI-zbIV7AAAI","metadata":{},"timestamp":"2026-03-23 19:54:37"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: YYq5joARR1Lh9tu5AAAJ","metadata":{},"timestamp":"2026-03-23 19:54:37"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: GlcHFM28y6w73mtkAAAL","metadata":{},"timestamp":"2026-03-23 19:54:42"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 19:54:48"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: WpyaCvGVB436WTb_AAAO","metadata":{},"timestamp":"2026-03-23 19:54:48"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 20:11:09"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 20:11:09"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 20:11:09"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: taiic9kzbVollf90AAAC","metadata":{},"timestamp":"2026-03-23 20:11:10"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: GCB__fbQya9IYk-eAAAE","metadata":{},"timestamp":"2026-03-23 20:11:10"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: n5F3Yi684xhVzsGuAAAF","metadata":{},"timestamp":"2026-03-23 20:11:10"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: wUGa89BGUJJ5n4hWAAAH","metadata":{},"timestamp":"2026-03-23 20:11:11"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 9GpwHLhrSUiiYArqAAAK","metadata":{},"timestamp":"2026-03-23 20:11:15"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: jnjfCpXkOBkHkl_qAAAL","metadata":{},"timestamp":"2026-03-23 20:11:15"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 20:11:15"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:11:15"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 20:11:15"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 20:11:15"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 20:11:15"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: xenlyb5CnBz_Ko1NAAAO","metadata":{},"timestamp":"2026-03-23 20:11:16"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: cUKZqiBxCUykO4EDAAAR","metadata":{},"timestamp":"2026-03-23 20:11:16"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: slQYH17ZS_Rl9NYUAAAU","metadata":{},"timestamp":"2026-03-23 20:11:16"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: YACw9FGwdmrMYP_JAAAY","metadata":{},"timestamp":"2026-03-23 20:11:16"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: jn_3IEkFW-1km54gAAAc","metadata":{},"timestamp":"2026-03-23 20:11:16"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: EWII85ndXvS-o3ibAAAd","metadata":{},"timestamp":"2026-03-23 20:11:16"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:12:40"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:13:31"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: yISO6MhrkUZlVU_gAAAg","metadata":{},"timestamp":"2026-03-23 20:13:33"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:13:33"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 6dDQ1BUkesQcdvwrAAAj","metadata":{},"timestamp":"2026-03-23 20:13:36"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:13:36"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: WIcb4-7XwHwFiV4UAAAm","metadata":{},"timestamp":"2026-03-23 20:13:54"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:13:54"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 20:15:11"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 20:15:11"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 20:15:11"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: brD992Nr8_MIWxQBAAAC","metadata":{},"timestamp":"2026-03-23 20:15:11"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 3oHldfYC4KwY7fXBAAAD","metadata":{},"timestamp":"2026-03-23 20:15:11"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 2YoPdeqCnkGUAG5FAAAF","metadata":{},"timestamp":"2026-03-23 20:15:12"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: F3ZjFniGRx1BAL6UAAAH","metadata":{},"timestamp":"2026-03-23 20:15:14"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: hi5uexx4deJjQ0teAAAJ","metadata":{},"timestamp":"2026-03-23 20:15:16"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: FhLeztnPc-VkOMCFAAAM","metadata":{},"timestamp":"2026-03-23 20:18:29"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c11ff912d274d1a5e8cae5/read","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 20:25:06"}
+{"level":"warn","message":"Handled AppError notificationId: Invalid input: expected string, received undefined, : Unrecognized key: \"id\"","metadata":{"method":"PATCH","statusCode":400,"url":"/api/notifications/69c11c7a18132977f248e592/read","userId":"6952c5e37717bc70a397d947"},"timestamp":"2026-03-23 20:25:10"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:28:27"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: f7cpTdQbrFh_b8X2AAAP","metadata":{},"timestamp":"2026-03-23 20:28:30"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 7dxnwgKcQaaVQbWsAAAS","metadata":{},"timestamp":"2026-03-23 20:29:26"}
+{"level":"info","message":"User 6952c5e37717bc70a397d947 joined room 69b3952fac2d38ffcd551060","metadata":{},"timestamp":"2026-03-23 20:29:32"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:29:42"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 20:39:10"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 20:39:10"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 20:39:10"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 10zx6S1rpSd0nP3tAAAB","metadata":{},"timestamp":"2026-03-23 20:39:13"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: fpuJOEotWmoL3gJQAAAD","metadata":{},"timestamp":"2026-03-23 20:39:14"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: I64tfDGv3kz9QWHbAAAH","metadata":{},"timestamp":"2026-03-23 20:39:15"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: XUUZ2gqk23HXU_OkAAAJ","metadata":{},"timestamp":"2026-03-23 20:39:15"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: JvE1I3Q-3a79gAmfAAAK","metadata":{},"timestamp":"2026-03-23 20:39:15"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: mR1aNRXAdWoTC1wWAAAL","metadata":{},"timestamp":"2026-03-23 20:39:15"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:52:46"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: BlOPShXZuIejrXRAAAAO","metadata":{},"timestamp":"2026-03-23 20:52:46"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:53:13"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: QBR9_XbR7A982pdrAAAR","metadata":{},"timestamp":"2026-03-23 20:53:13"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:53:14"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: jYMkulfdOcGEWm_BAAAU","metadata":{},"timestamp":"2026-03-23 20:53:14"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:53:16"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: z7VjU6X2PVSeYNdtAAAX","metadata":{},"timestamp":"2026-03-23 20:53:16"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:53:17"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 6hxGxYD_l7SThsUyAAAa","metadata":{},"timestamp":"2026-03-23 20:53:17"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:53:18"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 3NzN93d-ekYfBbnhAAAd","metadata":{},"timestamp":"2026-03-23 20:53:18"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:53:19"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 2XhPXQh24yTDf8YKAAAg","metadata":{},"timestamp":"2026-03-23 20:53:19"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: VR-tSy94I__SRR9RAAAj","metadata":{},"timestamp":"2026-03-23 20:54:11"}
+{"level":"info","message":"User 695adad0e5e49754e37c9c4b joined room 69b3952fac2d38ffcd551060","metadata":{},"timestamp":"2026-03-23 20:54:15"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 20:54:16"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 20:55:11"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 20:55:11"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 20:55:11"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: iVt3ag26i4j8l2JJAAAB","metadata":{},"timestamp":"2026-03-23 20:55:12"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: GnOLZb3UajRr6WZCAAAE","metadata":{},"timestamp":"2026-03-23 20:55:13"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 7psvCVUBopiO6fYZAAAF","metadata":{},"timestamp":"2026-03-23 20:55:13"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: y6iRrAwlRmHNkz0OAAAH","metadata":{},"timestamp":"2026-03-23 20:55:14"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: iibWYNawXi7hP8IGAAAJ","metadata":{},"timestamp":"2026-03-23 20:55:15"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: 0N1Bk-oNDgRpxiU3AAAL","metadata":{},"timestamp":"2026-03-23 20:55:17"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 20:56:57"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: XDtPooD5QQOe8WD0AAAO","metadata":{},"timestamp":"2026-03-23 20:56:57"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 21:04:22"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: qh768pP05EfDyY_QAAAR","metadata":{},"timestamp":"2026-03-23 21:04:22"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 21:04:31"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 0QAuogYPemkmSrUYAAAU","metadata":{},"timestamp":"2026-03-23 21:04:31"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 21:06:44"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 21:06:44"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 21:06:44"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: CWeAL5cffs7vRsG-AAAD","metadata":{},"timestamp":"2026-03-23 21:06:45"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: 1gvaJzLGbtj1WflNAAAE","metadata":{},"timestamp":"2026-03-23 21:06:45"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: byHiqgduecLrulbkAAAF","metadata":{},"timestamp":"2026-03-23 21:06:45"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: 984aM3UHnoD1EcvAAAAI","metadata":{},"timestamp":"2026-03-23 21:06:46"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: qiRIh9hdYIBalvfHAAAJ","metadata":{},"timestamp":"2026-03-23 21:06:46"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: oO3evm9MpfirYOGjAAAL","metadata":{},"timestamp":"2026-03-23 21:06:47"}
+{"level":"info","message":"Backend running on http://localhost:5001","metadata":{},"timestamp":"2026-03-23 21:13:04"}
+{"level":"info","message":"Redis connected","metadata":{},"timestamp":"2026-03-23 21:13:04"}
+{"level":"info","message":"MongoDB connected successfully","metadata":{},"timestamp":"2026-03-23 21:13:04"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: mXPQ0XtGWHZM6QaVAAAC","metadata":{},"timestamp":"2026-03-23 21:13:05"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: rAa2xQ8W-l2pwMJjAAAD","metadata":{},"timestamp":"2026-03-23 21:13:05"}
+{"level":"info","message":"[Socket connected] userId: 693d1d1c955b52394a731682, socketId: og1pKkA7u5oRVrHKAAAG","metadata":{},"timestamp":"2026-03-23 21:13:09"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: dhDbkIV0ZSwTxrvoAAAH","metadata":{},"timestamp":"2026-03-23 21:13:09"}
+{"level":"info","message":"[Socket connected] userId: 695adad0e5e49754e37c9c4b, socketId: VVzp6UZe8RInx7cbAAAK","metadata":{},"timestamp":"2026-03-23 21:13:10"}
+{"level":"info","message":"[Socket connected] userId: 6952c5e37717bc70a397d947, socketId: Ew96Z85rj69UpoxiAAAL","metadata":{},"timestamp":"2026-03-23 21:13:10"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 21:14:51"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 21:14:51"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 21:14:51"}
+{"level":"info","message":"[Socket disconnected] userId: 6952c5e37717bc70a397d947","metadata":{},"timestamp":"2026-03-23 21:14:51"}
+{"level":"info","message":"[Socket disconnected] userId: 695adad0e5e49754e37c9c4b","metadata":{},"timestamp":"2026-03-23 21:14:51"}
+{"level":"info","message":"[Socket disconnected] userId: 693d1d1c955b52394a731682","metadata":{},"timestamp":"2026-03-23 21:14:51"}

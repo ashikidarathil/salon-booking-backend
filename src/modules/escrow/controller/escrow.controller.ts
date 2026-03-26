@@ -6,6 +6,8 @@ import { TOKENS } from '../../../common/di/tokens';
 import { ApiResponse } from '../../../common/response/apiResponse';
 import { ESCROW_MESSAGES } from '../constants/escrow.constants';
 import { AuthPayload } from '../../../common/types/authPayload';
+import { AppError } from '../../../common/errors/appError';
+import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { EscrowPaginationQueryDto } from '../dto/escrow.request.dto';
 
 @injectable()
@@ -15,49 +17,53 @@ export class EscrowController implements IEscrowController {
     private readonly escrowService: IEscrowService,
   ) {}
 
-  getAllEscrows = async (req: Request, res: Response): Promise<void> => {
-    const query = req.query as unknown as EscrowPaginationQueryDto;
+  getAllEscrows = async (req: Request, res: Response): Promise<Response> => {
+    const query = req.query as EscrowPaginationQueryDto;
     const escrows = await this.escrowService.getAllEscrows(query);
-    res.json(ApiResponse.success(ESCROW_MESSAGES.FETCHED_ALL, escrows));
+    return ApiResponse.success(res, escrows, ESCROW_MESSAGES.FETCHED_ALL);
   };
 
-  getEscrowByBooking = async (req: Request, res: Response): Promise<void> => {
+  getEscrowByBooking = async (req: Request, res: Response): Promise<Response> => {
     const { bookingId } = req.params;
     const escrow = await this.escrowService.getEscrowByBookingId(bookingId);
-    res.json(ApiResponse.success(ESCROW_MESSAGES.FETCHED_ONE, escrow));
+    return ApiResponse.success(res, escrow, ESCROW_MESSAGES.FETCHED_ONE);
   };
 
-  getStylistEscrows = async (req: Request & { auth?: AuthPayload }, res: Response): Promise<void> => {
+  getStylistEscrows = async (
+    req: Request & { auth?: AuthPayload },
+    res: Response,
+  ): Promise<Response> => {
     const userId = req.auth?.userId;
     if (!userId) {
-      res.status(401).json(ApiResponse.error('Unauthorized'));
-      return;
+      throw new AppError(ESCROW_MESSAGES.ERROR.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
     }
-    const query = req.query as unknown as EscrowPaginationQueryDto;
+    const query = req.query as EscrowPaginationQueryDto;
     const escrows = await this.escrowService.getStylistEscrows(userId, query);
-    res.json(ApiResponse.success(ESCROW_MESSAGES.FETCHED_ALL, escrows));
+    return ApiResponse.success(res, escrows, ESCROW_MESSAGES.FETCHED_ALL);
   };
 
-  getHeldBalance = async (req: Request & { auth?: AuthPayload }, res: Response): Promise<void> => {
+  getHeldBalance = async (
+    req: Request & { auth?: AuthPayload },
+    res: Response,
+  ): Promise<Response> => {
     const userId = req.auth?.userId;
     if (!userId) {
-      res.status(401).json(ApiResponse.error('Unauthorized'));
-      return;
+      throw new AppError(ESCROW_MESSAGES.ERROR.UNAUTHORIZED, HttpStatus.UNAUTHORIZED);
     }
     const balance = await this.escrowService.getHeldBalance(userId);
-    res.json(ApiResponse.success('Held balance fetched successfully', balance));
+    return ApiResponse.success(res, balance, ESCROW_MESSAGES.HELD_BALANCE);
   };
 
-  getAdminStylistEscrows = async (req: Request, res: Response): Promise<void> => {
+  getAdminStylistEscrows = async (req: Request, res: Response): Promise<Response> => {
     const { stylistId } = req.params;
-    const query = req.query as unknown as EscrowPaginationQueryDto;
+    const query = req.query as EscrowPaginationQueryDto;
     const escrows = await this.escrowService.getAdminStylistEscrows(stylistId, query);
-    res.json(ApiResponse.success(ESCROW_MESSAGES.FETCHED_ALL, escrows));
+    return ApiResponse.success(res, escrows, ESCROW_MESSAGES.FETCHED_ALL);
   };
 
-  getAdminStylistHeldBalance = async (req: Request, res: Response): Promise<void> => {
+  getAdminStylistHeldBalance = async (req: Request, res: Response): Promise<Response> => {
     const { stylistId } = req.params;
     const balance = await this.escrowService.getHeldBalance(stylistId);
-    res.json(ApiResponse.success('Held balance fetched successfully', balance));
+    return ApiResponse.success(res, balance, ESCROW_MESSAGES.HELD_BALANCE);
   };
 }

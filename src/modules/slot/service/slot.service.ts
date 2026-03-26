@@ -11,7 +11,7 @@ import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { SLOT_MESSAGES } from '../constants/slot.messages';
 import { SpecialSlotStatus } from '../../../models/specialSlot.model';
 import { SlotMapper, SlotLike } from '../mapper/slot.mapper';
-import { isValidObjectId } from '../../../common/utils/mongoose.util';
+import { isValidObjectId, toObjectId } from '../../../common/utils/mongoose.util';
 
 @injectable()
 export class SlotService implements ISlotService {
@@ -27,6 +27,36 @@ export class SlotService implements ISlotService {
   ) {}
 
   async blockSlot(slotId: string, reason?: string): Promise<SlotResponseDto> {
+    // Dynamic slot IDs are generated on the fly and not in the DB.
+    // Format: dynamic_{branchId}_{stylistId}_{date}_{startTime}_{endTime}
+    if (slotId.startsWith('dynamic_')) {
+      const parts = slotId.split('_');
+      // parts[0] = 'dynamic', [1] = branchId, [2] = stylistId, [3] = date, [4] = startTime, [5] = endTime
+      if (parts.length < 6) {
+        throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.BAD_REQUEST);
+      }
+      const [, branchId, stylistId, date, startTime, endTime] = parts;
+
+      // Check stylist exists
+      const stylist = await this.slotRepo.findStylistById(stylistId);
+      if (!stylist) {
+        throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.BAD_REQUEST);
+      }
+
+      // Create a blocked special slot record directly
+      const created = await this.slotRepo.createSpecialSlot({
+        branchId: toObjectId(branchId),
+        stylistId: stylist._id,
+        date: new Date(date),
+        startTime,
+        endTime,
+        status: SpecialSlotStatus.CANCELLED,
+        note: reason,
+      });
+      return SlotMapper.toResponse(created as unknown as SlotLike);
+    }
+
+    // Real/persisted slot — original flow
     if (!isValidObjectId(slotId)) {
       throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.BAD_REQUEST);
     }
@@ -51,6 +81,41 @@ export class SlotService implements ISlotService {
   }
 
   async unblockSlot(slotId: string): Promise<SlotResponseDto> {
+    // Handle dynamic slot IDs — find and delete the matching CANCELLED special slot
+    if (slotId.startsWith('dynamic_')) {
+      const parts = slotId.split('_');
+      if (parts.length < 6) {
+        throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.BAD_REQUEST);
+      }
+      const [, branchId, stylistId, date, startTime, endTime] = parts;
+
+      // Find the CANCELLED special slot created when this dynamic slot was blocked
+      const allCancelled = await this.slotRepo.findSpecialSlots(
+        branchId,
+        [stylistId],
+        new Date(date),
+      );
+      const blocked = allCancelled.find(
+        (ss) =>
+          ss.status === SpecialSlotStatus.CANCELLED &&
+          ss.startTime === startTime &&
+          ss.endTime === endTime,
+      );
+
+      if (!blocked) {
+        throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.NOT_FOUND);
+      }
+
+      // Delete the CANCELLED special slot record — restores dynamic slot to AVAILABLE
+      await this.slotRepo.updateSpecialSlot(blocked._id.toString(), {
+        status: SpecialSlotStatus.AVAILABLE,
+        note: undefined,
+      });
+      const updated = await this.slotRepo.findSpecialSlotById(blocked._id.toString());
+      return SlotMapper.toResponse((updated ?? blocked) as unknown as SlotLike);
+    }
+
+    // Real/persisted slot — original flow
     if (!isValidObjectId(slotId)) {
       throw new AppError(SLOT_MESSAGES.NOT_FOUND, HttpStatus.BAD_REQUEST);
     }

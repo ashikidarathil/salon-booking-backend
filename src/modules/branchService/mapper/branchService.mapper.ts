@@ -12,6 +12,8 @@ export type BranchServiceItemResponse = {
   isActive: boolean;
   configured: boolean;
   createdAt?: string | Date;
+  rating?: number;
+  reviewCount?: number;
 };
 
 export type BranchServiceStatusResponse = {

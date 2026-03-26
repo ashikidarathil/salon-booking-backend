@@ -8,6 +8,7 @@ export const OFF_DAY_MESSAGES = {
   NOT_FOUND: 'Off-day request not found',
   FAILED_STATUS: 'Failed to process off-day status',
   UNAUTHORIZED: 'Unauthorized',
+  INVALID_DATE: 'Leave requests must be made at least 3 days in advance.',
 } as const;
 
 export const OFF_DAY_ROUTES = {

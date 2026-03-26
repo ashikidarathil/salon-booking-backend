@@ -28,8 +28,8 @@ export class MessageRepository
         select: 'bookingNumber status items',
         populate: {
           path: 'items.serviceId',
-          select: 'name'
-        }
+          select: 'name',
+        },
       })
       .exec();
 
@@ -52,6 +52,15 @@ export class MessageRepository
   async countUnreadMessages(roomId: string, receiverId: string): Promise<number> {
     return this.count({
       chatRoomId: toObjectId(roomId),
+      senderId: { $ne: toObjectId(receiverId) },
+      isRead: false,
+    });
+  }
+
+  async countTotalUnread(roomIds: string[], receiverId: string): Promise<number> {
+    if (!roomIds.length) return 0;
+    return this.count({
+      chatRoomId: { $in: roomIds.map(toObjectId) },
       senderId: { $ne: toObjectId(receiverId) },
       isRead: false,
     });

@@ -11,7 +11,7 @@ import { toObjectId } from '../../../common/utils/mongoose.util';
 export class NotificationService implements INotificationService {
   constructor(
     @inject(TOKENS.NotificationRepository)
-    private notificationRepo: INotificationRepository
+    private notificationRepo: INotificationRepository,
   ) {}
 
   async createNotification(data: CreateNotificationDto): Promise<INotification> {
@@ -24,16 +24,14 @@ export class NotificationService implements INotificationService {
       link: data.link,
     });
 
-    // Real-time alert via Socket.io
     SocketService.sendToUser(
       data.recipientId,
       'new_notification',
-      NotificationMapper.toResponseDto(notification)
+      NotificationMapper.toResponseDto(notification),
     );
 
     return notification;
   }
-
 
   async getUserNotifications(
     userId: string,

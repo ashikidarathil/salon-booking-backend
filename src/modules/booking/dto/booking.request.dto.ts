@@ -1,32 +1,18 @@
-import { BookingStatus } from '../../../models/booking.model';
-import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+import { z } from 'zod';
+import {
+  BookingItemInputSchema,
+  CreateBookingSchema,
+  CancelBookingSchema,
+  RescheduleBookingSchema,
+  UpdateBookingStatusSchema,
+  BookingPaginationSchema,
+  BookingStatsSchema,
+} from './booking.schema';
 
-export interface BookingItemInput {
-  serviceId: string;
-  stylistId: string;
-  date: string;
-  startTime: string;
-  slotId: string;
-}
-
-export interface CreateBookingDto {
-  items: BookingItemInput[];
-  notes?: string;
-}
-
-export interface CancelBookingDto {
-  reason?: string;
-}
-
-export interface RescheduleBookingDto {
-  items: BookingItemInput[];
-  reason?: string;
-}
-
-export interface UpdateBookingStatusDto {
-  status: BookingStatus;
-}
-
-export interface StylistBookingPaginationQueryDto extends PaginationQueryDto {
-  date?: string;
-}
+export type BookingItemInput = z.infer<typeof BookingItemInputSchema>;
+export type CreateBookingDto = z.infer<typeof CreateBookingSchema>;
+export type CancelBookingDto = z.infer<typeof CancelBookingSchema>;
+export type RescheduleBookingDto = z.infer<typeof RescheduleBookingSchema>;
+export type UpdateBookingStatusDto = z.infer<typeof UpdateBookingStatusSchema>;
+export type StylistBookingPaginationQueryDto = z.infer<typeof BookingPaginationSchema>;
+export type BookingStatsQueryDto = z.infer<typeof BookingStatsSchema>;

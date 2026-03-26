@@ -15,13 +15,13 @@ export class HolidayController implements IHolidayController {
     private readonly holidayService: IHolidayService,
   ) {}
 
-  createHoliday = async (req: Request, res: Response) => {
+  async createHoliday(req: Request, res: Response): Promise<Response> {
     const dto: HolidayRequestDto = req.body;
     const holiday = await this.holidayService.createHoliday(dto);
-    res.status(HttpStatus.CREATED).json(new ApiResponse(true, HOLIDAY_MESSAGES.CREATED, holiday));
-  };
+    return ApiResponse.success(res, holiday, HOLIDAY_MESSAGES.CREATED, HttpStatus.CREATED);
+  }
 
-  getHolidays = async (req: Request, res: Response) => {
+  async getHolidays(req: Request, res: Response): Promise<Response> {
     const branchId = req.query.branchId as string | undefined;
     const startDate = req.query.startDate as string | undefined;
     const endDate = req.query.endDate as string | undefined;
@@ -30,12 +30,12 @@ export class HolidayController implements IHolidayController {
     const end = endDate ? new Date(endDate) : undefined;
 
     const holidays = await this.holidayService.getHolidays(branchId, start, end);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, HOLIDAY_MESSAGES.FETCHED, holidays));
-  };
+    return ApiResponse.success(res, holidays, HOLIDAY_MESSAGES.FETCHED);
+  }
 
-  deleteHoliday = async (req: Request, res: Response) => {
+  deleteHoliday = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     await this.holidayService.deleteHoliday(id);
-    res.status(HttpStatus.OK).json(new ApiResponse(true, HOLIDAY_MESSAGES.DELETED));
+    return ApiResponse.success(res, undefined, HOLIDAY_MESSAGES.DELETED);
   };
 }

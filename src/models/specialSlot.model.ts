@@ -17,7 +17,7 @@ export interface ISpecialSlot extends Document {
   price: number;
   status: SpecialSlotStatus;
   note?: string;
-  createdBy: mongoose.Types.ObjectId; // userId of the creator
+  createdBy?: mongoose.Types.ObjectId; // userId of the creator (optional for system-created blocks)
   createdAt: Date;
   updatedAt: Date;
 }
@@ -38,7 +38,7 @@ const SpecialSlotSchema = new Schema<ISpecialSlot>(
       default: SpecialSlotStatus.AVAILABLE,
     },
     note: { type: String },
-    createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true },
 );

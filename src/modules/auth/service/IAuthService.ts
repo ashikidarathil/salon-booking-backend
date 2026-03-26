@@ -1,16 +1,16 @@
-import type { SignupDto } from '../dto/auth/Signup.dto';
-import type { LoginDto } from '../dto/auth/Login.dto';
-import type { VerifyOtpDto } from '../dto/auth/VerifyOtp.dto';
-import type { GoogleLoginDto } from '../dto/auth/GoogleLogin.dto';
-
-import type { ResetPasswordDto } from '../dto/password/ResetPassword.dto';
-import type { ForgotPasswordDto } from '../dto/password/ForgotPassword.dto';
-
-import type { SendSmsOtpDto } from '../dto/sms/SendSmsOtp.dto';
-import type { VerifySmsOtpDto } from '../dto/sms/VerifySmsOtp.dto';
+import type {
+  SignupDto,
+  LoginDto,
+  VerifyOtpDto,
+  GoogleLoginDto,
+  ResetPasswordDto,
+  ForgotPasswordDto,
+  SendSmsOtpDto,
+  VerifySignupSmsOtpDto,
+  ApplyAsStylistDto,
+} from '../dto/auth.schema';
 
 import type { UserEntity } from '../../../common/types/userEntity';
-import type { ApplyAsStylistDto } from '../dto/stylist/ApplyAsStylist.dto';
 import type { ApplyAsStylistResponseDto } from '../dto/stylist/ApplyAsStylistResponse.dto';
 
 import type { SignupResponseDto } from '../dto/auth/SignupResponse.dto';
@@ -38,7 +38,7 @@ export interface IAuthService {
   resendSmsOtp(phone: string): Promise<{ success: true }>;
 
   sendSmsOtp(dto: SendSmsOtpDto): Promise<{ message: string }>;
-  verifySignupSmsOtp(dto: VerifySmsOtpDto): Promise<{ success: true }>;
+  verifySignupSmsOtp(dto: VerifySignupSmsOtpDto): Promise<{ success: true }>;
 
   login(dto: LoginDto, tabId?: string): Promise<LoginResponseDto>;
   googleLogin(dto: GoogleLoginDto, tabId?: string): Promise<LoginResponseDto>;
@@ -49,8 +49,6 @@ export interface IAuthService {
   resendResetOtp(email: string): Promise<{ success: true }>;
   verifyResetOtp(email: string, otp: string): Promise<{ success: true }>;
   resetPassword(dto: ResetPasswordDto): Promise<ResetPasswordResponseDto>;
-
-  // verifySmsOtp(userId: string, dto: VerifySmsOtpDto): Promise<{ success: boolean }>;
 
   applyAsStylist(dto: ApplyAsStylistDto): Promise<ApplyAsStylistResponseDto>;
 }

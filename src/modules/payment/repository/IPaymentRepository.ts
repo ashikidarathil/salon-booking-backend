@@ -1,6 +1,6 @@
 import { IPayment } from '../../../models/payment.model';
 import { ClientSession, UpdateQuery } from 'mongoose';
-import { PopulateOptions, ObjectId } from '../../../common/utils/mongoose.util';
+import { PopulateOptions } from '../../../common/utils/mongoose.util';
 import { SortOptions } from '../../../common/repository/baseRepository';
 
 export interface IPaymentRepository {

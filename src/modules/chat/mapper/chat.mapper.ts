@@ -3,37 +3,29 @@ import { IChatRoom } from '../../../models/chatRoom.model';
 import { IMessage } from '../../../models/message.model';
 import { ChatRoomResponseDto, MessageResponseDto } from '../dto/chat.response.dto';
 
+import {
+  PopulatedUserRef,
+  PopulatedStylistRef,
+  PopulatedBookingRef,
+  PopulatedBookingMessageRef,
+} from '../types/chat.types';
+
 export class ChatMapper {
   static toRoomResponse(room: IChatRoom): ChatRoomResponseDto {
-    const userDoc = room.userId as unknown as {
-      _id?: string | ObjectId;
-      name?: string;
-      profilePicture?: string;
-    };
+    const userDoc = room.userId as unknown as PopulatedUserRef;
     const userName = userDoc?.name;
     const userProfilePic = userDoc?.profilePicture;
 
-    const stylistDoc = room.stylistId as unknown as {
-      _id?: string | ObjectId;
-      userId?: { name?: string; profilePicture?: string };
-      profilePicture?: string;
-    };
-    const stylistUserDoc = stylistDoc?.userId; 
+    const stylistDoc = room.stylistId as unknown as PopulatedStylistRef;
+    const stylistUserDoc = stylistDoc?.userId;
     const stylistName = stylistUserDoc?.name;
-    const stylistProfilePic =
-      stylistDoc?.profilePicture ?? stylistUserDoc?.profilePicture;
+    const stylistProfilePic = stylistDoc?.profilePicture ?? stylistUserDoc?.profilePicture;
 
-    const bookingDoc = room.bookingId as unknown as {
-      _id?: string | ObjectId;
-      bookingNumber?: string;
-      status?: string;
-      completedAt?: Date;
-      cancelledAt?: Date;
-    };
+    const bookingDoc = room.bookingId as unknown as PopulatedBookingRef;
 
     return {
       id: room._id.toString(),
-      bookingId: bookingDoc?._id ? bookingDoc._id.toString() : bookingDoc?.toString(),
+      bookingId: bookingDoc?._id ? bookingDoc._id.toString() : (bookingDoc?.toString() ?? ''),
       bookingNumber: bookingDoc?.bookingNumber,
       userId: userDoc?._id ? userDoc._id.toString() : room.userId?.toString(),
       userName,
@@ -45,7 +37,6 @@ export class ChatMapper {
       lastMessage: room.lastMessage,
       lastMessageAt: room.lastMessageAt,
       updatedAt: room.updatedAt,
-      // Nested objects used by AdminChatPage
       ...(userName !== undefined && {
         user: { name: userName, profilePicture: userProfilePic },
       }),
@@ -63,21 +54,23 @@ export class ChatMapper {
     };
   }
 
+  static toMessageResponse(
+    message: IMessage,
+    externalBooking?: { bookingNumber: string; status: string; serviceName?: string },
+  ): MessageResponseDto {
+    const bookingDoc = message.bookingId as unknown as PopulatedBookingMessageRef | null;
 
-
-
-  static toMessageResponse(message: IMessage): MessageResponseDto {
-    const bookingDoc = message.bookingId as unknown as {
-      bookingNumber?: string;
-      status?: string;
-      items?: { serviceId?: { name?: string } }[];
-    } | null;
     let bookingPayload: MessageResponseDto['bookingId'] = undefined;
 
-    if (bookingDoc) {
+    if (externalBooking) {
+      bookingPayload = {
+        bookingNumber: externalBooking.bookingNumber,
+        status: externalBooking.status,
+        bookingName: externalBooking.serviceName || 'Service',
+      };
+    } else if (bookingDoc && typeof bookingDoc === 'object' && 'bookingNumber' in bookingDoc) {
       const firstItem = bookingDoc.items?.[0];
       const serviceName = firstItem?.serviceId?.name || 'Service';
-
       bookingPayload = {
         bookingNumber: bookingDoc.bookingNumber || '',
         status: bookingDoc.status || '',
@@ -96,7 +89,7 @@ export class ChatMapper {
       duration: message.duration,
       isRead: message.isRead,
       createdAt: message.createdAt,
-      bookingId: bookingPayload || message.bookingId?.toString(),
+      bookingId: bookingPayload ?? message.bookingId?.toString(),
     };
   }
 }

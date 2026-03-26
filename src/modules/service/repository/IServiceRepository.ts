@@ -33,4 +33,5 @@ export interface IServiceRepository {
   softDelete(id: string): Promise<ServiceDocument | null>;
   restore(id: string): Promise<ServiceDocument | null>;
   getPaginatedServices(query: ServicePaginationQueryDto): Promise<ServicePaginatedResponse>;
+  update(id: string, data: unknown): Promise<void>;
 }

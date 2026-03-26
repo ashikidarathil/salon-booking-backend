@@ -6,6 +6,15 @@ import { roleMiddleware } from '../../../common/middleware/role.middleware';
 import { UserRole } from '../../../common/enums/userRole.enum';
 import { resolveAuthController } from '../../auth';
 import { STYLIST_INVITE_ROUTES } from '../constants/stylistInvite.routes';
+import { validate } from '../../../common/middleware/validation.middleware';
+import {
+  CreateStylistInviteSchema,
+  AcceptStylistInviteSchema,
+  ValidateStylistInviteSchema,
+  StylistPaginationSchema,
+  StylistBlockSchema,
+  StylistPositionSchema,
+} from '../dto/stylistInvite.schema';
 
 const router = Router();
 
@@ -14,77 +23,56 @@ const stylistController = resolveStylistController();
 const authController = resolveAuthController();
 
 /** Admin */
+router.use('/admin', authMiddleware, roleMiddleware([UserRole.ADMIN]));
+
 router.get(
   STYLIST_INVITE_ROUTES.ADMIN_LIST_STYLISTS,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
   stylistController.list.bind(stylistController),
 );
 
 router.get(
   STYLIST_INVITE_ROUTES.ADMIN_PAGINATED_LIST_STYLIST,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ query: StylistPaginationSchema }),
   stylistController.getStylists.bind(stylistController),
 );
 
 router.patch(
   STYLIST_INVITE_ROUTES.ADMIN_BLOCK_NEW,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ body: StylistBlockSchema }),
   stylistController.toggleBlock.bind(stylistController),
 );
 
 router.patch(
   STYLIST_INVITE_ROUTES.ADMIN_UPDATE_POSITION,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ body: StylistPositionSchema }),
   stylistController.updatePosition.bind(stylistController),
 );
 
 router.post(
   STYLIST_INVITE_ROUTES.ADMIN_SEND_INVITE_TO_APPLIED,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
   inviteController.sendInviteToApplied.bind(inviteController),
 );
 
 router.post(
   STYLIST_INVITE_ROUTES.ADMIN_MANUAL_INVITE,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ body: CreateStylistInviteSchema }),
   inviteController.createInvite.bind(inviteController),
 );
 
-router.post(
-  STYLIST_INVITE_ROUTES.ADMIN_APPROVE,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
-  inviteController.approve.bind(inviteController),
-);
+router.post(STYLIST_INVITE_ROUTES.ADMIN_APPROVE, inviteController.approve.bind(inviteController));
 
-router.post(
-  STYLIST_INVITE_ROUTES.ADMIN_REJECT,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
-  inviteController.reject.bind(inviteController),
-);
-
-// router.post(
-//   STYLIST_INVITE_ROUTES.ADMIN_BLOCK,
-//   authMiddleware,
-//   roleMiddleware([UserRole.ADMIN]),
-//   inviteController.toggleBlock.bind(inviteController),
-// );
+router.post(STYLIST_INVITE_ROUTES.ADMIN_REJECT, inviteController.reject.bind(inviteController));
 
 /** Public */
 router.get(
   STYLIST_INVITE_ROUTES.PUBLIC_VALIDATE_INVITE,
+  validate({ params: ValidateStylistInviteSchema }),
   inviteController.validate.bind(inviteController),
 );
 
 router.post(
   STYLIST_INVITE_ROUTES.PUBLIC_ACCEPT_INVITE,
+  validate({ body: AcceptStylistInviteSchema }),
   inviteController.accept.bind(inviteController),
 );
 
@@ -98,6 +86,7 @@ router.post(
 router.get(
   STYLIST_INVITE_ROUTES.PUBLIC_LIST_STYLISTS,
   optionalAuthMiddleware,
+  validate({ query: StylistPaginationSchema }),
   stylistController.getPublicStylists.bind(stylistController),
 );
 

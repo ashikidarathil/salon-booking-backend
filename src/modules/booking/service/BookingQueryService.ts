@@ -12,9 +12,10 @@ import { resolveStylistId } from './booking.helpers';
 import { StylistBookingPaginationQueryDto } from '../dto/booking.request.dto';
 import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 import { IUserRepository } from '../../auth/repository/IUserRepository';
-import { toObjectId, getIdString } from '../../../common/utils/mongoose.util';
+import { toObjectId } from '../../../common/utils/mongoose.util';
 import { UserEntity } from '../../../common/types/userEntity';
-import { BookingStatus, PaymentStatus, IBooking } from '../../../models/booking.model';
+import { BookingStatus, PaymentStatus } from '../../../models/booking.model';
+import { BookingEntity } from '../../../common/types/bookingEntity';
 
 @injectable()
 export class BookingQueryService implements IBookingQueryService {
@@ -99,11 +100,18 @@ export class BookingQueryService implements IBookingQueryService {
     const result = await this.listStylistBookings(userId, {
       date: today.toISOString(),
       limit: 100,
+      page: 1,
+      sortBy: 'date',
+      sortOrder: 'desc',
     });
     return result.data;
   }
 
-  async getStylistStats(userId: string, period: string = 'today', date?: string): Promise<Record<string, unknown>> {
+  async getStylistStats(
+    userId: string,
+    period: string = 'today',
+    date?: string,
+  ): Promise<Record<string, unknown>> {
     const stylistId = await resolveStylistId(userId, this.slotRepo);
     const filter: Record<string, unknown> = {
       $or: [{ stylistId: toObjectId(stylistId) }, { 'items.stylistId': toObjectId(stylistId) }],
@@ -156,13 +164,17 @@ export class BookingQueryService implements IBookingQueryService {
 
     const summary = {
       total: bookings.length,
-      confirmed: bookings.filter((b) => b.status === BookingStatus.CONFIRMED).length,
-      pending: bookings.filter((b) => b.status === BookingStatus.PENDING_PAYMENT).length,
-      cancelled: bookings.filter((b) => b.status === BookingStatus.CANCELLED).length,
-      completed: bookings.filter((b) => b.status === BookingStatus.COMPLETED).length,
+      confirmed: bookings.filter((b: BookingEntity) => b.status === BookingStatus.CONFIRMED).length,
+      pending: bookings.filter((b: BookingEntity) => b.status === BookingStatus.PENDING_PAYMENT)
+        .length,
+      cancelled: bookings.filter((b: BookingEntity) => b.status === BookingStatus.CANCELLED).length,
+      completed: bookings.filter((b: BookingEntity) => b.status === BookingStatus.COMPLETED).length,
       revenue: bookings
-        .filter((b) => b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED)
-        .reduce((sum, b) => sum + (b.payableAmount ?? b.totalPrice ?? 0), 0),
+        .filter(
+          (b: BookingEntity) =>
+            b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED,
+        )
+        .reduce((sum: number, b: BookingEntity) => sum + (b.payableAmount ?? b.totalPrice ?? 0), 0),
     };
 
     const chartData: { label: string; bookings: number; revenue: number }[] = [];
@@ -171,13 +183,19 @@ export class BookingQueryService implements IBookingQueryService {
       for (let i = 0; i < 24; i++) {
         const hourStr = i.toString().padStart(2, '0');
         const label = `${hourStr}:00`;
-        const hourBookings = bookings.filter((b) => b.startTime.startsWith(hourStr));
+        const hourBookings = bookings.filter((b: BookingEntity) => b.startTime.startsWith(hourStr));
         chartData.push({
           label,
           bookings: hourBookings.length,
           revenue: hourBookings
-            .filter((b) => b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED)
-            .reduce((sum, b) => sum + (b.payableAmount ?? b.totalPrice ?? 0), 0),
+            .filter(
+              (b: BookingEntity) =>
+                b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED,
+            )
+            .reduce(
+              (sum: number, b: BookingEntity) => sum + (b.payableAmount ?? b.totalPrice ?? 0),
+              0,
+            ),
         });
       }
     } else if (groupBy === 'day') {
@@ -187,14 +205,20 @@ export class BookingQueryService implements IBookingQueryService {
         d.setUTCDate(d.getUTCDate() - i);
         const label = d.toISOString().split('T')[0];
         const dayBookings = bookings.filter(
-          (b) => new Date(b.date).toISOString().split('T')[0] === label,
+          (b: BookingEntity) => b.date.toISOString().split('T')[0] === label,
         );
         chartData.push({
           label,
           bookings: dayBookings.length,
           revenue: dayBookings
-            .filter((b) => b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED)
-            .reduce((sum, b) => sum + (b.payableAmount ?? b.totalPrice ?? 0), 0),
+            .filter(
+              (b: BookingEntity) =>
+                b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED,
+            )
+            .reduce(
+              (sum: number, b: BookingEntity) => sum + (b.payableAmount ?? b.totalPrice ?? 0),
+              0,
+            ),
         });
       }
     } else if (groupBy === 'month') {
@@ -204,16 +228,22 @@ export class BookingQueryService implements IBookingQueryService {
         const year = d.getUTCFullYear();
         const month = d.getUTCMonth();
         const label = `${year}-${(month + 1).toString().padStart(2, '0')}`;
-        const monthBookings = bookings.filter((b) => {
-          const bDate = new Date(b.date);
+        const monthBookings = bookings.filter((b: BookingEntity) => {
+          const bDate = b.date;
           return bDate.getUTCFullYear() === year && bDate.getUTCMonth() === month;
         });
         chartData.push({
           label,
           bookings: monthBookings.length,
           revenue: monthBookings
-            .filter((b) => b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED)
-            .reduce((sum, b) => sum + (b.payableAmount ?? b.totalPrice ?? 0), 0),
+            .filter(
+              (b: BookingEntity) =>
+                b.status !== BookingStatus.CANCELLED && b.status !== BookingStatus.FAILED,
+            )
+            .reduce(
+              (sum: number, b: BookingEntity) => sum + (b.payableAmount ?? b.totalPrice ?? 0),
+              0,
+            ),
         });
       }
     }
@@ -244,7 +274,7 @@ export class BookingQueryService implements IBookingQueryService {
     let count = 0;
     for (const booking of expiredBookings) {
       const updated = await this.bookingRepo.update(
-        { _id: toObjectId(getIdString(booking._id)) },
+        { _id: toObjectId(booking.id) },
         {
           status: BookingStatus.FAILED,
           paymentStatus: PaymentStatus.FAILED,

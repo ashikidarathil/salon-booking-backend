@@ -11,6 +11,11 @@ import { OffDayStatus, IStylistOffDay } from '../../../models/stylistOffDay.mode
 import { IStylistRepository } from '../../stylistInvite/repository/IStylistRepository';
 import { toObjectId, isValidObjectId } from '../../../common/utils/mongoose.util';
 
+import { UserRole } from '../../../common/enums/userRole.enum';
+import { IUserRepository } from '../../auth/repository/IUserRepository';
+import { INotificationService } from '../../notification/service/INotificationService';
+import { NotificationType } from '../../../models/notification.model';
+
 @injectable()
 export class OffDayService implements IOffDayService {
   constructor(
@@ -18,6 +23,10 @@ export class OffDayService implements IOffDayService {
     private readonly offDayRepo: IOffDayRepository,
     @inject(TOKENS.StylistRepository)
     private readonly stylistRepo: IStylistRepository,
+    @inject(TOKENS.UserRepository)
+    private readonly userRepo: IUserRepository,
+    @inject(TOKENS.NotificationService)
+    private readonly notificationService: INotificationService,
   ) {}
 
   // Helper to resolve user ID to stylist ID
@@ -41,10 +50,7 @@ export class OffDayService implements IOffDayService {
     minDate.setDate(today.getDate() + 3);
 
     if (startDate < minDate) {
-      throw new AppError(
-        'Leave requests must be made at least 3 days in advance.',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new AppError(OFF_DAY_MESSAGES.INVALID_DATE, HttpStatus.BAD_REQUEST);
     }
 
     const offDay = await this.offDayRepo.create({
@@ -56,6 +62,24 @@ export class OffDayService implements IOffDayService {
       reason: dto.reason,
       status: OffDayStatus.PENDING,
     });
+
+    // Notify all admins
+    try {
+      const admins = await this.userRepo.findAllByRole(UserRole.ADMIN);
+      const notifications = admins.map((admin) => ({
+        recipientId: admin.id.toString(),
+        senderId: dto.stylistId,
+        type: NotificationType.SYSTEM,
+        title: 'New Leave Request',
+        message: `A stylist has requested an off-day (${dto.type}) starting on ${startDate.toLocaleDateString()}.`,
+        link: '/admin/off-days',
+      }));
+
+      await Promise.all(notifications.map((n) => this.notificationService.createNotification(n)));
+    } catch (error) {
+      console.error('Failed to send admin notifications for leave request:', error);
+    }
+
     return OffDayMapper.toResponse(offDay);
   }
 
@@ -114,6 +138,25 @@ export class OffDayService implements IOffDayService {
     if (!updated) {
       throw new AppError(OFF_DAY_MESSAGES.FAILED_STATUS, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    try {
+      const stylist = await this.stylistRepo.getById(offDay.stylistId.toString());
+      if (stylist && stylist.userId) {
+        await this.notificationService.createNotification({
+          recipientId: stylist.userId.toString(),
+          senderId: adminId,
+          type: NotificationType.SYSTEM,
+          title: `Leave Request ${dto.status}`,
+          message: `Your leave request has been ${dto.status.toLowerCase()}. ${
+            dto.adminRemarks ? `Admin remarks: "${dto.adminRemarks}"` : ''
+          }`,
+          link: '/stylist/off-days',
+        });
+      }
+    } catch (error) {
+      console.error('Failed to notify stylist of leave status update:', error);
+    }
+
     return OffDayMapper.toResponse(updated);
   }
 

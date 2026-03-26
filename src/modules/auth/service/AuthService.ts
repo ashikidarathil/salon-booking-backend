@@ -11,20 +11,19 @@ import { UserRole } from '../../../common/enums/userRole.enum';
 
 import type { IAuthService } from './IAuthService';
 
-import type { SignupDto } from '../dto/auth/Signup.dto';
-import type { LoginDto } from '../dto/auth/Login.dto';
-import type { VerifyOtpDto } from '../dto/auth/VerifyOtp.dto';
-import type { GoogleLoginDto } from '../dto/auth/GoogleLogin.dto';
+import type {
+  SignupDto,
+  LoginDto,
+  VerifyOtpDto,
+  GoogleLoginDto,
+  ResetPasswordDto,
+  ForgotPasswordDto,
+  SendSmsOtpDto,
+  VerifySignupSmsOtpDto,
+  ApplyAsStylistDto,
+} from '../dto/auth.schema';
 
-import type { ForgotPasswordDto } from '../dto/password/ForgotPassword.dto';
-import type { ResetPasswordDto } from '../dto/password/ResetPassword.dto';
-
-import type { SendSmsOtpDto } from '../dto/sms/SendSmsOtp.dto';
-import type { VerifySmsOtpDto } from '../dto/sms/VerifySmsOtp.dto';
-
-import type { ApplyAsStylistDto } from '../dto/stylist/ApplyAsStylist.dto';
 import type { ApplyAsStylistResponseDto } from '../dto/stylist/ApplyAsStylistResponse.dto';
-
 import type { SignupResponseDto } from '../dto/auth/SignupResponse.dto';
 import type { VerifyOtpResponseDto } from '../dto/auth/VerifyOtpResponse.dto';
 import type { LoginResponseDto } from '../dto/auth/LoginResponse.dto';
@@ -193,11 +192,11 @@ export class AuthService implements IAuthService {
 
   /**
    *
-   * @param VerifySmsOtpDto
+   * @param VerifySignupSmsOtpDto
    * @returns
    */
 
-  async verifySignupSmsOtp(dto: VerifySmsOtpDto): Promise<{ success: true }> {
+  async verifySignupSmsOtp(dto: VerifySignupSmsOtpDto): Promise<{ success: true }> {
     const phone = dto.phone.trim();
 
     await this._otpService.verify(otpKey.signupSms(phone), dto.otp);
@@ -228,28 +227,6 @@ export class AuthService implements IAuthService {
     });
     return { success: true };
   }
-
-  /*
-  async verifySmsOtp(userId: string, dto: VerifySmsOtpDto) {
-    const phone = dto.phone.trim();
-    const otp = dto.otp;
-
-    await this._otpService.verifySmsOtp(phone, otp);
-
-    const existing = await this._userRepo.findByPhone(phone);
-
-    if (existing && existing.id !== userId) {
-      throw new AppError('Phone number already in use', HttpStatus.BAD_REQUEST);
-    }
-
-    const updated = await this._userRepo.markPhoneVerified(userId, phone);
-    if (!updated) {
-      throw new AppError(MESSAGES.AUTH.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
-    }
-
-    return { success: true as const };
-  }
-  */
 
   /* ========================== LOGIN & SESSION ========================== */
 
@@ -420,7 +397,7 @@ export class AuthService implements IAuthService {
       html: template.html,
     });
 
-    return { message: MESSAGES.AUTH.RESET_TOKEN_SENT };
+    return { message: MESSAGES.AUTH.RESET_OTP_SENT };
   }
 
   /**

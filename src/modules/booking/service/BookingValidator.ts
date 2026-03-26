@@ -1,16 +1,16 @@
 import { injectable } from 'tsyringe';
 import { IBookingValidator } from './IBookingValidator';
-import { IBooking, BookingStatus } from '../../../models/booking.model';
+import { BookingStatus } from '../../../models/booking.model';
 import { AppError } from '../../../common/errors/appError';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { BOOKING_MESSAGES } from '../constants/booking.messages';
 import { BOOKING_POLICY, TIME_UTILS } from '../constants/booking.constants';
 import { UserRole } from '../../../common/enums/userRole.enum';
-import { getIdString } from '../../../common/utils/mongoose.util';
+import { BookingEntity } from '../../../common/types/bookingEntity';
 
 @injectable()
 export class BookingValidator implements IBookingValidator {
-  validateStatusTransition(booking: IBooking, newStatus: BookingStatus, role: UserRole): void {
+  validateStatusTransition(booking: BookingEntity, newStatus: BookingStatus, role: UserRole): void {
     const currentStatus = booking.status;
     if (currentStatus === BookingStatus.CANCELLED) {
       throw new AppError(BOOKING_MESSAGES.MODIFIED_CANCELLED, HttpStatus.CONFLICT);
@@ -47,18 +47,17 @@ export class BookingValidator implements IBookingValidator {
   }
 
   isAuthorizedToModify(
-    booking: IBooking,
+    booking: BookingEntity,
     userId: string,
     role?: string,
     stylistId?: string,
   ): boolean {
     if (role === UserRole.ADMIN) return true;
 
-    const bookingUserId = getIdString(booking.userId);
-    if (bookingUserId === userId) return true;
+    if (booking.userId === userId) return true;
 
     if (role === UserRole.STYLIST && stylistId) {
-      return getIdString(booking.stylistId) === stylistId;
+      return booking.stylistId === stylistId;
     }
 
     return false;

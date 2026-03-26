@@ -1,6 +1,6 @@
 import { IEscrow, EscrowStatus } from '../../../models/escrow.model';
 import { SortOptions } from '../../../common/repository/baseRepository';
-import { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
+import { EscrowPaginationQueryDto } from '../dto/escrow.request.dto';
 import { PaginatedResponse } from '../../../common/dto/pagination.response.dto';
 import { PopulateOptions, UpdateQuery, ClientSession } from '../../../common/utils/mongoose.util';
 
@@ -14,11 +14,11 @@ export interface IEscrowRepository {
     populate?: PopulateOptions[],
   ): Promise<IEscrow | null>;
   updateStatus(id: string, status: EscrowStatus, session?: ClientSession): Promise<IEscrow | null>;
-  findHeldBeforeMonth(currentMonth: string): Promise<IEscrow[]>;
+  findHeldBeforeDate(date: string): Promise<IEscrow[]>;
   find(
     filter: Record<string, unknown>,
     populate?: PopulateOptions[],
     sort?: SortOptions,
   ): Promise<IEscrow[]>;
-  findPaginated(query: PaginationQueryDto): Promise<PaginatedResponse<IEscrow>>;
+  findPaginated(query: EscrowPaginationQueryDto): Promise<PaginatedResponse<IEscrow>>;
 }

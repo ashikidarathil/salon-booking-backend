@@ -17,7 +17,7 @@ export class RazorpayService implements IRazorpayService {
 
   async createOrder(amount: number, currency: string, receipt: string): Promise<RazorpayOrder> {
     const options = {
-      amount: amount * 100, // amount in paisa
+      amount: amount * 100,
       currency: currency,
       receipt: receipt,
     };

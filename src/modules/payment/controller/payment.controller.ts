@@ -16,58 +16,67 @@ export class PaymentController implements IPaymentController {
     private paymentService: IPaymentService,
   ) {}
 
-  createOrder = async (req: Request & { auth?: AuthPayload }, res: Response): Promise<void> => {
+  createOrder = async (req: Request & { auth?: AuthPayload }, res: Response): Promise<Response> => {
     const userId = req.auth?.userId;
     if (!userId) {
       throw new AppError(PAYMENT_MESSAGES.UNAUTH, HttpStatus.UNAUTHORIZED);
     }
     const order = await this.paymentService.createOrder(req.body, userId);
-    res
-      .status(HttpStatus.CREATED)
-      .json(ApiResponse.success(PAYMENT_MESSAGES.ORDER_CREATE_SUCCESS, order));
+    return ApiResponse.success(
+      res,
+      order,
+      PAYMENT_MESSAGES.ORDER_CREATE_SUCCESS,
+      HttpStatus.CREATED,
+    );
   };
 
-  verifyPayment = async (req: Request, res: Response): Promise<void> => {
+  verifyPayment = async (req: Request, res: Response): Promise<Response> => {
     const result = await this.paymentService.verifyPayment(req.body);
-    res.status(HttpStatus.OK).json(ApiResponse.success(PAYMENT_MESSAGES.VERIFY_SUCCESS, result));
+    return ApiResponse.success(res, result, PAYMENT_MESSAGES.VERIFY_SUCCESS);
   };
 
-  payWithWallet = async (req: Request & { auth?: AuthPayload }, res: Response): Promise<void> => {
+  payWithWallet = async (
+    req: Request & { auth?: AuthPayload },
+    res: Response,
+  ): Promise<Response> => {
     const userId = req.auth?.userId;
     if (!userId) throw new AppError(PAYMENT_MESSAGES.UNAUTH, HttpStatus.UNAUTHORIZED);
 
     const { bookingId } = req.body;
     const result = await this.paymentService.payWithWallet(bookingId, userId);
-    res.status(HttpStatus.OK).json(ApiResponse.success(PAYMENT_MESSAGES.VERIFY_SUCCESS, result));
+    return ApiResponse.success(res, result, PAYMENT_MESSAGES.VERIFY_SUCCESS);
   };
 
   createRemainingOrder = async (
     req: Request & { auth?: AuthPayload },
     res: Response,
-  ): Promise<void> => {
+  ): Promise<Response> => {
     const userId = req.auth?.userId;
     if (!userId) throw new AppError(PAYMENT_MESSAGES.UNAUTH, HttpStatus.UNAUTHORIZED);
     const { bookingId } = req.body;
     const order = await this.paymentService.createRemainingOrder(bookingId, userId);
-    res
-      .status(HttpStatus.CREATED)
-      .json(ApiResponse.success(PAYMENT_MESSAGES.ORDER_CREATE_SUCCESS, order));
+    return ApiResponse.success(
+      res,
+      order,
+      PAYMENT_MESSAGES.ORDER_CREATE_SUCCESS,
+      HttpStatus.CREATED,
+    );
   };
 
   payRemainingWithWallet = async (
     req: Request & { auth?: AuthPayload },
     res: Response,
-  ): Promise<void> => {
+  ): Promise<Response> => {
     const userId = req.auth?.userId;
     if (!userId) throw new AppError(PAYMENT_MESSAGES.UNAUTH, HttpStatus.UNAUTHORIZED);
     const { bookingId } = req.body;
     const result = await this.paymentService.payRemainingWithWallet(bookingId, userId);
-    res.status(HttpStatus.OK).json(ApiResponse.success(PAYMENT_MESSAGES.VERIFY_SUCCESS, result));
+    return ApiResponse.success(res, result, PAYMENT_MESSAGES.VERIFY_SUCCESS);
   };
 
-  getPaymentById = async (req: Request, res: Response): Promise<void> => {
+  getPaymentById = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
     const payment = await this.paymentService.getPaymentById(id);
-    res.status(HttpStatus.OK).json(ApiResponse.success(PAYMENT_MESSAGES.FETCH_SUCCESS, payment));
+    return ApiResponse.success(res, payment, PAYMENT_MESSAGES.FETCH_SUCCESS);
   };
 }

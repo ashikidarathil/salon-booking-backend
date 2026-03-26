@@ -1,7 +1,10 @@
 import { injectable } from 'tsyringe';
-import { StylistModel } from '../../../models/stylist.model';
+import { StylistModel, type StylistDocument } from '../../../models/stylist.model';
 import { UserModel } from '../../../models/user.model';
-import { StylistInviteModel } from '../../../models/stylistInvite.model';
+import {
+  StylistInviteModel,
+  type StylistInviteDocument,
+} from '../../../models/stylistInvite.model';
 import { StylistBranchModel } from '../../../models/stylistBranch.model';
 import { StylistServiceModel } from '../../../models/stylistService.model';
 import { BranchServiceModel } from '../../../models/branchService.model';
@@ -23,6 +26,17 @@ import type { PaginatedResponse } from '../../../common/dto/pagination.response.
 import { PaginationQueryParser } from '../../../common/dto/pagination.query.dto';
 import { PaginationResponseBuilder } from '../../../common/dto/pagination.response.dto';
 import mongoose from 'mongoose';
+
+interface PopulatedUser {
+  _id: mongoose.Types.ObjectId;
+  name?: string;
+  email?: string;
+  phone?: string;
+  isActive: boolean;
+  isBlocked: boolean;
+  status: string;
+  profilePicture?: string;
+}
 
 interface PopulatedBranch {
   _id: mongoose.Types.ObjectId;
@@ -50,6 +64,40 @@ interface StylistBranchWithPopulatedBranch {
 
 @injectable()
 export class StylistRepository implements IStylistRepository {
+  private mapDocToListItem(
+    stylist: StylistDocument,
+    user?: PopulatedUser,
+    invite?: StylistInviteDocument,
+    branchName?: string,
+    assignedServices?: string[],
+    assignedServiceDetails?: unknown[],
+    weeklySchedule?: IWeeklyScheduleItem[],
+  ): StylistListItem {
+    return {
+      id: stylist._id.toString(),
+      userId: stylist.userId.toString(),
+      name: user?.name ?? 'Pending Registration',
+      email: user?.email,
+      phone: user?.phone,
+      specialization: stylist.specialization,
+      experience: stylist.experience,
+      status: stylist.status,
+      userStatus: (user?.status ?? 'ACTIVE') as unknown as StylistListItem['userStatus'],
+      isBlocked: !!user?.isBlocked,
+      inviteStatus: invite?.status as unknown as StylistListItem['inviteStatus'],
+      inviteExpiresAt: invite?.expiresAt?.toISOString(),
+      inviteLink: invite?.inviteLink,
+      position: stylist.position,
+      bio: stylist.bio,
+      profilePicture: user?.profilePicture || stylist.profilePicture || undefined,
+      branchName: branchName || 'N/A',
+      assignedServices: assignedServices || [],
+      assignedServiceDetails: assignedServiceDetails as StylistListItem['assignedServiceDetails'],
+      weeklySchedule,
+      rating: stylist.rating || 0,
+      reviewCount: stylist.reviewCount || 0,
+    };
+  }
   async existsByUserId(userId: string): Promise<boolean> {
     const stylist = await StylistModel.findOne({ userId }).select('_id').lean();
     return !!stylist;
@@ -76,9 +124,9 @@ export class StylistRepository implements IStylistRepository {
     const userIds = stylists.map((s) => s.userId);
     const users = await UserModel.find({ _id: { $in: userIds } })
       .select('name email phone isActive isBlocked status')
-      .lean();
+      .lean<PopulatedUser[]>();
 
-    const userMap = new Map<string, (typeof users)[0]>();
+    const userMap = new Map<string, PopulatedUser>();
     users.forEach((u) => userMap.set(u._id.toString(), u));
 
     const invites = await StylistInviteModel.find({
@@ -88,7 +136,7 @@ export class StylistRepository implements IStylistRepository {
       .sort({ createdAt: -1 })
       .lean();
 
-    const inviteMap = new Map<string, (typeof invites)[0]>();
+    const inviteMap = new Map<string, StylistInviteDocument>();
     invites.forEach((inv) => {
       const uid = inv.userId.toString();
       if (!inviteMap.has(uid)) {
@@ -99,25 +147,7 @@ export class StylistRepository implements IStylistRepository {
     return stylists.map((s) => {
       const user = userMap.get(s.userId.toString());
       const invite = inviteMap.get(s.userId.toString());
-
-      return {
-        id: s._id.toString(),
-        userId: s.userId.toString(),
-        name: user?.name ?? 'Pending Registration',
-        email: user?.email,
-        phone: user?.phone,
-        specialization: s.specialization,
-        experience: s.experience,
-        status: s.status,
-        userStatus: user?.status || 'ACTIVE',
-        inviteStatus: invite?.status,
-        inviteExpiresAt: invite?.expiresAt?.toISOString(),
-        inviteLink: invite?.inviteLink,
-        position: s.position,
-        bio: s.bio,
-        profilePicture: s.profilePicture,
-        isBlocked: !!user?.isBlocked,
-      };
+      return this.mapDocToListItem(s, user, invite);
     });
   }
 
@@ -144,13 +174,17 @@ export class StylistRepository implements IStylistRepository {
     }
 
     if (typeof filters.isBlocked === 'boolean') {
-      const users = await UserModel.find({ isBlocked: filters.isBlocked }).select('_id').lean();
+      const users = await UserModel.find({ isBlocked: filters.isBlocked })
+        .select('_id')
+        .lean<PopulatedUser[]>();
 
       filteredUserIds = users.map((u) => u._id.toString());
     }
 
     if (typeof filters.isActive === 'boolean') {
-      const users = await UserModel.find({ isActive: filters.isActive }).select('_id').lean();
+      const users = await UserModel.find({ isActive: filters.isActive })
+        .select('_id')
+        .lean<PopulatedUser[]>();
 
       const activeUserIds = users.map((u) => u._id.toString());
 
@@ -214,24 +248,24 @@ export class StylistRepository implements IStylistRepository {
     const [users, invites, branches, stylistServices] = await Promise.all([
       UserModel.find({ _id: { $in: userIds } })
         .select('name email phone isBlocked status profilePicture')
-        .lean(),
+        .lean<PopulatedUser[]>(),
       StylistInviteModel.find({ userId: { $in: userIds } }).lean(),
       StylistBranchModel.find({ stylistId: { $in: stylistIds }, isActive: true })
         .populate({ path: 'branchId', model: BranchModel, select: 'name' })
-        .lean(),
+        .lean<StylistBranchWithPopulatedBranch[]>(),
       StylistServiceModel.find({ stylistId: { $in: stylistIds }, isActive: { $ne: false } })
         .populate({
           path: 'serviceId',
           model: ServiceModel,
           select: 'name categoryId status isDeleted',
         })
-        .lean(),
+        .lean<StylistServiceWithPopulatedService[]>(),
     ]);
 
-    const userMap = new Map<string, (typeof users)[0]>();
+    const userMap = new Map<string, PopulatedUser>();
     users.forEach((u) => userMap.set(u._id.toString(), u));
 
-    const inviteMap = new Map<string, (typeof invites)[0]>();
+    const inviteMap = new Map<string, StylistInviteDocument>();
     invites.forEach((i) => {
       const uid = i.userId.toString();
       if (!inviteMap.has(uid)) {
@@ -239,10 +273,9 @@ export class StylistRepository implements IStylistRepository {
       }
     });
 
-    // 3. Fetch all potential categories and their branch-level activity
     const allCategoryIds = [
       ...new Set(
-        (stylistServices as unknown as StylistServiceWithPopulatedService[])
+        stylistServices
           .map((ss) => ss.serviceId?.categoryId?.toString())
           .filter(Boolean) as string[],
       ),
@@ -250,23 +283,23 @@ export class StylistRepository implements IStylistRepository {
 
     const branchIds = [
       ...new Set(
-        (branches as unknown as StylistBranchWithPopulatedBranch[])
-          .map((b) => b.branchId?._id?.toString() || b.branchId?.toString())
-          .filter(Boolean),
+        branches.map((b) => b.branchId?._id?.toString() || b.branchId?.toString()).filter(Boolean),
       ),
     ];
 
     const branchNameMap = new Map<string, string>();
-    (branches as unknown as StylistBranchWithPopulatedBranch[]).forEach((b) => {
+    branches.forEach((b) => {
+      const sid = b.stylistId.toString();
       if (b.branchId?.name) {
-        branchNameMap.set(b.stylistId.toString(), b.branchId.name);
+        branchNameMap.set(sid, b.branchId.name);
       }
     });
 
     const stylistToBranchIdMap = new Map<string, string>();
-    (branches as unknown as StylistBranchWithPopulatedBranch[]).forEach((b) => {
+    branches.forEach((b) => {
+      const sid = b.stylistId.toString();
       const bid = b.branchId?._id?.toString() || b.branchId?.toString();
-      if (bid) stylistToBranchIdMap.set(b.stylistId.toString(), bid);
+      if (bid) stylistToBranchIdMap.set(sid, bid as string);
     });
 
     const [categories, branchCategories, branchServices] = await Promise.all([
@@ -291,28 +324,22 @@ export class StylistRepository implements IStylistRepository {
 
     const activeGlobalCategoryIds = new Set(categories.map((c) => c._id.toString()));
 
-    const branchCategoryMap = new Set<string>(); // "branchId:categoryId"
-    (
-      branchCategories as unknown as Record<
-        string,
-        { branchId: { toString(): string }; categoryId: { toString(): string } }
-      >[]
-    ).forEach((bc) => {
-      branchCategoryMap.add(`${bc.branchId.toString()}:${bc.categoryId.toString()}`);
-    });
+    const branchCategoryMap = new Set<string>();
+    branchCategories.forEach(
+      (bc: { branchId: mongoose.Types.ObjectId; categoryId: mongoose.Types.ObjectId }) => {
+        branchCategoryMap.add(`${bc.branchId.toString()}:${bc.categoryId.toString()}`);
+      },
+    );
 
-    const branchServiceMap = new Set<string>(); // "branchId:serviceId"
-    (
-      branchServices as unknown as Record<
-        string,
-        { branchId: { toString(): string }; serviceId: { toString(): string } }
-      >[]
-    ).forEach((bs) => {
-      branchServiceMap.add(`${bs.branchId.toString()}:${bs.serviceId.toString()}`);
-    });
+    const branchServiceMap = new Set<string>();
+    branchServices.forEach(
+      (bs: { branchId: mongoose.Types.ObjectId; serviceId: mongoose.Types.ObjectId }) => {
+        branchServiceMap.add(`${bs.branchId.toString()}:${bs.serviceId.toString()}`);
+      },
+    );
 
     const servicesMap = new Map<string, string[]>();
-    (stylistServices as unknown as StylistServiceWithPopulatedService[]).forEach((ss) => {
+    stylistServices.forEach((ss) => {
       const service = ss.serviceId;
       if (!service || service.status === 'INACTIVE' || service.isDeleted === true) return;
 
@@ -338,28 +365,7 @@ export class StylistRepository implements IStylistRepository {
       const invite = inviteMap.get(s.userId.toString());
       const sid = s._id.toString();
 
-      return {
-        id: sid,
-        userId: s.userId.toString(),
-        name: user?.name ?? 'Pending Registration',
-        email: user?.email,
-        phone: user?.phone,
-        specialization: s.specialization,
-        experience: s.experience,
-        status: s.status,
-        userStatus: user?.status ?? 'ACTIVE',
-        isBlocked: !!user?.isBlocked,
-        inviteStatus: invite?.status,
-        inviteExpiresAt: invite?.expiresAt?.toISOString(),
-        inviteLink: invite?.inviteLink,
-        position: s.position,
-        bio: s.bio,
-        profilePicture: user?.profilePicture || undefined,
-        branchName: branchNameMap.get(sid) || 'N/A',
-        assignedServices: servicesMap.get(sid) || [],
-        rating: 4.5 + Math.random() * 0.5,
-        reviewCount: Math.floor(Math.random() * 200) + 50,
-      };
+      return this.mapDocToListItem(s, user, invite, branchNameMap.get(sid), servicesMap.get(sid));
     });
 
     return PaginationResponseBuilder.build(result, totalItems, params.page, params.limit);
@@ -373,55 +379,31 @@ export class StylistRepository implements IStylistRepository {
 
     const user = await UserModel.findByIdAndUpdate(stylist.userId, { isBlocked }, { new: true })
       .select('name email phone isBlocked status profilePicture')
-      .lean();
+      .lean<PopulatedUser>();
 
     if (!user) {
       return null;
     }
 
-    return {
-      id: stylist._id.toString(),
-      userId: stylist.userId.toString(),
-      name: user.name ?? 'Pending Registration',
-      email: user.email,
-      phone: user.phone,
-      specialization: stylist.specialization,
-      experience: stylist.experience,
-      status: stylist.status,
-      userStatus: user.status ?? 'ACTIVE',
-      isBlocked: !!user.isBlocked,
-      position: stylist.position,
-      bio: stylist.bio,
-      profilePicture: user.profilePicture || undefined,
-    };
+    return this.mapDocToListItem(stylist, user ?? undefined);
   }
 
   async updatePosition(
     stylistId: string,
     position: 'JUNIOR' | 'SENIOR' | 'TRAINEE',
   ): Promise<StylistListItem | null> {
-    const stylist = await StylistModel.findByIdAndUpdate(stylistId, { position }, { new: true });
+    const stylist = await StylistModel.findByIdAndUpdate(
+      stylistId,
+      { position },
+      { new: true },
+    ).lean();
     if (!stylist) return null;
 
     const user = await UserModel.findById(stylist.userId)
       .select('name email phone isBlocked status profilePicture')
-      .lean();
+      .lean<PopulatedUser>();
 
-    return {
-      id: stylist._id.toString(),
-      userId: stylist.userId.toString(),
-      name: user?.name ?? 'Pending Registration',
-      email: user?.email,
-      phone: user?.phone,
-      specialization: stylist.specialization,
-      experience: stylist.experience,
-      status: stylist.status,
-      userStatus: user?.status ?? 'ACTIVE',
-      isBlocked: !!user?.isBlocked,
-      position: stylist.position,
-      bio: stylist.bio,
-      profilePicture: user?.profilePicture || undefined,
-    };
+    return this.mapDocToListItem(stylist, user ?? undefined);
   }
 
   async getById(stylistId: string): Promise<StylistListItem | null> {
@@ -430,7 +412,7 @@ export class StylistRepository implements IStylistRepository {
 
     const user = await UserModel.findById(stylist.userId)
       .select('name email phone isBlocked status profilePicture')
-      .lean();
+      .lean<PopulatedUser>();
 
     // 1. Fetch the active branch association first
     const stylistBranch = await StylistBranchModel.findOne({
@@ -438,13 +420,12 @@ export class StylistRepository implements IStylistRepository {
       isActive: { $ne: false },
     })
       .populate({ path: 'branchId', model: BranchModel, select: 'name' })
-      .lean();
+      .lean<StylistBranchWithPopulatedBranch>();
 
-    const branchDoc = stylistBranch?.branchId as unknown as PopulatedBranch;
+    const branchDoc = stylistBranch?.branchId;
     const branchIdStr = branchDoc?._id?.toString() || (branchDoc as unknown as string);
     const branchName = branchDoc?.name || (branchIdStr ? 'N/A' : null);
 
-    // 2. Fetch everything else concurrently
     const [schedules, stylistServices] = await Promise.all([
       StylistWeeklyScheduleModel.find({
         stylistId: stylist._id,
@@ -456,31 +437,37 @@ export class StylistRepository implements IStylistRepository {
           model: ServiceModel,
           select: 'name imageUrl categoryId status isDeleted',
         })
-        .lean(),
+        .lean<StylistServiceWithPopulatedService[]>(),
     ]);
 
-    const serviceIds = (stylistServices as unknown as StylistServiceWithPopulatedService[])
-      .map((ss) => ss.serviceId?._id)
-      .filter(Boolean);
+    const serviceIds = stylistServices.map((ss) => ss.serviceId?._id).filter(Boolean);
 
-    // 3. Fetch BranchService price/duration for these services
     const branchServicesResult = branchIdStr
       ? await BranchServiceModel.find({
           branchId: branchIdStr,
           serviceId: { $in: serviceIds },
           isActive: { $ne: false },
-        }).lean()
+        }).lean<unknown[]>()
       : [];
 
-    const branchServiceMap = new Map<string, (typeof branchServicesResult)[0]>();
-    (
-      branchServicesResult as unknown as Record<string, { serviceId: { toString(): string } }>[]
-    ).forEach((bs) => branchServiceMap.set(bs.serviceId.toString(), bs));
+    const branchServiceMap = new Map<
+      string,
+      { isActive?: boolean; price: number; duration: number; serviceId: mongoose.Types.ObjectId }
+    >();
+    branchServicesResult.forEach((bs: unknown) => {
+      const b = bs as {
+        serviceId: mongoose.Types.ObjectId;
+        isActive?: boolean;
+        price: number;
+        duration: number;
+      };
+      branchServiceMap.set(b.serviceId.toString(), b);
+    });
 
     // 4. Fetch BranchCategory activity for all unique categories in those services
     const uniqueCategoryIds = [
       ...new Set(
-        (stylistServices as unknown as StylistServiceWithPopulatedService[])
+        stylistServices
           .map((ss) => ss.serviceId?.categoryId?.toString())
           .filter(Boolean) as string[],
       ),
@@ -505,8 +492,8 @@ export class StylistRepository implements IStylistRepository {
 
     const activeCategoryIds = new Set(categories.map((c) => c._id.toString()));
     const activeBranchCategoryIds = new Set(
-      (branchCategories as unknown as Record<string, { categoryId: { toString(): string } }>[]).map(
-        (bc) => bc.categoryId.toString(),
+      branchCategories.map((bc: { categoryId: mongoose.Types.ObjectId }) =>
+        bc.categoryId.toString(),
       ),
     );
 
@@ -520,22 +507,18 @@ export class StylistRepository implements IStylistRepository {
       })),
     }));
 
-    const assignedServiceDetails = (
-      stylistServices as unknown as StylistServiceWithPopulatedService[]
-    )
+    const assignedServiceDetails = stylistServices
       .map((ss) => {
         const service = ss.serviceId;
         if (!service || service.status === 'INACTIVE' || service.isDeleted === true) return null;
 
         const catId = service.categoryId?.toString();
 
-        // Strictly check branch assignment for both service and category if branchIdStr exists
         if (branchIdStr) {
-          // 1. Category check (must be active globally AND assigned/active in branch)
-          if (!catId || !activeCategoryIds.has(catId) || !activeBranchCategoryIds.has(catId))
+          if (!catId || !activeCategoryIds.has(catId) || !activeBranchCategoryIds.has(catId)) {
             return null;
+          }
 
-          // 2. Service-Branch check (must be assigned/active in branch)
           const bs = branchServiceMap.get(service._id.toString());
           if (!bs || bs.isActive === false) return null;
 
@@ -548,7 +531,6 @@ export class StylistRepository implements IStylistRepository {
           };
         }
 
-        // If no active branch assignment found for the stylist, we don't list services as we lack price/duration
         return null;
       })
       .filter(Boolean) as {
@@ -556,32 +538,20 @@ export class StylistRepository implements IStylistRepository {
       name: string;
       price: number;
       duration: number;
-      imageUrl: string;
+      imageUrl?: string;
     }[];
 
     const assignedServices = assignedServiceDetails.map((s) => s.name);
 
-    return {
-      id: stylist._id.toString(),
-      userId: stylist.userId.toString(),
-      name: user?.name ?? 'Pending Registration',
-      email: user?.email,
-      phone: user?.phone,
-      specialization: stylist.specialization,
-      experience: stylist.experience,
-      status: stylist.status,
-      userStatus: user?.status ?? 'ACTIVE',
-      isBlocked: !!user?.isBlocked,
-      position: stylist.position,
-      bio: stylist.bio,
-      profilePicture: user?.profilePicture || undefined,
-      branchName: branchName || 'N/A',
+    return this.mapDocToListItem(
+      stylist,
+      user ?? undefined,
+      undefined,
+      branchName || undefined,
       assignedServices,
       assignedServiceDetails,
       weeklySchedule,
-      rating: 5.0,
-      reviewCount: 142,
-    };
+    );
   }
 
   async findByUserId(userId: string): Promise<StylistListItem | null> {
@@ -605,5 +575,9 @@ export class StylistRepository implements IStylistRepository {
     if (Object.keys(updateData).length > 0) {
       await StylistModel.findOneAndUpdate({ userId }, updateData);
     }
+  }
+
+  async update(id: string, data: Record<string, unknown>): Promise<void> {
+    await StylistModel.findByIdAndUpdate(id, data);
   }
 }

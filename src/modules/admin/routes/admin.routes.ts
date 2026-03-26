@@ -4,29 +4,35 @@ import { authMiddleware } from '../../../common/middleware/auth.middleware';
 import { roleMiddleware } from '../../../common/middleware/role.middleware';
 import { UserRole } from '../../../common/enums/userRole.enum';
 import { API_ROUTES } from '../constants/routes';
+import { validate } from '../../../common/middleware/validation.middleware';
+import {
+  ToggleBlockUserSchema,
+  UserPaginationQuerySchema,
+  AdminStatsQuerySchema,
+} from '../dto/admin.dto';
 
 const router = Router();
 const userController = resolveUserController();
 const dashboardController = resolveAdminDashboardController();
 
+router.use(authMiddleware);
+router.use(roleMiddleware([UserRole.ADMIN]));
+
 router.patch(
   API_ROUTES.ADMIN.USERS.TOGGLE_BLOCK(':userId'),
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ body: ToggleBlockUserSchema }),
   userController.toggleBlock.bind(userController),
 );
 
 router.get(
   API_ROUTES.ADMIN.USERS.GET_USERS,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ query: UserPaginationQuerySchema }),
   userController.getUsers.bind(userController),
 );
 
 router.get(
   API_ROUTES.ADMIN.DASHBOARD.STATS,
-  authMiddleware,
-  roleMiddleware([UserRole.ADMIN]),
+  validate({ query: AdminStatsQuerySchema }),
   dashboardController.getStats.bind(dashboardController),
 );
 

@@ -1,3 +1,4 @@
+import { CategoryStatus } from '../constants/category.constants';
 import type { PaginationQueryDto } from '../../../common/dto/pagination.query.dto';
 
 export interface CreateCategoryDto {
@@ -8,7 +9,7 @@ export interface CreateCategoryDto {
 export interface UpdateCategoryDto {
   name?: string;
   description?: string;
-  status?: 'ACTIVE' | 'INACTIVE';
+  status?: CategoryStatus;
 }
 
 export interface SoftDeleteCategoryDto {
@@ -20,5 +21,5 @@ export interface RestoreCategoryDto {
 }
 
 export interface CategoryPaginationQueryDto extends PaginationQueryDto {
-  status?: 'ACTIVE' | 'INACTIVE';
+  status?: CategoryStatus;
 }

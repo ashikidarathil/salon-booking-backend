@@ -19,43 +19,70 @@ export class EscrowMapper {
   static toResponseDto(escrow: IEscrow): EscrowResponseDto {
     const booking = escrow.bookingId;
     const stylist = escrow.stylistId;
-    
-    // Check if populated: bookingId should be an object with bookingNumber or _id
-    const isBookingPopulated = !!(booking && typeof booking === 'object' && ('bookingNumber' in (booking as unknown as Record<string, unknown>) || 'items' in (booking as unknown as Record<string, unknown>)));
-    const isStylistPopulated = !!(stylist && typeof stylist === 'object' && 'userId' in (stylist as unknown as Record<string, unknown>));
+
+    const isBookingPopulated = !!(
+      booking &&
+      typeof booking === 'object' &&
+      ('bookingNumber' in (booking as unknown as Record<string, unknown>) ||
+        'items' in (booking as unknown as Record<string, unknown>))
+    );
+    const isStylistPopulated = !!(
+      stylist &&
+      typeof stylist === 'object' &&
+      'userId' in (stylist as unknown as Record<string, unknown>)
+    );
 
     const bookingObj = isBookingPopulated ? (booking as unknown as PopulatedBooking) : null;
     const stylistObj = isStylistPopulated ? (stylist as unknown as PopulatedStylist) : null;
 
-    // Generate booking number (fallback to BK-ID logic)
-    const bookingNumber = (bookingObj && bookingObj.bookingNumber) ? bookingObj.bookingNumber : 
-      (bookingObj?._id ? `BK-${bookingObj._id.toString().slice(-6).toUpperCase()}` : 'N/A');
+    const bookingNumber =
+      bookingObj && bookingObj.bookingNumber
+        ? bookingObj.bookingNumber
+        : bookingObj?._id
+          ? `BK-${bookingObj._id.toString().slice(-6).toUpperCase()}`
+          : 'N/A';
 
     return {
       id: escrow._id?.toString() ?? '',
       bookingId: {
-        id: isBookingPopulated && bookingObj ? bookingObj._id.toString() : (escrow.bookingId?.toString() ?? ''),
+        id:
+          isBookingPopulated && bookingObj
+            ? bookingObj._id.toString()
+            : (escrow.bookingId?.toString() ?? ''),
         bookingNumber: bookingNumber,
-        userId: isBookingPopulated && bookingObj && bookingObj.userId ? {
-          name: bookingObj.userId.name
-        } : undefined,
-        items: isBookingPopulated && bookingObj && bookingObj.items ? bookingObj.items.map((item) => ({
-          serviceId: {
-            name: (item.serviceId && typeof item.serviceId === 'object' && 'name' in item.serviceId) 
-              ? (item.serviceId as unknown as { name: string }).name 
-              : 'Service'
-          }
-        })) : []
+        userId:
+          isBookingPopulated && bookingObj && bookingObj.userId
+            ? {
+                name: bookingObj.userId.name,
+              }
+            : undefined,
+        items:
+          isBookingPopulated && bookingObj && bookingObj.items
+            ? bookingObj.items.map((item) => ({
+                serviceId: {
+                  name:
+                    item.serviceId && typeof item.serviceId === 'object' && 'name' in item.serviceId
+                      ? (item.serviceId as { name: string }).name
+                      : 'Service',
+                },
+              }))
+            : [],
       },
       stylistId: {
-        id: isStylistPopulated && stylistObj ? stylistObj._id.toString() : (escrow.stylistId?.toString() ?? ''),
+        id:
+          isStylistPopulated && stylistObj
+            ? stylistObj._id.toString()
+            : (escrow.stylistId?.toString() ?? ''),
         userId: {
-          name: isStylistPopulated && stylistObj && stylistObj.userId ? (stylistObj.userId.name ?? 'Stylist') : 'Stylist'
-        }
+          name:
+            isStylistPopulated && stylistObj && stylistObj.userId
+              ? (stylistObj.userId.name ?? 'Stylist')
+              : 'Stylist',
+        },
       },
       amount: escrow.amount,
       status: escrow.status as EscrowStatus,
-      releaseMonth: escrow.releaseMonth,
+      releaseDate: escrow.releaseDate,
       createdAt: escrow.createdAt?.toISOString() ?? '',
     };
   }

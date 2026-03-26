@@ -12,12 +12,7 @@ export enum TransactionStatus {
   REFUNDED = 'REFUNDED',
 }
 
-export type TransactionReferenceType =
-  | 'BOOKING'
-  | 'ESCROW'
-  | 'DEPOSIT'
-  | 'WITHDRAWAL'
-  | 'REFUND';
+export type TransactionReferenceType = 'BOOKING' | 'ESCROW' | 'DEPOSIT' | 'WITHDRAWAL' | 'REFUND';
 
 export interface IWalletTransaction extends Document {
   walletId: mongoose.Types.ObjectId;

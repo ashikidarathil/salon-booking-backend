@@ -22,6 +22,6 @@ export interface EscrowResponseDto {
   };
   amount: number;
   status: EscrowStatus;
-  releaseMonth: string;
+  releaseDate: string;
   createdAt: string;
 }

@@ -5,6 +5,13 @@ export enum DiscountType {
   FIXED = 'FIXED',
 }
 
+export enum CouponFilterStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+  DELETED = 'DELETED',
+  ALL = 'ALL',
+}
+
 export interface ICoupon extends Document {
   code: string;
   discountType: DiscountType;
@@ -13,6 +20,7 @@ export interface ICoupon extends Document {
   expiryDate: Date;
   maxUsage: number;
   usedCount: number;
+  maxDiscountAmount: number;
   isActive: boolean;
   isDeleted: boolean;
   applicableServices?: mongoose.Types.ObjectId[];
@@ -57,6 +65,11 @@ const CouponSchema = new Schema<ICoupon>(
     usedCount: {
       type: Number,
       default: 0,
+    },
+    maxDiscountAmount: {
+      type: Number,
+      required: true,
+      min: 0,
     },
     isActive: {
       type: Boolean,

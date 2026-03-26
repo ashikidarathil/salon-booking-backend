@@ -2,7 +2,7 @@ import { BaseRepository } from '../../../common/repository/baseRepository';
 import { IWallet, WalletModel } from '../../../models/wallet.model';
 import { IWalletRepository } from './IWalletRepository';
 import { injectable } from 'tsyringe';
-import { toObjectId, ObjectId } from '../../../common/utils/mongoose.util';
+import { toObjectId } from '../../../common/utils/mongoose.util';
 import { ClientSession } from 'mongoose';
 
 @injectable()

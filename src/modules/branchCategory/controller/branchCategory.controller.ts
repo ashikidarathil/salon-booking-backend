@@ -15,12 +15,12 @@ export class BranchCategoryController {
     private readonly service: IBranchCategoryService,
   ) {}
 
-  list = async (req: Request, res: Response) => {
+  list = async (req: Request, res: Response): Promise<Response> => {
     const data = await this.service.list(req.params.branchId);
-    return res.json(new ApiResponse(true, BRANCH_CATEGORY_MESSAGES.LISTED, data));
+    return ApiResponse.success(res, data, BRANCH_CATEGORY_MESSAGES.LISTED);
   };
 
-  toggle = async (req: AuthReq, res: Response) => {
+  toggle = async (req: AuthReq, res: Response): Promise<Response> => {
     const data = await this.service.toggle(
       req.params.branchId,
       req.params.categoryId,
@@ -28,9 +28,9 @@ export class BranchCategoryController {
       req.auth!.userId,
     );
 
-    return res.json(new ApiResponse(true, BRANCH_CATEGORY_MESSAGES.UPDATED, data));
+    return ApiResponse.success(res, data, BRANCH_CATEGORY_MESSAGES.UPDATED);
   };
-  listPaginated = async (req: Request, res: Response) => {
+  listPaginated = async (req: Request, res: Response): Promise<Response> => {
     const query: PaginationQueryDto = {
       page: req.query.page ? Number(req.query.page) : 1,
       limit: req.query.limit ? Number(req.query.limit) : 10,
@@ -46,6 +46,6 @@ export class BranchCategoryController {
     };
 
     const data = await this.service.listPaginated(req.params.branchId, query);
-    return res.json(new ApiResponse(true, BRANCH_CATEGORY_MESSAGES.LISTED, data));
+    return ApiResponse.success(res, data, BRANCH_CATEGORY_MESSAGES.LISTED);
   };
 }

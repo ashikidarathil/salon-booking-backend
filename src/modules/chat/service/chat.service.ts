@@ -7,30 +7,29 @@ import { IMessageRepository } from '../repository/IMessageRepository';
 import { INotificationService } from '../../notification/service/INotificationService';
 import { IBookingRepository } from '../../booking/repository/IBookingRepository';
 import { IStylistRepository } from '../../stylistInvite/repository/IStylistRepository';
+import { IUserRepository } from '../../auth/repository/IUserRepository';
 import { IChatRoom, ChatRoomStatus } from '../../../models/chatRoom.model';
 import { IMessage } from '../../../models/message.model';
 import { NotificationType } from '../../../models/notification.model';
 import { AppError } from '../../../common/errors/appError';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { CHAT_MESSAGES } from '../constants/chat.messages';
-import { toObjectId, isValidObjectId, ObjectId } from '../../../common/utils/mongoose.util';
+import {
+  toObjectId,
+  isValidObjectId,
+  ObjectId,
+  getIdString,
+} from '../../../common/utils/mongoose.util';
 import { MessageType, SenderType } from '../constants/chat.types';
 import { ChatMapper } from '../mapper/chat.mapper';
 import { MessageResponseDto } from '../dto/chat.response.dto';
+import { BookingStatus } from '../../../models/booking.model';
 
-function extractId(
-  ref: string | ObjectId | { _id: ObjectId | string } | undefined,
-): string {
-  if (!ref) return '';
-  if (typeof ref === 'string') return ref;
-  if (ref instanceof ObjectId) return ref.toString();
-  if (typeof ref === 'object' && '_id' in ref) return ref._id.toString();
-  return (ref as unknown as { toString(): string }).toString();
-}
+import { PopulatedBookingExpiry, PopulatedStylistWithUser } from '../types/chat.types';
 
 @injectable()
 export class ChatService implements IChatService {
-  private readonly EXPIRY_WINDOW = 24 * 60 * 60 * 1000; // 24 hours
+  private readonly EXPIRY_WINDOW = 24 * 60 * 60 * 1000;
 
   constructor(
     @inject(TOKENS.ChatRoomRepository) private readonly chatRoomRepo: IChatRoomRepository,
@@ -38,6 +37,7 @@ export class ChatService implements IChatService {
     @inject(TOKENS.NotificationService) private readonly notificationService: INotificationService,
     @inject(TOKENS.BookingRepository) private readonly bookingRepo: IBookingRepository,
     @inject(TOKENS.StylistRepository) private readonly stylistRepo: IStylistRepository,
+    @inject(TOKENS.UserRepository) private readonly userRepo: IUserRepository,
   ) {}
 
   async initializeRoom(bookingId: string, requestUserId: string): Promise<IChatRoom> {
@@ -49,10 +49,9 @@ export class ChatService implements IChatService {
       throw new AppError(CHAT_MESSAGES.BOOKING_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
-    const bUserId = this.extractId(booking.userId);
-    const bStylistId = this.extractId(booking.stylistId);
+    const bUserId = getIdString(booking.userId);
+    const bStylistId = getIdString(booking.stylistId);
 
-    // Verify requesting user is part of the booking
     await this.authorizeRoomAccess(requestUserId, bUserId, bStylistId);
 
     return this.findOrCreateRoom(bookingId, bUserId, bStylistId);
@@ -70,7 +69,6 @@ export class ChatService implements IChatService {
     const existing = await this.chatRoomRepo.findByUserAndStylist(userId, stylistId);
 
     if (existing) {
-      // Re-open and link to latest booking
       await this.chatRoomRepo.update(existing._id.toString(), {
         bookingId: toObjectId(bookingId),
         status: ChatRoomStatus.OPEN,
@@ -103,14 +101,14 @@ export class ChatService implements IChatService {
     return this.chatRoomRepo.findByBookingId(bookingId);
   }
 
-  async getUserRooms(userId: string): Promise<IChatRoom[]> {
-    return this.chatRoomRepo.findUserRooms(userId);
+  async getUserRooms(userId: string, search?: string): Promise<IChatRoom[]> {
+    return this.chatRoomRepo.findUserRooms(userId, search);
   }
 
-  async getStylistRooms(userIdFromAuth: string): Promise<IChatRoom[]> {
+  async getStylistRooms(userIdFromAuth: string, search?: string): Promise<IChatRoom[]> {
     const stylistId = await this.stylistRepo.findIdByUserId(userIdFromAuth);
     if (!stylistId) return [];
-    return this.chatRoomRepo.findStylistRooms(stylistId);
+    return this.chatRoomRepo.findStylistRooms(stylistId, search);
   }
 
   async sendMessage(data: SendMessageDto): Promise<MessageResponseDto> {
@@ -127,11 +125,10 @@ export class ChatService implements IChatService {
       throw new AppError(CHAT_MESSAGES.ROOM_CLOSED, HttpStatus.FORBIDDEN);
     }
 
-    // Softened expiry check
     await this.verifyRoomExpiry(data.chatRoomId);
 
-    const rUserId = this.extractId(room.userId);
-    const rStylistId = this.extractId(room.stylistId);
+    const rUserId = getIdString(room.userId);
+    const rStylistId = getIdString(room.stylistId);
 
     if (data.senderType !== SenderType.SYSTEM) {
       await this.authorizeRoomAccess(data.senderId, rUserId, rStylistId);
@@ -142,11 +139,9 @@ export class ChatService implements IChatService {
 
     await this.chatRoomRepo.updateLastMessage(data.chatRoomId, lastMsgPreview);
 
-    // Trigger notification
-    await this.handleMessagingNotification(room, data, lastMsgPreview);
+    this.handleMessagingNotification(room, data, lastMsgPreview).catch(() => {});
 
-    // Map to response and enrich with booking details
-    return this.enrichMessageResponse(message, room.bookingId?.toString());
+    return this.buildMessageResponseWithBooking(message, room.bookingId?.toString());
   }
 
   private async persistMessage(data: SendMessageDto, bookingId?: string): Promise<IMessage> {
@@ -178,15 +173,36 @@ export class ChatService implements IChatService {
     }
   }
 
+  private async buildMessageResponseWithBooking(
+    message: IMessage,
+    bookingId?: string,
+  ): Promise<MessageResponseDto> {
+    if (!bookingId) {
+      return ChatMapper.toMessageResponse(message);
+    }
+
+    const booking = await this.bookingRepo.findById(bookingId);
+    if (!booking) {
+      return ChatMapper.toMessageResponse(message);
+    }
+
+    const serviceName = getIdString(booking.items?.[0]?.serviceId) || 'Service';
+
+    return ChatMapper.toMessageResponse(message, {
+      bookingNumber: booking.bookingNumber,
+      status: booking.status,
+      serviceName,
+    });
+  }
+
   private async handleMessagingNotification(
     room: IChatRoom,
     data: SendMessageDto,
     preview: string,
   ): Promise<void> {
-    const stylistUserId = this.extractId(
-      (room.stylistId as unknown as { userId: ObjectId }).userId,
-    );
-    const roomUserId = this.extractId(room.userId);
+    const stylistDoc = room.stylistId as unknown as PopulatedStylistWithUser;
+    const stylistUserId = getIdString(stylistDoc?.userId);
+    const roomUserId = getIdString(room.userId);
 
     const isSenderStylist = data.senderId === stylistUserId;
     const recipientId = isSenderStylist ? roomUserId : stylistUserId;
@@ -195,39 +211,24 @@ export class ChatService implements IChatService {
       ? `/profile/chat?roomId=${data.chatRoomId}`
       : `/stylist/chat?roomId=${data.chatRoomId}`;
 
-    this.notificationService
-      .createNotification({
-        recipientId,
-        senderId: data.senderId,
-        type: NotificationType.CHAT_MESSAGE,
-        title: 'New Message',
-        message: preview,
-        link,
-      })
-      .catch((err) => console.error('Failed to create chat notification:', err));
-  }
-
-  private async enrichMessageResponse(
-    message: IMessage,
-    bookingId?: string,
-  ): Promise<MessageResponseDto> {
-    const mapped = ChatMapper.toMessageResponse(message);
-
-    if (bookingId) {
-      const booking = await this.bookingRepo.findById(bookingId);
-      if (booking) {
-        mapped.bookingId = {
-          bookingNumber: booking.bookingNumber,
-          status: booking.status,
-          bookingName:
-            (
-              booking.items?.[0] as unknown as { serviceId?: { name?: string } }
-            )?.serviceId?.name || 'Service',
-        };
+    let senderName = '';
+    if (data.senderType !== SenderType.SYSTEM) {
+      const senderUser = await this.userRepo.findById(data.senderId);
+      if (senderUser) {
+        senderName = senderUser.name;
       }
     }
 
-    return mapped;
+    const title = senderName ? `New Message from ${senderName}` : 'New Message';
+
+    await this.notificationService.createNotification({
+      recipientId,
+      senderId: data.senderId,
+      type: NotificationType.CHAT_MESSAGE,
+      title,
+      message: preview,
+      link,
+    });
   }
 
   async getRoomMessages(roomId: string, limit?: number, skip?: number): Promise<IMessage[]> {
@@ -246,6 +247,18 @@ export class ChatService implements IChatService {
     return this.messageRepo.countUnreadMessages(roomId, receiverId);
   }
 
+  async getTotalUnreadCount(userId: string): Promise<number> {
+    const stylistId = await this.stylistRepo.findIdByUserId(userId);
+    const rooms = stylistId
+      ? await this.chatRoomRepo.findStylistRooms(stylistId)
+      : await this.chatRoomRepo.findUserRooms(userId);
+
+    if (!rooms.length) return 0;
+
+    const roomIds = rooms.map((r) => r._id.toString());
+    return this.messageRepo.countTotalUnread(roomIds, userId);
+  }
+
   async verifyRoomExpiry(roomId: string): Promise<void> {
     if (!isValidObjectId(roomId)) {
       throw new AppError(CHAT_MESSAGES.ROOM_NOT_FOUND, HttpStatus.BAD_REQUEST);
@@ -255,36 +268,25 @@ export class ChatService implements IChatService {
       throw new AppError(CHAT_MESSAGES.ROOM_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
-    const booking = room.bookingId as unknown as {
-      status?: string;
-      completedAt?: Date;
-      cancelledAt?: Date;
-    } | null;
+    const booking = room.bookingId as unknown as PopulatedBookingExpiry | null;
     if (!booking) return;
 
-    if (booking.status === 'COMPLETED' || booking.status === 'CANCELLED') {
-      const now = new Date().getTime();
-      const actionAt = booking.status === 'COMPLETED' ? booking.completedAt : booking.cancelledAt;
+    const isTerminated =
+      booking.status === BookingStatus.COMPLETED || booking.status === BookingStatus.CANCELLED;
 
-      if (actionAt) {
-        const actionTime = new Date(actionAt).getTime();
-        if (now - actionTime > this.EXPIRY_WINDOW) {
-          await this.chatRoomRepo.closeRoom(roomId);
-          throw new AppError(CHAT_MESSAGES.ROOM_EXPIRED, HttpStatus.FORBIDDEN);
-        }
+    if (isTerminated) {
+      const now = Date.now();
+      const actionAt =
+        booking.status === BookingStatus.COMPLETED ? booking.completedAt : booking.cancelledAt;
+
+      if (actionAt && now - new Date(actionAt).getTime() > this.EXPIRY_WINDOW) {
+        await this.chatRoomRepo.closeRoom(roomId);
+        throw new AppError(CHAT_MESSAGES.ROOM_EXPIRED, HttpStatus.FORBIDDEN);
       }
     }
   }
 
   async closeExpiredRooms(): Promise<number> {
     return this.chatRoomRepo.closeExpiredRooms();
-  }
-
-  private extractId(ref: string | ObjectId | { _id: ObjectId | string } | undefined): string {
-    if (!ref) return '';
-    if (typeof ref === 'string') return ref;
-    if (ref instanceof ObjectId) return ref.toString();
-    if (typeof ref === 'object' && '_id' in ref) return ref._id.toString();
-    return (ref as unknown as { toString(): string }).toString();
   }
 }

@@ -9,13 +9,13 @@ import { ISlotService } from '../../slot/service/ISlotService';
 import { AppError } from '../../../common/errors/appError';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { BOOKING_MESSAGES } from '../constants/booking.messages';
-import { BOOKING_DEFAULTS, BOOKING_POLICY, TIME_UTILS } from '../constants/booking.constants';
+import { BOOKING_DEFAULTS, TIME_UTILS } from '../constants/booking.constants';
 import { SLOT_PREFIXES } from '../../slot/constants/slot.constants';
 import { BookingStatus, IBookingItem, PaymentStatus } from '../../../models/booking.model';
 import { IBookingValidator } from './IBookingValidator';
 import { IBookingQueryService } from './IBookingQueryService';
 import { ISlotRepository } from '../../slot/repository/ISlotRepository';
-import { toObjectId, getIdString, ObjectId } from '../../../common/utils/mongoose.util';
+import { toObjectId, ObjectId } from '../../../common/utils/mongoose.util';
 import { ICouponService } from '../../coupon/service/ICouponService';
 import { DiscountType } from '../../../models/coupon.model';
 import { resolveStylistId, timeToMinutes, minutesToTime } from './booking.helpers';
@@ -25,12 +25,21 @@ import { IWalletService } from '../../wallet/service/IWalletService';
 import { IEscrowService } from '../../escrow/service/IEscrowService';
 import { INotificationService } from '../../notification/service/INotificationService';
 import { NotificationType } from '../../../models/notification.model';
+import { UpdateQuery } from 'mongoose';
+import { BookingRef } from '../../../common/types/bookingEntity';
 
 const ADVANCE_PERCENTAGE = 0.2; // 20% advance
 const PAYMENT_WINDOW_MINUTES = 15;
 
 @injectable()
 export class BookingService implements IBookingService {
+  private getRefId(ref: BookingRef): string {
+    if (ref && typeof ref === 'object' && '_id' in ref) {
+      return ref._id.toString();
+    }
+    return ref as string;
+  }
+
   constructor(
     @inject(TOKENS.BookingRepository)
     private readonly bookingRepo: IBookingRepository,
@@ -117,12 +126,12 @@ export class BookingService implements IBookingService {
       this.bookingValidator.validateLeadTime(booking.startTime, booking.date);
     }
 
-    const bookingUserId = getIdString(booking.userId);
+    const bookingUserId = booking.userId;
 
     if (booking.paymentStatus === PaymentStatus.ADVANCE_PAID) {
-      const bookingNumber = getIdString(booking._id).slice(-6).toUpperCase();
+      const bookingNumber = booking.id.slice(-6).toUpperCase();
       await this.walletService.creditBalance(
-        bookingUserId,
+        this.getRefId(bookingUserId),
         booking.advanceAmount,
         `Refund for cancelled booking #BK-${bookingNumber}`,
         bookingId,
@@ -135,24 +144,33 @@ export class BookingService implements IBookingService {
         ? PaymentStatus.REFUNDED
         : booking.paymentStatus;
 
-    const updated = await this.bookingRepo.update({ 
-      _id: toObjectId(bookingId) 
-    }, {
-      status: BookingStatus.CANCELLED,
-      cancelledBy: (role?.toUpperCase() as 'USER' | 'ADMIN' | 'STYLIST' | 'SYSTEM') || 'USER',
-      cancelledReason: reason,
-      cancelledAt: new Date(),
-      paymentStatus: updatePaymentStatus,
-    });
+    const cancelledBy =
+      role === UserRole.ADMIN
+        ? 'ADMIN'
+        : role === UserRole.STYLIST
+          ? 'STYLIST'
+          : role === UserRole.USER
+            ? 'USER'
+            : 'SYSTEM';
+
+    const updated = await this.bookingRepo.update(
+      {
+        _id: toObjectId(bookingId),
+      },
+      {
+        status: BookingStatus.CANCELLED,
+        cancelledBy,
+        cancelledReason: reason,
+        cancelledAt: new Date(),
+        paymentStatus: updatePaymentStatus,
+      },
+    );
 
     if (!updated) {
-      throw new AppError('Failed to cancel booking', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new AppError(BOOKING_MESSAGES.CANCEL_FAILED, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    const recipientId =
-      role === UserRole.USER
-        ? getIdString(booking.stylistId)
-        : getIdString(booking.userId);
+    const recipientId = this.getRefId(role === UserRole.USER ? booking.stylistId : booking.userId);
 
     this.notificationService
       .createNotification({
@@ -160,7 +178,7 @@ export class BookingService implements IBookingService {
         type: NotificationType.BOOKING_CANCELLED,
         title: 'Booking Cancelled',
         message: `Booking #${booking.bookingNumber} has been cancelled${reason ? `: ${reason}` : ''}.`,
-        link: role === UserRole.USER ? `/stylist/appointments` : `/bookings`,
+        link: role === UserRole.USER ? `/stylist/appointments` : `/profile/bookings/${booking.id}`,
       })
       .catch((err) => console.error('Failed to create cancellation notification:', err));
 
@@ -187,18 +205,21 @@ export class BookingService implements IBookingService {
     }
 
     if (booking.status !== BookingStatus.CONFIRMED) {
-      throw new AppError('Only confirmed bookings can be rescheduled', HttpStatus.BAD_REQUEST);
+      throw new AppError(
+        BOOKING_MESSAGES.ONLY_CONFIRMED_BOOKING_RESCHEDULE,
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     if (booking.paymentStatus !== PaymentStatus.ADVANCE_PAID) {
-      throw new AppError('Rescheduling is only allowed after advance payment', HttpStatus.BAD_REQUEST);
+      throw new AppError(BOOKING_MESSAGES.RESCHEDULE_ADVANCE_PAYMENT, HttpStatus.BAD_REQUEST);
     }
 
     if ((booking.rescheduleCount ?? 0) >= 1) {
-      throw new AppError('You can only reschedule a booking once', HttpStatus.BAD_REQUEST);
+      throw new AppError(BOOKING_MESSAGES.RESCHEDULE_ONCE_ONLY, HttpStatus.BAD_REQUEST);
     }
 
-    const bookingStartMs = new Date(booking.date).getTime();
+    const bookingStartMs = booking.date.getTime();
     const [h, m] = booking.startTime.split(':').map(Number);
     const bookingStartTime = new Date(bookingStartMs);
     bookingStartTime.setHours(h, m, 0, 0);
@@ -207,33 +228,33 @@ export class BookingService implements IBookingService {
     const leadTimeHours = leadTimeMs / TIME_UTILS.MS_PER_HOUR;
 
     if (leadTimeHours < 24) {
-      throw new AppError(
-        'Rescheduling must be done at least 24 hours before the appointment',
-        HttpStatus.CONFLICT,
-      );
+      throw new AppError(BOOKING_MESSAGES.RESCHEDULE_LEAD_TIME_24, HttpStatus.CONFLICT);
     }
 
-    const branchId = getIdString(booking.branchId) || BOOKING_DEFAULTS.BRANCH_ID;
+    const branchId = booking.branchId || BOOKING_DEFAULTS.BRANCH_ID;
     const bookingItems = await this.prepareBookingItems(branchId, items);
 
-    const updated = await this.bookingRepo.update({ _id: toObjectId(bookingId) }, {
-      items: bookingItems,
-      date: bookingItems[0].date,
-      startTime: bookingItems[0].startTime,
-      endTime: bookingItems[bookingItems.length - 1].endTime,
-      rescheduleCount: (booking.rescheduleCount || 0) + 1,
-      rescheduleReason: reason,
-    });
+    const updated = await this.bookingRepo.update(
+      { _id: toObjectId(bookingId) },
+      {
+        items: bookingItems,
+        date: bookingItems[0].date,
+        startTime: bookingItems[0].startTime,
+        endTime: bookingItems[bookingItems.length - 1].endTime,
+        rescheduleCount: (booking.rescheduleCount || 0) + 1,
+        rescheduleReason: reason,
+      },
+    );
 
     if (!updated) {
-      throw new AppError('Failed to reschedule booking', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new AppError(BOOKING_MESSAGES.RESCHEDULE_FAILED_24, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    const stylistUserId = getIdString(booking.stylistId);
+    const stylistUserId = booking.stylistId;
 
     this.notificationService
       .createNotification({
-        recipientId: stylistUserId,
+        recipientId: this.getRefId(stylistUserId),
         type: NotificationType.SYSTEM,
         title: 'Booking Rescheduled',
         message: `Booking #${
@@ -274,29 +295,33 @@ export class BookingService implements IBookingService {
 
     if (status === BookingStatus.NO_SHOW) {
       if (booking.paymentStatus === PaymentStatus.ADVANCE_PAID) {
-        const stylistRawId = getIdString(booking.stylistId);
-        await this.escrowService.holdAmount(
-          bookingId,
-          stylistRawId,
-          booking.advanceAmount,
-        );
+        const stylistRawId = this.getRefId(booking.stylistId);
+        await this.escrowService.holdAmount(bookingId, stylistRawId, booking.advanceAmount);
       }
     }
 
-    const updated = await this.bookingRepo.update({ _id: toObjectId(bookingId) }, updateData as any);
+    const updated = await this.bookingRepo.update(
+      { _id: toObjectId(bookingId) },
+      updateData as UpdateQuery<unknown>,
+    );
 
     if (!updated) {
-      throw new AppError('Failed to update booking status', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new AppError(BOOKING_MESSAGES.FAILED_TO_UPDATE, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     if (status === BookingStatus.COMPLETED || status === BookingStatus.NO_SHOW) {
-      this.notificationService.createNotification({
-        recipientId: getIdString(booking.userId),
-        type: status === BookingStatus.COMPLETED ? NotificationType.BOOKING_COMPLETED : NotificationType.SYSTEM,
-        title: `Booking ${status === BookingStatus.COMPLETED ? 'Completed' : 'Status Updated'}`,
-        message: `Your booking #${booking.bookingNumber} is now marked as ${status.toLowerCase()}.`,
-        link: `/bookings`,
-      }).catch(err => console.error('Failed to create status update notification:', err));
+      const isCompleted = status === BookingStatus.COMPLETED;
+      this.notificationService
+        .createNotification({
+          recipientId: this.getRefId(booking.userId),
+          type: isCompleted ? NotificationType.BOOKING_COMPLETED : NotificationType.SYSTEM,
+          title: isCompleted ? 'Share Your Experience!' : 'Booking Status Updated',
+          message: isCompleted
+            ? `Your booking #${booking.bookingNumber} is complete! Please take a moment to rate your stylist and service.`
+            : `Your booking #${booking.bookingNumber} is now marked as ${status.toLowerCase()}.`,
+          link: `/profile/bookings/${booking.id}`,
+        })
+        .catch((err) => console.error('Failed to create status update notification:', err));
     }
 
     return BookingMapper.toResponse(updated);
@@ -329,7 +354,11 @@ export class BookingService implements IBookingService {
     return this.bookingQueryService.getStylistTodayBookings(userId);
   }
 
-  async getStylistStats(userId: string, period?: string, date?: string): Promise<Record<string, unknown>> {
+  async getStylistStats(
+    userId: string,
+    period?: string,
+    date?: string,
+  ): Promise<Record<string, unknown>> {
     return this.bookingQueryService.getStylistStats(userId, period, date);
   }
 
@@ -343,12 +372,12 @@ export class BookingService implements IBookingService {
       throw new AppError(BOOKING_MESSAGES.NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
-    if (getIdString(booking.userId) !== userId) {
+    if (booking.userId !== userId) {
       throw new AppError(BOOKING_MESSAGES.UNAUTHORIZED, HttpStatus.FORBIDDEN);
     }
 
     if (booking.status !== BookingStatus.PENDING_PAYMENT) {
-      throw new AppError('Coupon can only be applied to pending bookings', HttpStatus.BAD_REQUEST);
+      throw new AppError(BOOKING_MESSAGES.COUPON_PENDING_BOOKING, HttpStatus.BAD_REQUEST);
     }
 
     const coupon = await this.couponService.validateCoupon(couponCode, booking.totalPrice);
@@ -356,6 +385,9 @@ export class BookingService implements IBookingService {
     let discountAmount = 0;
     if (coupon.discountType === DiscountType.PERCENTAGE) {
       discountAmount = (booking.totalPrice * coupon.discountValue) / 100;
+      if (coupon.maxDiscountAmount && discountAmount > coupon.maxDiscountAmount) {
+        discountAmount = coupon.maxDiscountAmount;
+      }
     } else {
       discountAmount = coupon.discountValue;
     }
@@ -370,12 +402,12 @@ export class BookingService implements IBookingService {
         discountAmount,
         payableAmount,
         advanceAmount,
-        couponId: couponObjectId,
+        couponId: couponObjectId as unknown as string,
       },
     );
 
     if (!updated) {
-      throw new AppError('Failed to apply coupon', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new AppError(BOOKING_MESSAGES.FAILED_TO_APPLY_COUPON, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     return BookingMapper.toResponse(updated);
@@ -387,35 +419,35 @@ export class BookingService implements IBookingService {
       throw new AppError(BOOKING_MESSAGES.NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
-    if (getIdString(booking.userId) !== userId) {
+    if (booking.userId !== userId) {
       throw new AppError(BOOKING_MESSAGES.UNAUTHORIZED, HttpStatus.FORBIDDEN);
     }
 
     if (booking.status !== BookingStatus.PENDING_PAYMENT) {
-      throw new AppError('Coupon can only be removed from pending bookings', HttpStatus.BAD_REQUEST);
+      throw new AppError(BOOKING_MESSAGES.COUPON_REMOVE_PENDING_BOOKING, HttpStatus.BAD_REQUEST);
     }
 
     if (!booking.couponId) {
-      throw new AppError('No coupon applied to this booking', HttpStatus.BAD_REQUEST);
+      throw new AppError(BOOKING_MESSAGES.NO_COUPON_APPLIED, HttpStatus.BAD_REQUEST);
     }
 
     const payableAmount = booking.totalPrice;
     const advanceAmount = Math.ceil(payableAmount * ADVANCE_PERCENTAGE);
 
-    const updated = await this.bookingRepo.update(
-      { _id: toObjectId(bookingId) },
-      {
-        $set: {
-          discountAmount: 0,
-          payableAmount,
-          advanceAmount,
-        },
-        $unset: { couponId: 1 },
-      } as any,
-    );
+    const updated = await this.bookingRepo.update({ _id: toObjectId(bookingId) }, {
+      $set: {
+        discountAmount: 0,
+        payableAmount,
+        advanceAmount,
+      },
+      $unset: { couponId: 1 },
+    } as UpdateQuery<unknown>);
 
     if (!updated) {
-      throw new AppError('Failed to remove coupon', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new AppError(
+        BOOKING_MESSAGES.FAILED_TO_REMOVE_COUPON,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
 
     return BookingMapper.toResponse(updated);

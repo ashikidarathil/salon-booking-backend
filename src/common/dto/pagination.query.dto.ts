@@ -32,6 +32,8 @@ export class PaginationQueryParser {
     'search',
     'sortBy',
     'sortOrder',
+    'startDate',
+    'endDate',
   ] as const;
 
   static parse(query: PaginationQueryDto): ParsedQuery {

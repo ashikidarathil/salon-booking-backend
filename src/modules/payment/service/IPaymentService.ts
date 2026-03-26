@@ -1,11 +1,6 @@
-import {
-  PaymentResponseDto,
-  CreateOrderRequestDto,
-  PaymentVerificationDto,
-  OrderResponseDto,
-} from '../dto/payment.dto';
+import { PaymentResponseDto, OrderResponseDto } from '../dto/payment.response.dto';
+import { CreateOrderRequestDto, PaymentVerificationDto } from '../dto/payment.request.dto';
 
-// Fix: accidentally used coupon.dto in writing thought, correcting to payment.dto
 export interface IPaymentService {
   createOrder(dto: CreateOrderRequestDto, userId: string): Promise<OrderResponseDto>;
   verifyPayment(dto: PaymentVerificationDto): Promise<PaymentResponseDto>;
