@@ -11,7 +11,7 @@ export const WeeklyScheduleRequestSchema = z
   .object({
     stylistId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid stylist ID'),
     branchId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid branch ID'),
-    dayOfWeek: z.number().min(0).max(6),
+    dayOfWeek: z.number().min(0).max(6).optional(),
     isWorkingDay: z.boolean(),
     shifts: z.array(ShiftSchema),
   })

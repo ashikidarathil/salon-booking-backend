@@ -18,7 +18,7 @@ export class HolidayService implements IHolidayService {
 
   async createHoliday(dto: HolidayRequestDto): Promise<HolidayResponseDto> {
     const holiday = await this.holidayRepo.create({
-      branchId: dto.branchId ? toObjectId(dto.branchId) : null,
+      branchIds: dto.isAllBranches ? [] : (dto.branchIds || []).map((id) => toObjectId(id)),
       date: new Date(dto.date),
       name: dto.name,
       isAllBranches: dto.isAllBranches,
@@ -34,9 +34,7 @@ export class HolidayService implements IHolidayService {
     const filter: Record<string, unknown> = {};
 
     if (branchId) {
-      filter.$or = [{ branchId: toObjectId(branchId) }, { isAllBranches: true }];
-    } else {
-      filter.isAllBranches = true;
+      filter.$or = [{ branchIds: toObjectId(branchId) }, { isAllBranches: true }];
     }
 
     if (startDate || endDate) {

@@ -1,4 +1,3 @@
-import { ObjectId } from '../../../common/utils/mongoose.util';
 import { IChatRoom } from '../../../models/chatRoom.model';
 import { IMessage } from '../../../models/message.model';
 import { ChatRoomResponseDto, MessageResponseDto } from '../dto/chat.response.dto';

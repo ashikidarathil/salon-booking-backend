@@ -6,7 +6,7 @@ import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { BOOKING_MESSAGES } from '../constants/booking.messages';
 import { BOOKING_POLICY, TIME_UTILS } from '../constants/booking.constants';
 import { UserRole } from '../../../common/enums/userRole.enum';
-import { BookingEntity } from '../../../common/types/bookingEntity';
+import { BookingEntity, BookingRef } from '../../../common/types/bookingEntity';
 
 @injectable()
 export class BookingValidator implements IBookingValidator {
@@ -54,12 +54,19 @@ export class BookingValidator implements IBookingValidator {
   ): boolean {
     if (role === UserRole.ADMIN) return true;
 
-    if (booking.userId === userId) return true;
+    if (this.getRefId(booking.userId) === userId) return true;
 
     if (role === UserRole.STYLIST && stylistId) {
-      return booking.stylistId === stylistId;
+      return this.getRefId(booking.stylistId) === stylistId;
     }
 
     return false;
+  }
+
+  private getRefId(ref: BookingRef): string {
+    if (ref && typeof ref === 'object' && '_id' in ref) {
+      return ref._id.toString();
+    }
+    return ref as string;
   }
 }

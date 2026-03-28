@@ -372,7 +372,7 @@ export class BookingService implements IBookingService {
       throw new AppError(BOOKING_MESSAGES.NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
-    if (booking.userId !== userId) {
+    if (this.getRefId(booking.userId) !== userId) {
       throw new AppError(BOOKING_MESSAGES.UNAUTHORIZED, HttpStatus.FORBIDDEN);
     }
 
@@ -419,7 +419,7 @@ export class BookingService implements IBookingService {
       throw new AppError(BOOKING_MESSAGES.NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
-    if (booking.userId !== userId) {
+    if (this.getRefId(booking.userId) !== userId) {
       throw new AppError(BOOKING_MESSAGES.UNAUTHORIZED, HttpStatus.FORBIDDEN);
     }
 

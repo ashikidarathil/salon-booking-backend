@@ -14,12 +14,7 @@ import { NotificationType } from '../../../models/notification.model';
 import { AppError } from '../../../common/errors/appError';
 import { HttpStatus } from '../../../common/enums/httpStatus.enum';
 import { CHAT_MESSAGES } from '../constants/chat.messages';
-import {
-  toObjectId,
-  isValidObjectId,
-  ObjectId,
-  getIdString,
-} from '../../../common/utils/mongoose.util';
+import { toObjectId, isValidObjectId, getIdString } from '../../../common/utils/mongoose.util';
 import { MessageType, SenderType } from '../constants/chat.types';
 import { ChatMapper } from '../mapper/chat.mapper';
 import { MessageResponseDto } from '../dto/chat.response.dto';

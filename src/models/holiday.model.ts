@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IHoliday extends Document {
-  branchId: mongoose.Types.ObjectId | null;
+  branchIds: mongoose.Types.ObjectId[];
   date: Date;
   name: string;
   isAllBranches: boolean;
@@ -11,12 +11,13 @@ export interface IHoliday extends Document {
 
 const HolidaySchema = new Schema<IHoliday>(
   {
-    branchId: {
-      type: Schema.Types.ObjectId,
-      ref: 'Branch',
-      default: null,
-      index: true,
-    },
+    branchIds: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Branch',
+        index: true,
+      },
+    ],
     date: {
       type: Date,
       required: true,
@@ -36,6 +37,6 @@ const HolidaySchema = new Schema<IHoliday>(
   },
 );
 
-HolidaySchema.index({ branchId: 1, date: 1 }, { unique: true });
+HolidaySchema.index({ date: 1, name: 1 }, { unique: true });
 
 export const HolidayModel = mongoose.model<IHoliday>('Holiday', HolidaySchema);

@@ -1,5 +1,5 @@
 export interface HolidayRequestDto {
-  branchId?: string | null;
+  branchIds?: string[];
   date: string;
   name: string;
   isAllBranches: boolean;
@@ -7,7 +7,7 @@ export interface HolidayRequestDto {
 
 export interface HolidayResponseDto {
   id: string;
-  branchId?: string | null;
+  branchIds: string[];
   date: string;
   name: string;
   isAllBranches: boolean;

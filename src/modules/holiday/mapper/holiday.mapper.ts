@@ -5,7 +5,7 @@ export class HolidayMapper {
   static toResponse(holiday: IHoliday): HolidayResponseDto {
     return {
       id: String(holiday._id),
-      branchId: holiday.branchId?.toString() || null,
+      branchIds: (holiday.branchIds || []).map((id) => id.toString()),
       date: holiday.date.toISOString(),
       name: holiday.name,
       isAllBranches: holiday.isAllBranches,
