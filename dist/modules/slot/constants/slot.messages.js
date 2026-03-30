@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SLOT_MESSAGES = void 0;
+exports.SLOT_MESSAGES = {
+    GENERATED: 'Slots generated successfully',
+    FETCHED: 'Slots fetched successfully',
+    BLOCKED: 'Slot blocked successfully',
+    UNBLOCKED: 'Slot unblocked successfully',
+    SPECIAL_CREATED: 'Special slot created successfully',
+    UNAVAILABLE: 'Slot unavailable',
+    NOT_FOUND: 'Slot not found',
+    UNAUTHORIZED: 'Unauthorized',
+    INVALID_DATE_RANGE: 'Invalid date range',
+    LEGACY_UNSUPPORTED: 'Legacy slots are no longer supported',
+    BLOCK_LEAD_TIME: 'Cannot block slots starting within the next 30 minutes',
+    UNBLOCK_LEAD_TIME: 'Cannot unblock slots starting within the next 30 minutes',
+    BLOCK_FAILED: 'Failed to block slot',
+    UNBLOCK_FAILED: 'Failed to unblock slot',
+    FETCH_FAILED: 'Failed to fetch available slots',
+    DYNAMIC_FETCH_FAILED: 'Failed to fetch dynamic availability',
+    SPECIAL_HOLIDAY: (name) => `Cannot create a special slot on a holiday: ${name}`,
+    SPECIAL_OFF_DAY: 'Cannot create a special slot on an approved off-day',
+    SPECIAL_NO_SCHEDULE: 'Cannot create a special slot: no schedule configured for this stylist on this day',
+    SPECIAL_NON_WORKING: 'Cannot create a special slot on a non-working day',
+    SPECIAL_CANCELLED: 'Special slot cancelled successfully',
+    SPECIAL_OVERLAP: 'Overlaps with another special slot',
+    PAST_DATE: 'Cannot create special slots for past dates',
+    INVALID_TIME_RANGE: 'End time must be after start time',
+    UNAUTHORIZED_ACTION: 'You are not authorized to perform this action',
+    ALREADY_BOOKED: 'Cannot block an already booked slot',
+    NOT_BLOCKED: 'Slot is not blocked/cancelled',
+};

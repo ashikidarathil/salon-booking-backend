@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.STYLIST_WALLET_MESSAGES = void 0;
+exports.STYLIST_WALLET_MESSAGES = {
+    UNAUTHORIZED: 'Unauthorized',
+    WALLET_RETRIEVED: 'Stylist wallet retrieved',
+    INVALID_AMOUNT: 'Invalid withdrawal amount',
+    WITHDRAWAL_SUBMITTED: 'Withdrawal request submitted',
+    HISTORY_RETRIEVED: 'Withdrawal history retrieved',
+    ALL_WITHDRAWALS_RETRIEVED: 'All withdrawal requests retrieved',
+    WITHDRAWAL_APPROVED: 'Withdrawal approved',
+    PAYMENT_REF_REQUIRED: 'Payment reference number is required',
+    WITHDRAWAL_PAID: 'Withdrawal marked as paid',
+    REJECTION_REASON_REQUIRED: 'Rejection reason is required',
+    WITHDRAWAL_REJECTED: 'Withdrawal rejected',
+    INSUFFICIENT_BALANCE: 'Insufficient balance for withdrawal',
+    MINIMUM_AMOUNT: 'Minimum withdrawal amount is ₹100',
+    REQUEST_NOT_FOUND: 'Withdrawal request not found',
+    ONLY_PENDING_APPROVED: 'Only PENDING requests can be approved',
+    FAILED_TO_APPROVE: 'Failed to approve withdrawal request',
+    ONLY_APPROVED_PAID: 'Only APPROVED requests can be marked as paid',
+    CANNOT_REJECT_COMPLETED: 'Cannot reject a completed or already rejected request',
+    INVALID_ID: 'Invalid ID format provided',
+    LOGS: {
+        CREDITED: (amount, stylistId) => `[Wallet] Successfully credited ₹${amount} earnings to stylist ${String(stylistId)}`,
+    },
+};

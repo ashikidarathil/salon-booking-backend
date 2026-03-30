@@ -1,0 +1,22 @@
+"use strict";
+// backend/src/modules/category/routes/category.routes.ts
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const index_1 = require("../index");
+const auth_middleware_1 = require("../../../common/middleware/auth.middleware");
+const role_middleware_1 = require("../../../common/middleware/role.middleware");
+const userRole_enum_1 = require("../../../common/enums/userRole.enum");
+const category_routes_1 = require("../constants/category.routes");
+const validation_middleware_1 = require("../../../common/middleware/validation.middleware");
+const category_schema_1 = require("../dto/category.schema");
+const router = (0, express_1.Router)();
+const controller = (0, index_1.resolveCategoryController)();
+router.get(category_routes_1.CATEGORY_ROUTES.PUBLIC.CATEGORY.LIST, controller.listPublic.bind(controller));
+router.use('/admin', auth_middleware_1.authMiddleware, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]));
+router.get(category_routes_1.CATEGORY_ROUTES.ADMIN.CATEGORY.PAGINATED, (0, validation_middleware_1.validate)({ query: category_schema_1.CategoryPaginationSchema }), controller.getPaginatedCategories.bind(controller));
+router.get(category_routes_1.CATEGORY_ROUTES.ADMIN.CATEGORY.BASE, controller.listAdmin.bind(controller));
+router.post(category_routes_1.CATEGORY_ROUTES.ADMIN.CATEGORY.BASE, (0, validation_middleware_1.validate)({ body: category_schema_1.CreateCategorySchema }), controller.create.bind(controller));
+router.patch(category_routes_1.CATEGORY_ROUTES.ADMIN.CATEGORY.BY_ID(':id'), (0, validation_middleware_1.validate)({ body: category_schema_1.UpdateCategorySchema }), controller.update.bind(controller));
+router.patch(category_routes_1.CATEGORY_ROUTES.ADMIN.CATEGORY.SOFT_DELETE(':id'), controller.softDelete.bind(controller));
+router.patch(category_routes_1.CATEGORY_ROUTES.ADMIN.CATEGORY.RESTORE(':id'), controller.restore.bind(controller));
+exports.default = router;

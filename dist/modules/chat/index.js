@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.resolveChatController = void 0;
+const tsyringe_1 = require("tsyringe");
+const tokens_1 = require("../../common/di/tokens");
+const chatRoom_repository_1 = require("./repository/chatRoom.repository");
+const message_repository_1 = require("./repository/message.repository");
+const chat_service_1 = require("./service/chat.service");
+const chat_controller_1 = require("./controller/chat.controller");
+tsyringe_1.container.register(tokens_1.TOKENS.ChatRoomRepository, { useClass: chatRoom_repository_1.ChatRoomRepository });
+tsyringe_1.container.register(tokens_1.TOKENS.MessageRepository, { useClass: message_repository_1.MessageRepository });
+tsyringe_1.container.register(tokens_1.TOKENS.ChatService, { useClass: chat_service_1.ChatService });
+tsyringe_1.container.register(chat_controller_1.ChatController, { useClass: chat_controller_1.ChatController });
+const resolveChatController = () => tsyringe_1.container.resolve(chat_controller_1.ChatController);
+exports.resolveChatController = resolveChatController;

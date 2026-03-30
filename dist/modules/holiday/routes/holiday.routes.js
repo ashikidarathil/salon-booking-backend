@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const __1 = require("..");
+const auth_middleware_1 = require("../../../common/middleware/auth.middleware");
+const role_middleware_1 = require("../../../common/middleware/role.middleware");
+const userRole_enum_1 = require("../../../common/enums/userRole.enum");
+const holiday_constants_1 = require("../constants/holiday.constants");
+const validation_middleware_1 = require("../../../common/middleware/validation.middleware");
+const holiday_schema_1 = require("../dto/holiday.schema");
+const router = (0, express_1.Router)();
+const controller = (0, __1.resolveHolidayController)();
+router.use('/holidays', auth_middleware_1.authMiddleware);
+router.post(holiday_constants_1.HOLIDAY_ROUTES.BASE, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]), (0, validation_middleware_1.validate)({ body: holiday_schema_1.HolidayRequestSchema }), controller.createHoliday.bind(controller));
+router.get(holiday_constants_1.HOLIDAY_ROUTES.BASE, controller.getHolidays.bind(controller));
+router.delete(holiday_constants_1.HOLIDAY_ROUTES.BASE + holiday_constants_1.HOLIDAY_ROUTES.BY_ID, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]), controller.deleteHoliday.bind(controller));
+exports.default = router;

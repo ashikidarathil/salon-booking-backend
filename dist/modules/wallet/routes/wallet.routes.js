@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const index_1 = require("../index");
+const auth_middleware_1 = require("../../../common/middleware/auth.middleware");
+const wallet_routes_1 = require("../constants/wallet.routes");
+const validation_middleware_1 = require("../../../common/middleware/validation.middleware");
+const wallet_schema_1 = require("../dto/wallet.schema");
+const router = (0, express_1.Router)();
+const controller = (0, index_1.resolveWalletController)();
+router.use(auth_middleware_1.authMiddleware);
+router.get(wallet_routes_1.WALLET_ROUTES.ME, controller.getMyWallet.bind(controller));
+router.get(wallet_routes_1.WALLET_ROUTES.TRANSACTIONS, controller.getTransactionHistory.bind(controller));
+router.post(wallet_routes_1.WALLET_ROUTES.CREDIT, (0, validation_middleware_1.validate)({ body: wallet_schema_1.CreditWalletSchema }), controller.creditMyWallet.bind(controller));
+router.post(wallet_routes_1.WALLET_ROUTES.TOPUP_ORDER, (0, validation_middleware_1.validate)({ body: wallet_schema_1.CreateTopupOrderSchema }), controller.createTopupOrder.bind(controller));
+router.post(wallet_routes_1.WALLET_ROUTES.TOPUP_VERIFY, (0, validation_middleware_1.validate)({ body: wallet_schema_1.VerifyTopupSchema }), controller.verifyTopup.bind(controller));
+exports.default = router;

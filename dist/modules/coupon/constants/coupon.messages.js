@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.COUPON_MESSAGES = void 0;
+exports.COUPON_MESSAGES = {
+    ALREADY_EXISTS: 'Coupon code already exists',
+    NOT_FOUND: 'Coupon not found',
+    INACTIVE: 'Coupon is inactive',
+    EXPIRED: 'Coupon has expired',
+    LIMIT_REACHED: 'Coupon usage limit reached',
+    MIN_AMOUNT_NOT_MET: (minAmount) => `Minimum booking amount for this coupon is ${minAmount}`,
+    CREATE_SUCCESS: 'Coupon created successfully',
+    VALIDATE_SUCCESS: 'Coupon is valid',
+    COUPON_UPDATED: 'Coupon updated successfully',
+    FETCH_SUCCESS: 'Coupons retrieved successfully',
+    TOGGLE_SUCCESS: 'Coupon status toggled successfully',
+    DELETE_SUCCESS: 'Coupon deleted successfully',
+    UPDATE_FAILED: 'Failed to update coupon',
+    INVALID_INPUT: 'Invalid input data',
+    VALIDATION: {
+        CODE_INVALID: 'Coupon code must be alphanumeric and cannot contain spaces',
+        DISCOUNT_VALUE_INVALID: 'Discount value must be greater than 0',
+        PERCENTAGE_EXCEEDS: 'Percentage discount cannot exceed 100%',
+        EXPIRY_PAST: 'Expiry date must be in the future',
+        MAX_USAGE_INVALID: 'Max usage must be at least 1',
+        MIN_AMOUNT_INVALID: 'Minimum booking amount is required and must be greater than 0',
+        MAX_DISCOUNT_INVALID: 'Max discount amount is required and must be at least 0',
+    },
+};

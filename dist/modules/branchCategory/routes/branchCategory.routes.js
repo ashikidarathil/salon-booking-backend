@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_middleware_1 = require("../../../common/middleware/auth.middleware");
+const role_middleware_1 = require("../../../common/middleware/role.middleware");
+const userRole_enum_1 = require("../../../common/enums/userRole.enum");
+const branchCategory_routes_1 = require("../constants/branchCategory.routes");
+const index_1 = require("../index");
+const validation_middleware_1 = require("../../../common/middleware/validation.middleware");
+const branchCategory_schema_1 = require("../dto/branchCategory.schema");
+const router = (0, express_1.Router)();
+const controller = (0, index_1.resolveBranchCategoryController)();
+router.use('/admin', auth_middleware_1.authMiddleware, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]));
+router.get(branchCategory_routes_1.BRANCH_CATEGORY_ROUTES.ADMIN.LIST, controller.list);
+router.get(branchCategory_routes_1.BRANCH_CATEGORY_ROUTES.ADMIN.LIST_PAGINATED, (0, validation_middleware_1.validate)({ query: branchCategory_schema_1.BranchCategoryPaginationSchema }), controller.listPaginated);
+router.patch(branchCategory_routes_1.BRANCH_CATEGORY_ROUTES.ADMIN.TOGGLE, (0, validation_middleware_1.validate)({ body: branchCategory_schema_1.ToggleBranchCategorySchema }), controller.toggle);
+exports.default = router;

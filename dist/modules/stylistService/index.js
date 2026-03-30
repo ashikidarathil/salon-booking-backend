@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.resolveStylistServiceController = void 0;
+require("reflect-metadata");
+const tsyringe_1 = require("tsyringe");
+const tokens_1 = require("../../common/di/tokens");
+const stylistService_repository_1 = require("./repository/stylistService.repository");
+const stylistService_service_1 = require("./service/stylistService.service");
+const stylistService_controller_1 = require("./controller/stylistService.controller");
+tsyringe_1.container.registerSingleton(tokens_1.TOKENS.StylistServiceRepository, stylistService_repository_1.StylistServiceRepository);
+tsyringe_1.container.registerSingleton(tokens_1.TOKENS.StylistServiceService, stylistService_service_1.StylistServiceService);
+tsyringe_1.container.registerSingleton(tokens_1.TOKENS.StylistServiceController, stylistService_controller_1.StylistServiceController);
+const resolveStylistServiceController = () => tsyringe_1.container.resolve(tokens_1.TOKENS.StylistServiceController);
+exports.resolveStylistServiceController = resolveStylistServiceController;

@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const index_1 = require("../index");
+const auth_middleware_1 = require("../../../common/middleware/auth.middleware");
+const role_middleware_1 = require("../../../common/middleware/role.middleware");
+const upload_middleware_1 = require("../../../common/middleware/upload.middleware");
+const userRole_enum_1 = require("../../../common/enums/userRole.enum");
+const service_routes_1 = require("../constants/service.routes");
+const validation_middleware_1 = require("../../../common/middleware/validation.middleware");
+const service_schema_1 = require("../dto/service.schema");
+const router = (0, express_1.Router)();
+const controller = (0, index_1.resolveServiceController)();
+// PUBLIC
+router.get(service_routes_1.API_ROUTES.PUBLIC.SERVICE.LIST, controller.listPublic.bind(controller));
+router.get(service_routes_1.API_ROUTES.PUBLIC.SERVICE.BY_ID(':id'), controller.getPublic.bind(controller));
+router.get(service_routes_1.API_ROUTES.PUBLIC.SERVICE.PAGINATED, (0, validation_middleware_1.validate)({ query: service_schema_1.ServicePaginationSchema }), controller.listPublicPaginated.bind(controller));
+router.use('/admin', auth_middleware_1.authMiddleware, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]));
+router.get(service_routes_1.API_ROUTES.ADMIN.SERVICE.BASE, controller.listAdmin.bind(controller));
+router.get(service_routes_1.API_ROUTES.ADMIN.SERVICE.PAGINATED, (0, validation_middleware_1.validate)({ query: service_schema_1.ServicePaginationSchema }), controller.getPaginatedServices.bind(controller));
+router.post(service_routes_1.API_ROUTES.ADMIN.SERVICE.BASE, (0, validation_middleware_1.validate)({ body: service_schema_1.CreateServiceSchema }), controller.create.bind(controller));
+router.patch(service_routes_1.API_ROUTES.ADMIN.SERVICE.BY_ID(':id'), (0, validation_middleware_1.validate)({ body: service_schema_1.UpdateServiceSchema }), controller.update.bind(controller));
+router.patch(service_routes_1.API_ROUTES.ADMIN.SERVICE.SOFT_DELETE(':id'), controller.softDelete.bind(controller));
+router.patch(service_routes_1.API_ROUTES.ADMIN.SERVICE.RESTORE(':id'), controller.restore.bind(controller));
+router.post(service_routes_1.API_ROUTES.ADMIN.SERVICE.UPLOAD_IMAGE(':id'), upload_middleware_1.uploadMiddleware.single('image'), controller.uploadImage.bind(controller));
+router.delete(service_routes_1.API_ROUTES.ADMIN.SERVICE.DELETE_IMAGE(':id'), controller.deleteImage.bind(controller));
+exports.default = router;

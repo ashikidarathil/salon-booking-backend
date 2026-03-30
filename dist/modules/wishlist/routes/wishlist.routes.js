@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const tsyringe_1 = require("tsyringe");
+const WishlistController_1 = require("../controller/WishlistController");
+const auth_middleware_1 = require("../../../common/middleware/auth.middleware");
+const wishlist_constants_1 = require("../constants/wishlist.constants");
+const validation_middleware_1 = require("../../../common/middleware/validation.middleware");
+const wishlist_schema_1 = require("../dto/wishlist.schema");
+const router = (0, express_1.Router)();
+const controller = tsyringe_1.container.resolve(WishlistController_1.WishlistController);
+router.use('/wishlist', auth_middleware_1.authMiddleware);
+router.post(wishlist_constants_1.WISHLIST_ROUTES.BASE + wishlist_constants_1.WISHLIST_ROUTES.TOGGLE, (0, validation_middleware_1.validate)({ body: wishlist_schema_1.WishlistToggleSchema }), controller.toggle);
+router.get(wishlist_constants_1.WISHLIST_ROUTES.BASE + wishlist_constants_1.WISHLIST_ROUTES.ME, controller.getMyFavorites);
+exports.default = router;

@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PAYMENT_MESSAGES = void 0;
+exports.PAYMENT_MESSAGES = {
+    NOT_FOUND: 'Payment record not found',
+    ORDER_CREATE_SUCCESS: 'Payment order created successfully',
+    ORDER_CREATE_FAILED: 'Failed to create payment order',
+    VERIFY_SUCCESS: 'Payment verified successfully',
+    VERIFY_FAILED: 'Payment verification failed',
+    ALREADY_COMPLETED: 'Payment already processed',
+    FETCH_SUCCESS: 'Payment details retrieved successfully',
+    INVALID_SIGNATURE: 'Invalid payment signature',
+    UNAUTH: 'User not authenticated',
+    BOOKING_NOT_FOUND: 'Booking not found',
+    UNAUTHORIZED: 'Unauthorized',
+    ALREADY_PAID: 'Booking is already paid',
+    UPDATE_FAILED: 'Failed to update payment status',
+    REMAINING_NOT_APPLICABLE: 'Remaining payment is not applicable for this booking',
+    WALLET_ADVANCE: (id) => `Advance payment for booking ${id}`,
+    WALLET_REMAINING: (id) => `Remaining payment for booking ${id}`,
+};

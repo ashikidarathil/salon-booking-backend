@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_middleware_1 = require("../../../common/middleware/auth.middleware");
+const role_middleware_1 = require("../../../common/middleware/role.middleware");
+const userRole_enum_1 = require("../../../common/enums/userRole.enum");
+const stylistService_routes_1 = require("../constants/stylistService.routes");
+const index_1 = require("../index");
+const validation_middleware_1 = require("../../../common/middleware/validation.middleware");
+const stylistService_schema_1 = require("../dto/stylistService.schema");
+const router = (0, express_1.Router)();
+const controller = (0, index_1.resolveStylistServiceController)();
+// PUBLIC ROUTES
+router.get(stylistService_routes_1.STYLIST_SERVICE_ROUTES.BASE + stylistService_routes_1.STYLIST_SERVICE_ROUTES.USER.STYLISTS_BY_SERVICE, controller.getStylistsByService.bind(controller));
+router.get(stylistService_routes_1.STYLIST_SERVICE_ROUTES.BASE + stylistService_routes_1.STYLIST_SERVICE_ROUTES.USER.LIST_BY_STYLIST, controller.list.bind(controller));
+router.use('/admin', auth_middleware_1.authMiddleware);
+router.get(stylistService_routes_1.STYLIST_SERVICE_ROUTES.BASE + stylistService_routes_1.STYLIST_SERVICE_ROUTES.ADMIN.LIST, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN, userRole_enum_1.UserRole.STYLIST]), controller.list.bind(controller));
+router.get(stylistService_routes_1.STYLIST_SERVICE_ROUTES.BASE + stylistService_routes_1.STYLIST_SERVICE_ROUTES.ADMIN.LIST_PAGINATED, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]), (0, validation_middleware_1.validate)({ query: stylistService_schema_1.StylistServicePaginationSchema }), controller.listPaginated.bind(controller));
+router.patch(stylistService_routes_1.STYLIST_SERVICE_ROUTES.BASE + stylistService_routes_1.STYLIST_SERVICE_ROUTES.ADMIN.TOGGLE_STATUS, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]), (0, validation_middleware_1.validate)({ body: stylistService_schema_1.ToggleStylistServiceStatusSchema }), controller.toggleStatus.bind(controller));
+exports.default = router;

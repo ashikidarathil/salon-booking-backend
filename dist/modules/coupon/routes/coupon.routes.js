@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const index_1 = require("../index");
+const auth_middleware_1 = require("../../../common/middleware/auth.middleware");
+const role_middleware_1 = require("../../../common/middleware/role.middleware");
+const userRole_enum_1 = require("../../../common/enums/userRole.enum");
+const coupon_routes_1 = require("../constants/coupon.routes");
+const validation_middleware_1 = require("../../../common/middleware/validation.middleware");
+const coupon_schema_1 = require("../dto/coupon.schema");
+const router = (0, express_1.Router)();
+const controller = (0, index_1.resolveCouponController)();
+router.use(auth_middleware_1.authMiddleware);
+router.post(coupon_routes_1.API_ROUTES.USER.VALIDATE, (0, validation_middleware_1.validate)({ body: coupon_schema_1.ValidateCouponSchema }), controller.validateCoupon.bind(controller));
+router.get(coupon_routes_1.API_ROUTES.USER.AVAILABLE, controller.listAvailableCoupons.bind(controller));
+// Admin routes
+router.post(coupon_routes_1.API_ROUTES.ADMIN.BASE, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]), (0, validation_middleware_1.validate)({ body: coupon_schema_1.CreateCouponSchema }), controller.createCoupon.bind(controller));
+router.get(coupon_routes_1.API_ROUTES.ADMIN.BASE, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]), (0, validation_middleware_1.validate)({ query: coupon_schema_1.CouponPaginationSchema }), controller.listAllCoupons.bind(controller));
+router.put(coupon_routes_1.API_ROUTES.ADMIN.UPDATE, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]), (0, validation_middleware_1.validate)({ body: coupon_schema_1.UpdateCouponSchema }), controller.updateCoupon.bind(controller));
+router.patch(coupon_routes_1.API_ROUTES.ADMIN.TOGGLE_STATUS, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]), controller.toggleStatus.bind(controller));
+router.patch(coupon_routes_1.API_ROUTES.ADMIN.DELETE, (0, role_middleware_1.roleMiddleware)([userRole_enum_1.UserRole.ADMIN]), controller.toggleDelete.bind(controller));
+exports.default = router;

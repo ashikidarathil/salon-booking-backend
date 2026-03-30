@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReviewController = void 0;
+const tsyringe_1 = require("tsyringe");
+const tokens_1 = require("../../common/di/tokens");
+const review_repository_1 = require("./repository/review.repository");
+const review_service_1 = require("./service/review.service");
+const review_controller_1 = require("./controller/review.controller");
+Object.defineProperty(exports, "ReviewController", { enumerable: true, get: function () { return review_controller_1.ReviewController; } });
+const review_mapper_1 = require("./mapper/review.mapper");
+tsyringe_1.container.registerSingleton(tokens_1.TOKENS.ReviewRepository, review_repository_1.ReviewRepository);
+tsyringe_1.container.registerSingleton(tokens_1.TOKENS.ReviewService, review_service_1.ReviewService);
+tsyringe_1.container.registerSingleton(tokens_1.TOKENS.ReviewController, review_controller_1.ReviewController);
+tsyringe_1.container.registerSingleton(tokens_1.TOKENS.ReviewMapper, review_mapper_1.ReviewMapper);
