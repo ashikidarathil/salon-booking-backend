@@ -9,7 +9,7 @@ export interface IChatRoomRepository {
   findUserRooms(userId: string, search?: string): Promise<IChatRoom[]>;
   findStylistRooms(stylistId: string, search?: string): Promise<IChatRoom[]>;
   findAll(limit?: number, skip?: number): Promise<IChatRoom[]>;
-  updateLastMessage(roomId: string, message: string): Promise<void>;
+  updateLastMessage(roomId: string, message: string, messageType?: string): Promise<void>;
   update(id: string, data: Partial<IChatRoom>): Promise<IChatRoom | null>;
   closeRoom(roomId: string): Promise<void>;
   closeExpiredRooms(): Promise<number>;

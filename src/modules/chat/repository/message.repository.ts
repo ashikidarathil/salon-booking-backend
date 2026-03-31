@@ -65,4 +65,33 @@ export class MessageRepository
       isRead: false,
     });
   }
+
+  async countUnreadPerRoom(
+    roomIds: string[],
+    receiverId: string,
+  ): Promise<Record<string, number>> {
+    if (!roomIds.length) return {};
+
+    const results = await this._model.aggregate<{ _id: string; count: number }>([
+      {
+        $match: {
+          chatRoomId: { $in: roomIds.map(toObjectId) },
+          senderId: { $ne: toObjectId(receiverId) },
+          isRead: false,
+        },
+      },
+      {
+        $group: {
+          _id: { $toString: '$chatRoomId' },
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    const map: Record<string, number> = {};
+    for (const r of results) {
+      map[r._id] = r.count;
+    }
+    return map;
+  }
 }

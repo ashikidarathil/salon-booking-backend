@@ -37,14 +37,14 @@ let ChatController = class ChatController {
         this.getUserRooms = async (req, res) => {
             const userId = req.auth.userId;
             const search = req.query.search;
-            const rooms = await this.chatService.getUserRooms(userId, search);
-            return apiResponse_1.ApiResponse.success(res, rooms.map(chat_mapper_1.ChatMapper.toRoomResponse), chat_messages_1.CHAT_MESSAGES.FETCHED);
+            const rooms = await this.chatService.getUserRoomsEnriched(userId, search);
+            return apiResponse_1.ApiResponse.success(res, rooms, chat_messages_1.CHAT_MESSAGES.FETCHED);
         };
         this.getStylistRooms = async (req, res) => {
             const userId = req.auth.userId;
             const search = req.query.search;
-            const rooms = await this.chatService.getStylistRooms(userId, search);
-            return apiResponse_1.ApiResponse.success(res, rooms.map(chat_mapper_1.ChatMapper.toRoomResponse), chat_messages_1.CHAT_MESSAGES.FETCHED);
+            const rooms = await this.chatService.getStylistRoomsEnriched(userId, search);
+            return apiResponse_1.ApiResponse.success(res, rooms, chat_messages_1.CHAT_MESSAGES.FETCHED);
         };
         this.getAllRoomsAdmin = async (req, res) => {
             const limit = req.query.limit ? parseInt(req.query.limit) : 50;

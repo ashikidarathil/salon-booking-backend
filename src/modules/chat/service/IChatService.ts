@@ -1,6 +1,6 @@
 import { IChatRoom } from '../../../models/chatRoom.model';
 import { IMessage } from '../../../models/message.model';
-import { MessageResponseDto } from '../dto/chat.response.dto';
+import { ChatRoomResponseDto, MessageResponseDto } from '../dto/chat.response.dto';
 import { SendMessageDto } from '../dto/chat.request.dto';
 
 export interface IChatService {
@@ -9,6 +9,8 @@ export interface IChatService {
   getRoomByBookingId(bookingId: string): Promise<IChatRoom | null>;
   getUserRooms(userId: string, search?: string): Promise<IChatRoom[]>;
   getStylistRooms(stylistId: string, search?: string): Promise<IChatRoom[]>;
+  getUserRoomsEnriched(userId: string, search?: string): Promise<ChatRoomResponseDto[]>;
+  getStylistRoomsEnriched(userIdFromAuth: string, search?: string): Promise<ChatRoomResponseDto[]>;
   sendMessage(data: SendMessageDto): Promise<MessageResponseDto>;
   getRoomMessages(roomId: string, limit?: number, skip?: number): Promise<IMessage[]>;
   getAllRooms(limit?: number, skip?: number): Promise<IChatRoom[]>;

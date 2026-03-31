@@ -104,9 +104,10 @@ export class ChatRoomRepository
     return docs.map((d) => this.toEntity(d));
   }
 
-  async updateLastMessage(roomId: string, message: string): Promise<void> {
+  async updateLastMessage(roomId: string, message: string, messageType?: string): Promise<void> {
     await this.update(roomId, {
       lastMessage: message,
+      lastMessageType: messageType,
       lastMessageAt: new Date(),
     });
   }

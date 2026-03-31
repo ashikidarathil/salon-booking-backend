@@ -46,12 +46,24 @@ connectDB();
 connectRedis();
 initCronJobs();
 
-app.use(
-  cors({
-    origin: env.FRONTEND_ORIGIN,
-    credentials: true,
-  }),
-);
+// app.use(
+//   cors({
+//     origin: env.FRONTEND_ORIGIN,
+//     credentials: true,
+//   }),
+// );
+
+app.use(cors({
+  origin: (origin, callback) => {
+    const allowedOrigins = env.FRONTEND_ORIGIN.split(',');
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 
 app.use(express.json());
 app.use(cookieParser());

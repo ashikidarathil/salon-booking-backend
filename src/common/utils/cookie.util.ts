@@ -19,7 +19,9 @@ export function createAuthTokens(userId: string, role: UserRole, tabId?: string)
   return { accessToken, refreshToken };
 }
 
+
 const isProd = env.NODE_ENV === 'production';
+const cookieDomain = isProd ? '.salonbook.online' : undefined;
 
 export const setAuthCookies = (
   res: Response,
@@ -32,15 +34,14 @@ export const setAuthCookies = (
     secure: isProd,
     sameSite: 'lax' as const,
     path: '/',
+    ...(cookieDomain && { domain: cookieDomain }),
   };
 
-  // Access Token: Short-lived (15m)
   res.cookie(`${rolePrefix}_access_token`, tokens.accessToken, {
     ...baseOptions,
     maxAge: 15 * 60 * 1000,
   });
 
-  // Refresh Token: Long-lived (7d)
   res.cookie(`${rolePrefix}_refresh_token`, tokens.refreshToken, {
     ...baseOptions,
     maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -48,17 +49,67 @@ export const setAuthCookies = (
 };
 
 export const clearAuthCookies = (res: Response, role?: UserRole) => {
+  const clearOptions = { 
+    path: '/',
+    ...(cookieDomain && { domain: cookieDomain })
+  };
+  
   if (role) {
     const rolePrefix = role.toLowerCase();
-    res.clearCookie(`${rolePrefix}_access_token`, { path: '/' });
-    res.clearCookie(`${rolePrefix}_refresh_token`, { path: '/' });
+    res.clearCookie(`${rolePrefix}_access_token`, clearOptions);
+    res.clearCookie(`${rolePrefix}_refresh_token`, clearOptions);
   } else {
-    // Clear all if no role specified (optional safety)
-    res.clearCookie('user_access_token', { path: '/' });
-    res.clearCookie('user_refresh_token', { path: '/' });
-    res.clearCookie('admin_access_token', { path: '/' });
-    res.clearCookie('admin_refresh_token', { path: '/' });
-    res.clearCookie('stylist_access_token', { path: '/' });
-    res.clearCookie('stylist_refresh_token', { path: '/' });
+    ['user', 'admin', 'stylist'].forEach(r => {
+      res.clearCookie(`${r}_access_token`, clearOptions);
+      res.clearCookie(`${r}_refresh_token`, clearOptions);
+    });
   }
 };
+
+
+
+// const isProd = env.NODE_ENV === 'production';
+
+// export const setAuthCookies = (
+//   res: Response,
+//   role: UserRole,
+//   tokens: { accessToken: string; refreshToken: string },
+// ) => {
+//   const rolePrefix = role.toLowerCase();
+//   const baseOptions = {
+//       httpOnly: true,
+//       secure: isProd,
+//       sameSite: 'lax' as const,
+//       path: '/',
+//       ...(isProd && { domain: '.salonbook.online' }),
+// };
+
+//   // Access Token: Short-lived (15m)
+//   res.cookie(`${rolePrefix}_access_token`, tokens.accessToken, {
+//     ...baseOptions,
+//     maxAge: 15 * 60 * 1000,
+//   });
+
+//   // Refresh Token: Long-lived (7d)
+//   res.cookie(`${rolePrefix}_refresh_token`, tokens.refreshToken, {
+//     ...baseOptions,
+//     maxAge: 7 * 24 * 60 * 60 * 1000,
+//   });
+// };
+
+// export const clearAuthCookies = (res: Response, role?: UserRole) => {
+//   if (role) {
+//     const rolePrefix = role.toLowerCase();
+//     res.clearCookie(`${rolePrefix}_access_token`, { path: '/' });
+//     res.clearCookie(`${rolePrefix}_refresh_token`, { path: '/' });
+//   } else {
+//     res.clearCookie('user_access_token', { path: '/' });
+//     res.clearCookie('user_refresh_token', { path: '/' });
+//     res.clearCookie('admin_access_token', { path: '/' });
+//     res.clearCookie('admin_refresh_token', { path: '/' });
+//     res.clearCookie('stylist_access_token', { path: '/' });
+//     res.clearCookie('stylist_refresh_token', { path: '/' });
+//   }
+// };
+
+

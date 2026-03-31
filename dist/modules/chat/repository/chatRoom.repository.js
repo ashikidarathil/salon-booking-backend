@@ -84,9 +84,10 @@ let ChatRoomRepository = class ChatRoomRepository extends baseRepository_1.BaseR
             .exec();
         return docs.map((d) => this.toEntity(d));
     }
-    async updateLastMessage(roomId, message) {
+    async updateLastMessage(roomId, message, messageType) {
         await this.update(roomId, {
             lastMessage: message,
+            lastMessageType: messageType,
             lastMessageAt: new Date(),
         });
     }

@@ -11,6 +11,7 @@ export interface IChatRoom extends Document {
   stylistId: mongoose.Types.ObjectId;
   status: ChatRoomStatus;
   lastMessage?: string;
+  lastMessageType?: string;
   lastMessageAt?: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -43,6 +44,9 @@ const ChatRoomSchema = new Schema<IChatRoom>(
       index: true,
     },
     lastMessage: {
+      type: String,
+    },
+    lastMessageType: {
       type: String,
     },
     lastMessageAt: {

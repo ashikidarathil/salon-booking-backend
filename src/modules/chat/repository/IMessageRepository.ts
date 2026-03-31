@@ -6,4 +6,5 @@ export interface IMessageRepository {
   markAsRead(roomId: string, receiverId: string): Promise<void>;
   countUnreadMessages(roomId: string, receiverId: string): Promise<number>;
   countTotalUnread(roomIds: string[], receiverId: string): Promise<number>;
+  countUnreadPerRoom(roomIds: string[], receiverId: string): Promise<Record<string, number>>;
 }

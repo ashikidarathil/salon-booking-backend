@@ -12,8 +12,10 @@ export interface ChatRoomResponseDto {
   stylistProfilePic?: string;
   status: string;
   lastMessage?: string;
+  lastMessageType?: string;
   lastMessageAt?: Date;
   updatedAt: Date;
+  unreadCount?: number;
   // Nested objects for admin / detailed views
   user?: { name: string; profilePicture?: string };
   stylist?: { name: string; profilePicture?: string };

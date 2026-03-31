@@ -68,6 +68,9 @@ const ChatRoomSchema = new mongoose_1.Schema({
     lastMessage: {
         type: String,
     },
+    lastMessageType: {
+        type: String,
+    },
     lastMessageAt: {
         type: Date,
         default: Date.now,

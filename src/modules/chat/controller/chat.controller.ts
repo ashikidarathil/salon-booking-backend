@@ -36,9 +36,8 @@ export class ChatController {
   ): Promise<Response> => {
     const userId = req.auth!.userId;
     const search = req.query.search as string | undefined;
-    const rooms = await this.chatService.getUserRooms(userId, search);
-
-    return ApiResponse.success(res, rooms.map(ChatMapper.toRoomResponse), CHAT_MESSAGES.FETCHED);
+    const rooms = await this.chatService.getUserRoomsEnriched(userId, search);
+    return ApiResponse.success(res, rooms, CHAT_MESSAGES.FETCHED);
   };
 
   getStylistRooms = async (
@@ -47,9 +46,8 @@ export class ChatController {
   ): Promise<Response> => {
     const userId = req.auth!.userId;
     const search = req.query.search as string | undefined;
-    const rooms = await this.chatService.getStylistRooms(userId, search);
-
-    return ApiResponse.success(res, rooms.map(ChatMapper.toRoomResponse), CHAT_MESSAGES.FETCHED);
+    const rooms = await this.chatService.getStylistRoomsEnriched(userId, search);
+    return ApiResponse.success(res, rooms, CHAT_MESSAGES.FETCHED);
   };
 
   getAllRoomsAdmin = async (req: Request, res: Response): Promise<Response> => {

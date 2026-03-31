@@ -23,6 +23,7 @@ class ChatMapper {
             stylistProfilePic,
             status: room.status,
             lastMessage: room.lastMessage,
+            lastMessageType: room.lastMessageType,
             lastMessageAt: room.lastMessageAt,
             updatedAt: room.updatedAt,
             ...(userName !== undefined && {

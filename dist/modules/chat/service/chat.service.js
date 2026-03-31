@@ -86,6 +86,31 @@ let ChatService = class ChatService {
             return [];
         return this.chatRoomRepo.findStylistRooms(stylistId, search);
     }
+    async getUserRoomsEnriched(userId, search) {
+        const rooms = await this.chatRoomRepo.findUserRooms(userId, search);
+        if (!rooms.length)
+            return [];
+        const roomIds = rooms.map((r) => r._id.toString());
+        const unreadMap = await this.messageRepo.countUnreadPerRoom(roomIds, userId);
+        return rooms.map((r) => ({
+            ...chat_mapper_1.ChatMapper.toRoomResponse(r),
+            unreadCount: unreadMap[r._id.toString()] || 0,
+        }));
+    }
+    async getStylistRoomsEnriched(userIdFromAuth, search) {
+        const stylistId = await this.stylistRepo.findIdByUserId(userIdFromAuth);
+        if (!stylistId)
+            return [];
+        const rooms = await this.chatRoomRepo.findStylistRooms(stylistId, search);
+        if (!rooms.length)
+            return [];
+        const roomIds = rooms.map((r) => r._id.toString());
+        const unreadMap = await this.messageRepo.countUnreadPerRoom(roomIds, userIdFromAuth);
+        return rooms.map((r) => ({
+            ...chat_mapper_1.ChatMapper.toRoomResponse(r),
+            unreadCount: unreadMap[r._id.toString()] || 0,
+        }));
+    }
     async sendMessage(data) {
         const room = await this.chatRoomRepo.findById(data.chatRoomId, [
             { path: 'stylistId', select: 'userId' },
@@ -105,7 +130,7 @@ let ChatService = class ChatService {
         }
         const message = await this.persistMessage(data, room.bookingId?.toString());
         const lastMsgPreview = this.getMessagePreview(data);
-        await this.chatRoomRepo.updateLastMessage(data.chatRoomId, lastMsgPreview);
+        await this.chatRoomRepo.updateLastMessage(data.chatRoomId, lastMsgPreview, data.messageType);
         this.handleMessagingNotification(room, data, lastMsgPreview).catch(() => { });
         return this.buildMessageResponseWithBooking(message, room.bookingId?.toString());
     }
