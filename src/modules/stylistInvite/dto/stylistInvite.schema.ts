@@ -10,7 +10,6 @@ export const CreateStylistInviteSchema = z
 
 export const AcceptStylistInviteSchema = z
   .object({
-    token: z.string().min(1, 'Token is required'),
     name: z.string().min(2, 'Name must be at least 2 characters long'),
     phone: z
       .string()

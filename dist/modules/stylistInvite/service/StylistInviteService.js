@@ -190,6 +190,12 @@ let StylistInviteService = class StylistInviteService {
      * Activates user account and stylist profile
      */
     async approveStylist(adminId, userId) {
+        const user = await this._userRepo.findByIdWithPassword(userId);
+        if (user && !user.password) {
+            const tempPassword = crypto_1.default.randomBytes(32).toString('hex');
+            const hashed = await bcrypt_1.default.hash(tempPassword, 10);
+            await this._userRepo.updatePasswordById(userId, hashed);
+        }
         await this._userRepo.setActiveById(userId, true);
         await this._userRepo.setStatusById(userId, 'ACTIVE');
         await this._stylistRepo.activateByUserId(userId);

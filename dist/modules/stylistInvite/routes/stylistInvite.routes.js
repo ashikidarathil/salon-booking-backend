@@ -26,7 +26,7 @@ router.post(stylistInvite_routes_1.STYLIST_INVITE_ROUTES.ADMIN_APPROVE, inviteCo
 router.post(stylistInvite_routes_1.STYLIST_INVITE_ROUTES.ADMIN_REJECT, inviteController.reject.bind(inviteController));
 /** Public */
 router.get(stylistInvite_routes_1.STYLIST_INVITE_ROUTES.PUBLIC_VALIDATE_INVITE, (0, validation_middleware_1.validate)({ params: stylistInvite_schema_1.ValidateStylistInviteSchema }), inviteController.validate.bind(inviteController));
-router.post(stylistInvite_routes_1.STYLIST_INVITE_ROUTES.PUBLIC_ACCEPT_INVITE, (0, validation_middleware_1.validate)({ body: stylistInvite_schema_1.AcceptStylistInviteSchema }), inviteController.accept.bind(inviteController));
+router.post(stylistInvite_routes_1.STYLIST_INVITE_ROUTES.PUBLIC_ACCEPT_INVITE, (0, validation_middleware_1.validate)({ params: stylistInvite_schema_1.ValidateStylistInviteSchema, body: stylistInvite_schema_1.AcceptStylistInviteSchema }), inviteController.accept.bind(inviteController));
 /** Apply stylist (from AuthController) */
 router.post(stylistInvite_routes_1.STYLIST_INVITE_ROUTES.PUBLIC_APPLY_STYLIST, authController.applyAsStylist.bind(authController));
 /** Public Stylist Listing & Profile */

@@ -230,6 +230,14 @@ export class StylistInviteService implements IStylistInviteService {
    * Activates user account and stylist profile
    */
   async approveStylist(adminId: string, userId: string): Promise<{ success: true }> {
+    const user = await this._userRepo.findByIdWithPassword(userId);
+
+    if (user && !user.password) {
+      const tempPassword = crypto.randomBytes(32).toString('hex');
+      const hashed = await bcrypt.hash(tempPassword, 10);
+      await this._userRepo.updatePasswordById(userId, hashed);
+    }
+
     await this._userRepo.setActiveById(userId, true);
     await this._userRepo.setStatusById(userId, 'ACTIVE');
     await this._stylistRepo.activateByUserId(userId);

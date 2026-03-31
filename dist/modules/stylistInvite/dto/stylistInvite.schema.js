@@ -11,7 +11,6 @@ exports.CreateStylistInviteSchema = zod_1.z
     .strict();
 exports.AcceptStylistInviteSchema = zod_1.z
     .object({
-    token: zod_1.z.string().min(1, 'Token is required'),
     name: zod_1.z.string().min(2, 'Name must be at least 2 characters long'),
     phone: zod_1.z
         .string()

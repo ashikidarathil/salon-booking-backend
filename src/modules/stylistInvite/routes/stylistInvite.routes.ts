@@ -72,7 +72,7 @@ router.get(
 
 router.post(
   STYLIST_INVITE_ROUTES.PUBLIC_ACCEPT_INVITE,
-  validate({ body: AcceptStylistInviteSchema }),
+  validate({ params: ValidateStylistInviteSchema, body: AcceptStylistInviteSchema }),
   inviteController.accept.bind(inviteController),
 );
 
