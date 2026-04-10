@@ -183,7 +183,7 @@ let ChatService = class ChatService {
         const isSenderStylist = data.senderId === stylistUserId;
         const recipientId = isSenderStylist ? roomUserId : stylistUserId;
         const link = isSenderStylist
-            ? `/profile/chat?roomId=${data.chatRoomId}`
+            ? `/chat?roomId=${data.chatRoomId}`
             : `/stylist/chat?roomId=${data.chatRoomId}`;
         let senderName = '';
         if (data.senderType !== chat_types_1.SenderType.SYSTEM) {

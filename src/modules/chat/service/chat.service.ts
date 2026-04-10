@@ -230,7 +230,7 @@ export class ChatService implements IChatService {
     const recipientId = isSenderStylist ? roomUserId : stylistUserId;
 
     const link = isSenderStylist
-      ? `/profile/chat?roomId=${data.chatRoomId}`
+      ? `/chat?roomId=${data.chatRoomId}`
       : `/stylist/chat?roomId=${data.chatRoomId}`;
 
     let senderName = '';
