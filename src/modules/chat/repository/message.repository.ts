@@ -66,10 +66,7 @@ export class MessageRepository
     });
   }
 
-  async countUnreadPerRoom(
-    roomIds: string[],
-    receiverId: string,
-  ): Promise<Record<string, number>> {
+  async countUnreadPerRoom(roomIds: string[], receiverId: string): Promise<Record<string, number>> {
     if (!roomIds.length) return {};
 
     const results = await this._model.aggregate<{ _id: string; count: number }>([

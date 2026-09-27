@@ -25,6 +25,8 @@ export const env = {
   ACCESS_TOKEN_EXPIRES: process.env.ACCESS_TOKEN_EXPIRES as SignOptions['expiresIn'],
   REFRESH_TOKEN_EXPIRES: process.env.REFRESH_TOKEN_EXPIRES as SignOptions['expiresIn'],
   FRONTEND_ORIGIN: requireEnv('FRONTEND_ORIGIN'),
+  // Set only when frontend and API share a custom domain (e.g. .salonbook.online)
+  COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
 
   SMTP_HOST: requireEnv('SMTP_HOST'),
   SMTP_PORT: requireEnv('SMTP_PORT'),
@@ -34,10 +36,15 @@ export const env = {
   TWILIO_ACCOUNT_SID: requireEnv('TWILIO_ACCOUNT_SID'),
   TWILIO_AUTH_TOKEN: requireEnv('TWILIO_AUTH_TOKEN'),
   TWILIO_PHONE_NUMBER: requireEnv('TWILIO_PHONE_NUMBER'),
-  AWS_ACCESS_KEY_ID: requireEnv('AWS_ACCESS_KEY_ID'),
-  AWS_SECRET_ACCESS_KEY: requireEnv('AWS_SECRET_ACCESS_KEY'),
-  AWS_REGION: requireEnv('AWS_REGION'),
-  AWS_S3_BUCKET_NAME: requireEnv('AWS_S3_BUCKET_NAME'),
+  CLOUDINARY_CLOUD_NAME: requireEnv('CLOUDINARY_CLOUD_NAME'),
+  CLOUDINARY_API_KEY: requireEnv('CLOUDINARY_API_KEY'),
+  CLOUDINARY_API_SECRET: requireEnv('CLOUDINARY_API_SECRET'),
+  CLOUDINARY_FOLDER: process.env.CLOUDINARY_FOLDER || 'saloon-booking',
+  // Legacy S3 settings, only used by S3Service
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+  AWS_REGION: process.env.AWS_REGION,
+  AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME,
   RAZORPAY_KEY_ID: requireEnv('RAZORPAY_KEY_ID'),
   RAZORPAY_KEY_SECRET: requireEnv('RAZORPAY_KEY_SECRET'),
 };

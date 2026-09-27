@@ -19,9 +19,18 @@ export function createAuthTokens(userId: string, role: UserRole, tabId?: string)
   return { accessToken, refreshToken };
 }
 
-
 const isProd = env.NODE_ENV === 'production';
-const cookieDomain = isProd ? '.salonbook.online' : undefined;
+const cookieDomain = isProd ? env.COOKIE_DOMAIN : undefined;
+
+// With a shared custom domain the frontend and API are same-site, so 'lax' works.
+// Otherwise (e.g. vercel.app + onrender.com) they are cross-site and need 'none'.
+const cookieOptions = {
+  httpOnly: true,
+  secure: isProd,
+  sameSite: isProd && !cookieDomain ? ('none' as const) : ('lax' as const),
+  path: '/',
+  ...(cookieDomain && { domain: cookieDomain }),
+};
 
 export const setAuthCookies = (
   res: Response,
@@ -29,44 +38,29 @@ export const setAuthCookies = (
   tokens: { accessToken: string; refreshToken: string },
 ) => {
   const rolePrefix = role.toLowerCase();
-  const baseOptions = {
-    httpOnly: true,
-    secure: isProd,
-    sameSite: 'lax' as const,
-    path: '/',
-    ...(cookieDomain && { domain: cookieDomain }),
-  };
-
   res.cookie(`${rolePrefix}_access_token`, tokens.accessToken, {
-    ...baseOptions,
+    ...cookieOptions,
     maxAge: 15 * 60 * 1000,
   });
 
   res.cookie(`${rolePrefix}_refresh_token`, tokens.refreshToken, {
-    ...baseOptions,
+    ...cookieOptions,
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 };
 
 export const clearAuthCookies = (res: Response, role?: UserRole) => {
-  const clearOptions = { 
-    path: '/',
-    ...(cookieDomain && { domain: cookieDomain })
-  };
-  
   if (role) {
     const rolePrefix = role.toLowerCase();
-    res.clearCookie(`${rolePrefix}_access_token`, clearOptions);
-    res.clearCookie(`${rolePrefix}_refresh_token`, clearOptions);
+    res.clearCookie(`${rolePrefix}_access_token`, cookieOptions);
+    res.clearCookie(`${rolePrefix}_refresh_token`, cookieOptions);
   } else {
-    ['user', 'admin', 'stylist'].forEach(r => {
-      res.clearCookie(`${r}_access_token`, clearOptions);
-      res.clearCookie(`${r}_refresh_token`, clearOptions);
+    ['user', 'admin', 'stylist'].forEach((r) => {
+      res.clearCookie(`${r}_access_token`, cookieOptions);
+      res.clearCookie(`${r}_refresh_token`, cookieOptions);
     });
   }
 };
-
-
 
 // const isProd = env.NODE_ENV === 'production';
 
@@ -86,13 +80,13 @@ export const clearAuthCookies = (res: Response, role?: UserRole) => {
 
 //   // Access Token: Short-lived (15m)
 //   res.cookie(`${rolePrefix}_access_token`, tokens.accessToken, {
-//     ...baseOptions,
+//     ...cookieOptions,
 //     maxAge: 15 * 60 * 1000,
 //   });
 
 //   // Refresh Token: Long-lived (7d)
 //   res.cookie(`${rolePrefix}_refresh_token`, tokens.refreshToken, {
-//     ...baseOptions,
+//     ...cookieOptions,
 //     maxAge: 7 * 24 * 60 * 60 * 1000,
 //   });
 // };
@@ -111,5 +105,3 @@ export const clearAuthCookies = (res: Response, role?: UserRole) => {
 //     res.clearCookie('stylist_refresh_token', { path: '/' });
 //   }
 // };
-
-

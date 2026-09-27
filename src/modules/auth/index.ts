@@ -21,7 +21,7 @@ import { StylistRepository } from '../stylistInvite/repository/StylistRepository
 import type { IStylistRepository } from '../stylistInvite/repository/IStylistRepository';
 
 import type { IImageService } from '../../common/service/image/IImageService';
-import { S3Service } from '../../common/service/image/S3Service';
+import { CloudinaryService } from '../../common/service/image/CloudinaryService';
 
 import { ProfileService } from './service/ProfileService';
 import { IProfileService } from './service/IProfileService';
@@ -42,7 +42,7 @@ container.register<IStylistRepository>(TOKENS.StylistRepository, {
 container.registerSingleton<IProfileService>(TOKENS.ProfileService, ProfileService);
 
 container.register<IImageService>(TOKENS.ImageService, {
-  useClass: S3Service,
+  useClass: CloudinaryService,
 });
 container.register(AuthController, { useClass: AuthController });
 

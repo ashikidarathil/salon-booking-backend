@@ -53,17 +53,19 @@ initCronJobs();
 //   }),
 // );
 
-app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = env.FRONTEND_ORIGIN.split(',');
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const allowedOrigins = env.FRONTEND_ORIGIN.split(',');
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 app.use(cookieParser());
@@ -88,6 +90,10 @@ app.use((req, res, next) => {
 });
 
 app.use(loggerMiddleware);
+
+app.get('/api/health', (_req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api', stylistInviteRoutes);
