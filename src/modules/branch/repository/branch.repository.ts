@@ -1,4 +1,5 @@
 import { BranchModel } from '../../../models/branch.model';
+import { BranchServiceModel } from '../../../models/branchService.model';
 import type { IBranchRepository } from './IBranchRepository';
 import type { CreateBranchDto, UpdateBranchDto } from '../dto/branch.request.dto';
 import { PaginationQueryParser } from '../../../common/dto/pagination.query.dto';
@@ -124,9 +125,15 @@ export class BranchRepository implements IBranchRepository {
       })
       .filter((branch) => branch !== null);
 
-    branchesWithDistance.sort((a, b) => (a.distance || 0) - (b.distance || 0));
+    // Branches that offer at least one active service come first, then by distance
+    const branchIdsWithServices: string[] = (
+      await BranchServiceModel.distinct('branchId', { isActive: true })
+    ).map(String);
+    const hasServices = (id: string) => (branchIdsWithServices.includes(id) ? 0 : 1);
 
-    console.log(`✅ Found ${branchesWithDistance.length} nearby branches`);
+    branchesWithDistance.sort(
+      (a, b) => hasServices(a.id) - hasServices(b.id) || (a.distance || 0) - (b.distance || 0),
+    );
 
     return branchesWithDistance;
   }

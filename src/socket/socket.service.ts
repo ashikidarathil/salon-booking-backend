@@ -18,7 +18,9 @@ export class SocketService {
   static init(server: HttpServer) {
     this.io = new Server(server, {
       cors: {
-        origin: env.FRONTEND_ORIGIN.split(','),
+        origin: env.FRONTEND_ORIGIN.split(',')
+          .map((o) => o.trim())
+          .filter(Boolean),
         credentials: true,
       },
       pingTimeout: 60000,

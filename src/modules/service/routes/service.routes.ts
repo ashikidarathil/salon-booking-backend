@@ -17,12 +17,13 @@ const controller = resolveServiceController();
 
 // PUBLIC
 router.get(API_ROUTES.PUBLIC.SERVICE.LIST, controller.listPublic.bind(controller));
-router.get(API_ROUTES.PUBLIC.SERVICE.BY_ID(':id'), controller.getPublic.bind(controller));
+// '/services/paginated' must be registered before '/services/:id'
 router.get(
   API_ROUTES.PUBLIC.SERVICE.PAGINATED,
   validate({ query: ServicePaginationSchema }),
   controller.listPublicPaginated.bind(controller),
 );
+router.get(API_ROUTES.PUBLIC.SERVICE.BY_ID(':id'), controller.getPublic.bind(controller));
 
 router.use('/admin', authMiddleware, roleMiddleware([UserRole.ADMIN]));
 
