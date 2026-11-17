@@ -46,22 +46,15 @@ connectDB();
 connectRedis();
 initCronJobs();
 
-// app.use(
-//   cors({
-//     origin: env.FRONTEND_ORIGIN,
-//     credentials: true,
-//   }),
-// );
+const allowedOrigins = env.FRONTEND_ORIGIN.split(',')
+  .map((o) => o.trim().replace(/\/$/, ''))
+  .filter(Boolean);
 
 app.use(
   cors({
+    // Unknown origins get no CORS headers (browser blocks them) instead of a 500
     origin: (origin, callback) => {
-      const allowedOrigins = env.FRONTEND_ORIGIN.split(',');
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
+      callback(null, !origin || allowedOrigins.includes(origin));
     },
     credentials: true,
   }),
@@ -73,19 +66,6 @@ app.use(cookieParser());
 // Security Headers for Google Login & Auth compatibility
 app.use((_req, res, next) => {
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log('=== REQUEST DEBUG ===');
-  console.log('Time:', new Date().toISOString());
-  console.log('Method:', req.method);
-  console.log('URL:', req.url);
-  console.log('Path:', req.path);
-  console.log('Content-Type header:', req.headers['content-type']);
-  console.log('Body parser working?', req.body !== undefined);
-  console.log('Body:', req.body);
-  console.log('=== END DEBUG ===');
   next();
 });
 
